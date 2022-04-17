@@ -21,3 +21,5 @@ Route::get('/', function () {
 
 //CLIENTE
 Route::get('/create/cliente',[ClienteController::class,'create']);
+//CLIENTE
+//Route::get('/create/prestador',[ClienteController::class,'create']);
