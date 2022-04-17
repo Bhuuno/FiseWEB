@@ -11,4 +11,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }
-teste
+
+
+Bora realizar um teste
