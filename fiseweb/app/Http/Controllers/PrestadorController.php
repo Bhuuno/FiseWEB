@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use resources\views\cliente;
 
-class ClienteController extends Controller
+use Illuminate\Http\Request;
+
+class PrestadorController extends Controller
 {
     public function create()
     {
-        return view('cliente.create');
+        return view('prestador.create');
     }
 }
