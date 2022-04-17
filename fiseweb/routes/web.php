@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ClienteController;
+use \App\Http\Controllers\PrestadorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,6 @@ Route::get('/', function () {
 
 
 //CLIENTE
-Route::get('/create/cliente',[ClienteController::class,'create']);
-//CLIENTE
-//Route::get('/create/prestador',[ClienteController::class,'create']);
+Route::get('/cliente/create',[ClienteController::class,'create']);
+//PRESTADOR
+Route::get('/prestador/create',[PrestadorController::class,'create']);
