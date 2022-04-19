@@ -10,6 +10,7 @@ class Pessoa extends Model
 {
     use HasFactory;
 
+    private $id;
     private $nome;
     private $rg;
     private $cpf;
@@ -20,6 +21,19 @@ class Pessoa extends Model
     private $estado_civil;
     
 //GET AND SET
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getNome()
     {
         return $this->nome;
@@ -116,5 +130,18 @@ class Pessoa extends Model
         return $this;
     }
 
-public gravar()
+public function __construct($id="", $nome = "", $rg = "",$cpf = "", $endereco = "", $email = "", $telefone="", $data_nascimento="", $estado_civil="")
+{
+    $this->id = $id;
+    $this->nome = $nome;
+    $this->rg = $rg;
+    $this->cpf = $cpf;
+    $this->endereco = $endereco;
+    $this->email = $email;
+    $this->telefone = $telefone;
+    $this->data_nascimento = $data_nascimento;
+    $this->estado_civil = $estado_civil;
+}
+
+
 }
