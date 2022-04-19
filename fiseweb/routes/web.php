@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\ClienteController;
-use \App\Http\Controllers\PrestadorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-//CLIENTE
-Route::get('/cliente/create',[ClienteController::class,'create']);
-//PRESTADOR
-Route::get('/prestador/create',[PrestadorController::class,'create']);
+require __DIR__.'/auth.php';
