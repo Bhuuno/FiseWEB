@@ -1,8 +1,11 @@
 <?php
+require __DIR__.'/auth.php';
+
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PrestadorController;
+use App\Http\Controllers\PessoaController;
 
 
 /*
@@ -24,9 +27,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-//CLIENTE
+//CLIENTE//
+//Gravar
 Route::get('/cliente/create',[ClienteController::class,'create']);
-//PRESTADOR
+
+//PRESTADOR//
+//Gravar
 Route::get('/prestador/create',[PrestadorController::class,'create']);
 
-require __DIR__.'/auth.php';
+//PESSOA//
+//Gravar
+Route::get('/pessoa/create',[PessoaController::class,'create']);
+

@@ -16,10 +16,14 @@ return new class extends Migration
         Schema::create('prestadors', function (Blueprint $table) {
             // $table->id();
             $table->increments('id');
-            $table->integer('pessoa_id')->usigned();
-            $table->foreign('pessoas_id')->references('id')->on('pessoas');
+            $table->timestamps();
+            //$table->integer('pessoa_id')->usigned();
+            //$table->foreign('pessoa_id')->references('id')->on('pessoa');
             $table->string('cnpj',14);
-            $table->string('profissao');            
+            $table->string('cartao');
+            $table->string('conta');
+            $table->string('profissao');
+            $table->string('imagens');            
         });
     }
 

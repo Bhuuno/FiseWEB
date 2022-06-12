@@ -15,13 +15,17 @@ return new class extends Migration
     {
         Schema::create('pessoas', function (Blueprint $table) {
             $table->increments('id');
+                $table->string('nome');
                 $table->string('rg',12);
                 $table->string('cpf',14);
-                $table->string('endereco');
+                $table->date('data_nascimento');
                 $table->string('email');
                 $table->string('telefone','15');
-                $table->date('data_nascimento');
                 $table->string('estado_civil');
+                $table->string('endereco');
+                $table->integer('numero');
+                $table->string('cidade');
+                $table->string('cep',9);
         });
     }
 
