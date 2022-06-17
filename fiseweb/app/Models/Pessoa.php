@@ -12,28 +12,28 @@ class Pessoa extends Model
 {
     use HasFactory;
 
-    // protected $fillable = [
-    // 'nome',
-    // 'rg',
-    // 'cpf',
-    // 'data_nsacimento',
-    // 'email',
-    // 'telefone',
-    // 'estado_civil',
-    // 'endereco',
-    // 'numero',
-    // 'cidade',
-    // 'cep'];
+    protected $fillable = [
+    'nome',
+    'rg',
+    'cpf',
+    'data_nsacimento',
+    'email',
+    'telefone',
+    'estado_civil',
+    'endereco',
+    'numero',
+    'cidade',
+    'cep'];
 
-//     protected $id;
-//     protected $nome;
-//     protected $rg;
-//     protected $cpf;
-//     protected $endereco; 
-//     protected $email;
-//     protected $telefone;
-//     protected $data_nascimento;
-//     protected $estado_civil;
+    protected $id;
+    protected $nome;
+    protected $rg;
+    protected $cpf;
+    protected $endereco; 
+    protected $email;
+    protected $telefone;
+    protected $data_nascimento;
+    protected $estado_civil;
     
 // //GET AND SET
 
