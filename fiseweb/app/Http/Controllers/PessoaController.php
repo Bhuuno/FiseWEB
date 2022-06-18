@@ -7,13 +7,15 @@ use resources\views;
 
 class PessoaController extends Controller
 {
-    public function gravar(Request $request)
+    public function store(Request $request)
     {
         try{
-            $pessoa = new Pessoa();
-            $dados = $request->only($pessoa->getFillable());
+            $pessoas = new Pessoa();
+            $dados = $request
+                ->only($pessoas->getFillable());
             Pessoa::create($dados);
-            return redirect()->action([PessoaController::class,'create']);
+            // return redirect()->action([PessoaController::class,'create']);
+            return redirect('/') -> with('msg','Evento criado com sucesso!');
         }
         catch(\Exception $e){
             echo"Erro ao inserir!";

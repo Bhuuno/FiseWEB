@@ -19,6 +19,10 @@ use App\Http\Controllers\PessoaController;
 |
 */
 
+Route::resources([
+    'pessoa' => \App\Http\Controllers\PessoaController::class,
+]);
+
 Route::get('/', function () {
     return view('home');
 });
@@ -29,13 +33,14 @@ Route::get('/dashboard', function () {
 
 //CLIENTE//
 //Gravar
-Route::get('/cliente/create',[ClienteController::class,'create']);
+// Route::get('/cliente/create',[ClienteController::class,'create']);
 
 //PRESTADOR//
 //Gravar
-Route::get('/prestador/create',[PrestadorController::class,'create']);
+// Route::get('/prestador/create',[PrestadorController::class,'create']);
 
 //PESSOA//
 //Gravar
 Route::get('/pessoa/create',[PessoaController::class,'create']);
+
 

@@ -12,55 +12,54 @@
     ?>
     <div class="container mt-5">
         <h1>Cadastro</h1>
-        
-        <form action="" method="post" class="row g-3 mt-4"}>
+        <form action="{{route('pessoa.store')}}" method="post" class="row g-3 mt-4"}>
             @csrf
             <div class="row">
                 <div class="col-md-5">
                     <label for="nome" class="form-label">Nome Completo</label>
-                    <input type="text" class="form-control" id="nome" placeholder="Nome">
+                    <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome">
                 </div>
 
                 <div class="col-3">
                     <label for="est_civil" class="form-label">Estado Civil</label>
                     <select class="form-select" name="estado_civil" aria-label="Default select example">
-                        <option selected>Solteiro</option>
+                        <option selected value="0">Solteiro</option>
                         <option value="1">Casado</option>
                         <option value="2">Viúvo</option>
                         <option value="3">Divorciado</option>
                     </select>
                 </div>
                     <div class="col-3">
-                        <label for="nascimento" value="" class="form-label">Data de Nascimento</label>
-                        <input type="date" name="data_nsacimento" class="form-control" id="nascimento">
+                        <label for="nascimento" class="form-label">Data de Nascimento</label>
+                        <input type="date" name="data_nascimento" class="form-control" id="nascimento">
                     </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <label for="rg" class="form-label">RG</label>
-                    <input type="text" class="form-control" value="" name="rg" id="rg" placeholder="Ex: 000.000.000-00">
+                    <input type="text" class="form-control" name="rg" id="rg" placeholder="Ex: 000.000.000-00">
                 </div>
                 <div class="col-md-4">
                     <label for="cpf" name="exemplo" id="exemplo" class="form-label">CPF</label>
-                    <input type="text" name="cpf" class="form-control" id="cpf" maxlength='11' value="" onkeyup="verificarCPF()" onkeydown="verificarCPF()" name="cpf" placeholder="Digite apenas os números do CPF">
+                    <input type="text" name="cpf" class="form-control" id="cpf" maxlength='11' onkeyup="verificarCPF()" onkeydown="verificarCPF()" name="cpf" placeholder="Digite apenas os números do CPF">
                 </div>
             </div>
             <div class="row">
                 <div class="col-5">
                     <label for="rua" class="form-label">Endereço</label>
-                    <input type="rua" class="form-control" name="endereco" value="" id="rua" placeholder="Ex: R. João Constatino Silva">
+                    <input type="rua" class="form-control" name="endereco" id="rua" placeholder="Ex: R. João Constatino Silva">
                 </div>
                 <div class="col-1">
                     <label for="numero" class="form-label">N°</label>
-                    <input type="text" value="" name="numero" class="form-control" id="numero">
+                    <input type="text" name="numero" class="form-control" id="numero">
                 </div>
                 <div class="col-3">
                     <label for="city" class="form-label">Cidade</label>
-                    <input type="city" class="form-control" value="" id="cidade" name="cidade" placeholder="Ex: Presidente Prudente-SP">
+                    <input type="city" class="form-control" id="cidade" name="cidade" placeholder="Ex: Presidente Prudente-SP">
                 </div>
                 <div class="col-3">
                     <label for="cep" id="label_cep" class="form-label">CEP</label>
-                    <input type="cep" class="form-control" id="cep" value="" name="cep" onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
+                    <input type="cep" class="form-control" id="cep" name="cep" onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
                 </div>
             </div>
             <div class="row">
