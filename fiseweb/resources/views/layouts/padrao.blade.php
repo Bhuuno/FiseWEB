@@ -22,6 +22,12 @@
 
   </head>
   <body>
+    
+    <div class="row">
+      @if(session('msg'))
+          <p class="msg">{{session('msg')}}</p>
+      @endif
+    </div>
     @yield('conteudo')
     <footer class="position-absolute bottom-0 start-50 translate-middle-x">
             <p>FiseWEB &copy; 2022</p>

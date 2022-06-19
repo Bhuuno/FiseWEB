@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('pessoas', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedBigInteger("user_id")->unsigned();
+            $table->foreign("user_id")
+                ->references("id")
+                ->on("users");
             $table->string('nome');
             $table->string('rg',12);
             $table->string('cpf',14);
