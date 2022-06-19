@@ -14,6 +14,7 @@ class Pessoa extends Model
 
     protected $fillable = [
     'nome',
+    'user_id',
     'rg',
     'cpf',
     'data_nascimento',
@@ -24,4 +25,8 @@ class Pessoa extends Model
     'numero',
     'cidade',
     'cep'];
+
+    public function user(){
+        return $this->belongsTo(Users::class);
+    }
 }

@@ -19,6 +19,8 @@ use App\Http\Controllers\PessoaController;
 |
 */
 
+require __DIR__.'/auth.php';
+
 Route::resources([
     'pessoa' => \App\Http\Controllers\PessoaController::class,
 ]);
@@ -41,6 +43,6 @@ Route::get('/dashboard', function () {
 
 //PESSOA//
 //Gravar
-Route::get('/pessoa/create',[PessoaController::class,'create']);
+Route::get('/pessoa/create',[PessoaController::class,'create'])->middleware(['auth']);
 
 
