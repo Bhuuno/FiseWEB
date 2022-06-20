@@ -41,8 +41,11 @@ Route::get('/dashboard', function () {
 //Gravar
 // Route::get('/prestador/create',[PrestadorController::class,'create']);
 
+
 //PESSOA//
 //Gravar
 Route::get('/pessoa/create',[PessoaController::class,'create'])->middleware(['auth']);
+//EDITAR
+Route::get('/pessoa/update',[PessoaController::class,'update'])->middleware(['auth']);
 
 

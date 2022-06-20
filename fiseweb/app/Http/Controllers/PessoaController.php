@@ -40,13 +40,32 @@ class PessoaController extends Controller
     //     }else{
     //         $events = Event::all();
     //     }
-
     //     return view('welcome',['events' => $events, 'search'=> $search]);
     // }
 
     public function create()
     {
-        $cadastro = Pessoa::findOrFail(auth()->user()->id);
-        return view('pessoa.create',['cadastro'=>$cadastro]);
+        $cadastro = Pessoa::find(auth()->user()->id);
+        if(isset($cadastro))
+            return view('pessoa.update',['cadastro'=>$cadastro]);
+        else
+            return view('pessoa.create');
     }
+
+    public function update(Request $request)
+    {
+        $id = auth()->user()->id;
+        try{
+            $pessoas = new Pessoa();
+            $dados = $request->only($pessoas->getFillable());
+            Pessoa::whereId($id)->update($dados);
+            return redirect('/') -> with('msg',"Cadastro Alterado com sucesso! $id");
+            // return redirect()->action([ProdutoController::class, "index"])
+            //     ->with("resposta", "Registro alterado");
+        } catch (\Exception $e){
+            return redirect()->action([ProdutoController::class, "index"])
+                ->with("resposta", "Erro ao alterar");
+        }
+    }
+
 }
