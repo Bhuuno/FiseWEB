@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--Java Script-->
-    <script type="text/javascript" src="{{asset('../../js/script.js')}}"></script>
+    <script type="text/javascript" src="{{asset('../../js/pessoa.js')}}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
 
