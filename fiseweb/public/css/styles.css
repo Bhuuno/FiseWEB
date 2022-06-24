@@ -1,0 +1,25 @@
+body{
+    background-image: url("/img/fundo.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+div.principal{
+    width:100%;
+    height:110px;
+    display: flex;
+    align-items: center;
+}
+h1.logo{
+    color: black;
+    font-size: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+span.logo{
+    color:red;
+    font-size: 47px;
+    font-weight: bold;
+}
+nav.menu{
+    height: 40px;
+}
