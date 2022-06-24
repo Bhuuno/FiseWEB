@@ -8,7 +8,7 @@
         use App\Http\Controllers\PessoaController;
     ?>
     <div class="container mt-5">
-        <h1>Cadastro</h1>
+        <h1>Cadastro Cliente</h1>
         <form action="{{route('pessoa.store')}}" method="post" class="row g-3 mt-4"}>
             @csrf
             <div class="row">
@@ -65,8 +65,8 @@
                     <input type="mail" required class="form-control" name="email" id="email">
                 </div>
                 <div class="col-3">
-                    <label for="telefone" class="form-label">Telefone</label>
-                    <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="(00)00000-0000">
+                    <label for="telefone" class="form-label">Celular</label>
+                    <input type="tel" class="form-control" name="celular" id="celular" placeholder="(00)00000-0000">
                 </div>
             </div>
             <div class="mt-5 position-relative">

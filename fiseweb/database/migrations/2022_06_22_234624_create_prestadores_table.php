@@ -13,19 +13,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pessoas', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('prestadores', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger("user_id")->unsigned();
             $table->foreign("user_id")
                 ->references("id")
                 ->on("users");
-            $table->string('nome');
-            $table->string('rg',12);
-            $table->string('cpf',14);
-            $table->date('data_nascimento');
+            $table->string('razao_social');
+            $table->string('cnpj',18);
+            $table->date('data_constituicao');
             $table->string('email');
+            $table->string('profissao');
+            $table->string('especialidade');
+            $table->string('informacao');
+            $table->string('sobre');
+            $table->string('experiencia');
             $table->string('celular','15');
-            $table->string('estado_civil');
+            $table->string('telefone','10');
             $table->string('endereco');
             $table->integer('numero');
             $table->string('cidade');
@@ -41,6 +45,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pessoas');
+        Schema::dropIfExists('prestadores');
     }
 };

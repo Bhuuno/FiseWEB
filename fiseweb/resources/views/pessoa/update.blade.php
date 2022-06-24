@@ -8,7 +8,7 @@
         use App\Http\Controllers\PessoaController;
     ?>
     <div class="container mt-5">
-        <h1>Cadastro</h1>
+        <h1>Alteração de Dados</h1>
 
         <form action="{{route('pessoa.update','$cadastro->user_id')}}" method="post" class="row g-3 mt-4"}>
             @csrf
