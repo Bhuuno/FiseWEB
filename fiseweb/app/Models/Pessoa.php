@@ -19,7 +19,7 @@ class Pessoa extends Model
     'cpf',
     'data_nascimento',
     'email',
-    'telefone',
+    'celular',
     'estado_civil',
     'endereco',
     'numero',

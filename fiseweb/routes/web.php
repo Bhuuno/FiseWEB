@@ -39,7 +39,7 @@ Route::get('/dashboard', function () {
 
 //PRESTADOR//
 //Gravar
-// Route::get('/prestador/create',[PrestadorController::class,'create']);
+Route::get('/prestador/create',[PrestadorController::class,'create']);
 
 
 //PESSOA//
