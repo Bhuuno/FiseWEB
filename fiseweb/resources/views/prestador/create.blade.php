@@ -9,7 +9,7 @@
     ?>
     <div class="container mt-5">
         <h1>Cadastro Prestador</h1>
-        <form action="{{route('pessoa.store')}}" method="post" class="row g-3 mt-4"}>
+        <form action="{{route('prestador.store')}}" method="post" class="row g-3 mt-4"}>
             @csrf
             <div class="row">
                 <div class="col-md-5">

@@ -63,8 +63,9 @@ class PessoaController extends Controller
             // return redirect()->action([ProdutoController::class, "index"])
             //     ->with("resposta", "Registro alterado");
         } catch (\Exception $e){
-            return redirect()->action([ProdutoController::class, "index"])
-                ->with("resposta", "Erro ao alterar");
+            // return redirect()->action([ProdutoController::class, "index"])
+            //     ->with("resposta", "Erro ao alterar");
+            return redirect('/') -> with('msg',"Erro ao alterar! $e");
         }
     }
 

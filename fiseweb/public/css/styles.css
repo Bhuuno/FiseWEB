@@ -1,7 +1,10 @@
 body{
     background-image: url("/img/fundo.jpg");
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-position-x: center;
+    background-position-y: center;
+    background-attachment: fixed;
+    background-size: cover;
 }
 div.principal{
     width:100%;
