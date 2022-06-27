@@ -13,5 +13,22 @@ class Prestador extends Model
 {
     use HasFactory;
 
-
+    protected $fillable = [
+        'user_id',
+        'razao_social',
+        'cnpj',
+        'data_constituicao',
+        'email',
+        'profissao',
+        'especialidade',
+        'informacao',
+        'sobre',
+        'experiencia',
+        'celular',
+        'telefone',
+        'endereco',
+        'numero',
+        'cidade',
+        'cep',
+        ];
 }

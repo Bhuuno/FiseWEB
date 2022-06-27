@@ -21,6 +21,7 @@ class Pessoa extends Model
     'email',
     'celular',
     'estado_civil',
+    'celular',
     'endereco',
     'numero',
     'cidade',
