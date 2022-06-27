@@ -1,6 +1,6 @@
 @extends('layouts.padrao')
 
-@section('titulo', 'Contato')
+@section('titulo', 'Alteração de Cadastro')
 
 @section('conteudo')
     <?php
