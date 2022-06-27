@@ -18,7 +18,6 @@ return array(
     'App\\Http\\Controllers\\Auth\\VerifyEmailController' => $baseDir . '/app/Http/Controllers/Auth/VerifyEmailController.php',
     'App\\Http\\Controllers\\ClienteController' => $baseDir . '/app/Http/Controllers/ClienteController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
-    'App\\Http\\Controllers\\ControllerPrestador' => $baseDir . '/app/Http/Controllers/ControllerPrestador.php',
     'App\\Http\\Controllers\\PessoaController' => $baseDir . '/app/Http/Controllers/PessoaController.php',
     'App\\Http\\Controllers\\PrestadorController' => $baseDir . '/app/Http/Controllers/PrestadorController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',

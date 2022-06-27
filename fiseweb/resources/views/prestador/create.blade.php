@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="cnpj" class="form-label">CNPJ</label>
-                    <input type="text" required class="form-control" name="cnpj" id="cnpj" placeholder="XX.XXX.XXX/0001-XX">
+                    <input type="text" required class="form-control" name="cnpj" id="cnpj" maxlength='14' placeholder="XX.XXX.XXX/0001-XX">
                 </div>
             </div>
             <div class="row">
