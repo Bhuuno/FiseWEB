@@ -14,6 +14,7 @@ class Prestador extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'razao_social',
         'cnpj',
         'data_constituicao',

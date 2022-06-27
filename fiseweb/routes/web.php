@@ -23,6 +23,7 @@ require __DIR__.'/auth.php';
 
 Route::resources([
     'pessoa' => \App\Http\Controllers\PessoaController::class,
+    'prestador' => \App\Http\Controllers\PrestadorController::class,
 ]);
 
 Route::get('/', function () {
@@ -39,7 +40,7 @@ Route::get('/dashboard', function () {
 
 //PRESTADOR//
 //Gravar
-Route::get('/prestador/create',[PrestadorController::class,'create']);
+Route::get('/prestador/create',[PrestadorController::class,'create'])->middleware(['auth']);
 
 
 //PESSOA//
