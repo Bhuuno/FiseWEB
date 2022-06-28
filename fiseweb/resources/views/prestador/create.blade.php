@@ -8,7 +8,7 @@
         use App\Http\Controllers\PessoaController;
     ?>
     <div class="container p-5">
-        <form action="{{route('pessoa.store')}}" method="post" class="bg-white shadow row g-3 pb-4">
+        <form action="{{route('prestador.store')}}" method="post" class="bg-white shadow row g-3 pb-4">
             @csrf
             <h1 class="text-center">Cadastro Prestador</h1>
 
