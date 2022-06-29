@@ -1,6 +1,6 @@
 @extends('layouts.padrao')
 
-@section('titulo', 'Contato')
+@section('titulo', 'Alteração de Dados')
 
 @section('conteudo')
     <?php
@@ -8,15 +8,12 @@
         use App\Http\Controllers\PrestadorController;
     ?>
     <div class="container mt-5">
-        <h1>Cadastro Prestador</h1>
+        <h1>Alteração de Cadastro</h1>
         <!-- enctype="multipart/form-data" -->
         <form action="{{route('prestador.update','$cadastro->user_id')}}" method="post" class="row g-3 mt-4"}>
             @csrf
             @method('PATCH')
-            <!-- <div class="form-group">
-                <label for="image">Imagem do Evento: </label>
-                <input type="file" class="form-control-file" id="image" name="image">
-            </div> -->
+            
             <div class="row">
                 <div class="col-lg-5">
                     <label for="razao_social" class="form-label">Razão Social</label>
@@ -76,15 +73,15 @@
             <div class="row">
                 <div class="col-12">
                     <label for="informacao" class="form-label">Informações</label>
-                    <textarea rows="2" type="text" class="form-control informacao" name="informacao" value="{{$cadastro->informacao}}" id="informacao"></textarea>
+                    <textarea rows="2" type="text" class="form-control informacao" name="informacao" id="informacao">{{$cadastro->informacao}}</textarea>
                 </div>
                 <div class="col-12">
                     <label for="sobre" class="form-label">Sobre mim</label>
-                    <textarea rows="2" type="text" class="form-control sobre" name="sobre" value="{{$cadastro->sobre}}" id="sobre"></textarea>
+                    <textarea rows="2" type="text" class="form-control sobre" name="sobre" id="sobre">{{$cadastro->sobre}}</textarea>
                 </div>
                 <div class="col-12">
                     <label for="experiencia" class="form-label">Experiência</label>
-                    <textarea rows="2" type="text" class="form-control experiencia" value="{{$cadastro->experiencia}}" name="experiencia" id="experiencia"></textarea>
+                    <textarea rows="2" type="textarea" class="form-control experiencia" name="experiencia" id="experiencia">{{$cadastro->experiencia}}</textarea>
                 </div>
             </div>
             <div class="mt-5 position-relative">

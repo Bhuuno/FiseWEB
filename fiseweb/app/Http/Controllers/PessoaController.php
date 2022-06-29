@@ -13,7 +13,15 @@ class PessoaController extends Controller
     {
         try{
             $pessoas = new Pessoa();
+            if($request->hasFile('image') && $request->file('image')->isValid()){
 
+                $requestImage = $request->image;
+                $extension = $requestImage -> extension();
+                $imageName = md5($requestImage -> getClientOriginalName() . strtotime("now") . "." . $extension);
+                $requestImage->move(public_path('img/fotos_perfil'), $imageName);
+                $pessoas->image = $imageName;
+            }
+            
             // INSERE O ID DO USUÁRIO NA CHAVE ESTRANGEIRA
             $request["user_id"] = auth()->user()->id;
 
@@ -21,7 +29,7 @@ class PessoaController extends Controller
                 ->only($pessoas->getFillable());
             Pessoa::create($dados);
             //return redirect()->action([PessoaController::class,'create']);
-            return redirect('/') -> with('msg','Cadastro criado com sucesso!');
+            return redirect('/') -> with('msg',"Cadastro criado com sucesso!");
         }
         catch(\Exception $e){
             echo"Erro ao inserir! $e";
@@ -45,7 +53,8 @@ class PessoaController extends Controller
 
     public function create()
     {
-        $cadastro = Pessoa::find(auth()->user()->id);
+        $cadastro = Pessoa::where('user_id',auth()->user()->id)->first();
+        // var_dump($cadastro);
         if(isset($cadastro))
             return view('pessoa.update',['cadastro'=>$cadastro]);
         else

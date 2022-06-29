@@ -13,10 +13,16 @@
         //{{route('pessoa.gravar')}}
     ?>
     <div class="container p-5">
-        <form action="{{route('pessoa.store')}}" method="post" class="bg-white shadow row g-3 pb-4">
+        <form action="{{route('pessoa.store')}}" method="post" enctype="multipart/form-data" class="bg-white shadow row g-3 pb-4">
             @csrf
 
             <h1 class="text-center">Cadastro</h1>
+
+            <div class="form-group">
+                <label for="image">Imagem de perfil: </label>
+                <input type="file" class="form-control-file" id="image" name="image">
+            </div>
+
             <div class="col-md-6">
                 <label for="nome" class="form-label">Nome Completo</label>
                 <input type="text" required name="nome" class="form-control" id="nome" placeholder="Nome">
