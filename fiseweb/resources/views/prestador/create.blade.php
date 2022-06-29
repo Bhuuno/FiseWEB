@@ -4,14 +4,13 @@
 
 @section('conteudo')
     <?php
-        use App\Models\Prestador;
-        use App\Http\Controllers\PrestadorController;
+        use App\Models\Pessoa;
+        use App\Http\Controllers\PessoaController;
     ?>
-    <div class="container mt-5">
-        <h1>Cadastro Prestador</h1>
-        <!-- enctype="multipart/form-data" -->
-        <form action="{{route('prestador.store')}}" method="post" class="row g-3 mt-4"}>
-            @csrf  
+    <div class="container p-5">
+        <form action="{{route('prestador.store')}}" method="post" class="bg-white shadow row g-3 pb-4">
+            @csrf
+            <h1 class="text-center">Cadastro Prestador</h1>
 
             <!-- <div class="form-group">
                 <label for="image">Imagem do Evento: </label>

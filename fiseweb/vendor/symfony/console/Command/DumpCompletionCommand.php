@@ -45,6 +45,7 @@ final class DumpCompletionCommand extends Command
         $commandName = basename($fullCommand);
         $fullCommand = @realpath($fullCommand) ?: $fullCommand;
 
+
         $shell = $this->guessShell();
         [$rcFile, $completionFile] = match ($shell) {
             'fish' => ['~/.config/fish/config.fish', "/etc/fish/completions/$commandName.fish"],
@@ -60,6 +61,7 @@ to use shell autocompletion (currently, bash and fish completion is supported).
 -------------------</>
 
 Dump the script to a global completion file and restart your shell:
+
 
     <info>%command.full_name% {$shell} | sudo tee {$completionFile}</>
 

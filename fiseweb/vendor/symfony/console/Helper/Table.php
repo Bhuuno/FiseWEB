@@ -422,6 +422,7 @@ class Table
                     $hasTitle = false;
                 }
 
+
                 if ($vertical) {
                     $isHeader = false;
                     $isFirstRow = false;

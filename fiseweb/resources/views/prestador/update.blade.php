@@ -11,11 +11,11 @@
         <h1>Alteração de Cadastro</h1>
         <!-- enctype="multipart/form-data" -->
         <form action="{{route('prestador.update','$cadastro->user_id')}}" method="post" class="row g-3 mt-4"}>
-            @csrf  
+            @csrf
             @method('PATCH')
             
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-lg-5">
                     <label for="razao_social" class="form-label">Razão Social</label>
                     <input type="text" required name="razao_social" class="form-control razao_social" value="{{$cadastro->razao_social}}" id="razao_social">
                 </div>
@@ -23,7 +23,7 @@
                     <label for="data_constituicao" class="form-label">Data de Constituição</label>
                     <input type="date" required name="data_constituicao" class="form-control data_constituicao" value="{{$cadastro->data_constituicao}}" id="data_constituicao">
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     <label for="cnpj" class="form-label">CNPJ</label>
                     <input type="text" required class="form-control" name="cnpj" id="cnpj" value="{{$cadastro->cnpj}}" placeholder="XX.XXX.XXX/0001-XX">
                 </div>
