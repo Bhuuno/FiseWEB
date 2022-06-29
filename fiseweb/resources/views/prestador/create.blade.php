@@ -12,72 +12,72 @@
             @csrf
             <h1 class="text-center">Cadastro Prestador</h1>
 
-            <div class="col-md-5">
+            <div class="col-lg-5">
                 <label for="razao_social" class="form-label">Razão Social</label>
                 <input type="text" required name="razao_social" class="form-control razao_social" id="razao_social">
             </div>
-            <div class="col-md-3">
+            <div class="col-lg-3">
                 <label for="data_constituicao" class="form-label">Data de Constituição</label>
                 <input type="date" required name="data_constituicao" class="form-control data_constituicao" id="data_constituicao">
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <label for="cnpj" class="form-label">CNPJ</label>
                 <input type="text" required class="form-control" name="cnpj" id="cnpj" placeholder="XX.XXX.XXX/0001-XX">
             </div>
 
-            <div class="col-md-5">
+            <div class="col-lg-5">
                 <label for="rua" class="form-label">Endereço</label>
                 <input type="text" required class="form-control endereco" name="endereco" id="rua" placeholder="Ex: R. João Constatino Silva">
             </div>
-            <div class="col-md-1">
+            <div class="col-lg-1">
                 <label for="numero" class="form-label">N°</label>
                 <input type="text" required name="numero" class="form-control numero" id="numero">
             </div>
-            <div class="col-md-3">
+            <div class="col-lg-3">
                 <label for="cidade" class="form-label">Cidade</label>
                 <input type="city" required class="form-control cidade" id="cidade" name="cidade" placeholder="Ex: Presidente Prudente-SP">
             </div>
-            <div class="col-md-3">
+            <div class="col-lg-3">
                 <label for="cep" id="label_cep" class="form-label">CEP</label>
                 <input type="cep" required class="form-control cep" id="cep" name="cep" onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
             </div>
 
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <label for="email" class="form-label">E-mail</label>
                 <input type="mail" required class="form-control email" name="email" id="email">
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <label for="celular" class="form-label">Celular</label>
                 <input type="tel" class="form-control celular" name="celular" id="celular" placeholder="(00)00000-0000">
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <label for="telefone" class="form-label">Telefone</label>
                 <input type="tel" class="form-control telefone" name="telefone" id="telefone" placeholder="(00)00000-0000">
             </div>
 
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <label for="profissao" class="form-label">Profissão</label>
                 <input type="text" required class="form-control profissao" name="profissao" id="profissao" placeholder="Pedreiro">
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <label for="especialidade" class="form-label">Especialidade</label>
                 <input type="text" class="form-control especialidade" name="especialidade" id="especialidade" placeholder="Construção Civil">
             </div>
 
-            <div class="col-md-12">
+            <div class="col-lg-12">
                 <label for="informacao" class="form-label">Informações</label>
                 <textarea rows="2" type="text" class="form-control informacao" name="informacao" id="informacao"></textarea>
             </div>
-            <div class="col-md-12">
+            <div class="col-lg-12">
                 <label for="sobre" class="form-label">Sobre mim</label>
                 <textarea rows="2" type="text" class="form-control sobre" name="sobre" id="sobre"></textarea>
             </div>
-            <div class="col-md-12">
+            <div class="col-lg-12">
                 <label for="experiencia" class="form-label">Experiência</label>
                 <textarea rows="2" type="text" class="form-control experiencia" name="experiencia" id="experiencia"></textarea>
             </div>
 
-            <div class="col-md-12 text-center">
+            <div class="col-lg-12 text-center">
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
             </div>
         </form>
