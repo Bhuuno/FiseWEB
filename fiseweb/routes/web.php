@@ -41,7 +41,8 @@ Route::get('/dashboard', function () {
 //PRESTADOR//
 //Gravar
 Route::get('/prestador/create',[PrestadorController::class,'create'])->middleware(['auth']);
-
+//EDITAR
+Route::get('/prestador/update',[PrestadorController::class,'update'])->middleware(['auth']);
 
 //PESSOA//
 //Gravar

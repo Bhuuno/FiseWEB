@@ -3,6 +3,8 @@
 @section('titulo', 'Contato')
 
 @section('conteudo')
+
+@method('path')
     <?php
         use App\Models\Pessoa;
         use App\Http\Controllers\PessoaController;
