@@ -25,7 +25,8 @@ class Pessoa extends Model
     'endereco',
     'numero',
     'cidade',
-    'cep'];
+    'cep',
+    'image'];
 
     public function user(){
         return $this->belongsTo(Users::class);
