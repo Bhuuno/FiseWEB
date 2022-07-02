@@ -20,6 +20,7 @@ return new class extends Migration
                 ->references("id")
                 ->on("users");
             $table->string('nome');
+            $table->string('image')->nullable();
             $table->string('rg',12);
             $table->string('cpf',14);
             $table->date('data_nascimento');

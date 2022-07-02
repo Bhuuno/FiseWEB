@@ -31,4 +31,7 @@ class Prestador extends Model
         'cidade',
         'cep',
         ];
+        public function user(){
+            return $this->belongsTo(Users::class);
+        }
 }

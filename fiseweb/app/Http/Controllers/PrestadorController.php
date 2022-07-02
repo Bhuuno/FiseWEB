@@ -11,7 +11,7 @@ class PrestadorController extends Controller
 {
     public function create()
     {
-        $cadastro = Prestador::find(auth()->user()->id);
+        $cadastro = Prestador::where('user_id',auth()->user()->id)->first();
         if(isset($cadastro))
             return view('prestador.update',['cadastro'=>$cadastro]);
         else
