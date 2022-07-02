@@ -4,6 +4,7 @@ require __DIR__.'/auth.php';
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PrestadorController;
 use App\Http\Controllers\PessoaController;
 
@@ -26,13 +27,18 @@ Route::resources([
     'prestador' => \App\Http\Controllers\PrestadorController::class,
 ]);
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+//HOME
+//EXIBIR PRETADOR TELA HOME
+Route::get('/', [HomeController::class,'index']);
+
 
 //CLIENTE//
 //Gravar
