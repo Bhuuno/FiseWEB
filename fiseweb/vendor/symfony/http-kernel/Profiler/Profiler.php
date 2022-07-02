@@ -26,14 +26,14 @@ use Symfony\Contracts\Service\ResetInterface;
  */
 class Profiler implements ResetInterface
 {
-    private ProfilerStorageInterface $storage;
+    private $storage;
 
     /**
      * @var DataCollectorInterface[]
      */
     private array $collectors = [];
 
-    private ?LoggerInterface $logger;
+    private $logger;
     private bool $initiallyEnabled = true;
     private bool $enabled = true;
 
@@ -58,11 +58,6 @@ class Profiler implements ResetInterface
     public function enable()
     {
         $this->enabled = true;
-    }
-
-    public function isEnabled(): bool
-    {
-        return $this->enabled;
     }
 
     /**
@@ -142,7 +137,7 @@ class Profiler implements ResetInterface
         $profile->setStatusCode($response->getStatusCode());
         try {
             $profile->setIp($request->getClientIp());
-        } catch (ConflictingHeadersException) {
+        } catch (ConflictingHeadersException $e) {
             $profile->setIp('Unknown');
         }
 
@@ -233,7 +228,7 @@ class Profiler implements ResetInterface
 
         try {
             $value = new \DateTime(is_numeric($value) ? '@'.$value : $value);
-        } catch (\Exception) {
+        } catch (\Exception $e) {
             return null;
         }
 
