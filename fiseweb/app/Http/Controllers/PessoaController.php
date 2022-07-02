@@ -13,21 +13,26 @@ class PessoaController extends Controller
     {
         try{
             $pessoas = new Pessoa();
-            if($request->hasFile('image') && $request->file('image')->isValid()){
 
+            // INSERE O ID DO USUÁRIO NA CHAVE ESTRANGEIRA
+            $request["user_id"] = auth()->user()->id;
+            $dados = $request
+                ->only($pessoas->getFillable());
+            
+            //CRIA NOME CRIPTOGRAFIA PARA IMAGEM
+            if($request->hasFile('image') && $request->file('image')->isValid()){
                 $requestImage = $request->image;
                 $extension = $requestImage -> extension();
                 $imageName = md5($requestImage -> getClientOriginalName() . strtotime("now") . "." . $extension);
                 $requestImage->move(public_path('img/fotos_perfil'), $imageName);
-                $pessoas->image = $imageName;
-            }
-            
-            // INSERE O ID DO USUÁRIO NA CHAVE ESTRANGEIRA
-            $request["user_id"] = auth()->user()->id;
 
-            $dados = $request
-                ->only($pessoas->getFillable());
-            Pessoa::create($dados);
+                // TEM QUE COLOCAR O NOME DA IMAGEM ASSIM NO BANCO
+                $dados["image"] =  $imageName;
+                // dd($dados["image"]);
+            }
+
+
+           Pessoa::create($dados);
             //return redirect()->action([PessoaController::class,'create']);
             return redirect('/') -> with('msg',"Cadastro criado com sucesso!");
         }
@@ -76,6 +81,10 @@ class PessoaController extends Controller
             //     ->with("resposta", "Erro ao alterar");
             return redirect('/') -> with('msg',"Erro ao alterar! $e");
         }
+    }
+    public function show()
+    {
+        
     }
 
 }
