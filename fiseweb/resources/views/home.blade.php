@@ -18,23 +18,24 @@
 
                     <div class="container p-4">
                         <div class="card mb-3" style="max-width: 735px;">
+                        
+                        @foreach ($prestadores as $prestador) 
                             <div class="row g-0">
 
                                 <div class="col-md-4 border border-dark text-center">
-                                    <img src="img/paisagem1.jpg" class="img-fluid" alt="...">
-                                    <p class="bg-warning">Especialidade do ignorante</p>
-                                    <p>Informações desnecessarias</p>
+                                    <img src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
+                                    <p class="bg-warning">{{$prestador->profissao}}</p>
+                                    <p>COLOCAR ESTRELA</p>
                                 </div>
-
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">Nome do infeliz</h5>
-                                        <p class="card-text">Experiência do desgraçado:</p>
-                                        <p class="card-text">Contato da mula: (00) 0000-0000</p>
+                                        <h5 class="card-title">{{$prestador->nome}}</h5>
+                                        <p class="card-text">Expecialidade: {{$prestador->especialidade}}</p>
+                                        <p class="card-text">Contato: {{$prestador->celular}}</p>
                                         <p class="card-text"><small class="text-muted">Parceiro desde 30/02/2022</small></p>
                                     </div>
                                 </div>
-
+                        @endforeach
                             </div>
                         </div>
                     </div>
