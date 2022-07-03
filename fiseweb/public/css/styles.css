@@ -1,10 +1,15 @@
 body{
-    background-image: url("/img/fundo.jpg");
+    /* background: -webkit-linear-gradient(-164deg, rgb(22, 135, 237), rgb(20, 55, 90)); */
+    background: linear-gradient(-164deg, rgb(214, 236, 255), rgb(15, 104, 193));
+
+
+
+    /* background-image: url("/img/fundo.jpg");
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: center;
     background-attachment: fixed;
-    background-size: cover;
+    background-size: cover; */
 }
 div.principal{
     width:100%;
