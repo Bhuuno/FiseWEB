@@ -17,6 +17,7 @@ class PrestadorController extends Controller
         else
             return view('prestador.create');
     }
+    
     public function store(Request $request)
     {
         try{
