@@ -68,21 +68,23 @@
                                 <p>COLOCAR ALGUMA COISA</p>
                             @endif
                             @foreach ($prestadores as $prestador) 
+                                <a href="/dashboard">
                                 <div class="row g-0">
                                     <div class="col-md-4 border border-dark text-center">
                                         <img src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
-                                        <p class="bg-warning">{{$prestador->profissao}}</p>
+                                        <p class="bg-warning">{{strtoupper($prestador->profissao)}}</p>
                                         <p>COLOCAR ESTRELA</p>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{$prestador->nome}}</h5>
+                                            <h5 class="card-title">{{strtoupper($prestador->nome)}}</h5>
                                             <p class="card-text">Expecialidade: {{$prestador->especialidade}}</p>
                                             <p class="card-text">Contato: {{$prestador->celular}}</p>
                                             <p class="card-text"><small class="text-muted">Parceiro desde 30/02/2022</small></p>
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             @endforeach
                         </div>
                         @if(count($prestadores) == 0 && $search)
