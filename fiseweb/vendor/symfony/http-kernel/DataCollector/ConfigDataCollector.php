@@ -24,7 +24,7 @@ use Symfony\Component\VarDumper\Caster\ClassStub;
  */
 class ConfigDataCollector extends DataCollector implements LateDataCollectorInterface
 {
-    private KernelInterface $kernel;
+    private $kernel;
 
     /**
      * Sets the Kernel associated with this Request.
@@ -195,19 +195,11 @@ class ConfigDataCollector extends DataCollector implements LateDataCollectorInte
     }
 
     /**
-     * Returns true if the Xdebug is enabled.
+     * Returns true if the XDebug is enabled.
      */
-    public function hasXdebug(): bool
+    public function hasXDebug(): bool
     {
         return $this->data['xdebug_enabled'];
-    }
-
-    /**
-     * Returns true if the function xdebug_info is available.
-     */
-    public function hasXdebugInfo(): bool
-    {
-        return \function_exists('xdebug_info');
     }
 
     /**

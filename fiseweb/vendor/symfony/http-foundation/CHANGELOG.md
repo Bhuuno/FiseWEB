@@ -1,12 +1,6 @@
 CHANGELOG
 =========
 
-6.1
----
-
- * Add stale while revalidate and stale if error cache header
- * Allow dynamic session "ttl" when using a remote storage
-
 6.0
 ---
 
