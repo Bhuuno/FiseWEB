@@ -18,9 +18,11 @@
                         <span class="fs-5 d-none d-sm-inline">Menu</span>
                     </a>
                     <ul>
-                        <li class="d-flex"><img src="/icons/chat-dots.svg" class="icon-space">Chat</li>
+                        <a href="/dashboard" class="text-decoration-none text-white">
+                        <li class="d-flex" href="/dashboard"><img src="/icons/house-door.svg" class="icon-space"> Home <li>
                         <hr>
-                        <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space"> home <li>
+                        </a>
+                        <li class="d-flex"><img src="/icons/chat-dots.svg" class="icon-space">Chat</li>
                         <hr>
                         <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
                         <hr>
