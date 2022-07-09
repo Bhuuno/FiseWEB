@@ -42,10 +42,10 @@ use Symfony\Component\Routing\RequestContextAwareInterface;
  */
 class RouterListener implements EventSubscriberInterface
 {
-    private RequestMatcherInterface|UrlMatcherInterface $matcher;
-    private RequestContext $context;
-    private ?LoggerInterface $logger;
-    private RequestStack $requestStack;
+    private $matcher;
+    private $context;
+    private $logger;
+    private $requestStack;
     private ?string $projectDir;
     private bool $debug;
 
@@ -108,12 +108,14 @@ class RouterListener implements EventSubscriberInterface
                 $parameters = $this->matcher->match($request->getPathInfo());
             }
 
-            $this->logger?->info('Matched route "{route}".', [
-                'route' => $parameters['_route'] ?? 'n/a',
-                'route_parameters' => $parameters,
-                'request_uri' => $request->getUri(),
-                'method' => $request->getMethod(),
-            ]);
+            if (null !== $this->logger) {
+                $this->logger->info('Matched route "{route}".', [
+                    'route' => $parameters['_route'] ?? 'n/a',
+                    'route_parameters' => $parameters,
+                    'request_uri' => $request->getUri(),
+                    'method' => $request->getMethod(),
+                ]);
+            }
 
             $request->attributes->add($parameters);
             unset($parameters['_route'], $parameters['_controller']);

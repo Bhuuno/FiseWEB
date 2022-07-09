@@ -23,7 +23,7 @@ use Symfony\Component\Cache\Traits\RedisProxy;
  */
 class RedisSessionHandler extends AbstractSessionHandler
 {
-    private \Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface|RedisProxy|RedisClusterProxy $redis;
+    private $redis;
 
     /**
      * Key prefix for shared environments.
@@ -33,7 +33,7 @@ class RedisSessionHandler extends AbstractSessionHandler
     /**
      * Time to live in seconds.
      */
-    private int|\Closure|null $ttl;
+    private ?int $ttl;
 
     /**
      * List of available options:
@@ -66,8 +66,7 @@ class RedisSessionHandler extends AbstractSessionHandler
      */
     protected function doWrite(string $sessionId, string $data): bool
     {
-        $ttl = ($this->ttl instanceof \Closure ? ($this->ttl)() : $this->ttl) ?? ini_get('session.gc_maxlifetime');
-        $result = $this->redis->setEx($this->prefix.$sessionId, (int) $ttl, $data);
+        $result = $this->redis->setEx($this->prefix.$sessionId, (int) ($this->ttl ?? ini_get('session.gc_maxlifetime')), $data);
 
         return $result && !$result instanceof ErrorInterface;
     }
@@ -82,7 +81,7 @@ class RedisSessionHandler extends AbstractSessionHandler
         if ($unlink) {
             try {
                 $unlink = false !== $this->redis->unlink($this->prefix.$sessionId);
-            } catch (\Throwable) {
+            } catch (\Throwable $e) {
                 $unlink = false;
             }
         }
@@ -110,8 +109,6 @@ class RedisSessionHandler extends AbstractSessionHandler
 
     public function updateTimestamp(string $sessionId, string $data): bool
     {
-        $ttl = ($this->ttl instanceof \Closure ? ($this->ttl)() : $this->ttl) ?? ini_get('session.gc_maxlifetime');
-
-        return $this->redis->expire($this->prefix.$sessionId, (int) $ttl);
+        return $this->redis->expire($this->prefix.$sessionId, (int) ($this->ttl ?? ini_get('session.gc_maxlifetime')));
     }
 }

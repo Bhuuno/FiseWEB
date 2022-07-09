@@ -18,7 +18,7 @@ namespace Symfony\Component\HttpFoundation\Session;
  */
 final class SessionBagProxy implements SessionBagInterface
 {
-    private SessionBagInterface $bag;
+    private $bag;
     private array $data;
     private ?int $usageIndex;
     private ?\Closure $usageReporter;
@@ -28,7 +28,7 @@ final class SessionBagProxy implements SessionBagInterface
         $this->bag = $bag;
         $this->data = &$data;
         $this->usageIndex = &$usageIndex;
-        $this->usageReporter = null === $usageReporter ? null : $usageReporter(...);
+        $this->usageReporter = $usageReporter instanceof \Closure || !\is_callable($usageReporter) ? $usageReporter : \Closure::fromCallable($usageReporter);
     }
 
     public function getBag(): SessionBagInterface
