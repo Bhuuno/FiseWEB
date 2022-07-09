@@ -61,12 +61,14 @@
                 <div class="p-6 bg-white border-b border-gray-200">
 
                     <div class="container p-4">
-                        <div class="card mb-3" style="max-width: 735px;">
+                        @foreach ($prestadores as $prestador)
+                        <div class="card mb-3">
                             @if($search)
                                 <h2>Buscando por: {{$search}}</h2>
                             @else
                                 <p>COLOCAR ALGUMA COISA</p>
                             @endif
+<<<<<<< HEAD
                             @foreach ($prestadores as $prestador) 
                                 <a href="/dashboard">
                                 <div class="row g-0">
@@ -86,7 +88,25 @@
                                 </div>
                                 </a>
                             @endforeach
+=======
+                            <div class="row g-0">
+                                <div class="col-md-4 border border-dark text-center">
+                                    <img src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
+                                    <p class="bg-warning">{{$prestador->profissao}}</p>
+                                    <p>COLOCAR ESTRELA</p>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{$prestador->nome}}</h5>
+                                        <p class="card-text">Expecialidade: {{$prestador->especialidade}}</p>
+                                        <p class="card-text">Contato: {{$prestador->celular}}</p>
+                                        <p class="card-text"><small class="text-muted">Parceiro desde 30/02/2022</small></p>
+                                    </div>
+                                </div>
+                            </div>
+>>>>>>> e9863d13413d2d062e1fc1ec7a8fb4964f429970
                         </div>
+                        @endforeach
                         @if(count($prestadores) == 0 && $search)
                             <p>Não foi possível encontrar nenhum prestador com {{$search}}! <a href="/">Ver todos!</a></p>
                         @elseif(count($prestadores) == 0)
