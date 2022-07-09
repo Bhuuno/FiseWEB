@@ -17,17 +17,15 @@
                 <div class="p-6 bg-white border-b border-gray-200">
 
                     <div class="container p-4">
-                        <div class="card mb-3" style="max-width: 735px;">
-                        
-                        @foreach ($prestadores as $prestador) 
+                        @foreach ($prestadores as $prestador)
+                        <div class="card mb-3">
                             <div class="row g-0">
-
-                                <div class="col-md-4 border border-dark text-center">
+                                <div class="col-md-3 border border-dark text-center">
                                     <img src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
                                     <p class="bg-warning">{{$prestador->profissao}}</p>
                                     <p>COLOCAR ESTRELA</p>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <div class="card-body">
                                         <h5 class="card-title">{{$prestador->nome}}</h5>
                                         <p class="card-text">Expecialidade: {{$prestador->especialidade}}</p>
@@ -39,7 +37,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
