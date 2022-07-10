@@ -59,7 +59,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-
                     <div class="container p-4">
                         @foreach ($prestadores as $prestador)
                         <div class="card mb-3">
@@ -68,27 +67,6 @@
                             @else
                                 <!-- <p>COLOCAR ALGUMA COISA</p> -->
                             @endif
-<<<<<<< HEAD
-                            @foreach ($prestadores as $prestador) 
-                                <a href="/dashboard">
-                                <div class="row g-0">
-                                    <div class="col-md-4 border border-dark text-center">
-                                        <img src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
-                                        <p class="bg-warning">{{strtoupper($prestador->profissao)}}</p>
-                                        <p>COLOCAR ESTRELA</p>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{strtoupper($prestador->nome)}}</h5>
-                                            <p class="card-text">Expecialidade: {{$prestador->especialidade}}</p>
-                                            <p class="card-text">Contato: {{$prestador->celular}}</p>
-                                            <p class="card-text"><small class="text-muted">Parceiro desde 30/02/2022</small></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                </a>
-                            @endforeach
-=======
                             <div class="row g-0">
                                 <div class="col-md-3 border border-dark text-center">
                                     <img style="height:260px; margin:auto" src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
@@ -100,14 +78,12 @@
                                         <h5 class="card-title">{{strtoupper($prestador->nome)}}</h5>
                                         <p class="card-text">Expecialidade: {{$prestador->especialidade}}</p>
                                         <p class="card-text">Contato: {{$prestador->celular}}</p>
-                                        <p class="card-text"><small class="text-muted">Parceiro desde 30/02/2022</small></p>
+                                        <p class="card-text"><small class="text-muted">Parceiro desde: {{date('d-m-Y', strtotime($prestador->created_at));}}</small></p>
                                         <p class="card-text">Experiências: {{$prestador->experiencia}}</p>
                                     </div>
                                 </div>
                             </div>
->>>>>>> e9863d13413d2d062e1fc1ec7a8fb4964f429970
                         </div>
-                        <br>
                         @endforeach
                         @if(count($prestadores) == 0 && $search)
                             <p>Não foi possível encontrar nenhum prestador com {{$search}}! <a href="/">Ver todos!</a></p>
@@ -115,9 +91,71 @@
                             <p>Não há Prestadores Cadastrado!</p>
                         @endif
                     </div>
-
+                    <!-- Paginação -->
+                    <div style="  display: flex;justify-content: center;">
+                        {{$prestadores->onEachSide(1)->links()}}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
+<div class="container">
+  <footer class="py-5">
+    <div class="row">
+      <div class="col-2">
+        <h5>Section</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+        </ul>
+      </div>
+
+      <div class="col-2">
+        <h5>Section</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+        </ul>
+      </div>
+
+      <div class="col-2">
+        <h5>Section</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+        </ul>
+      </div>
+
+      <div class="col-4 offset-1">
+        <form>
+          <h5>Subscribe to our newsletter</h5>
+          <p>Monthly digest of whats new and exciting from us.</p>
+          <div class="d-flex w-100 gap-2">
+            <label for="newsletter1" class="visually-hidden">Email address</label>
+            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+            <button class="btn btn-primary" type="button">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between py-4 my-4 border-top">
+      <p>© 2021 Company, Inc. All rights reserved.</p>
+      <ul class="list-unstyled d-flex">
+        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+      </ul>
+    </div>
+  </footer>
+</div>

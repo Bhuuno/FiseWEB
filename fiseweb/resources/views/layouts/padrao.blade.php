@@ -13,10 +13,17 @@
 
     <!-- Bootstrap CSS -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- Style CSS -->
     <link href="{{asset('css/styles.css')}}" rel="stylesheet">
 
     <!-- Fontes -->
     <link href="{{asset('fonts')}}">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="/icons/app.css">
+    <!-- <link href="{{asset('icons/all.css')}}" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> -->
 
     <title>@yield('titulo')</title>
 
@@ -29,8 +36,5 @@
       @endif
     </div>
     @yield('conteudo')
-    <footer class="position-relative text-center">
-            <p>FiseWEB &copy; 2022</p>
-    </footer>
   </body>
 </html>

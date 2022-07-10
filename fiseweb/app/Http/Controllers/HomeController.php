@@ -24,21 +24,19 @@ class HomeController extends Controller
             $prestadores=DB::table('prestadors')
                 ->where([['nome', 'like', '%'.$search.'%']])
                 ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
-                ->select('pessoas.nome','pessoas.image','prestadors.celular','prestadors.profissao','prestadors.experiencia',
+                ->select('pessoas.nome','pessoas.image','prestadors.celular','prestadors.profissao','prestadors.experiencia','prestadors.created_at',
                         'prestadors.especialidade','prestadors.celular')
                 ->orderBy('nome')
-                ->get();
+                ->paginate();
         }
         else{
             $prestadores = DB::table('prestadors')
                 ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
-                ->select('pessoas.nome','pessoas.image','prestadors.celular','prestadors.profissao',
+                ->select('pessoas.nome','pessoas.image','prestadors.celular','prestadors.profissao','prestadors.created_at',
                         'prestadors.especialidade','prestadors.celular','prestadors.experiencia')
                 ->orderBy('nome')
-                ->get();
+                ->paginate(1);
         }   
-
-
 
         return view('home',compact('prestadores','search'));
     }
