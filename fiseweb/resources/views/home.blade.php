@@ -18,21 +18,21 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="/img/menu.png" class="d-block w-100" alt="...">
+                <img src="/img/home1.png" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                 <h5>First slide label</h5>
                     <p>Some representative placeholder content for the first slide.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="/img/menu.png" class="d-block w-100" alt="...">
+                <img width="100%" height="20%" src="/img/home2.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Second slide label</h5>
                     <p>Some representative placeholder content for the second slide.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="/img/menu.png" class="d-block w-100" alt="...">
+                <img height="100px"src="/img/home3.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Third slide label</h5>
                     <p>Some representative placeholder content for the third slide.</p>
@@ -66,24 +66,26 @@
                             @if($search)
                                 <h2>Buscando por: {{$search}}</h2>
                             @else
-                                <p>COLOCAR ALGUMA COISA</p>
+                                <!-- <p>COLOCAR ALGUMA COISA</p> -->
                             @endif
                             <div class="row g-0">
-                                <div class="col-md-4 border border-dark text-center">
-                                    <img src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
-                                    <p class="bg-warning">{{$prestador->profissao}}</p>
+                                <div class="col-md-3 border border-dark text-center">
+                                    <img style="height:260px; margin:auto" src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
+                                    <p class="bg-warning">{{strtoupper($prestador->profissao)}}</p>
                                     <p>COLOCAR ESTRELA</p>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{$prestador->nome}}</h5>
+                                        <h5 class="card-title">{{strtoupper($prestador->nome)}}</h5>
                                         <p class="card-text">Expecialidade: {{$prestador->especialidade}}</p>
                                         <p class="card-text">Contato: {{$prestador->celular}}</p>
                                         <p class="card-text"><small class="text-muted">Parceiro desde 30/02/2022</small></p>
+                                        <p class="card-text">Experiências: {{$prestador->experiencia}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <br>
                         @endforeach
                         @if(count($prestadores) == 0 && $search)
                             <p>Não foi possível encontrar nenhum prestador com {{$search}}! <a href="/">Ver todos!</a></p>

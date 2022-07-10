@@ -24,7 +24,7 @@ class HomeController extends Controller
             $prestadores=DB::table('prestadors')
                 ->where([['nome', 'like', '%'.$search.'%']])
                 ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
-                ->select('pessoas.nome','pessoas.image','prestadors.celular','prestadors.profissao',
+                ->select('pessoas.nome','pessoas.image','prestadors.celular','prestadors.profissao','prestadors.experiencia',
                         'prestadors.especialidade','prestadors.celular')
                 ->orderBy('nome')
                 ->get();
@@ -33,7 +33,7 @@ class HomeController extends Controller
             $prestadores = DB::table('prestadors')
                 ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
                 ->select('pessoas.nome','pessoas.image','prestadors.celular','prestadors.profissao',
-                        'prestadors.especialidade','prestadors.celular')
+                        'prestadors.especialidade','prestadors.celular','prestadors.experiencia')
                 ->orderBy('nome')
                 ->get();
         }   
