@@ -3,6 +3,7 @@ require __DIR__.'/auth.php';
 
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PrestadorController;
@@ -35,6 +36,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/dashboard/chat',[ChatController::class,'index'])->middleware(['auth'])->name('chat');
+
 //HOME
 //EXIBIR PRETADOR TELA HOME
 Route::get('/', [HomeController::class,'index']);
@@ -55,5 +58,3 @@ Route::get('/prestador/update',[PrestadorController::class,'update'])->middlewar
 Route::get('/pessoa/create',[PessoaController::class,'create'])->middleware(['auth']);
 //EDITAR
 Route::get('/pessoa/update',[PessoaController::class,'update'])->middleware(['auth']);
-
-
