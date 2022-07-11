@@ -1,7 +1,7 @@
 body{
     /* background: -webkit-linear-gradient(-164deg, rgb(22, 135, 237), rgb(20, 55, 90)); */
-    background: linear-gradient(-164deg, rgb(214, 236, 255), rgb(15, 104, 193));
-
+    /* background: linear-gradient(-164deg, rgb(214, 236, 255), rgb(15, 104, 193)); */
+    background-color: aliceblue;
 
 
     /* background-image: url("/img/fundo.jpg");

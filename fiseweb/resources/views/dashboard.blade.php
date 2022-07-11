@@ -40,6 +40,7 @@
                 </div>
                 <div class="col py-3">
                     <h3>Gráfico</h3>
+
                 </div>
             </div>
             

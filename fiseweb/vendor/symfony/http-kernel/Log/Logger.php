@@ -62,7 +62,7 @@ class Logger extends AbstractLogger
         }
 
         $this->minLevelIndex = self::LEVELS[$minLevel];
-        $this->formatter = null !== $formatter ? $formatter(...) : $this->format(...);
+        $this->formatter = $formatter instanceof \Closure ? $formatter : \Closure::fromCallable($formatter ?? [$this, 'format']);
         if ($output && false === $this->handle = \is_resource($output) ? $output : @fopen($output, 'a')) {
             throw new InvalidArgumentException(sprintf('Unable to open "%s".', $output));
         }
