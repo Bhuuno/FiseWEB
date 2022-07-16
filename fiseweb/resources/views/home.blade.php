@@ -2,8 +2,6 @@
 
 @section('titulo', 'FiseWEB')
 
-@section('conteudo')
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -60,13 +58,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="container p-2">
+                        @if($search)
+                            <h2>Buscando por: {{$search}}</h2>
+                        @endif
                         @foreach ($prestadores as $prestador)
                         <div class="card mb-1">
-                            @if($search)
-                                <h2>Buscando por: {{$search}}</h2>
-                            @else
-                                <!-- <p>COLOCAR ALGUMA COISA</p> -->
-                            @endif
+                            <a href="/dashboard/prestador/{{$prestador->user_id}}" class="text-decoration-none" style="color:black;">
                             <div class="row g-0">
                                 <div class="col-md-3 border border-dark text-center">
                                     <img style="height:260px; margin:auto" src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
@@ -83,6 +80,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
                         @endforeach
                         @if(count($prestadores) == 0 && $search)

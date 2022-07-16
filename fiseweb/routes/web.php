@@ -8,6 +8,8 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PrestadorController;
 use App\Http\Controllers\PessoaController;
+use App\Http\Controllers\VisualizacaoController;
+use App\Http\Controllers\PerfilController;
 
 
 /*
@@ -26,6 +28,7 @@ require __DIR__.'/auth.php';
 Route::resources([
     'pessoa' => \App\Http\Controllers\PessoaController::class,
     'prestador' => \App\Http\Controllers\PrestadorController::class,
+    'perfil' => \App\Http\Controllers\PerfilController::class,
 ]);
 
 // Route::get('/', function () {
@@ -43,18 +46,34 @@ Route::get('/dashboard/chat',[ChatController::class,'index'])->middleware(['auth
 Route::get('/', [HomeController::class,'index']);
 
 
+
 //CLIENTE//
 //Gravar
 // Route::get('/cliente/create',[ClienteController::class,'create']);
+
+
+
 
 //PRESTADOR//
 //Gravar
 Route::get('/prestador/create',[PrestadorController::class,'create'])->middleware(['auth']);
 //EDITAR
 Route::get('/prestador/update',[PrestadorController::class,'update'])->middleware(['auth']);
+//PERFIL
+Route::get('/dashboard/prestador/{id}',[PrestadorController::class,'profile'])->middleware(['auth']);
+//CONTROLLER
+
+
+
+//VISUALIZAÇÃO
+Route::get('/dashboard/prestador/gravar_visualizacao',[VisualizacaoController::class,'create'])->middleware(['auth']);
+
+
 
 //PESSOA//
 //Gravar
 Route::get('/pessoa/create',[PessoaController::class,'create'])->middleware(['auth']);
 //EDITAR
 Route::get('/pessoa/update',[PessoaController::class,'update'])->middleware(['auth']);
+//PERFIL
+Route::get('/dashboard/perfil',[PerfilController::class,'index'])->middleware(['auth']);

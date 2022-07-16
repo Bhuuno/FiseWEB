@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use resources\views;
 use App\Models\Prestador;
 use Illuminate\Http\Request;
-use resources\views;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PessoaController;
 
 class PrestadorController extends Controller
 {
@@ -51,5 +54,16 @@ class PrestadorController extends Controller
             //     ->with("resposta", "Erro ao alterar");
             return redirect('/') -> with('msg',"Erro ao alterar! $e");
         }
+    }
+    public function profile($id)
+    {
+        $prestador=DB::table('prestadors')
+        ->where([['prestadors.user_id', $id]])
+        ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
+        ->select('pessoas.nome','pessoas.email','pessoas.image','prestadors.celular','prestadors.profissao','prestadors.experiencia','prestadors.created_at',
+                'prestadors.especialidade','prestadors.celular','prestadors.informacao','prestadors.sobre','prestadors.razao_social','prestadors.telefone'
+                ,'prestadors.endereco','prestadors.user_id')
+        ->get();
+        return view('prestador.perfil',compact('prestador'));
     }
 }

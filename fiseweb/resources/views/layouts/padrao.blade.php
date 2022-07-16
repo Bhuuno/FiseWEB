@@ -8,6 +8,7 @@
 
     <!--Java Script-->
     <script type="text/javascript" src="{{asset('../../js/pessoa.js')}}"></script>
+    <script type="text/javascript" src="{{asset('../../js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
 
@@ -20,11 +21,6 @@
     <!-- Fontes -->
     <link href="{{asset('fonts')}}">
 
-    <!-- Icons -->
-    <!-- <link rel="stylesheet" href="/icons/app.css"> -->
-    <link href="{{asset('icons/all.css')}}" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> -->
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"> -->
     <title>@yield('titulo')</title>
 
   </head>

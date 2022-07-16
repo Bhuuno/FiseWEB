@@ -1,5 +1,5 @@
 @extends('layouts.padrao')
-
+    <link href="{{asset('css/perfil.css')}}" rel="stylesheet">
 @section('titulo', 'Cadastro')
 
 @section('conteudo')
@@ -23,7 +23,7 @@
                             <hr>
                         </a>
                         <a href="/dashboard/perfil" class="text-decoration-none text-white">
-                            <li class="d-flex"><img src="/icons/chat-dots.svg" class="icon-space"> Perfil</li>
+                            <li class="d-flex"><img src="/icons/chat-dots.svg" class="icon-space">Perfil</li>
                             <hr>
                         </a>
                         <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
@@ -39,11 +39,17 @@
                     </ul>
                     </div>
                 </div>
-                <div class="col py-3">
-                    <h3>Gráfico</h3>
-
+                <div class="col py-3 ">
+                    <div class="centro_perfil container">
+                        <br>
+                        <div class="foto">
+                        </div>
+                            <h2 class="nome_perfil">Bruno Cavalcante Pereira</h2>
+                    <div>
+        
+                
                 </div>
-            </div>
+            </>
             
         </div>
     </div>
