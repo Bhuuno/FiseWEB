@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Visualizacao;
 use Illuminate\Http\Request;
 
 class VisualizacaoController extends Controller
@@ -22,9 +23,14 @@ class VisualizacaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        return view('home');
+        $visualizacao = new Visualizacao();
+        $visualizacao->user_id = $_GET['cliente'];
+        $visualizacao->prestador_id = $_GET['prestador'];   
+
+        $visualizacao->save();
     }
 
     /**

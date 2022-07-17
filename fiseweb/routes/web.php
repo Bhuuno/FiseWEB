@@ -29,6 +29,7 @@ Route::resources([
     'pessoa' => \App\Http\Controllers\PessoaController::class,
     'prestador' => \App\Http\Controllers\PrestadorController::class,
     'perfil' => \App\Http\Controllers\PerfilController::class,
+    'visualizacao' => \App\Http\Controllers\VisualizacaoController::class,
 ]);
 
 // Route::get('/', function () {
@@ -45,14 +46,9 @@ Route::get('/dashboard/chat',[ChatController::class,'index'])->middleware(['auth
 //EXIBIR PRETADOR TELA HOME
 Route::get('/', [HomeController::class,'index']);
 
-
-
 //CLIENTE//
 //Gravar
 // Route::get('/cliente/create',[ClienteController::class,'create']);
-
-
-
 
 //PRESTADOR//
 //Gravar
@@ -63,12 +59,8 @@ Route::get('/prestador/update',[PrestadorController::class,'update'])->middlewar
 Route::get('/dashboard/prestador/{id}',[PrestadorController::class,'profile'])->middleware(['auth']);
 //CONTROLLER
 
-
-
 //VISUALIZAÇÃO
-Route::get('/dashboard/prestador/gravar_visualizacao',[VisualizacaoController::class,'create'])->middleware(['auth']);
-
-
+Route::get('/visualizacao',[VisualizacaoController::class,'create']);
 
 //PESSOA//
 //Gravar

@@ -259,10 +259,9 @@
     window.onload = function(){
         var id_prestador = '<?=$prestador[0]->user_id?>';
         var id_cliente = '<?=$request["user_id"] = auth()->user()->id;?>';
-        <?php use App\Http\Controllers\Controller; ?>
         $.ajax({
-            url: 'gravar_visualizacao.php',
-            type: 'POST',
+            url: '/visualizacao',
+            type: 'GET',
             data: {
                 prestador:id_prestador,
                 cliente:id_cliente
