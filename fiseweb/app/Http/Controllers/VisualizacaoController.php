@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Pessoa;
-use App\Models\Prestador;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Visualizacao;
+use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class VisualizacaoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,27 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $search = request('search');
-        if($search){
-
-            $prestadores=DB::table('prestadors')
-                ->where([['nome', 'like', '%'.$search.'%']])
-                ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
-                ->select('prestadors.user_id','pessoas.nome','pessoas.image','prestadors.celular','prestadors.profissao','prestadors.experiencia','prestadors.created_at',
-                        'prestadors.especialidade','prestadors.celular')
-                ->orderBy('nome')
-                ->paginate();
-        }
-        else{
-            $prestadores = DB::table('prestadors')
-                ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
-                ->select('prestadors.user_id','pessoas.nome','pessoas.image','prestadors.celular','prestadors.profissao','prestadors.created_at',
-                        'prestadors.especialidade','prestadors.celular','prestadors.experiencia')
-                ->orderBy('nome')
-                ->paginate(1);
-        }   
-
-        return view('home',compact('prestadores','search'));
+        //
     }
 
     /**
@@ -46,9 +23,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        //
+        $visualizacao = new Visualizacao();
+        $visualizacao->user_id = $_GET['cliente'];
+        $visualizacao->prestador_id = $_GET['prestador'];   
+
+        $visualizacao->save();
     }
 
     /**
