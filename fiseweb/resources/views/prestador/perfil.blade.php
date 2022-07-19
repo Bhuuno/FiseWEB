@@ -2,8 +2,6 @@
     <link href="{{asset('css/perfil_prestador.css')}}" rel="stylesheet">
     @section('titulo', 'Perfil Prestador')
     <x-app-layout>
-        <link href="{{asset('css/perfil_prestador.css')}}" rel="stylesheet">
-        @section('titulo', 'Perfil Prestador');
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <!-- {{ __('Perfil') }} -->
@@ -267,7 +265,6 @@
                 cliente:id_cliente
             },
             success: function( result ) {  
-                console.log(result);
             },
             error: function( request, status, error ) {
                 console.log(request,status,error);
