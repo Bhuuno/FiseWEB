@@ -29,7 +29,6 @@ Route::resources([
     'pessoa' => \App\Http\Controllers\PessoaController::class,
     'prestador' => \App\Http\Controllers\PrestadorController::class,
     'perfil' => \App\Http\Controllers\PerfilController::class,
-    'visualizacao' => \App\Http\Controllers\VisualizacaoController::class,
 ]);
 
 // Route::get('/', function () {
@@ -60,7 +59,8 @@ Route::get('/dashboard/prestador/{id}',[PrestadorController::class,'profile'])->
 //CONTROLLER
 
 //VISUALIZAÇÃO
-Route::get('/visualizacao',[VisualizacaoController::class,'create']);
+Route::get('/visualizacao',[VisualizacaoController::class,'create'])->middleware(['auth']);
+Route::get('/visualizacao/grafico',[VisualizacaoController::class,'grafico'])->middleware(['auth']);
 
 //PESSOA//
 //Gravar

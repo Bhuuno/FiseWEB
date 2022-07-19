@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Visualizacao;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class VisualizacaoController extends Controller
 {
@@ -87,5 +88,23 @@ class VisualizacaoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function grafico()
+    {
+        $prestador = $_GET['prestador'];
+        $dias = $_GET['dias'];
+
+        $grafico = DB::select("SELECT 
+            COUNT(prestador_id) AS quantidade,
+            date_format(created_at, '%d/%m/%Y') AS data
+        FROM 
+            visualizacaos 
+        WHERE 
+            prestador_id = '$prestador' 
+            GROUP BY DATA
+            LIMIT $dias");
+
+       return json_encode($grafico);
     }
 }
