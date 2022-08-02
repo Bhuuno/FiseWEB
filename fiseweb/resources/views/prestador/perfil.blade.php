@@ -24,16 +24,18 @@
                                 <li class="d-flex"><img src="/icons/chat-dots.svg" class="icon-space">Perfil</li>
                                 <li>
                             <hr>
-                            </a>
-                            <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
+                                </a>
+                                <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
                             <hr>
-                            <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
+                                <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
                             <hr>
-                            <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
+                                <a href="/dashboard/avaliacao/{{$prestador[0]->user_id}}" class="text-decoration-none text-white">
+                                <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
                             <hr>
-                            <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Suporte</li>
+                                </a>
+                                <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Suporte</li>
                             <hr>
-                            <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>
+                                <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>
                             <hr>
                         </ul>
                     </div>
@@ -44,14 +46,14 @@
                             <div class="col-md-4    ">
                                 <div class="card">
                                     <div class="card-body">
-                                    <div class="d-flex flex-column align-items-center text-center">
-                                        <img src="/img/fotos_perfil/{{$prestador[0]->image}}" alt="{{$prestador[0]->nome}}" class="rounded-circle" style="width:144px; height:144px";>
-                                        <div class="mt-3">
-                                            <h4>{{$prestador[0]->nome}}</h4>
-                                            <h6>{{strtoupper($prestador[0]->profissao)}}</h6>
-                                            <p class="text-secondary mb-1">Avaliações</p>
+                                        <div class="d-flex flex-column align-items-center text-center">
+                                            <img src="/img/fotos_perfil/{{$prestador[0]->image}}" alt="{{$prestador[0]->nome}}" class="rounded-circle" style="width:144px; height:144px";>
+                                            <div class="mt-3">
+                                                <h4>{{$prestador[0]->nome}}</h4>
+                                                <h6>{{strtoupper($prestador[0]->profissao)}}</h6>
+                                                <p class="text-secondary mb-1">Avaliações</p>
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                                 <div class="card mt-3">

@@ -45,7 +45,7 @@
 
             <div class="col-md-6">
                 <label for="rg" class="form-label">RG</label>
-                <input type="text" required class="form-control" name="rg" id="rg" placeholder="Ex: 000.000.000-00">
+                <input type="text" class="form-control" data-mask="000.00.000-0" name="rg" id="rg" placeholder="Ex: 000.000.000-00">
             </div>
 
             <div class="col-md-6">

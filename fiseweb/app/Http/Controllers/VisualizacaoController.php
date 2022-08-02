@@ -27,11 +27,7 @@ class VisualizacaoController extends Controller
 
     public function create()
     {
-        $visualizacao = new Visualizacao();
-        $visualizacao->user_id = $_GET['cliente'];
-        $visualizacao->prestador_id = $_GET['prestador'];   
-
-        $visualizacao->save();
+        // 
     }
 
     /**
@@ -40,9 +36,14 @@ class VisualizacaoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    
+    public function store()//Request $request
     {
-        //
+        $visualizacao = new Visualizacao();
+        $visualizacao->user_id = $_GET['cliente'];
+        $visualizacao->prestador_id = $_GET['prestador'];   
+
+        $visualizacao->save();
     }
 
     /**
@@ -94,6 +95,14 @@ class VisualizacaoController extends Controller
     {
         $prestador = $_GET['prestador'];
         $dias = $_GET['dias'];
+        $data = $_GET['data'];
+
+        if(empty($data))
+        {
+            $data = date('Y-m-d');
+            $data = date('Y-m-d', strtotime("-$dias days"));
+            // var_dump($data);
+        }
 
         $grafico = DB::select("SELECT 
             COUNT(prestador_id) AS quantidade,
@@ -101,7 +110,8 @@ class VisualizacaoController extends Controller
         FROM 
             visualizacaos 
         WHERE 
-            prestador_id = '$prestador' 
+            prestador_id = '$prestador' AND
+            date(created_at) >= '$data' 
             GROUP BY DATA
             LIMIT $dias");
 
