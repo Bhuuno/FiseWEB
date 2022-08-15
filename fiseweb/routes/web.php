@@ -58,7 +58,7 @@ Route::get('/dashboard/prestador/{id}',[PrestadorController::class,'profile'])->
 //VISUALIZAÇÃO
 Route::get('/visualizacao',[VisualizacaoController::class,'store'])->middleware(['auth']);
 Route::get('/visualizacao/grafico',[VisualizacaoController::class,'grafico'])->middleware(['auth']);
-
+Route::get('/informacoes/dashboard',[VisualizacaoController::class,'dashboard'])->middleware(['auth']);
 
 //PESSOA//
 Route::get('/pessoa/create',[PessoaController::class,'create'])->middleware(['auth']);

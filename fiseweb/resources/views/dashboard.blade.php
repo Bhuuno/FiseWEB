@@ -45,21 +45,30 @@
                         <div class="row mt-3" style="height:80px;">
                             <div class="col-2 barra">
                                 Visualização Semanal
+                                <div id="semanal">0</div>
                             </div>
                             <div class="col-2 barra">
                                 Visualização Mensal
+                                <div id="mensal">0</div>
                             </div>
                             <div class="col-2 barra">
-                                Visualização TOTAL
+                                TOTAL Visualização
+                                <div id="total">0</div>
                             </div>
                             <div class="col-2 barra">
-                                Comentarios
+                                TOTAL avaliações
+                                <div id="avaliacoes">0</div>
                             </div>
                             <div class="col-2 barra">
-                                Quantidade de comentários
+                                Fotos TOTAL
+                                <div>0</div>
                             </div>
                             <div class="col-2 barra">
                                 Pontuação
+                                <div style="display: flex; justify-content:center;">
+                                    <div id="media">0</div>
+                                    <img style="height: fit-content; padding: 2px;"width="25px" src="/img/star1.png">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -77,9 +86,18 @@
                         <input class="input_grafico ms-3" id="data" name="data" type="date">
                         <input class="button_grafico ms-4" id="buscar" type="button" value="Gerar" onclick="grafico_visualizacao()">
                     </div>
-                    <div id="grafico" style="display:flex; width:64%;">
-                        <canvas id="myChart"></canvas>
-                        <canvas id="myChart1"></canvas>
+                    <div style="display: flex;">
+                        <!-- GRAFICO DE LINHA E BARRA -->
+                        <div id="grafico" style="display:flex; width:64%;">
+                        
+                            <canvas id="myChart"></canvas>
+                            <canvas id="myChart1"></canvas>
+                        </div>
+
+                        <!-- GRAFICO DE ROSCA -->
+                        <div id="grafico_rosca" style="display:flex; width:60%;">
+                            <p>Visualização de Perfil</p>
+                        </div>
                     </div>
                 </div>
 
@@ -91,6 +109,7 @@
 </x-app-layout>
 <script>
 
+    // ALERTA MENSAGEM 
    function valor_negativo_atencao(){
         swal({
             title: "Atenção!",
@@ -99,6 +118,7 @@
             button: "Fechar!",
         });
     };
+    // ALERTA MENSAGEM
     function acima_30_dias_atencao(){
         swal({
             title: "Atenção!",
@@ -108,24 +128,51 @@
         });
     };
     window.onload = function(){
-        
         $("#myChart").remove();
         document.getElementById('grafico').innerHTML='<canvas id="myChart"></canvas>';
         grafico_visualizacao();
-        sucess();
+        visualizacao_dashboard();
+    }
+    function visualizacao_dashboard(){
+        $.ajax({
+            url: '/informacoes/dashboard',
+            type: 'get',
+            data: {
+            },
+            success: function( result ) {  
+                var dashboard = JSON.parse(result);
+
+                //EXIBIR O VALOR NO DASHBOARD SEMANAL 
+                document.getElementById('semanal').innerHTML = dashboard[0].semanal
+                
+                //EXIBIR O VALOR NO DASHBOARD MENSAL 
+                document.getElementById('mensal').innerHTML = dashboard[0].mensal
+
+                //EXIBIR O VALOR NO DASHBOARD TOTAL 
+                document.getElementById('total').innerHTML = dashboard[0].total_visualizacao
+                
+                //EXIBIR O VALOR NO COMENTARIOS TOTAL 
+                document.getElementById('avaliacoes').innerHTML = dashboard[0].total_avaliacoes
+                
+                //EXIBIR O VALOR NO PONTUAÇÃO TOTAL 
+                document.getElementById('media').innerHTML = dashboard[0].media.toFixed(1)
+            },
+            error: function( request, status, error ) {
+                console.log(request,status,error);
+            }
+        });
     }
     function grafico_visualizacao(){
-
         var data = $("#data").val();
         var dias = $("#dias").val();
         var tipo = $("#tipo").val();
+        var id_prestador = '<?=$request["user_id"] = auth()->user()->id;?>';
 
         if(dias < 0)
             valor_negativo_atencao();
 
         if(dias <= 30)
         {
-            var id_prestador = '<?=$request["user_id"] = auth()->user()->id;?>';
             $.ajax({
                 url: '/visualizacao/grafico',
                 type: 'get',
@@ -139,15 +186,50 @@
 
                     // console.log(grafico[0].quantidade);
                     var label=[];
+                    var label_rosca=[];
+                    var avaliacao_rosca = [];
                     var valores=[];
                     var i;
 
+                    //MONTA UM ARRAY PRO GRAFICO DE ROSCA COM A QUANTIDADE DE AVALIAÇÕES
                     for(i=0; i< grafico.length; i++)
                     {
                         label.push(grafico[i].data);
                         valores.push(grafico[i].quantidade);
                     }
+                    if(grafico[0].NOTA0)
+                    {
+                        avaliacao_rosca.push(grafico[0].NOTA0);
+                        label_rosca.push('Nota 0')
+                    }
+                    if(grafico[0].NOTA1)
+                    {
+                        avaliacao_rosca.push(grafico[0].NOTA1);
+                        label_rosca.push('Nota 1')
+                    }
+                    if(grafico[0].NOTA2)
+                    {
+                        avaliacao_rosca.push(grafico[0].NOTA2);
+                        label_rosca.push('Nota 2')
+                    }
+                    if(grafico[0].NOTA3)
+                    {
+                        avaliacao_rosca.push(grafico[0].NOTA3);
+                        label_rosca.push('Nota 3')
+                    }
+                    if(grafico[0].NOTA4)
+                    {
+                        avaliacao_rosca.push(grafico[0].NOTA4);
+                        label_rosca.push('Nota 4')
+                    }
+                    if(grafico[0].NOTA5)
+                    {
+                        avaliacao_rosca.push(grafico[0].NOTA5);
+                        label_rosca.push('Nota 5')
+                    }
 
+
+                    //GRAFICO DE LINHA 
                     if(tipo == 0)
                     {
                         $("#myChart").remove();
@@ -158,7 +240,7 @@
                         const data = {
                             labels: labels,
                             datasets: [{
-                            label: 'My First dataset',
+                            label: 'Visualizações no perfil',
                             backgroundColor: 'rgb(255, 99, 132)',
                             borderColor: 'rgb(255, 99, 132)',
                             data: valores,
@@ -175,6 +257,7 @@
                             document.getElementById('myChart'),
                             config
                         );
+                    // GRAFICO ESTILO BARRA
                     }if(tipo == 1){
                         $("#myChart").remove();
                         document.getElementById('grafico').innerHTML='<canvas id="myChart"></canvas>';
@@ -206,6 +289,7 @@
                                 }]
                             },
                             options: {
+                                indexAxis: 'y',
                                 scales: {
                                     y: {
                                         beginAtZero: true
@@ -214,6 +298,39 @@
                             }
                         });
                     }
+                    //GRAFICO DE ROSCA 
+                    document.getElementById('grafico_rosca').innerHTML='<canvas id="myChart2"></canvas>';
+                        const ctx = document.getElementById('myChart2').getContext('2d');
+                        const myChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: label_rosca,
+                                datasets: [{
+                                    label: 'Avaliações',
+                                    data: avaliacao_rosca,
+                                    backgroundColor: [
+                                        '#000',
+                                        '#999',
+                                        '#ccc'
+                                    ],
+                                    borderColor: [
+                                        '#000',
+                                        '#999',
+                                        '#ccc'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                indexAxis: 'y',
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+
                 },
                 error: function( request, status, error ) {
                     console.log(request,status,error);

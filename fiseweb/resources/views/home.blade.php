@@ -68,19 +68,14 @@
                                 <div class="col-md-3 border border-dark text-center">
                                     <img style="height:260px; margin:auto" src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
                                     <p class="bg-warning">{{strtoupper($prestador->profissao)}}</p>
-                                    <div style="display: flex; justify-content:center;">
-                                        <p id="media">{{number_format(($prestador->total/$prestador->quantidade),1)}}</p>
-                                        <img style="height: fit-content; padding: 2px;"width="25px" src="/img/star1.png">
-                                        <!-- {{$prestador->quantidade}} Avaliações -->
-                                    </div>
-
+                                    <p>{{strtoupper($prestador->cidade)}}</p>
                                 </div>
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h5 class="card-title">{{strtoupper($prestador->nome)}}</h5>
-                                        <p class="card-text">Expecialidade: {{strtoupper($prestador->especialidade)}}</p>
+                                        <p class="card-text">Expecialidade: {{$prestador->especialidade}}</p>
                                         <p class="card-text">Contato: {{$prestador->celular}}</p>
-                                        <p class="card-text"><small class="text-muted">Parceiro desde: {{date('d/m/Y', strtotime($prestador->created_at));}}</small></p>
+                                        <p class="card-text"><small class="text-muted">Parceiro desde: {{date('d-m-Y', strtotime($prestador->created_at));}}</small></p>
                                         <p class="card-text">Experiências: {{$prestador->experiencia}}</p>
                                     </div>
                                 </div>
@@ -96,7 +91,7 @@
                     </div>
                     <!-- Paginação -->
                     <div style="  display: flex;justify-content: center;">
-                        <!-- brno -->
+                        {{$prestadores->onEachSide(1)->links()}}
                     </div>
                 </div>
             </div>

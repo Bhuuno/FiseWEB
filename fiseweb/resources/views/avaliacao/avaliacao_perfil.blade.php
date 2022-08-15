@@ -220,7 +220,8 @@
                     media = resposta[0].total_nota / resposta[0].qtde_avaliacao;
 
                     //ALETRA O VALOR DA MEDIA
-                    document.getElementById('media').innerHTML = media.toFixed(1)
+                    if(resposta[0].total_nota != null)
+                        document.getElementById('media').innerHTML = media.toFixed(1)
 
                     //MOSTRA A QANTIDADE DE VISUALIZAÇÕES
                     document.getElementById('quantidade').innerHTML = resposta[0].qtde_avaliacao
@@ -251,7 +252,7 @@
             document.getElementById("s3").src = "/img/star1.png";
             document.getElementById("s4").src = "/img/star1.png";
             document.getElementById("s5").src = "/img/star1.png";
-        avaliacao = 5;
+            avaliacao = 5;
         }
         
         //ESTRELA 4
@@ -261,7 +262,7 @@
             document.getElementById("s3").src = "/img/star1.png";
             document.getElementById("s4").src = "/img/star1.png";
             document.getElementById("s5").src = "/img/star0.png";
-        avaliacao = 4;
+            avaliacao = 4;
         }
 
         //ESTRELA 3
