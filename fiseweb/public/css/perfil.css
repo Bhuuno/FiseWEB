@@ -31,13 +31,19 @@ div.sobre{
 }
 
 .tab {
-    width: 700px;
+    width: 700px; 
     margin: 20px auto;
   }
   
-  .tab input[type] {
+  /* OCULTA AS BOLINHAS DO RADIO */
+  input[type="radio"]{
+    visibility:hidden;
+}
+
+/* OCULTA A BOLINHA DO RADIO, MAS BAGUNÇA O RESTO DOS INPUTS */
+  /* .tab input[type] {
     display: none;
-  }
+  } */
   /*envolve todo o nosso conteúdo*/
   .tab label {
     display: block;
