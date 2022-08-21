@@ -44,11 +44,12 @@
                     <div class="album py-5 bg-light">
                         @if(auth()->user()->id == $id)
                             <div>
-                                <form action="" enctype="multipart/form-data" class="bg-white shadow row g-4 pb-8">
+                                <form action="{{route('galeria.store')}}" method="post" enctype="multipart/form-data" class="bg-white shadow row g-4 pb-8">
+                                    @csrf
                                     <h4>Upload de imagens</h4>
                                     <div class="form-group">
                                         <label for="image">Imagem: </label>
-                                        <input type="file" class="form-control-file" id="image" name="image">
+                                        <input type="file" class="form-control-file" id="imagem" name="imagem">
                                     </div>
 
                                     <div class="col-12">
@@ -57,7 +58,7 @@
                                     </div>
 
                                     <div class="col-md-12 text-center">
-                                        <button type="button" onclick="upload_imagem()" class="btn btn-primary">Enviar</button>
+                                        <button type="submit" class="btn btn-primary">Enviar</button>
                                     </div>
                                 </form>
                             </div>
@@ -86,11 +87,3 @@
     </div>
 
 </x-app-layout>
-<script>
-    //FAZ UPLOAD DE IMAGEM PARA GALERIACONTROLLERSTORE
-    function upload_imagem()
-    {
-        comentario = $('comentario').attr();
-        console.log(comentario);
-    }
-</script>
