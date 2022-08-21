@@ -131,7 +131,7 @@ class VisualizacaoController extends Controller
     from 
         visualizacaos
     WHERE 
-        prestador_id = '1' AND
+        prestador_id = '$prestador' AND
         date(created_at) >= '$semana';");
 
         return json_encode($consulta);
