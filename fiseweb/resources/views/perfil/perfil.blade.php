@@ -21,11 +21,7 @@
                         <a href="/" class="text-decoration-none text-white">
                             <li class="d-flex" href="/"><img src="/icons/house-door.svg" class="icon-space"> Home <li>
                             <hr>
-                        </a>
-                        <a href="/dashboard/perfil" class="text-decoration-none text-white">
-                            <li class="d-flex"><img src="/icons/chat-dots.svg" class="icon-space">Perfil</li>
-                            <hr>
-                        </a>
+                        </a>                     
                         <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
                         <hr>
                         <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
