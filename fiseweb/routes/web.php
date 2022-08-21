@@ -10,7 +10,8 @@ use App\Http\Controllers\PrestadorController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\VisualizacaoController;
 use App\Http\Controllers\PerfilController;
-
+use App\Http\Controllers\AvaliacaoController;
+use App\Http\Controllers\GaleriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,8 @@ Route::resources([
     'pessoa' => \App\Http\Controllers\PessoaController::class,
     'prestador' => \App\Http\Controllers\PrestadorController::class,
     'perfil' => \App\Http\Controllers\PerfilController::class,
+    'avaliacao' => \App\Http\Controllers\AvaliacaoController::class,
+    'galeria' => \App\Http\Controllers\GaleriaController::class,
 ]);
 
 // Route::get('/', function () {
@@ -42,30 +45,33 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard/chat',[ChatController::class,'index'])->middleware(['auth'])->name('chat');
 
 //HOME
-//EXIBIR PRETADOR TELA HOME
 Route::get('/', [HomeController::class,'index']);
 
 //CLIENTE//
-//Gravar
 // Route::get('/cliente/create',[ClienteController::class,'create']);
 
+
 //PRESTADOR//
-//Gravar
 Route::get('/prestador/create',[PrestadorController::class,'create'])->middleware(['auth']);
-//EDITAR
 Route::get('/prestador/update',[PrestadorController::class,'update'])->middleware(['auth']);
-//PERFIL
 Route::get('/dashboard/prestador/{id}',[PrestadorController::class,'profile'])->middleware(['auth']);
-//CONTROLLER
+
+//NOTA SERVIÇO PRESTADOR
+Route::get('/media',[AvaliacaoController::class,'media'])->middleware(['auth']);
 
 //VISUALIZAÇÃO
-Route::get('/visualizacao',[VisualizacaoController::class,'create'])->middleware(['auth']);
+Route::get('/visualizacao',[VisualizacaoController::class,'store'])->middleware(['auth']);
 Route::get('/visualizacao/grafico',[VisualizacaoController::class,'grafico'])->middleware(['auth']);
+Route::get('/informacoes/dashboard',[VisualizacaoController::class,'dashboard'])->middleware(['auth']);
 
 //PESSOA//
-//Gravar
 Route::get('/pessoa/create',[PessoaController::class,'create'])->middleware(['auth']);
-//EDITAR
 Route::get('/pessoa/update',[PessoaController::class,'update'])->middleware(['auth']);
-//PERFIL
 Route::get('/dashboard/perfil',[PerfilController::class,'index'])->middleware(['auth']);
+
+//AVALIAÇÃO
+Route::get('/dashboard/avaliacao/{id}',[AvaliacaoController::class,'index'])->middleware(['auth']);
+Route::get('/gravar/comentario',[AvaliacaoController::class,'store'])->middleware(['auth']);
+
+//GALERIA
+Route::get('/dashboard/galeria/{id}',[GaleriaController::class,'index'])->middleware(['auth']);

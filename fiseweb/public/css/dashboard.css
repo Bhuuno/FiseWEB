@@ -1,0 +1,26 @@
+div.barra{
+    background-color:white;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+div.input-grafico{
+    display:flex; 
+    justify-content:left;
+    border-radius: 3px;
+}
+input.input_grafico_dias{
+    border-radius: 5px;
+    width: 60px;
+}
+input.input_grafico{
+    border-radius: 5px;
+}
+input.button_grafico{
+    border-radius: 5px;
+    padding: 0 25px;
+    background-color: red;
+}
+select.select_grafico{
+    border-radius: 5px;
+    width: 100px;
+}

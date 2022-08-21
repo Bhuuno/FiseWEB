@@ -1,5 +1,5 @@
 @extends('layouts.padrao')
-    <link href="{{asset('css/perfil.css')}}" rel="stylesheet">
+<link href="{{asset('css/perfil.css')}}" rel="stylesheet">
 @section('titulo', 'Cadastro')
 
 @section('conteudo')
@@ -30,8 +30,10 @@
                         <hr>
                         <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
                         <hr>
+                        <a href="/dashboard/avaliacao" lass="text-decoration-none text-white">
                         <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
                         <hr>
+                        </a>
                         <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Suporte</li>
                         <hr>
                         <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>

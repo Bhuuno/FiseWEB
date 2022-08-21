@@ -68,7 +68,7 @@
                                 <div class="col-md-3 border border-dark text-center">
                                     <img style="height:260px; margin:auto" src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
                                     <p class="bg-warning">{{strtoupper($prestador->profissao)}}</p>
-                                    <p>COLOCAR ESTRELA</p>
+                                    <p>{{strtoupper($prestador->cidade)}}</p>
                                 </div>
                                 <div class="col-md-7">
                                     <div class="card-body">
@@ -86,7 +86,7 @@
                         @if(count($prestadores) == 0 && $search)
                             <p>Não foi possível encontrar nenhum prestador com {{$search}}! <a href="/">Ver todos!</a></p>
                         @elseif(count($prestadores) == 0)
-                            <p>Não há Prestadores Cadastrado!</p>
+                            <p>Não há Prestadores Cadastrados!</p>
                         @endif
                     </div>
                     <!-- Paginação -->
@@ -168,4 +168,3 @@
     </footer>
     </div>
 </x-app-layout>
-

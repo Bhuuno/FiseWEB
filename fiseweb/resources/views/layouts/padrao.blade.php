@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <style>
+      body { overflow-x: hidden; }
+    </style>
+    
     <!--Java Script-->
     <script type="text/javascript" src="{{asset('../../js/pessoa.js')}}"></script>
     <script type="text/javascript" src="{{asset('../../js/jquery-3.6.0.min.js')}}"></script>
@@ -16,7 +20,11 @@
     <script type="text/javascript"> 
       $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } }); 
     </script>
-    
+
+    <!-- alert -->    
+    <script src="{{ asset('alert/jquery.min.js') }}"></script>    
+    <script src="{{ asset('alert/sweetalert.min.js') }}"></script>
+
     <!-- Bootstrap CSS -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 

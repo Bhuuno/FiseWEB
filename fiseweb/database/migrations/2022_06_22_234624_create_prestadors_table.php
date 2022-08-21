@@ -25,11 +25,11 @@ return new class extends Migration
             $table->string('email');
             $table->string('profissao');
             $table->string('especialidade');
-            $table->string('informacao');
-            $table->string('sobre');
-            $table->string('experiencia');
+            $table->text('informacao');
+            $table->text('sobre');
+            $table->text('experiencia');
             $table->string('celular','15');
-            $table->string('telefone','10');
+            $table->string('telefone','15');
             $table->string('endereco');
             $table->integer('numero');
             $table->string('cidade');
