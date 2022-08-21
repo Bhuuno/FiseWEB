@@ -30,12 +30,15 @@
                                 <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
                             <hr>
                                 <a href="/dashboard/avaliacao/{{$prestador[0]->user_id}}" class="text-decoration-none text-white">
-                                <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
+                                <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li></a>
                             <hr>
                                 </a>
                                 <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Suporte</li>
                             <hr>
                                 <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>
+                            <hr>
+                                <a href="/dashboard/galeria/{{$prestador[0]->user_id}}" class="text-decoration-none text-white">
+                                <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Galeria</li></a>
                             <hr>
                         </ul>
                     </div>
@@ -257,6 +260,7 @@
 </x-app-layout>
 <script type="text/javascript">
     window.onload = function(){
+        // Realiza contagem para criação de grafico no dashboard
         var id_prestador = '<?=$prestador[0]->user_id?>';
         var id_cliente = '<?=$request["user_id"] = auth()->user()->id;?>';
         $.ajax({

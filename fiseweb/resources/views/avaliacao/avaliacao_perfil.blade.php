@@ -234,6 +234,8 @@
     }
 
     function Avaliar(estrela) {
+
+        //FUNÇÃO PEGO DA INTERNET
         var url = window.location;
         url = url.toString()
         url = url.split("index.html");

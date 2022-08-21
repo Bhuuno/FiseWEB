@@ -11,6 +11,7 @@ use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\VisualizacaoController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\AvaliacaoController;
+use App\Http\Controllers\GaleriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::resources([
     'prestador' => \App\Http\Controllers\PrestadorController::class,
     'perfil' => \App\Http\Controllers\PerfilController::class,
     'avaliacao' => \App\Http\Controllers\AvaliacaoController::class,
+    'galeria' => \App\Http\Controllers\GaleriaController::class,
 ]);
 
 // Route::get('/', function () {
@@ -54,6 +56,8 @@ Route::get('/prestador/create',[PrestadorController::class,'create'])->middlewar
 Route::get('/prestador/update',[PrestadorController::class,'update'])->middleware(['auth']);
 Route::get('/dashboard/prestador/{id}',[PrestadorController::class,'profile'])->middleware(['auth']);
 
+//NOTA SERVIÇO PRESTADOR
+Route::get('/media',[AvaliacaoController::class,'media'])->middleware(['auth']);
 
 //VISUALIZAÇÃO
 Route::get('/visualizacao',[VisualizacaoController::class,'store'])->middleware(['auth']);
@@ -65,9 +69,9 @@ Route::get('/pessoa/create',[PessoaController::class,'create'])->middleware(['au
 Route::get('/pessoa/update',[PessoaController::class,'update'])->middleware(['auth']);
 Route::get('/dashboard/perfil',[PerfilController::class,'index'])->middleware(['auth']);
 
-
 //AVALIAÇÃO
 Route::get('/dashboard/avaliacao/{id}',[AvaliacaoController::class,'index'])->middleware(['auth']);
 Route::get('/gravar/comentario',[AvaliacaoController::class,'store'])->middleware(['auth']);
-//NOTA SERVIÇO PRESTADOR
-Route::get('/media',[AvaliacaoController::class,'media'])->middleware(['auth']);
+
+//GALERIA
+Route::get('/dashboard/galeria/{id}',[GaleriaController::class,'index'])->middleware(['auth']);

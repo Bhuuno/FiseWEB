@@ -86,7 +86,7 @@
                         @if(count($prestadores) == 0 && $search)
                             <p>Não foi possível encontrar nenhum prestador com {{$search}}! <a href="/">Ver todos!</a></p>
                         @elseif(count($prestadores) == 0)
-                            <p>Não há Prestadores Cadastrado!</p>
+                            <p>Não há Prestadores Cadastrados!</p>
                         @endif
                     </div>
                     <!-- Paginação -->
