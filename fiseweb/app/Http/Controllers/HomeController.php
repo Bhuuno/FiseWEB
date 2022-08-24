@@ -33,7 +33,7 @@ class HomeController extends Controller
                 ->where([['nome', 'like', '%'.$search.'%']])
                 ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
                 ->select('prestadors.user_id','pessoas.nome','pessoas.image','prestadors.celular','prestadors.profissao','prestadors.experiencia','prestadors.created_at',
-                        'prestadors.especialidade','prestadors.celular','prestadors.id')
+                        'prestadors.especialidade','prestadors.celular','prestadors.id', 'prestadors.cidade')
                 ->orderBy('nome')
                 ->paginate();
         }
