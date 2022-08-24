@@ -4,7 +4,6 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                
                 <a href="\" style="max-width: 5.5%; heigth: auto;">
                     <img src="/img/logo.png">
                 </a>
