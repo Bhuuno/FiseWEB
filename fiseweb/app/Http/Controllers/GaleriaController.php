@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use resources\views;
 use App\Models\Galeria;
 use Illuminate\Http\Request;
-use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use resources\views;
 
 class GaleriaController extends Controller
 {
@@ -18,7 +18,9 @@ class GaleriaController extends Controller
      */
     public function index($id)
     {
-        return view('galeria.galeria',compact('id'));
+        $galeria = DB::select("SELECT * FROM `galerias` WHERE user_id = $id");
+
+        return view('galeria.galeria',compact('id','galeria'));
     }
 
     /**
@@ -39,39 +41,35 @@ class GaleriaController extends Controller
      */
     public function store(Request $request)
     {
+        $id_user = auth()->user()->id;
         try{
             $galeria = new Galeria();
-            
-            var_dump($request);
 
             // INSERE O ID DO USUÁRIO NA CHAVE ESTRANGEIRA
-            $request["user_id"] = auth()->user()->id;
+            $request["user_id"] = $id_user;
             $dados = $request->only($galeria->getFillable());
 
             //CRIA NOME CRIPTOGRAFIA PARA IMAGEM
-            if($request->hasFile('imagem') && $request->file('imagem')->isValid()){
-                $requestImagem = $request->imagem;
+            if($request->hasFile('image') && $request->file('image')->isValid()){
+                $requestImagem = $request->image;
                 $extension = $requestImagem -> extension();
-
-                var_dump($extension);
                 $imageName = md5($requestImagem -> getClientOriginalName() . strtotime("now") . "." . $extension);
-                $requestImagem->move(public_path('img/fotos_perfil'), $imageName);
+                $requestImagem->move(public_path('img/galeria'), $imageName);
 
                 // TEM QUE COLOCAR O NOME DA IMAGEM ASSIM NO BANCO
-                $dados["imagem"] =  $imageName;
+                $dados["image"] =  $imageName;
                 $dados["status"] = true;
                 $dados["curtidas"] = 0;
-                var_dump($dados);
             }
 
-           Galeria::create($dados);
-            //return redirect()->action([PessoaController::class,'create']);
-            echo "Garvado1";
+            Galeria::create($dados);
+            // return redirect()->action([GaleriaController::class,'index']);
+
+            return redirect("/dashboard/galeria/$id_user");
             // return redirect('/') -> with('msg',"Cadastro criado com sucesso!");
         }
         catch(\Exception $e){
-            var_dump($request);
-            // echo"Erro ao inserir! $e";
+            echo"Erro ao inserir! $e";
         }
     }
 
@@ -117,6 +115,14 @@ class GaleriaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $id_user = auth()->user()->id;
+            Galeria::destroy($id);
+            return redirect("/dashboard/galeria/$id_user");
+        }
+        catch (\Exception $e)
+        {
+            echo"Erro ao excluir!"+$e->getMessage();
+        }
     }
 }
