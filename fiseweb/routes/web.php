@@ -75,3 +75,4 @@ Route::get('/gravar/comentario',[AvaliacaoController::class,'store'])->middlewar
 
 //GALERIA
 Route::get('/dashboard/galeria/{id}',[GaleriaController::class,'index'])->middleware(['auth']);
+Route::get('/dashboard/galeria/{id}',[GaleriaController::class,'index'])->middleware(['auth']);

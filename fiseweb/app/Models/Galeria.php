@@ -11,7 +11,7 @@ class Galeria extends Model
 
     protected $fillable = [
         'user_id',
-        'imagem',
+        'image',
         'comentario',
         'curtidas',
         'status'

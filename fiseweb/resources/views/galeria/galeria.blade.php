@@ -1,6 +1,10 @@
 @extends('layouts.padrao')
-<link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
+
+@method('path')
+
 @section('titulo', 'Galeria')
+
+<link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
 <script src="{{ asset('chats/Chart.js') }}"></script>   
 <x-app-layout>
     <x-slot name="header">
@@ -49,7 +53,7 @@
                                     <h4>Upload de imagens</h4>
                                     <div class="form-group">
                                         <label for="image">Imagem: </label>
-                                        <input type="file" class="form-control-file" id="imagem" name="imagem">
+                                        <input type="file" class="form-control-file" id="image" name="image">
                                     </div>
 
                                     <div class="col-12">
@@ -63,27 +67,67 @@
                                 </form>
                             </div>
                         @endif
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="card mb-4 shadow-sm">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22348%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20348%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_182b8b7398c%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_182b8b7398c%22%3E%3Crect%20width%3D%22348%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22116.71249771118164%22%20y%3D%22120.18000011444092%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
-                                        <div class="card-body">
-                                            <p class="card-text">Este é um card maior e que suporta texto abaixo, como uma introdução mais natural ao conteúdo adicional.</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+                        @if(!empty($galeria))
+                            <div class="container">
+                                <div class="row">
+                                    @foreach($galeria as $item)
+                                        <div class="col-md-4">
+                                            <div class="card mb-4 shadow-sm">
+                                                <img class="card-img-top" src="/img/galeria/{{$item->image}}" width="60%" height="60%" data-holder-rendered="true">
+                                                <div class="card-body">
+                                                    <p class="card-text">Comentário: {{$item->comentario}}</p>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="btn-group">
+                                                        
+                                                        <form action="{{route('galeria.destroy',$item->id)}}" method="POST">
+                                                            @csrf
+                                                            @Method("DELETE")   
+                                                            <!-- <x-button>Excluir</x-button> -->
+                                                            <button type="submit" class="btn btn-sm btn-outline-secondary" onclick="mensagem()">Excluir</button>
+                                                        </form>
+                                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Editar</button>
+                                                    </div>
+                                                    <small class="text-muted">{{date('d-m-Y', strtotime($item->created_at));}}</small>
+                                                </div>
                                             </div>
-                                            <small class="text-muted">9 mins</small>
-                                    </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </x-app-layout>
+<script>
+        function mensagem(){
+        swal({
+            title: "Exclusão!",
+            text: "Você deseja remover a imagem?",
+            icon: "warning",
+            
+            buttons: {
+            btn1: "Confirmar exclusão (Essa ação não é recomendada \n, <small>Deletar este colaborador pode acarretar em inconsistencias nos dados anteriores, você pode torna-lo inativo, ou registrar um desligamento de funcionário.</small>.",
+            btn2: "Cancelar"
+        },
+        })
+        .then((value) => {
+        switch (value) {
+
+            case "btn1":
+            return true;
+            break;
+
+            case "btn2":
+            return false;
+            break;
+
+            default:
+            swal("404");
+        }
+        });
+    };
+</script>
