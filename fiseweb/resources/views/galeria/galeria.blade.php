@@ -4,8 +4,9 @@
 
 @section('titulo', 'Galeria')
 
-<link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
-<script src="{{ asset('chats/Chart.js') }}"></script>   
+<script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>
+<script src="{{ asset('jquery/bootstrap.min.js') }}"></script>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -48,7 +49,7 @@
                     <div class="album py-5 bg-light">
                         @if(auth()->user()->id == $id)
                             <div>
-                                <form action="{{route('galeria.store')}}" method="post" enctype="multipart/form-data" class="bg-white shadow row g-4 pb-8">
+                                <form id="inserir" name="inserir" action="{{route('galeria.store')}}" method="post"  enctype="multipart/form-data" class="bg-white shadow row g-4 pb-8">
                                     @csrf
                                     <h4>Upload de imagens</h4>
                                     <div class="form-group">
@@ -62,37 +63,39 @@
                                     </div>
 
                                     <div class="col-md-12 text-center">
-                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                        <button onclick="verifica_campos()" type="button" class="btn btn-primary">Enviar</button>
                                     </div>
                                 </form>
                             </div>
                         @endif
+
                         @if(!empty($galeria))
                             <div class="container">
                                 <div class="row">
-                                    @foreach($galeria as $item)
+                                    @for($i=0; $i < count($galeria); $i++)
                                         <div class="col-md-4">
                                             <div class="card mb-4 shadow-sm">
-                                                <img class="card-img-top" src="/img/galeria/{{$item->image}}" width="60%" height="60%" data-holder-rendered="true">
+                                                <img class="card-img-top" src="/img/galeria/{{$galeria[$i]->image}}" width="60%" height="60%" data-holder-rendered="true">
                                                 <div class="card-body">
-                                                    <p class="card-text">Comentário: {{$item->comentario}}</p>
+                                                    <p class="card-text">Comentário: {{$galeria[$i]->comentario}}</p>
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="btn-group">
                                                         
-                                                        <form action="{{route('galeria.destroy',$item->id)}}" method="POST">
+                                                        <!-- <form name="form_exclusao" id="form_exclusao" class="form_exclusao" action="{{route('galeria.destroy',$galeria[$i]->id)}}" method="POST">
                                                             @csrf
                                                             @Method("DELETE")   
-                                                            <!-- <x-button>Excluir</x-button> -->
-                                                            <button type="submit" class="btn btn-sm btn-outline-secondary" onclick="mensagem()">Excluir</button>
+                                                            <x-button>Excluir</x-button> -->
+                                                            <button type="button" style="width:75px; height:40px;" class="btn btn-primary" onclick="confirmar_exclusao(<?php echo $galeria[$i]->id ?>)">Excluir</button>
                                                         </form>
-                                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Editar</button>
+                                                        <button type="button" style="width: 70px; height:40px;" class="btn btn-primary">Editar</button>
+                                                        <button class="btn btn-primary" style="width:70px; height:40px; border-radius: 1px" data-toggle="modal" data-target=".bd-example-modal-xl" onclick="foto(<?php echo $galeria[$i]->id ?>)">Abrir</button>
                                                     </div>
-                                                    <small class="text-muted">{{date('d-m-Y', strtotime($item->created_at));}}</small>
+                                                    <small class="text-muted">{{date('d-m-Y', strtotime($galeria[$i]->created_at));}}</small>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+                                    @endfor
                                 </div>
                             </div>
                         @endif
@@ -101,24 +104,123 @@
             </div>
         </div>
     </div>
+    <!-- MODAL IMAGEM -->
+    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content inserir_modal" name="inserir_modal" id="inserir_modal">
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL IMAGEM ZOOM -->
+    <!-- Large modal -->
+
 </x-app-layout>
 <script>
-        function mensagem(){
-        swal({
-            title: "Exclusão!",
-            text: "Você deseja remover a imagem?",
-            icon: "warning",
-            
-            buttons: {
-            btn1: "Confirmar exclusão (Essa ação não é recomendada \n, <small>Deletar este colaborador pode acarretar em inconsistencias nos dados anteriores, você pode torna-lo inativo, ou registrar um desligamento de funcionário.</small>.",
-            btn2: "Cancelar"
-        },
+
+    //VERIFICA SE POSSUI COMENTARIO E IMAGEM
+    function verifica_campos()
+    {
+        if($('#image').val().length > 0 && $('#comentario').val().length)
+        {
+            document.getElementById("inserir").submit();
+        }
+        else
+        {
+            swal({
+                    title: "Error",
+                    text: "Não foi insirido a imagem ou comentário!",
+                    icon: "error"
+            })
+        }
+    }
+    //CONSULTA E EXIBE NA MODAL
+    function foto(id)
+    {
+        $("bd-example-modal-xl").show();
+        $modal = "";
+        $("#inserir_modal").html($modal);
+        
+        $.ajax({
+                url: '/galeria/foto/consultar',
+                type: 'get',
+                data: {
+                    id:id
+                },
+                success: function( result ) {  
+
+                    var foto = JSON.parse(result);
+                    
+                    $modal = "";
+                    $modal += "<div class='modal-header'>";
+                    $modal += "<img class='card-img-top modal_foto' name='modal_foto' id='modal_foto' src='/img/galeria/"+foto.image+"' width='60%' height='60%' data-holder-rendered='true'>";
+                    $modal += "<button type='button' class='close' data-dismiss='modal' aria-label='Fechar'>";
+                    $modal += "</button>";
+                    $modal += "</div>";
+
+                    $("#inserir_modal").html($modal);
+                },
+                error: function( request, status, error ) {
+                    console.log(request,status,error);
+                }
+                
+        });
+    }
+
+    function excluir_imagem(id){
+        $.ajax({
+                url: '/galeria/foto/excluir',
+                type: 'get',
+                data: {
+                    id:id
+                },
+                success: function( result ) {  
+
+                    var resposta = JSON.parse(result);
+
+                    if(resposta == 1)
+                    {
+                        swal({
+                            title: "Exclusao",
+                            text: "Imagem deletada com sucesso!",
+                            icon: "success",
+                                
+                            buttons: {
+                            btn1: "ok",
+                            },
+                        })
+                        .then((value) => {
+                            switch (value) {
+                                case "btn1":
+                                    document.location.reload(true);
+                                break;
+                            }
+                        });
+                    }
+
+                },
+                error: function( request, status, error ) {
+                    console.log(request,status,error);
+                }
+                
+        });
+    }
+    //UTILIZADO PARA CONFIRMAR A EXCLUSÃO DE IMAGEM DA GALERIA
+    function confirmar_exclusao(id){
+            swal({
+                title: "Exclusão!",
+                text: "Você deseja remover a imagem?",
+                icon: "warning",
+                
+                buttons: {
+                btn1: "Confirmar",
+                btn2: "Cancelar"
+            },
         })
         .then((value) => {
         switch (value) {
-
             case "btn1":
-            return true;
+                excluir_imagem(id);
             break;
 
             case "btn2":

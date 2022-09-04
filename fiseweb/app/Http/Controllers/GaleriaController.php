@@ -125,4 +125,16 @@ class GaleriaController extends Controller
             echo"Erro ao excluir!"+$e->getMessage();
         }
     }
+    public function consulta_foto()
+    {   
+        $id = $_GET['id'];
+        $foto = DB::table('galerias')->find($id);
+        return json_encode($foto);
+    }
+    public function excluir_foto()
+    {   
+        $id = $_GET['id'];
+        $foto = DB::table('galerias')->delete($id);
+        return true;
+    }
 }
