@@ -22,7 +22,6 @@ return new class extends Migration
                 ->on("users");
             $table->string('image')->nullable();
             $table->text('comentario');
-            $table->integer('curtidas');
             $table->boolean('status');
         });
     }
