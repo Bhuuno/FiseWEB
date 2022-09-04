@@ -16,6 +16,8 @@ class GaleriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //EXIBE A PAGINA INICIAL
     public function index($id)
     {
         $galeria = DB::select("SELECT * FROM `galerias` WHERE user_id = $id");
@@ -39,6 +41,8 @@ class GaleriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //GRAVA A IMAGEM NA TABELA "GALERIAS"
     public function store(Request $request)
     {
         $id_user = auth()->user()->id;
@@ -115,26 +119,50 @@ class GaleriaController extends Controller
      */
     public function destroy($id)
     {
-        try{
-            $id_user = auth()->user()->id;
-            Galeria::destroy($id);
-            return redirect("/dashboard/galeria/$id_user");
-        }
-        catch (\Exception $e)
-        {
-            echo"Erro ao excluir!"+$e->getMessage();
-        }
+
     }
+    //RETORNA A IMAGEM PARA MODAL
     public function consulta_foto()
     {   
         $id = $_GET['id'];
         $foto = DB::table('galerias')->find($id);
         return json_encode($foto);
     }
+
+    //EXCLUI A IMAGEM 
     public function excluir_foto()
     {   
         $id = $_GET['id'];
         $foto = DB::table('galerias')->delete($id);
         return true;
+    }
+    //CONSULTA AS INFORMACOES DA IMAGEM QUE QUER ALTERAR
+    public function editar_comentario()
+    {   
+        $id = $_GET['id'];
+        $foto = DB::table('galerias')->find($id);
+        return json_encode($foto);
+    }
+
+    //ALTERA COMENTARIO DA IMAGEM GALERIA
+    public function atualizar_comentario($id)
+    {   
+        $id_user = auth()->user()->id;
+        $comentario = $_GET['comentario_alteracao'];
+        $foto = DB::select("UPDATE galerias SET comentario = '$comentario' WHERE id = $id;");
+
+        return redirect("/dashboard/galeria/$id_user");
+    }
+    //FAZ COM QUE A IMAGEM NÃO EXIBA
+    public function nao_exibir()
+    {
+        $id = $_GET['id'];
+        $foto = DB::select("UPDATE galerias SET status = 0 WHERE id = '$id';");
+    }
+    //FAZ COM QUE A IMAGEM EXIBA
+    public function exibir()
+    {
+        $id = $_GET['id'];
+        $foto = DB::select("UPDATE galerias SET status = 1 WHERE id = '$id';");
     }
 }

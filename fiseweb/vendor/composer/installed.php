@@ -5,8 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '80b9d000b42fdbf8de75ec6eb6b9ceebc9cae2f5',
-
+        'reference' => '8d8a075366015a5233ebdaf74fa30df05bc68216',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -389,9 +388,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-
-            'reference' => '80b9d000b42fdbf8de75ec6eb6b9ceebc9cae2f5',
-
+            'reference' => '8d8a075366015a5233ebdaf74fa30df05bc68216',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -1252,6 +1249,21 @@
             'aliases' => array(),
             'reference' => 'da444caae6aca7a19c0c140f68c6182e337d5b1c',
             'dev_requirement' => false,
+        ),
+        'twbs/bootstrap' => array(
+            'pretty_version' => '5.2.0',
+            'version' => '5.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../twbs/bootstrap',
+            'aliases' => array(),
+            'reference' => 'edf9c40956d19e6ab3f9151bfe0dfac6be06fa21',
+            'dev_requirement' => false,
+        ),
+        'twitter/bootstrap' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '5.2.0',
+            ),
         ),
         'vlucas/phpdotenv' => array(
             'pretty_version' => 'v5.4.1',
