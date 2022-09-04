@@ -69,7 +69,7 @@
             </div>
 
             <div class="col-md-3">
-            <label for="cep" id="label_cep" class="form-label">CEP</label>
+                    <label for="cep" id="label_cep" class="form-label">CEP</label>
                     <input type="cep" required class="form-control" id="cep" name="cep" onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
             </div>
 
