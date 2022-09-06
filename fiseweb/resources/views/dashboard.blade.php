@@ -4,20 +4,19 @@
 <script src="{{ asset('chats/Chart.js') }}"></script>   
 <x-app-layout>
     <x-slot name="header">
-        <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <button class="btn btn-dark p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <img src="/icons/list.svg" class="icon-space d-flex">  
           </button>        
           <h2 class="d-inline p-4">DASHBOARD</h2>
     </x-slot>
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
 
-        
             <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-white text-decoration-none text-white">
               <span class="fs-4">Menu</span>
             </a>
-            <hr>
+                <hr>
             <ul class="nav nav-pills flex-column mb-auto">
               
               <a href="/" class="nav-link link-dark text-white">
@@ -55,9 +54,9 @@
               
             </ul>
             <hr>
-                    </div>
+            </div>
                 </div>
-                <div class="row m-1" style="width:79%; height:55%;">
+                <div class="row m-1 p-3" style="width:100%; height:60%;">
                     <div class="container text-center">
                         <div class="row mt-3" style="height:80px;">
                             <div class="col-2 barra">
