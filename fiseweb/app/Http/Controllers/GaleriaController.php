@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use resources\views;
 use App\Models\Galeria;
 use Illuminate\Http\Request;
-use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use resources\views;
 
 class GaleriaController extends Controller
 {
@@ -16,9 +16,13 @@ class GaleriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //EXIBE A PAGINA INICIAL
     public function index($id)
     {
-        return view('galeria.galeria',compact('id'));
+        $galeria = DB::select("SELECT * FROM `galerias` WHERE user_id = $id");
+
+        return view('galeria.galeria',compact('id','galeria'));
     }
 
     /**
@@ -37,41 +41,39 @@ class GaleriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //GRAVA A IMAGEM NA TABELA "GALERIAS"
     public function store(Request $request)
     {
+        $id_user = auth()->user()->id;
         try{
             $galeria = new Galeria();
-            
-            var_dump($request);
 
             // INSERE O ID DO USUÁRIO NA CHAVE ESTRANGEIRA
-            $request["user_id"] = auth()->user()->id;
+            $request["user_id"] = $id_user;
             $dados = $request->only($galeria->getFillable());
 
             //CRIA NOME CRIPTOGRAFIA PARA IMAGEM
-            if($request->hasFile('imagem') && $request->file('imagem')->isValid()){
-                $requestImagem = $request->imagem;
+            if($request->hasFile('image') && $request->file('image')->isValid()){
+                $requestImagem = $request->image;
                 $extension = $requestImagem -> extension();
-
-                var_dump($extension);
                 $imageName = md5($requestImagem -> getClientOriginalName() . strtotime("now") . "." . $extension);
-                $requestImagem->move(public_path('img/fotos_perfil'), $imageName);
+                $requestImagem->move(public_path('img/galeria'), $imageName);
 
                 // TEM QUE COLOCAR O NOME DA IMAGEM ASSIM NO BANCO
-                $dados["imagem"] =  $imageName;
+                $dados["image"] =  $imageName;
                 $dados["status"] = true;
                 $dados["curtidas"] = 0;
-                var_dump($dados);
             }
 
-           Galeria::create($dados);
-            //return redirect()->action([PessoaController::class,'create']);
-            echo "Garvado1";
+            Galeria::create($dados);
+            // return redirect()->action([GaleriaController::class,'index']);
+
+            return redirect("/dashboard/galeria/$id_user");
             // return redirect('/') -> with('msg',"Cadastro criado com sucesso!");
         }
         catch(\Exception $e){
-            var_dump($request);
-            // echo"Erro ao inserir! $e";
+            echo"Erro ao inserir! $e";
         }
     }
 
@@ -117,6 +119,50 @@ class GaleriaController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+    }
+    //RETORNA A IMAGEM PARA MODAL
+    public function consulta_foto()
+    {   
+        $id = $_GET['id'];
+        $foto = DB::table('galerias')->find($id);
+        return json_encode($foto);
+    }
+
+    //EXCLUI A IMAGEM 
+    public function excluir_foto()
+    {   
+        $id = $_GET['id'];
+        $foto = DB::table('galerias')->delete($id);
+        return true;
+    }
+    //CONSULTA AS INFORMACOES DA IMAGEM QUE QUER ALTERAR
+    public function editar_comentario()
+    {   
+        $id = $_GET['id'];
+        $foto = DB::table('galerias')->find($id);
+        return json_encode($foto);
+    }
+
+    //ALTERA COMENTARIO DA IMAGEM GALERIA
+    public function atualizar_comentario($id)
+    {   
+        $id_user = auth()->user()->id;
+        $comentario = $_GET['comentario_alteracao'];
+        $foto = DB::select("UPDATE galerias SET comentario = '$comentario' WHERE id = $id;");
+
+        return redirect("/dashboard/galeria/$id_user");
+    }
+    //FAZ COM QUE A IMAGEM NÃO EXIBA
+    public function nao_exibir()
+    {
+        $id = $_GET['id'];
+        $foto = DB::select("UPDATE galerias SET status = 0 WHERE id = '$id';");
+    }
+    //FAZ COM QUE A IMAGEM EXIBA
+    public function exibir()
+    {
+        $id = $_GET['id'];
+        $foto = DB::select("UPDATE galerias SET status = 1 WHERE id = '$id';");
     }
 }

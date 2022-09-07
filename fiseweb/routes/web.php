@@ -50,7 +50,6 @@ Route::get('/', [HomeController::class,'index']);
 //CLIENTE//
 // Route::get('/cliente/create',[ClienteController::class,'create']);
 
-
 //PRESTADOR//
 Route::get('/prestador/create',[PrestadorController::class,'create'])->middleware(['auth']);
 Route::get('/prestador/update',[PrestadorController::class,'update'])->middleware(['auth']);
@@ -74,10 +73,10 @@ Route::get('/dashboard/avaliacao/{id}',[AvaliacaoController::class,'index'])->mi
 Route::get('/gravar/comentario',[AvaliacaoController::class,'store'])->middleware(['auth']);
 
 //GALERIA
-Route::get('/dashboard/galeria/{id}',[GaleriaController::class,'index'])->middleware(['auth']);
-
-//TESTE
-
-Route::get('/teste', function () {
-    return view('teste');
-});
+Route::get('/dashboard/galeria/{id}',[GaleriaController::class,'index'])->middleware(['auth']); //exibe a página dagaleria
+Route::get('/galeria/foto/consultar',[GaleriaController::class,'consulta_foto'])->middleware(['auth']); //retorna imagem prestador na modal galeria
+Route::get('/galeria/foto/excluir',[GaleriaController::class,'excluir_foto'])->middleware(['auth']); //exclui imagem galeria prestador
+Route::get('/galeria/foto/editar',[GaleriaController::class,'editar_comentario'])->middleware(['auth']); //Busca informações para edicao
+Route::get('/galeria/foto/update/{id}',[GaleriaController::class,'atualizar_comentario'])->middleware(['auth']); //altera o comentario da imagem
+Route::get('/galeria/foto/naoexibir',[GaleriaController::class,'nao_exibir'])->middleware(['auth']); //altera o status da imagem para não exibir
+Route::get('/galeria/foto/exibir',[GaleriaController::class,'exibir'])->middleware(['auth']); //altera o status da imagem para exibir

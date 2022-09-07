@@ -1,7 +1,12 @@
 @extends('layouts.padrao')
-<link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
+
+@method('path')
+
 @section('titulo', 'Galeria')
-<script src="{{ asset('chats/Chart.js') }}"></script>   
+
+<script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>
+<script src="{{ asset('jquery/bootstrap.min.js') }}"></script>
+
 <x-app-layout>
     <x-slot name="header">
         <button class="btn btn-dark p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
@@ -60,12 +65,12 @@
                     <div class="album py-2 bg-light">
                         @if(auth()->user()->id == $id)
                             <div>
-                                <form action="{{route('galeria.store')}}" method="post" enctype="multipart/form-data" class="bg-white shadow row g-4 pb-8">
+                                <form id="inserir" name="inserir" action="{{route('galeria.store')}}" method="post"  enctype="multipart/form-data" class="bg-white shadow row g-4 pb-8">
                                     @csrf
                                     <h4>Upload de imagens</h4>
                                     <div class="form-group">
                                         <label for="image">Imagem: </label>
-                                        <input type="file" class="form-control-file" id="imagem" name="imagem">
+                                        <input type="file" class="form-control-file" id="image" name="image">
                                     </div>
 
                                     <div class="col-12">
@@ -73,33 +78,287 @@
                                         <textarea rows="2" type="text" class="form-control" name="comentario" id="comentario"></textarea>
                                     </div>
 
-                                    <div class="col-md-12 text-center p-2">
-                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                    <div class="col-md-12 text-center">
+                                        <button onclick="verifica_campos()" type="button" class="btn btn-primary">Enviar</button>
+                                        
                                     </div>
                                 </form>
                             </div>
                         @endif
-                        <div class="">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="card mb-4 shadow-sm">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22348%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20348%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_182b8b7398c%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_182b8b7398c%22%3E%3Crect%20width%3D%22348%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22116.71249771118164%22%20y%3D%22120.18000011444092%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
-                                        <div class="card-body">
-                                            <p class="card-text">Este é um card maior e que suporta texto abaixo, como uma introdução mais natural ao conteúdo adicional.</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+
+
+                        @if(!empty($galeria))
+                            <div class="container">
+                                <div class="row">
+                                    @for($i=0; $i < count($galeria); $i++)
+                                        @if(auth()->user()->id == $id)
+                                            <div class="col-md-4">
+                                                <div class="card mb-4 shadow-sm">
+                                                    <img class="card-img-top" src="/img/galeria/{{$galeria[$i]->image}}" width="60%" height="60%" data-holder-rendered="true">
+                                                    <div class="card-body">
+                                                        <p class="card-text">Comentário: {{$galeria[$i]->comentario}}</p>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="btn-group">
+                                                            
+                                                            <!-- <form name="form_exclusao" id="form_exclusao" class="form_exclusao" action="{{route('galeria.destroy',$galeria[$i]->id)}}" method="POST">
+                                                                @csrf
+                                                                @Method("DELETE")   
+                                                                <x-button>Excluir</x-button> -->
+                                                            @if(auth()->user()->id == $id)
+                                                                <button type="button" style="width:75px; height:40px;" class="btn btn-primary" onclick="confirmar_exclusao(<?php echo $galeria[$i]->id ?>)">Excluir</button>
+                                                        
+                                                            @endif
+                                                                <!-- </form> -->
+                                                            @if(auth()->user()->id == $id)
+                                                                <button type="button" style="width: 70px; height:40px;" type="button" class="btn btn-primary" onclick="editar_comentario(<?php echo $galeria[$i]->id ?>)" class="btn btn-primary">Editar</button>
+                                                                <button class="btn btn-primary" style="width:70px; height:40px; border-radius: 1px" data-toggle="modal" data-target=".bd-example-modal-xl" onclick="foto(<?php echo $galeria[$i]->id ?>)">Abrir</button>
+                                                                @if($galeria[$i]->status == 1)
+                                                                    <img width="20px" src="/icons/eye-fill.svg" onclick="nao_exibir(<?php echo $galeria[$i]->id ?>)" class="icon-space">
+                                                                @else
+                                                                    <img width="20px" src="/icons/eye-slash-fill.svg" onclick="exibir(<?php echo $galeria[$i]->id ?>)" class="icon-space">
+                                                                @endif
+                                                            @endif
+                                                        </div>
+                                                        <small class="text-muted">{{date('d-m-Y', strtotime($galeria[$i]->created_at));}}</small>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <small class="text-muted">9 mins</small>
-                                    </div>
+                                        @else
+                                        @if($galeria[$i]->status == 1)
+                                            <div class="col-md-4">
+                                                <div class="card mb-4 shadow-sm">
+                                                        <img class="card-img-top" src="/img/galeria/{{$galeria[$i]->image}}" width="60%" height="60%" data-holder-rendered="true">
+                                                        <div class="card-body">
+                                                            <p class="card-text">Comentário: {{$galeria[$i]->comentario}}</p>
+                                                        </div>
+                                                            <small class="text-muted">{{date('d-m-Y', strtotime($galeria[$i]->created_at));}}</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endif
+                                    @endfor
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- MODAL IMAGEM -->
+    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content inserir_modal" name="inserir_modal" id="inserir_modal">
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EDITAR IMAGEM -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Alteração</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="update" name="update" action="" method="get">
+                        <div class="col-12">
+                            <label for="comentario" class="form-label">Comentário</label>
+                            <textarea rows="2" type="text" class="form-control" name="comentario_alteracao" id="comentario_alteracao"></textarea>
+                        </div>
+                        <br>
+                        <button button type="submit" class="btn btn-primary">Salvar</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </x-app-layout>
+<script>
+    //EDITAR IMAGEM
+    function editar_comentario(id)
+    {
+        $.ajax({
+                url: '/galeria/foto/editar',
+                type: 'get',
+                data: {
+                    id:id
+                },
+                success: function( result ) {  
+
+                    var editar = JSON.parse(result);
+
+                    //COLOCA COMENTARIO NO INPUT MODAL
+                    document.getElementById('comentario_alteracao').value = editar.comentario;
+
+                    //EXIBE MODAL
+                    $('#exampleModalCenter').modal('show');
+
+                    //ALTERA ACTION MODAL
+                    document.getElementById('update').action = "/galeria/foto/update/"+id+"";
+
+                },
+                error: function( request, status, error ) {
+                    console.log(request,status,error);
+                }
+                
+        });
+    }
+
+    //VERIFICA SE POSSUI COMENTARIO E IMAGEM
+    function verifica_campos()
+    {
+        if($('#image').val().length > 0 && $('#comentario').val().length)
+        {
+            document.getElementById("inserir").submit();
+        }
+        //APRESENTA ERRO SE O USUÁRIO NÃO INSERIR IMAGEM E COMENTARIO
+        else
+        {
+            swal({
+                    title: "Error",
+                    text: "Não foi insirido a imagem ou comentário!",
+                    icon: "error"
+            })
+        }
+    }
+    //CONSULTA E EXIBE NA MODAL
+    function foto(id)
+    {
+        $("bd-example-modal-xl").show();
+        $modal = "";
+        $("#inserir_modal").html($modal);
+        
+        $.ajax({
+                url: '/galeria/foto/consultar',
+                type: 'get',
+                data: {
+                    id:id
+                },
+                success: function( result ) {  
+
+                    var foto = JSON.parse(result);
+                    
+                    $modal = "";
+                    $modal += "<div class='modal-header'>";
+                    $modal += "<img class='card-img-top modal_foto' name='modal_foto' id='modal_foto' src='/img/galeria/"+foto.image+"' width='60%' height='60%' data-holder-rendered='true'>";
+                    $modal += "<button type='button' class='close' data-dismiss='modal' aria-label='Fechar'>";
+                    $modal += "</button>";
+                    $modal += "</div>";
+
+                    $("#inserir_modal").html($modal);
+                },
+                error: function( request, status, error ) {
+                    console.log(request,status,error);
+                }
+                
+        });
+    }
+    //ESSA FUNÇÃO REMOVE A IMAGEM DA GALERIA
+    function excluir_imagem(id){
+        $.ajax({
+                url: '/galeria/foto/excluir',
+                type: 'get',
+                data: {
+                    id:id
+                },
+                success: function( result ) {  
+
+                    var resposta = JSON.parse(result);
+
+                    if(resposta == 1)
+                    {
+                        swal({
+                            title: "Exclusão",
+                            text: "Imagem deletada com sucesso!",
+                            icon: "success",
+                                
+                            buttons: {
+                            btn1: "ok",
+                            },
+                        })
+                        .then((value) => {
+                            switch (value) {
+                                case "btn1":
+                                    //DEPOIS QUE EXCLUI A PESSOA CONFIRMA E ATUALIZA A PÁGINA
+                                    document.location.reload(true);
+                                break;
+                            }
+                        });
+                    }
+
+                },
+                error: function( request, status, error ) {
+                    console.log(request,status,error);
+                }
+                
+        });
+    }
+    //UTILIZADO PARA CONFIRMAR A EXCLUSÃO DE IMAGEM DA GALERIA
+    function confirmar_exclusao(id){
+            swal({
+                title: "Exclusão!",
+                text: "Você deseja remover a imagem?",
+                icon: "warning",
+                
+                buttons: {
+                btn1: "Confirmar",
+                btn2: "Cancelar"
+            },
+        })
+        .then((value) => {
+        switch (value) {
+            case "btn1":
+                excluir_imagem(id);
+            break;
+
+            case "btn2":
+            return false;
+            break;
+
+            default:
+            swal("404");
+        }
+        });
+    };
+    //EXIBIR NÃO EXIBIR IMAGEM
+    function nao_exibir(id)
+    {
+        $.ajax({
+            url: '/galeria/foto/naoexibir',
+            type: 'get',
+            data: {
+                id:id
+            },
+            success: function( result ) {  
+                document.location.reload(true);
+            },
+            error: function( request, status, error ) {
+                console.log(request,status,error);
+            }
+        });
+    }
+    //EXIBIR IMAGEM
+    function exibir(id)
+    {
+        $.ajax({
+            url: '/galeria/foto/exibir',
+            type: 'get',
+            data: {
+                id:id
+            },
+            success: function( result ) {  
+                document.location.reload(true);
+            },
+            error: function( request, status, error ) {
+                console.log(request,status,error);
+            }
+                
+        });
+    }
+
+</script>

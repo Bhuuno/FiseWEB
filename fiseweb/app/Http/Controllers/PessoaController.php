@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
 use App\Models\Pessoa;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
