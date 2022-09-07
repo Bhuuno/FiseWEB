@@ -1,7 +1,6 @@
 <?php
 require __DIR__.'/auth.php';
 
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ClienteController;
@@ -12,6 +11,7 @@ use App\Http\Controllers\VisualizacaoController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\AvaliacaoController;
 use App\Http\Controllers\GaleriaController;
+use App\Http\Controllers\PagamentoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,3 +80,6 @@ Route::get('/galeria/foto/editar',[GaleriaController::class,'editar_comentario']
 Route::get('/galeria/foto/update/{id}',[GaleriaController::class,'atualizar_comentario'])->middleware(['auth']); //altera o comentario da imagem
 Route::get('/galeria/foto/naoexibir',[GaleriaController::class,'nao_exibir'])->middleware(['auth']); //altera o status da imagem para não exibir
 Route::get('/galeria/foto/exibir',[GaleriaController::class,'exibir'])->middleware(['auth']); //altera o status da imagem para exibir
+
+//PAGAMENTO
+Route::get('/dashboard/pagamento/index',[PagamentoController::class,'index'])->middleware(['auth']);

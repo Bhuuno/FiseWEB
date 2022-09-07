@@ -40,6 +40,9 @@
                                 <a href="/dashboard/galeria/{{$prestador[0]->user_id}}" class="text-decoration-none text-white">
                                 <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Galeria</li></a>
                             <hr>
+                                <a href="/dashboard/pagamento/index" class="text-decoration-none text-white">
+                                <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Pagamento</li></a>
+                            <hr>
                         </ul>
                     </div>
                 </div>
