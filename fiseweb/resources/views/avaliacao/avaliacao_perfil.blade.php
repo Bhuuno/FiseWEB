@@ -14,7 +14,7 @@
             <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-white text-decoration-none text-white">
               <span class="fs-4">Menu</span>
             </a>
-                <hr>
+            <hr>
             <ul class="nav nav-pills flex-column mb-auto">
               
               <a href="/" class="nav-link link-dark text-white">
