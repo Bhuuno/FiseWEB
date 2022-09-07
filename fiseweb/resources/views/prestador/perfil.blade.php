@@ -3,53 +3,72 @@
     @section('titulo', 'Perfil Prestador')
     <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <!-- {{ __('Perfil') }} -->
-        </h2>
+       <button class="btn btn-dark p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <img src="/icons/list.svg" class="icon-space d-flex">  
+          </button>        
+          <h2 class="d-inline p-4">DASHBOARD</h2>
     </x-slot>
         <div class="container-fluid m-2">
-            <div class="row flex-nowrap ">
-                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-                    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                        <a href="/dashboard" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Menu</span>
-                        </a>
-                        <ul>
-                            <a href="/" class="text-decoration-none text-white">
-                                <li class="d-flex" href="/"><img src="/icons/house-door.svg" class="icon-space"> Home 
-                                <li>
-                                <hr>
-                            </a>
-                            <a href="/dashboard/perfil" class="text-decoration-none text-white">
-                                <li class="d-flex"><img src="/icons/chat-dots.svg" class="icon-space">Perfil</li>
-                                <li>
-                            <hr>
-                                </a>
-                                <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
-                            <hr>
-                                <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
-                            <hr>
-                                <a href="/dashboard/avaliacao/{{$prestador[0]->user_id}}" class="text-decoration-none text-white">
-                                <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li></a>
-                            <hr>
-                                </a>
-                                <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Suporte</li>
-                            <hr>
-                                <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>
-                            <hr>
-                                <a href="/dashboard/galeria/{{$prestador[0]->user_id}}" class="text-decoration-none text-white">
-                                <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Galeria</li></a>
-                            <hr>
-                                <a href="/dashboard/pagamento/index" class="text-decoration-none text-white">
-                                <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Pagamento</li></a>
-                            <hr>
-                        </ul>
+            <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
+
+        
+                <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-white text-decoration-none text-white">
+                  <span class="fs-4">Menu</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                  
+                  <a href="/" class="nav-link link-dark text-white">
+                    <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Home</li>
+                    <hr>
+                  </a>
+
+                  <a href="/dashboard/perfil" class="nav-link link-dark text-white">
+                    <li class="d-flex"><img src="/icons/person.svg" class="icon-space">Perfil</li>
+                    <hr>
+                  </a>
+                
+                  <a href="#" class="nav-link link-dark text-white">
+                    <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
+                    <hr>
+                  </a>
+                  
+                    <a href="#" class="nav-link link-dark text-white">
+                      <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
+                      <hr>
+                    </a>
+                  
+                  
+                    <a href="/dashboard/avaliacao/{{$prestador[0]->user_id}}" class="nav-link link-dark text-white">
+                      <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
+                      <hr>
+                    </a>
+                  
+                  
+                    <a href="#" class="nav-link link-dark text-white">
+                      <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Suporte</li>
+                      <hr>
+                    </a>
+                  
+                  
+                    <a href="#" class="nav-link link-dark text-white">
+                      <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>
+                      <hr>
+                    </a>
+
+                    <a href="/dashboard/galeria/{{$prestador[0]->user_id}}" class="nav-link link-dark text-white">
+                        <li class="d-flex"><img src="/icons/images.svg" class="icon-space">Galeria</li>
+                        <hr>
+                      </a>
+                  
+                </ul>
+                <hr>
+                        </div>
                     </div>
-                </div>
-                <div class="container">
-                    <div class="main-body">
-                        <div class="row gutters-sm" style="padding:1%; margin-left:5%">
-                            <div class="col-md-4    ">
+                <div class="container-fluid">
+                    <div class="">
+                        <div class="row gutters-md p-4" style="">
+                            <div class="col-md-6">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-flex flex-column align-items-center text-center">
@@ -116,7 +135,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <div class="row">
@@ -223,7 +242,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-9 mt-2">
+                            <div class="col-sm-12 mt-2">
                                 <div class="card h-100">
                                     <div class="card-body">
                                         <small>Sobre</small>
@@ -233,7 +252,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-9 mt-2">
+                            <div class="col-sm-12 mt-2">
                                 <div class="card h-100">
                                     <div class="card-body">
                                         <small>Informações</small>
@@ -243,7 +262,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-9 mt-2">
+                            <div class="col-sm-12 mt-2">
                                 <div class="card h-100">
                                     <div class="card-body">
                                         <small>Experiência</small>
