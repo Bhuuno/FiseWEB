@@ -9,44 +9,60 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashbord') }}
-        </h2>
+        <button class="btn btn-dark p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <img src="/icons/list.svg" class="icon-space d-flex">  
+          </button>        
+          <h2 class="d-inline p-4">GALERIA</h2>
     </x-slot>
 
     <div class="container-fluid">
-        <div class="row flex-nowrap ">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a href="/dashboard" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline">Menu</span>
-                    </a>
-                    <ul>
-                        <a href="/" class="text-decoration-none text-white">
-                            <li class="d-flex" href="/"><img src="/icons/house-door.svg" class="icon-space"> Home <li>
-                            <hr>
-                        </a>
-                        <a href="/dashboard/perfil" class="text-decoration-none text-white">
-                            <li class="d-flex"><img src="/icons/chat-dots.svg" class="icon-space"> Perfil</li>
-                            <hr>
-                        </a>
-                        <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
-                        <hr>
-                        <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
-                        <hr>
-                        <a href="/dashboard/avaliacao" lass="text-decoration-none text-white">
-                        <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
-                        <hr>
-                        </a>
-                        <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Suporte</li>
-                        <hr>
-                        <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>
-                        <hr>
-                    </ul>
-                    </div>
+        <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
+            <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-white text-decoration-none text-white">
+              <span class="fs-4">Menu</span>
+            </a>
+                <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+              
+              <a href="/" class="nav-link link-dark text-white">
+                <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Home</li>
+                <hr>
+              </a>
+            
+              <a href="#" class="nav-link link-dark text-white">
+                <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
+                <hr>
+              </a>
+              
+                <a href="#" class="nav-link link-dark text-white">
+                  <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
+                  <hr>
+                </a>
+              
+              
+                <a href="/dashboard/avaliacao" class="nav-link link-dark text-white">
+                  <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
+                  <hr>
+                </a>
+              
+              
+                <a href="#" class="nav-link link-dark text-white">
+                  <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Suporte</li>
+                  <hr>
+                </a>
+              
+              
+                <a href="#" class="nav-link link-dark text-white">
+                  <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>
+                  <hr>
+                </a>
+              
+            </ul>
+            <hr>
+            </div>
+                
                 </div>
-                <div style="width:83%">
-                    <div class="album py-5 bg-light">
+                <div class="p-4" style="width:100%">
+                    <div class="album py-2 bg-light">
                         @if(auth()->user()->id == $id)
                             <div>
                                 <form id="inserir" name="inserir" action="{{route('galeria.store')}}" method="post"  enctype="multipart/form-data" class="bg-white shadow row g-4 pb-8">
@@ -64,10 +80,12 @@
 
                                     <div class="col-md-12 text-center">
                                         <button onclick="verifica_campos()" type="button" class="btn btn-primary">Enviar</button>
+                                        
                                     </div>
                                 </form>
                             </div>
                         @endif
+
 
                         @if(!empty($galeria))
                             <div class="container">
