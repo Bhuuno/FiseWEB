@@ -63,7 +63,6 @@ class GaleriaController extends Controller
                 // TEM QUE COLOCAR O NOME DA IMAGEM ASSIM NO BANCO
                 $dados["image"] =  $imageName;
                 $dados["status"] = true;
-                $dados["curtidas"] = 0;
             }
 
             Galeria::create($dados);

@@ -13,16 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('galerias', function (Blueprint $table) {
+        Schema::create('pagamentos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger("user_id")->unsigned();
-            $table->foreign("user_id")
-                ->references("id")
-                ->on("users");
-            $table->string('image')->nullable();
-            $table->text('comentario');
-            $table->boolean('status');
         });
     }
 
@@ -33,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('galerias');
+        Schema::dropIfExists('pagamentos');
     }
 };

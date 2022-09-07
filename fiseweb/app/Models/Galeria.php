@@ -13,7 +13,6 @@ class Galeria extends Model
         'user_id',
         'image',
         'comentario',
-        'curtidas',
         'status'
     ];
     public function user(){
