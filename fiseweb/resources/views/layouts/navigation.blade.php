@@ -9,14 +9,14 @@
                 </a>
                 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <!-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('chat')" :active="request()->routeIs('chat')">
                         {{ __('chat') }}
                     </x-nav-link>
-                </div>
+                </div> -->
             </div>
 
             <!-- Settings Dropdown -->
@@ -38,9 +38,12 @@
 
                         <x-slot name="content">
                             <!-- Authentication -->
-                                <x-dropdown-link>
-                                    <a href="/perfil">Editar perfil</a>
-                                </x-dropdown-link>
+                            
+                                <!-- Botão editar perfil -->
+                                
+                                <?php $id_user = auth()->user()->id; ?>
+                                <a class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" href="/perfil?id={{$id_user}}">Editar perfil</a>
+                                
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
     

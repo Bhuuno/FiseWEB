@@ -16,51 +16,10 @@
     </x-slot>
 
     <div class="container-fluid">
-        <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
-            <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-white text-decoration-none text-white">
-              <span class="fs-4">Menu</span>
-            </a>
-                <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-              
-              <a href="/" class="nav-link link-dark text-white">
-                <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Home</li>
-                <hr>
-              </a>
-            
-              <a href="#" class="nav-link link-dark text-white">
-                <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
-                <hr>
-              </a>
-              
-                <a href="#" class="nav-link link-dark text-white">
-                  <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
-                  <hr>
-                </a>
-              
-              
-                <a href="/dashboard/avaliacao" class="nav-link link-dark text-white">
-                  <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
-                  <hr>
-                </a>
-              
-              
-                <a href="#" class="nav-link link-dark text-white">
-                  <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Suporte</li>
-                  <hr>
-                </a>
-              
-              
-                <a href="#" class="nav-link link-dark text-white">
-                  <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>
-                  <hr>
-                </a>
-              
-            </ul>
-            <hr>
-            </div>
+        <!-- menu projeto -->
+        @extends('layouts.menu')
                 
-                </div>
+            </div>
                 <div class="p-4" style="width:100%">
                     <div class="album py-2 bg-light">
                         @if(auth()->user()->id == $id)

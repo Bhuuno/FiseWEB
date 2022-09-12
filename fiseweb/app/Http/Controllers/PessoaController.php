@@ -29,7 +29,6 @@ class PessoaController extends Controller
 
                 // TEM QUE COLOCAR O NOME DA IMAGEM ASSIM NO BANCO
                 $dados["image"] =  $imageName;
-                // dd($dados["image"]);
             }
 
 
@@ -59,28 +58,41 @@ class PessoaController extends Controller
 
     public function create()
     {
-        $cadastro = Pessoa::where('user_id',auth()->user()->id)->first();
-        // var_dump($cadastro);
-        if(isset($cadastro))
-            return view('pessoa.update',['cadastro'=>$cadastro]);
-        else
-            return view('pessoa.create');
+        // $cadastro = Pessoa::where('user_id',auth()->user()->id)->first();
+        // // var_dump($cadastro);
+        // if(isset($cadastro))
+        //     return view('pessoa.update',['cadastro'=>$cadastro]);
+        // else
+        //     return view('pessoa.create');
     }
 
     public function update(Request $request)
     {
         $id = auth()->user()->id;
+
         try{
             $pessoas = new Pessoa();
             $dados = $request->only($pessoas->getFillable());
+
+            //CRIA NOME CRIPTOGRAFIA PARA IMAGEM
+            if($request->hasFile('image') && $request->file('image')->isValid()){
+                $requestImage = $request->image;
+                $extension = $requestImage -> extension();
+                $imageName = md5($requestImage -> getClientOriginalName() . strtotime("now") . "." . $extension);
+                $requestImage->move(public_path('img/fotos_perfil'), $imageName);
+
+                // TEM QUE COLOCAR O NOME DA IMAGEM ASSIM NO BANCO
+                $dados["image"] =  $imageName;
+            }
+
             Pessoa::whereId($id)->update($dados);
-            return redirect('/') -> with('msg',"Cadastro Alterado com sucesso! $id");
+            return redirect("/perfil?id=$id") -> with('msg',"Cadastro Pessoal Alterado com sucesso!");
             // return redirect()->action([ProdutoController::class, "index"])
             //     ->with("resposta", "Registro alterado");
         } catch (\Exception $e){
             // return redirect()->action([ProdutoController::class, "index"])
             //     ->with("resposta", "Erro ao alterar");
-            return redirect('/') -> with('msg',"Erro ao alterar! $e");
+            return redirect("/perfil?id=$id") -> with('msg',"Erro ao alterar perfil pessoal! $e");
         }
     }
     public function show()
