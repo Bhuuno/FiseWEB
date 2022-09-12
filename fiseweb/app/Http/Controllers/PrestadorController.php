@@ -14,17 +14,19 @@ class PrestadorController extends Controller
 {
     public function create()
     {
-        $cadastro = Prestador::where('user_id',auth()->user()->id)->first();
-        if(isset($cadastro))
-            return view('prestador.update',['cadastro'=>$cadastro]);
-        else
-            return view('prestador.create');
+        // $cadastro = Prestador::where('user_id',auth()->user()->id)->first();
+        // if(isset($cadastro))
+        //     return view('prestador.update',['cadastro'=>$cadastro]);
+        // else
+        //     return view('prestador.create');
     }
     
     public function store(Request $request)
     {
         try{
             $prestadors = new Prestador();
+
+            $id= auth()->user()->id;
 
             // INSERE O ID DO USUÁRIO NA CHAVE ESTRANGEIRA
             $request["user_id"] = auth()->user()->id;
@@ -33,7 +35,7 @@ class PrestadorController extends Controller
                 ->only($prestadors->getFillable());
             Prestador::create($dados);
             //return redirect()->action([PessoaController::class,'create']);
-            return redirect('/') -> with('msg','Cadastro criado com sucesso!');
+            return redirect("/perfil?id=$id") -> with('msg','Cadastro Prestador criado com sucesso!');
         }
         catch(\Exception $e){
             echo"Erro ao inserir! $e";
@@ -46,15 +48,16 @@ class PrestadorController extends Controller
             $pessoas = new Prestador();
             $dados = $request->only($pessoas->getFillable());
             Prestador::whereId($id)->update($dados);
-            return redirect('/') -> with('msg',"Cadastro Alterado com sucesso! $id");
+            return redirect("/perfil?id=$id") -> with('msg',"Cadastro Prestador Alterado com sucesso!");
             // return redirect()->action([ProdutoController::class, "index"])
             //     ->with("resposta", "Registro alterado");
         } catch (\Exception $e){
             // return redirect()->action([ProdutoController::class, "index"])
             //     ->with("resposta", "Erro ao alterar");
-            return redirect('/') -> with('msg',"Erro ao alterar! $e");
+            return redirect("/perfil?id=$id") -> with('msg',"Erro ao alterar cadastro Prestador! $e");
         }
     }
+    // RETORNA AS INFORMAÇÕES NA TELA
     public function profile($id)
     {
         $prestador=DB::table('prestadors')

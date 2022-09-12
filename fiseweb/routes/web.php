@@ -47,12 +47,9 @@ Route::get('/dashboard/chat',[ChatController::class,'index'])->middleware(['auth
 //HOME
 Route::get('/', [HomeController::class,'index']);
 
-//CLIENTE//
-// Route::get('/cliente/create',[ClienteController::class,'create']);
-
 //PRESTADOR//
-Route::get('/prestador/create',[PrestadorController::class,'create'])->middleware(['auth']);
-Route::get('/prestador/update',[PrestadorController::class,'update'])->middleware(['auth']);
+// Route::get('/prestador/create',[PrestadorController::class,'create'])->middleware(['auth']);
+// Route::get('/prestador/update',[PrestadorController::class,'update'])->middleware(['auth']);
 Route::get('/dashboard/prestador/{id}',[PrestadorController::class,'profile'])->middleware(['auth']);
 
 //NOTA SERVIÇO PRESTADOR
@@ -64,8 +61,10 @@ Route::get('/visualizacao/grafico',[VisualizacaoController::class,'grafico'])->m
 Route::get('/informacoes/dashboard',[VisualizacaoController::class,'dashboard'])->middleware(['auth']);
 
 //PESSOA//
-Route::get('/pessoa/create',[PessoaController::class,'create'])->middleware(['auth']);
-Route::get('/pessoa/update',[PessoaController::class,'update'])->middleware(['auth']);
+// Route::get('/pessoa/create',[PessoaController::class,'create'])->middleware(['auth']);
+// Route::get('/pessoa/update',[PessoaController::class,'update'])->middleware(['auth']);
+
+//PERFIL PRESTADOR/PESSOA
 Route::get('/dashboard/perfil',[PerfilController::class,'index'])->middleware(['auth']);
 
 //AVALIAÇÃO

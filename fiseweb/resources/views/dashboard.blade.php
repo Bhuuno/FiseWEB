@@ -9,119 +9,70 @@
           </button>        
           <h2 class="d-inline p-4">DASHBOARD</h2>
     </x-slot>
+    <!-- menu projeto -->
+    @extends('layouts.menu')
 
-    <div class="container">
-        <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
-
-            <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-white text-decoration-none text-white">
-              <span class="fs-4">Menu</span>
-            </a>
-                <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-              
-              <a href="/" class="nav-link link-dark text-white">
-                <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Home</li>
-                <hr>
-              </a>
-            
-              <a href="#" class="nav-link link-dark text-white">
-                <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
-                <hr>
-              </a>
-              
-                <a href="#" class="nav-link link-dark text-white">
-                  <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
-                  <hr>
-                </a>
-              
-              
-                <a href="/dashboard/avaliacao" class="nav-link link-dark text-white">
-                  <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
-                  <hr>
-                </a>
-              
-              
-                <a href="#" class="nav-link link-dark text-white">
-                  <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Suporte</li>
-                  <hr>
-                </a>
-              
-              
-                <a href="#" class="nav-link link-dark text-white">
-                  <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>
-                  <hr>
-                </a>
-              
-            </ul>
-            <hr>
-            </div>
+    <div class="row m-1 p-3" style="width:100%; height:60%;">
+        <div class="container text-center">
+            <div class="row mt-3" style="height:80px;">
+                <div class="col-2 barra">
+                    Visualização Semanal
+                    <div id="semanal">0</div>
                 </div>
-                <div class="row m-1 p-3" style="width:100%; height:60%;">
-                    <div class="container text-center">
-                        <div class="row mt-3" style="height:80px;">
-                            <div class="col-2 barra">
-                                Visualização Semanal
-                                <div id="semanal">0</div>
-                            </div>
-                            <div class="col-2 barra">
-                                Visualização Mensal
-                                <div id="mensal">0</div>
-                            </div>
-                            <div class="col-2 barra">
-                                TOTAL Visualização
-                                <div id="total">0</div>
-                            </div>
-                            <div class="col-2 barra">
-                                TOTAL avaliações
-                                <div id="avaliacoes">0</div>
-                            </div>
-                            <div class="col-2 barra">
-                                Fotos TOTAL
-                                <div>0</div>
-                            </div>
-                            <div class="col-2 barra">
-                                Pontuação
-                                <div style="display: flex; justify-content:center;">
-                                    <div id="media">0</div>
-                                    <img style="height: fit-content; padding: 2px;"width="25px" src="/img/star1.png">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 input-grafico">
-                        <label class="m-2" for="dias">Dias:</label>
-                        <input class="input_grafico_dias" id="dias" name="dias" type="text" value="5">
-                        
-                        <label class="m-2" for="tipo">Tipo:</label>
-                        <select class="select_grafico" required class="form-select" id="tipo" name="tipo" aria-label="Default select example">
-                            <option selected value="0">Linha</option>
-                            <option value="1">Barra</option>
-                        </select>
-                        
-                        <input class="input_grafico ms-3" id="data" name="data" type="date">
-                        <input class="button_grafico ms-4" id="buscar" type="button" value="Gerar" onclick="grafico_visualizacao()">
-                    </div>
-                    <div style="display: flex;">
-                        <!-- GRAFICO DE LINHA E BARRA -->
-                        <div id="grafico" style="display:flex; width:64%;">
-                        
-                            <canvas id="myChart"></canvas>
-                            <canvas id="myChart1"></canvas>
-                        </div>
-
-                        <!-- GRAFICO DE ROSCA -->
-                        <div id="grafico_rosca" style="display:flex; width:60%;">
-                            <p>Visualização de Perfil</p>
-                        </div>
+                <div class="col-2 barra">
+                    Visualização Mensal
+                    <div id="mensal">0</div>
+                </div>
+                <div class="col-2 barra">
+                    TOTAL Visualização
+                    <div id="total">0</div>
+                </div>
+                <div class="col-2 barra">
+                    TOTAL avaliações
+                    <div id="avaliacoes">0</div>
+                </div>
+                <div class="col-2 barra">
+                    Fotos TOTAL
+                    <div>0</div>
+                </div>
+                <div class="col-2 barra">
+                    Pontuação
+                    <div style="display: flex; justify-content:center;">
+                        <div id="media">0</div>
+                        <img style="height: fit-content; padding: 2px;"width="25px" src="/img/star1.png">
                     </div>
                 </div>
-
             </div>
+        </div>
+
+        <div class="mt-3 input-grafico">
+            <label class="m-2" for="dias">Dias:</label>
+            <input class="input_grafico_dias" id="dias" name="dias" type="text" value="5">
             
+            <label class="m-2" for="tipo">Tipo:</label>
+            <select class="select_grafico" required class="form-select" id="tipo" name="tipo" aria-label="Default select example">
+                <option selected value="0">Linha</option>
+                <option value="1">Barra</option>
+            </select>
+            
+            <input class="input_grafico ms-3" id="data" name="data" type="date">
+            <input class="button_grafico ms-4" id="buscar" type="button" value="Gerar" onclick="grafico_visualizacao()">
+        </div>
+        <div style="display: flex;">
+        
+            <!-- GRAFICO DE LINHA E BARRA -->
+            <div id="grafico" style="display:flex; width:64%;">
+            
+                <canvas id="myChart"></canvas>
+                <canvas id="myChart1"></canvas>
+            </div>
+
+            <!-- GRAFICO DE ROSCA -->
+            <div id="grafico_rosca" style="display:flex; width:60%;">
+                <p>Visualização de Perfil</p>
+            </div>
         </div>
     </div>
-
 </x-app-layout>
 <script>
 

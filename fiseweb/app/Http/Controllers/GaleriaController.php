@@ -68,7 +68,7 @@ class GaleriaController extends Controller
             Galeria::create($dados);
             // return redirect()->action([GaleriaController::class,'index']);
 
-            return redirect("/dashboard/galeria/$id_user");
+            return redirect("/dashboard/galeria/$id_user?id=$id_user");
             // return redirect('/') -> with('msg',"Cadastro criado com sucesso!");
         }
         catch(\Exception $e){
@@ -150,7 +150,7 @@ class GaleriaController extends Controller
         $comentario = $_GET['comentario_alteracao'];
         $foto = DB::select("UPDATE galerias SET comentario = '$comentario' WHERE id = $id;");
 
-        return redirect("/dashboard/galeria/$id_user");
+        return redirect("/dashboard/galeria/$id_user?id=$id_user");
     }
     //FAZ COM QUE A IMAGEM NÃO EXIBA
     public function nao_exibir()

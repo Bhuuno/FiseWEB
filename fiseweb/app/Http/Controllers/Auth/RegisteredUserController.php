@@ -49,7 +49,10 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+        // Antigo
+        // return redirect(RouteServiceProvider::HOME);
+        
+        // Depois que registra redireciona para pagina principal
+        return redirect('/');
     }
 }

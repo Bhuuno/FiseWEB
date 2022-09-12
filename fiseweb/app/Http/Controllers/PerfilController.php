@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Pessoa;
+use App\Models\Prestador;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PerfilController extends Controller
 {
@@ -14,7 +16,21 @@ class PerfilController extends Controller
      */
     public function index()
     {
-        return view('perfil.perfil');
+        //ELE VERIFICA SE O USUÁRIO JÁ POSSUI CADASTRO PESSOA/PRESTADOR
+        $cadastro_pessoa = Pessoa::where('user_id',auth()->user()->id)->first();
+        $cadastro_prestador = Prestador::where('user_id',auth()->user()->id)->first();
+
+        // // var_dump($casdastro_prestador, $cadastro_pessoa);
+         
+
+        // if(empty($cadastro_pessoa) && empty($casdastro_prestador))
+        // {
+        //     //Entra aqui quando usuário já possui cadastro 
+        //     return view('perfil.perfil');
+        // }   
+        // else
+        //     //Se não possui
+            return view('perfil.perfil',['pessoa'=>$cadastro_pessoa,'prestador'=>$cadastro_prestador]);
     }
 
     /**

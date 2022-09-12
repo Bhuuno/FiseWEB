@@ -63,7 +63,7 @@
                         @endif
                         @foreach ($prestadores as $prestador)
                         <div class="card mb-1">
-                            <a href="/dashboard/prestador/{{$prestador->user_id}}" class="text-decoration-none" style="color:black;">
+                            <a href="/dashboard/prestador/{{$prestador->user_id}}?id={{$prestador->user_id}}" class="text-decoration-none" style="color:black;">
                             <div class="row g-0">
                                 <div class="col-md-3 border border-dark text-center">
                                     <img style="height:260px; margin:auto" src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
