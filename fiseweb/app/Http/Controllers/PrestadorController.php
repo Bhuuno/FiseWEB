@@ -35,6 +35,14 @@ class PrestadorController extends Controller
                 ->only($prestadors->getFillable());
             Prestador::create($dados);
             //return redirect()->action([PessoaController::class,'create']);
+
+            // Perquisa o nivel do usuário
+            $nivel = DB::select("SELECT * FROM users WHERE id = $id");
+
+            //Atualiza o nivel do usuario
+            if($nivel[0]->role == 'pessoal')
+                DB::select("UPDATE users set role = 'prestador' WHERE id = $id");
+
             return redirect("/perfil?id=$id") -> with('msg','Cadastro Prestador criado com sucesso!');
         }
         catch(\Exception $e){

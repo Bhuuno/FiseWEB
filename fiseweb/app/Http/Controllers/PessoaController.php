@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Controller;
-use App\Models\Pessoa;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use resources\views;
+use App\Models\Pessoa;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PessoaController extends Controller
 {
@@ -14,7 +15,6 @@ class PessoaController extends Controller
     {
         try{
             $pessoas = new Pessoa();
-
             // INSERE O ID DO USUÁRIO NA CHAVE ESTRANGEIRA
             $request["user_id"] = auth()->user()->id;
             $dados = $request
@@ -31,10 +31,19 @@ class PessoaController extends Controller
                 $dados["image"] =  $imageName;
             }
 
-
-           Pessoa::create($dados);
+            Pessoa::create($dados);
             //return redirect()->action([PessoaController::class,'create']);
-            return redirect('/') -> with('msg',"Cadastro criado com sucesso!");
+
+            $id = auth()->user()->id;
+
+            // Perquisa o nivel do usuário
+            $nivel = DB::select("SELECT * FROM users WHERE id = $id");
+
+            //Atualiza o nivel do usuario
+            if($nivel[0]->role == 'cliente')
+                DB::select("UPDATE users set role = 'pessoal' WHERE id = $id");
+
+            return redirect("/perfil?id=$id") -> with('msg',"Cadastro criado com sucesso!");
         }
         catch(\Exception $e){
             echo"Erro ao inserir! $e";

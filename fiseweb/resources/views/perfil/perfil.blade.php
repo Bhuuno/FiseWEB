@@ -9,7 +9,7 @@
         <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <img src="/icons/list.svg" class="icon-space d-flex">  
           </button>        
-          <h2 class="d-inline p-4">Perfil</h2>
+          <h2 class="d-inline p-4">PERFIL</h2>
 
     </x-slot>
 

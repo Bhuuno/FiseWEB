@@ -6,7 +6,7 @@
        <button class="btn btn-dark p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <img src="/icons/list.svg" class="icon-space d-flex">  
           </button>        
-          <h2 class="d-inline p-4">DASHBOARD</h2>
+          <h2 class="d-inline p-4">PERFIL PRESTADOR</h2>
     </x-slot>
     
     <!-- menu projeto -->
