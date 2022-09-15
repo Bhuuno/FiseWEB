@@ -1,17 +1,21 @@
 <?php
 require __DIR__.'/auth.php';
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Cookie\Middleware\EncryptCookies as middleware;
 use App\Http\Controllers\ChatController;
-use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PrestadorController;
-use App\Http\Controllers\PessoaController;
-use App\Http\Controllers\VisualizacaoController;
 use App\Http\Controllers\PerfilController;
-use App\Http\Controllers\AvaliacaoController;
+use App\Http\Controllers\PessoaController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\GaleriaController;
+use App\Http\Controllers\AvaliacaoController;
 use App\Http\Controllers\PagamentoController;
+use App\Http\Controllers\PrestadorController;
+use App\Http\Controllers\VisualizacaoController;
+
+$user = new User(); 
 
 /*
 |--------------------------------------------------------------------------
@@ -34,13 +38,10 @@ Route::resources([
     'galeria' => \App\Http\Controllers\GaleriaController::class,
 ]);
 
-// Route::get('/', function () {
-//     return view('home');
-// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard')->middleware('role:prestador,administrador');
 
 Route::get('/dashboard/chat',[ChatController::class,'index'])->middleware(['auth'])->name('chat');
 
@@ -48,8 +49,6 @@ Route::get('/dashboard/chat',[ChatController::class,'index'])->middleware(['auth
 Route::get('/', [HomeController::class,'index']);
 
 //PRESTADOR//
-// Route::get('/prestador/create',[PrestadorController::class,'create'])->middleware(['auth']);
-// Route::get('/prestador/update',[PrestadorController::class,'update'])->middleware(['auth']);
 Route::get('/dashboard/prestador/{id}',[PrestadorController::class,'profile'])->middleware(['auth']);
 
 //NOTA SERVIÇO PRESTADOR
@@ -60,16 +59,12 @@ Route::get('/visualizacao',[VisualizacaoController::class,'store'])->middleware(
 Route::get('/visualizacao/grafico',[VisualizacaoController::class,'grafico'])->middleware(['auth']);
 Route::get('/informacoes/dashboard',[VisualizacaoController::class,'dashboard'])->middleware(['auth']);
 
-//PESSOA//
-// Route::get('/pessoa/create',[PessoaController::class,'create'])->middleware(['auth']);
-// Route::get('/pessoa/update',[PessoaController::class,'update'])->middleware(['auth']);
-
 //PERFIL PRESTADOR/PESSOA
 Route::get('/dashboard/perfil',[PerfilController::class,'index'])->middleware(['auth']);
 
 //AVALIAÇÃO
 Route::get('/dashboard/avaliacao/{id}',[AvaliacaoController::class,'index'])->middleware(['auth']);
-Route::get('/gravar/comentario',[AvaliacaoController::class,'store'])->middleware(['auth']);
+Route::get('/gravar/comentario',[AvaliacaoController::class,'store'])->middleware(['auth'])->middleware('role:pessoal,prestador,administrador');
 
 //GALERIA
 Route::get('/dashboard/galeria/{id}',[GaleriaController::class,'index'])->middleware(['auth']); //exibe a página dagaleria
@@ -81,4 +76,4 @@ Route::get('/galeria/foto/naoexibir',[GaleriaController::class,'nao_exibir'])->m
 Route::get('/galeria/foto/exibir',[GaleriaController::class,'exibir'])->middleware(['auth']); //altera o status da imagem para exibir
 
 //PAGAMENTO
-Route::get('/dashboard/pagamento/index',[PagamentoController::class,'index'])->middleware(['auth']);
+Route::get('/dashboard/pagamento/index',[PagamentoController::class,'index'])->middleware(['auth'])->middleware('role:pessoal,prestador,administrador');

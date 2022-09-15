@@ -17,7 +17,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+
+    //DEFINE A ROTA PRINCIAPL QUANDO FAZER LOGIN - BRUNO
+    public const HOME = '/';
 
     /**
      * Define your route model bindings, pattern filters, etc.
