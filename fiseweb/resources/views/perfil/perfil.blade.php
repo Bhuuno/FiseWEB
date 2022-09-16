@@ -3,6 +3,7 @@
 @section('titulo', 'Cadastro')
 
 @section('conteudo')
+
 <x-app-layout>
     <x-slot name="header">
 
@@ -15,17 +16,21 @@
 
     <div class="container-fluid">
     <!-- menu projeto -->
+
     @extends('layouts.menu')
+    <script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>
+<script src="{{ asset('jquery/bootstrap.min.js') }}"></script>
+
 
     @if(session('msg'))
         <div class="alert alert-success">
             <p style="text-align:center; align-items:center; font-size:20px;">{{session('msg')}}</p>
         </div>
     @endif
+
     <div class="tab container-fluid">
     <input type="radio" name="tabs" id="tab1" checked>
     <label for="tab1">Perfil Pessoal</label>
-
     <input type="radio" name="tabs" id="tab2">
     <label for="tab2">Perfil Prestador</label>
     <div class="tabs">
@@ -382,3 +387,15 @@
         @endif
     </div>
 </x-app-layout>
+<script>
+    window.onload = function(e){ 
+        if('<?php print $perfil; ?>' == 'cliente')
+        {
+            swal({
+                title: "Informativo",
+                text: "Caso você queira apenas utilizar a ferramenta para encontrar prestador, faça um cadastro pessoal!",
+                icon: "info"
+            })
+        }
+    }
+</script>

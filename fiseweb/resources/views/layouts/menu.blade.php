@@ -47,7 +47,7 @@
         </a>
 
         <a href="/dashboard/pagamento/index?id={{$id}}" class="nav-link link-dark text-white">
-            <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Pagamento</li>
+            <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Seja Pro!</li>
             <hr>
         </a>
 
