@@ -18,7 +18,10 @@ class AvaliacaoController extends Controller
      */
     public function index($id)
     {
+        //pega o nivel do usuário
+        $role = auth()->user()->role;
 
+        
         $perfil=DB::select("SELECT ps.nome as nome_prestador,
         pr.profissao as profissao, ps.image as imagem
         FROM prestadors as pr 
@@ -36,7 +39,7 @@ class AvaliacaoController extends Controller
         WHERE a.prestador_id = $id
         ORDER by created_at DESC");
         
-        return view('avaliacao.avaliacao_perfil',compact('perfil','comentario','id'));
+        return view('avaliacao.avaliacao_perfil',compact('perfil','comentario','id','role'));
     }
 
     /**

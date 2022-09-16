@@ -153,6 +153,15 @@
     // serve para chamar as fuções que quero que inicie
     window.onload = function(){
         media();
+
+        if('<?php print $role; ?>' == 'cliente')
+        {
+            swal({
+                title: "Informativo",
+                text: "Seu nível de perfil não consegue realizar comentários, por favor cadastrar as informações pessoais!",
+                icon: "info"
+            })
+        }
     };
 
 

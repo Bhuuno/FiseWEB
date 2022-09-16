@@ -19,6 +19,7 @@ class PerfilController extends Controller
         //ELE VERIFICA SE O USUÁRIO JÁ POSSUI CADASTRO PESSOA/PRESTADOR
         $cadastro_pessoa = Pessoa::where('user_id',auth()->user()->id)->first();
         $cadastro_prestador = Prestador::where('user_id',auth()->user()->id)->first();
+        $perfil = auth()->user()->role;
 
         // // var_dump($casdastro_prestador, $cadastro_pessoa);
          
@@ -30,7 +31,7 @@ class PerfilController extends Controller
         // }   
         // else
         //     //Se não possui
-            return view('perfil.perfil',['pessoa'=>$cadastro_pessoa,'prestador'=>$cadastro_prestador]);
+            return view('perfil.perfil',['pessoa'=>$cadastro_pessoa,'prestador'=>$cadastro_prestador,'perfil'=>$perfil]);
     }
 
     /**
