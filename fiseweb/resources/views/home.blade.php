@@ -28,12 +28,14 @@
                     <hr>
                     <ul class="nav nav-pills flex-column mb-auto">
 
+
                     @if(auth()->user()->role == 'prestador' ||  auth()->user()->role == 'administrador')
                         <a href="/dashboard?id={{$id}}" class="nav-link link-dark text-white">
                             <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Dashboard</li>
                             <hr>
                         </a>
                     @endif
+
 
                     <a href="/dashboard/perfil?id={{$id}}" class="nav-link link-dark text-white">
                         <li class="d-flex"><img src="/icons/person.svg" class="icon-space">Perfil</li>
