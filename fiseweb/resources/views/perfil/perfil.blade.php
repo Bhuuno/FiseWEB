@@ -4,13 +4,28 @@
 
 @section('conteudo')
 
+<script>
+    //Aqui informa a mensagem inicial, tem que ficar no topo para funcionar
+    window.onload = function(e){ 
+        if('<?php print $perfil; ?>' == 'cliente')
+        {
+            swal({
+                title: "Informativo",
+                text: "Caso você queira apenas utilizar a ferramenta para encontrar prestador, faça um cadastro pessoal!",
+                icon: "info"
+            })
+        }
+    }
+</script>
+
 <x-app-layout>
     <x-slot name="header">
-
         <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <img src="/icons/list.svg" class="icon-space d-flex">  
-          </button>        
-          <h2 class="d-inline p-4">PERFIL</h2>
+        </button>        
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
+            PERFIL
+        </h2>
 
     </x-slot>
 
@@ -19,20 +34,50 @@
 
     @extends('layouts.menu')
     <script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>
-<script src="{{ asset('jquery/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('jquery/bootstrap.min.js') }}"></script>
 
 
     @if(session('msg'))
-        <div class="alert alert-success">
-            <p style="text-align:center; align-items:center; font-size:20px;">{{session('msg')}}</p>
-        </div>
+        @if(session('msg') == 'cadastro alterado')
+            <script>
+                window.onload = function(){
+                    swal({
+                        title: "Alteração!",
+                        text: "Cadastro alterado com sucesso!",
+                        icon: "success"
+                    })
+                }
+            </script>
+        @endif
+        @if(session('msg') == 'cadastro criado')
+            <script>
+                window.onload = function(){
+                    swal({
+                        title: "Parabéns!",
+                        text: "Cadastro Criado com sucesso!",
+                        icon: "success"
+                    })
+                }
+            </script>
+        @endif
+        @if(session('msg') == 'erro alterar')
+            <script>
+                window.onload = function(){
+                    swal({
+                        title: "Erro!",
+                        text: "Não foi possivel alterar cadastro, por favor informar a equipe de suporte FiseWEB",
+                        icon: "error"
+                    })
+                }
+            </script>
+        @endif
     @endif
 
-    <div class="tab container-fluid">
+    <div class="tab container">
     <input type="radio" name="tabs" id="tab1" checked>
     <label for="tab1">Perfil Pessoal</label>
     <input type="radio" name="tabs" id="tab2">
-    <label for="tab2">Perfil Prestador</label>
+    <label for="tab2">Perfil Profissional</label>
     <div class="tabs">
         @if(!isset($pessoa))
             <div class="content">
@@ -387,15 +432,3 @@
         @endif
     </div>
 </x-app-layout>
-<script>
-    window.onload = function(e){ 
-        if('<?php print $perfil; ?>' == 'cliente')
-        {
-            swal({
-                title: "Informativo",
-                text: "Caso você queira apenas utilizar a ferramenta para encontrar prestador, faça um cadastro pessoal!",
-                icon: "info"
-            })
-        }
-    }
-</script>

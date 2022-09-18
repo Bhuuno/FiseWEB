@@ -12,7 +12,7 @@
     <!-- menu projeto -->
     @extends('layouts.menu')
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="">
             <div class="row gutters-md p-4">
                 <div class="col-md-6">

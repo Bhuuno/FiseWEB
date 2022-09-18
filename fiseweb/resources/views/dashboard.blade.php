@@ -6,14 +6,16 @@
     <x-slot name="header">
         <button class="btn btn-dark p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <img src="/icons/list.svg" class="icon-space d-flex">  
-          </button>        
-          <h2 class="d-inline p-4">DASHBOARD</h2>
+        </button>        
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
+            DASHBOARD
+        </h2>
     </x-slot>
     <!-- menu projeto -->
     @extends('layouts.menu')
 
-    <div class="row m-1 p-3" style="width:100%; height:60%;">
-        <div class="container text-center">
+    <div class="container">
+        <div class="text-center rounded bg-white mt-5 mb-5">
             <div class="row mt-3" style="height:80px;">
                 <div class="col-2 barra">
                     Visualização Semanal
@@ -32,8 +34,8 @@
                     <div id="avaliacoes">0</div>
                 </div>
                 <div class="col-2 barra">
-                    Fotos TOTAL
-                    <div>0</div>
+                    TOTALFotos
+                    <div id="qtde_fotos">0</div>
                 </div>
                 <div class="col-2 barra">
                     Pontuação
@@ -108,6 +110,10 @@
             },
             success: function( result ) {  
                 var dashboard = JSON.parse(result);
+    
+                //se a média vem com valor null, recebe 0
+                if( dashboard[0].media == null)
+                    dashboard[0].media = 0;
 
                 //EXIBIR O VALOR NO DASHBOARD SEMANAL 
                 document.getElementById('semanal').innerHTML = dashboard[0].semanal
@@ -123,6 +129,9 @@
                 
                 //EXIBIR O VALOR NO PONTUAÇÃO TOTAL 
                 document.getElementById('media').innerHTML = dashboard[0].media.toFixed(1)
+
+                //EXIBIR A QUANTIDADE DE FOTOS POSTADAS
+                document.getElementById('qtde_fotos').innerHTML = dashboard[0].qtde_fotos
             },
             error: function( request, status, error ) {
                 console.log(request,status,error);
