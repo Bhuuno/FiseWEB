@@ -54,7 +54,7 @@ Route::get('/dashboard/prestador/{id}',[PrestadorController::class,'profile'])->
 //NOTA SERVIÇO PRESTADOR
 Route::get('/media',[AvaliacaoController::class,'media'])->middleware(['auth']);
 
-//VISUALIZAÇÃO
+//DASHBOARD
 Route::get('/visualizacao',[VisualizacaoController::class,'store'])->middleware(['auth']);
 Route::get('/visualizacao/grafico',[VisualizacaoController::class,'grafico'])->middleware(['auth']);
 Route::get('/informacoes/dashboard',[VisualizacaoController::class,'dashboard'])->middleware(['auth']);

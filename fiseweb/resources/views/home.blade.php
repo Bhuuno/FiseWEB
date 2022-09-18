@@ -13,13 +13,12 @@
             @endif
 
             <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
-                {{ __('Home') }}
+                HOME
             </h2>
         </div>
 
         @if(isset(auth()->user()->id))
             <?php $id = auth()->user()->id; ?>
-
             
             <div class="container-fluid m-2">
                 <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
@@ -29,15 +28,12 @@
                     <hr>
                     <ul class="nav nav-pills flex-column mb-auto">
 
-                    <a href="/" class="nav-link link-dark text-white">
-                        <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Home</li>
-                        <hr>
-                    </a>
-
-                    <a href="/dashboard?id={{$id}}" class="nav-link link-dark text-white">
-                        <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Dashboard</li>
-                        <hr>
-                    </a>
+                    @if(auth()->user()->role == 'prestador' ||  auth()->user()->role == 'administrador')
+                        <a href="/dashboard?id={{$id}}" class="nav-link link-dark text-white">
+                            <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Dashboard</li>
+                            <hr>
+                        </a>
+                    @endif
 
                     <a href="/dashboard/perfil?id={{$id}}" class="nav-link link-dark text-white">
                         <li class="d-flex"><img src="/icons/person.svg" class="icon-space">Perfil</li>
@@ -54,20 +50,24 @@
                         <hr>
                     </a> -->
 
-                    <a href="/dashboard/avaliacao/{{$id}}?id={{$id}}" class="nav-link link-dark text-white">
-                        <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
-                        <hr>
-                    </a>
-
+                    @if(auth()->user()->role != 'cliente')
+                        <a href="/dashboard/avaliacao/{{$id}}?id={{$id}}" class="nav-link link-dark text-white">
+                            <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
+                            <hr>
+                        </a>
+                    @endif
+                    @if(auth()->user()->role != 'cliente')
                     <a href="/dashboard/galeria/{{$id}}?id={{$id}}" class="nav-link link-dark text-white">
                         <li class="d-flex"><img src="/icons/images.svg" class="icon-space">Galeria</li>
                         <hr>
                     </a>
-
-                    <a href="/dashboard/pagamento/index?id={{$id}}" class="nav-link link-dark text-white">
-                        <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Seja Pro!</li>
-                        <hr>
-                    </a>
+                    @endif
+                    @if(auth()->user()->role != 'cliente')
+                        <a href="/dashboard/pagamento/index?id={{$id}}" class="nav-link link-dark text-white">
+                            <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Seja Pro!</li>
+                            <hr>
+                        </a>
+                    @endif
 
                     <!-- <a href="#" class="nav-link link-dark text-white">
                         <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>
@@ -83,7 +83,7 @@
         <!-- Aparece botão quando faz login e o nivel do usuário é cliente -->
         @if(!empty(auth()->user()->role) && auth()->user()->role == 'cliente')
             <div style="align-items:end; display:flex; justify-content:end;">
-                <a style="text-decoration:none; color:white" href="http://127.0.0.1:8000/perfil?id={{auth()->user()->id}}"> 
+                <a style="text-decoration:none; color:white" href="/perfil?id={{auth()->user()->id}}"> 
                     <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 ml-4">   
                             Torna-se um prestador!
                     </button>
@@ -92,9 +92,18 @@
         @endif  
     </x-slot>
     @if(session('msg'))
-        <div class="alert alert-success">
-            <p style="text-align:center; align-items:center; font-size:20px;">{{session('msg')}}</p>
-        </div>
+        
+        @if(session('msg') == 'sem permissao')
+        <script>
+            window.onload = function(){
+                swal({
+                    title: "Sem Permissão!",
+                    text: "Você não possui permissão suficiente, por favor finalizar cadastro pessoal",
+                    icon: "error"
+                })
+            }
+        </script>
+        @endif
     @endif
     <div id="carouselExampleCaptions" height="30px" class="carousel slide" data-bs-ride="false">
         <div class="carousel-indicators">
@@ -163,7 +172,7 @@
                                         <h5 class="card-title">{{strtoupper($prestador->nome)}}</h5>
                                         <p class="card-text">Expecialidade: {{$prestador->especialidade}}</p>
                                         <p class="card-text">Contato: {{$prestador->celular}}</p>
-                                        <p class="card-text"><small class="text-muted">Parceiro desde: {{date('d-m-Y', strtotime($prestador->created_at));}}</small></p>
+                                        <p class="card-text"><small class="text-muted">Parceiro desde: {{date('d/m/Y', strtotime($prestador->created_at));}}</small></p>
                                         <p class="card-text">Experiências: {{$prestador->experiencia}}</p>
                                     </div>
                                 </div>

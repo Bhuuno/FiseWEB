@@ -43,10 +43,10 @@ class PessoaController extends Controller
             if($nivel[0]->role == 'cliente')
                 DB::select("UPDATE users set role = 'pessoal' WHERE id = $id");
 
-            return redirect("/perfil?id=$id") -> with('msg',"Cadastro criado com sucesso!");
+            return redirect("/perfil?id=$id") -> with('msg',"cadastro criado");
         }
         catch(\Exception $e){
-            echo"Erro ao inserir! $e";
+            return redirect("/perfil?id=$id") -> with('msg',"erro");
         }
         
     }
@@ -95,13 +95,10 @@ class PessoaController extends Controller
             }
 
             Pessoa::whereId($id)->update($dados);
-            return redirect("/perfil?id=$id") -> with('msg',"Cadastro Pessoal Alterado com sucesso!");
-            // return redirect()->action([ProdutoController::class, "index"])
-            //     ->with("resposta", "Registro alterado");
+            return redirect("/perfil?id=$id") -> with('msg',"cadastro alterado");
+
         } catch (\Exception $e){
-            // return redirect()->action([ProdutoController::class, "index"])
-            //     ->with("resposta", "Erro ao alterar");
-            return redirect("/perfil?id=$id") -> with('msg',"Erro ao alterar perfil pessoal! $e");
+            return redirect("/perfil?id=$id") -> with('msg',"erro");
         }
     }
     public function show()

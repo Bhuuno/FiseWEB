@@ -21,16 +21,13 @@ class HomeController extends Controller
         $search = request('search');
         if($search){
 
-            // $prestadores = DB::select("WITH prestadores as (select pr.id,p.user_id,p.nome,p.image,pr.celular,pr.profissao,pr.created_at,pr.especialidade,pr.experiencia
-            // from prestadors as pr
-            // join pessoas as p on p.user_id = pr.user_id
-            // order by p.nome)
-            
-            // SELECT ps.*,(select SUM(a.avaliacao) as total from avaliacaos as a where a.prestador_id = ps.user_id) as total,
-            // (select COUNT(a.avaliacao) as quantidade from avaliacaos as a where a.prestador_id = ps.user_id) as quantidade 
-            // FROM prestadores as ps where ps.nome like'%$search%';");
+            //EXIBE A BUSCA NA HOME
+
             $prestadores=DB::table('prestadors')
-                ->where([['nome', 'like', '%'.$search.'%']])
+                ->where([['nome','like', '%'.$search.'%']])
+                ->orwhere([['profissao','like', '%'.$search.'%']])
+                ->orwhere([['especialidade','like', '%'.$search.'%']])
+                ->orwhere([['prestadors.cidade','like', '%'.$search.'%']])
                 ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
                 ->select('prestadors.user_id','pessoas.nome','pessoas.image','prestadors.celular','prestadors.profissao','prestadors.experiencia','prestadors.created_at',
                         'prestadors.especialidade','prestadors.celular','prestadors.id', 'prestadors.cidade')
@@ -38,14 +35,8 @@ class HomeController extends Controller
                 ->paginate();
         }
         else{
-            // $prestadores = DB::select("WITH prestadores as (select pr.id,p.user_id,p.nome,p.image,pr.celular,pr.profissao,pr.created_at,pr.especialidade,pr.experiencia
-            // from prestadors as pr
-            // join pessoas as p on p.user_id = pr.user_id
-            // order by p.nome)
-            
-            // SELECT ps.*,(select SUM(a.avaliacao) as total from avaliacaos as a where a.prestador_id = ps.user_id) as total,
-            // (select COUNT(a.avaliacao) as quantidade from avaliacaos as a where a.prestador_id = ps.user_id) as quantidade 
-            // FROM prestadores as ps");
+
+            //EXIBE OS PRESTADORES NA HOME
 
             $prestadores = DB::table('prestadors')
             ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
