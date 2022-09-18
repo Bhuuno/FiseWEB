@@ -23,6 +23,6 @@ class EnsureUserHasRole
                 return $next($request);
             }
         }
-        return redirect("/") -> with('msg',"Sem permissão! Por Favor continuar cadastro para ter acesso!");
+        return redirect("/") -> with('msg',"sem permissao");
     }
 }

@@ -16,10 +16,12 @@
             <hr>
         </a>
 
-        <a href="/dashboard?id={{$id}}" class="nav-link link-dark text-white">
-            <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Dashboard</li>
-            <hr>
-        </a>
+        @if(auth()->user()->role == 'administrador' || auth()->user()->role == 'prestador')
+            <a href="/dashboard?id={{$id}}" class="nav-link link-dark text-white">
+                <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Dashboard</li>
+                <hr>
+            </a>
+        @endif
 
         <a href="/dashboard/perfil?id={{$id}}" class="nav-link link-dark text-white">
             <li class="d-flex"><img src="/icons/person.svg" class="icon-space">Perfil</li>
@@ -46,10 +48,12 @@
             <hr>
         </a>
 
-        <a href="/dashboard/pagamento/index?id={{$id}}" class="nav-link link-dark text-white">
-            <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Seja Pro!</li>
-            <hr>
-        </a>
+        @if(auth()->user()->role != 'cliente')
+            <a href="/dashboard/pagamento/index?id={{$id}}" class="nav-link link-dark text-white">
+                <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Seja Pro!</li>
+                <hr>
+            </a>
+        @endif
 
         <!-- <a href="#" class="nav-link link-dark text-white">
             <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>

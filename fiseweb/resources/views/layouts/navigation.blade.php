@@ -60,7 +60,7 @@
             @else
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
                     <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 ml-4">
-                        <a style="text-decoration:none; color:white" href="http://127.0.0.1:8000/login">    
+                        <a style="text-decoration:none; color:white" href="/login">    
                             login
                         </a>
                     </button>
