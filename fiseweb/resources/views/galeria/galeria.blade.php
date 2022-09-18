@@ -11,19 +11,44 @@
     <x-slot name="header">
         <button class="btn btn-dark p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <img src="/icons/list.svg" class="icon-space d-flex">  
-          </button>        
-          <h2 class="d-inline p-4">GALERIA</h2>
+        </button>        
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
+            GALERIA
+        </h2>
     </x-slot>
 
     <div class="container-fluid">
         <!-- menu projeto -->
         @extends('layouts.menu')
-                
-            </div>
-                <div class="p-4" style="width:100%">
-                    <div class="album py-2 bg-light">
-                        @if(auth()->user()->id == $id)
-                            <div>
+        @if(auth()->user()->role == 'cliente' && $_GET['id'] == auth()->user()->id)
+            <script>
+                window.onload = function(){
+                    swal({
+                        title: "Erro",
+                        text: "Está página é usada apenas para pessoas que possuem um cadastro profissional!",
+                        icon: "error",
+                            
+                        buttons: {
+                        btn1: "ok",
+                        },
+                    })
+                    .then((value) => {
+                        switch (value) {
+                            case "btn1":
+                                //volta para a página anterior
+                                history.go(-1)
+                            break;
+                        }
+                    });
+   
+                }
+            </script>
+    </div>
+        @else
+                <div class="p-4">
+                    <div class="album py-2 bg-light container">
+                        @if(auth()->user()->id == $id && auth()->user()->role != 'cliente' && auth()->user()->role != 'pessoal')
+                            <div style="padding: 30px 80px 10px 80px;">
                                 <form id="inserir" name="inserir" action="{{route('galeria.store')}}" method="post"  enctype="multipart/form-data" class="bg-white shadow row g-4 pb-8">
                                     @csrf
                                     <h4>Upload de imagens</h4>
@@ -37,9 +62,8 @@
                                         <textarea rows="2" type="text" class="form-control" name="comentario" id="comentario"></textarea>
                                     </div>
 
-                                    <div class="col-md-12 text-center">
+                                    <div class="col-md-12 text-center mb-4">
                                         <button onclick="verifica_campos()" type="button" class="btn btn-primary">Enviar</button>
-                                        
                                     </div>
                                 </form>
                             </div>
@@ -47,63 +71,67 @@
 
 
                         @if(!empty($galeria))
-                            <div class="container">
-                                <div class="row">
-                                    @for($i=0; $i < count($galeria); $i++)
-                                        @if(auth()->user()->id == $id)
-                                            <div class="col-md-4">
-                                                <div class="card mb-4 shadow-sm">
-                                                    <img class="card-img-top" src="/img/galeria/{{$galeria[$i]->image}}" width="60%" height="60%" data-holder-rendered="true">
-                                                    <div class="card-body">
-                                                        <p class="card-text">Comentário: {{$galeria[$i]->comentario}}</p>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <div class="btn-group">
-                                                            
-                                                            <!-- <form name="form_exclusao" id="form_exclusao" class="form_exclusao" action="{{route('galeria.destroy',$galeria[$i]->id)}}" method="POST">
-                                                                @csrf
-                                                                @Method("DELETE")   
-                                                                <x-button>Excluir</x-button> -->
-                                                            @if(auth()->user()->id == $id)
-                                                                <button type="button" style="width:75px; height:40px;" class="btn btn-primary" onclick="confirmar_exclusao(<?php echo $galeria[$i]->id ?>)">Excluir</button>
+                            <div class="container" style="display: flex;">
+                                @for($i=0; $i < count($galeria); $i++)
+                                    <!-- Verifica se é o prestador -->
+                                    @if(auth()->user()->id == $id)
+
+                                    
+                                        <div class="card" style="padding: 8px; margin:13px;">
+                                            <div class="card">
+                                                <img class="card-img-top" src="/img/galeria/{{$galeria[$i]->image}}" style="width: 280px; height: 280px" data-holder-rendered="true">
+                                                <small style="padding-left:7px;" class="text-muted">{{date('d/m/Y', strtotime($galeria[$i]->created_at));}}</small>
+                                                <div class="card-body" style="width: 280px;">
+                                                    <p class="card-text">Comentário: {{$galeria[$i]->comentario}}</p>
+                                                </div>
+                                                <div  style="display: flex; align-items:center; justify-content:center;">
+                                                    <div class="btn-group">
                                                         
-                                                            @endif
-                                                                <!-- </form> -->
-                                                            @if(auth()->user()->id == $id)
-                                                                <button type="button" style="width: 70px; height:40px;" type="button" class="btn btn-primary" onclick="editar_comentario(<?php echo $galeria[$i]->id ?>)" class="btn btn-primary">Editar</button>
-                                                                <button class="btn btn-primary" style="width:70px; height:40px; border-radius: 1px" data-toggle="modal" data-target=".bd-example-modal-xl" onclick="foto(<?php echo $galeria[$i]->id ?>)">Abrir</button>
-                                                                @if($galeria[$i]->status == 1)
+                                                        @if(auth()->user()->id == $id)
+                                                            <button type="button" class="btn btn-primary" onclick="confirmar_exclusao(<?php echo $galeria[$i]->id ?>)">Excluir</button>
+                                                        @endif
+    
+                                                        @if(auth()->user()->id == $id)
+                                                            <button type="button"  type="button" class="btn btn-primary" onclick="editar_comentario(<?php echo $galeria[$i]->id ?>)" class="btn btn-primary">Editar</button>
+                                                            <button class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl" onclick="foto(<?php echo $galeria[$i]->id ?>)">Abrir</button>
+                                                            @if($galeria[$i]->status == 1)
+                                                                <button type="button" type="button" class="btn btn-primary">
                                                                     <img width="20px" src="/icons/eye-fill.svg" onclick="nao_exibir(<?php echo $galeria[$i]->id ?>)" class="icon-space">
-                                                                @else
+                                                                </button>
+                                                            @else
+                                                                <button type="button" type="button" class="btn btn-primary">
                                                                     <img width="20px" src="/icons/eye-slash-fill.svg" onclick="exibir(<?php echo $galeria[$i]->id ?>)" class="icon-space">
-                                                                @endif
+                                                                </button>
                                                             @endif
-                                                        </div>
-                                                        <small class="text-muted">{{date('d-m-Y', strtotime($galeria[$i]->created_at));}}</small>
+                                                        @endif
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
-                                        @else
-                                        @if($galeria[$i]->status == 1)
-                                            <div class="col-md-4">
-                                                <div class="card mb-4 shadow-sm">
-                                                        <img class="card-img-top" src="/img/galeria/{{$galeria[$i]->image}}" width="60%" height="60%" data-holder-rendered="true">
-                                                        <div class="card-body">
-                                                            <p class="card-text">Comentário: {{$galeria[$i]->comentario}}</p>
-                                                        </div>
-                                                            <small class="text-muted">{{date('d-m-Y', strtotime($galeria[$i]->created_at));}}</small>
-                                                        </div>
-                                                    </div>
+                                        </div>
+                                    @else
+                                    @if($galeria[$i]->status == 1)
+                                        <div class="card" style="padding: 8px; margin:13px;">
+                                            <div class="card">
+                                                <img class="card-img-top" src="/img/galeria/{{$galeria[$i]->image}}" style="width: 280px; height: 280px" data-holder-rendered="true">
+                                                <small style="padding-left:5px;" class="text-muted">{{date('d/m/Y', strtotime($galeria[$i]->created_at));}}</small>
+                                                <div class="card-body" style="width: 280px;">
+                                                    <p class="card-text">Comentário: {{$galeria[$i]->comentario}}</p>
                                                 </div>
-                                            @endif
+                                            </div>
+                                            <button class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl" onclick="foto(<?php echo $galeria[$i]->id ?>)">Abrir</button>
+        
+                                        </div>
+                                        
                                         @endif
-                                    @endfor
-                                </div>
+                                    @endif
+                                @endfor              
                             </div>
                         @endif
                     </div>
                 </div>
             </div>
+        @endif
         </div>
     </div>
     <!-- MODAL IMAGEM -->

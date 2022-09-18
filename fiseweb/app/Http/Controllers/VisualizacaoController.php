@@ -122,6 +122,7 @@ class VisualizacaoController extends Controller
             avaliacaos
         WHERE 
             prestador_id = '$prestador')as total_avaliacoes,
+        (SELECT COUNT(*) from galerias WHERE user_id = '$prestador') as qtde_fotos,
         (select sum(avaliacao)/(SELECT COUNT(*) from avaliacaos WHERE 
             prestador_id = '$prestador')
         from 

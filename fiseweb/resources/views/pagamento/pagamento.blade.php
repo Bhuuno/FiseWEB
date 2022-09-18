@@ -3,15 +3,19 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Pagamento') }}
+        <button class="btn btn-dark p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <img src="/icons/list.svg" class="icon-space d-flex">  
+        </button>        
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
+            PAGAMENTO
         </h2>
-                <!-- menu projeto -->
-                @extends('layouts.menu')
     </x-slot>
-    <div class="container-fluid">
+    <!-- menu projeto -->
+    @extends('layouts.menu')
+
+    <div class="container">
         <div class="row flex-nowrap ">
-            <div class="col-md-8 order-md-1">
+            <div class="col-md-12 order-md-1">
                 <form class="needs-validation" novalidate="">
                     <br>
                     <h4 class="mb-3">Pagamento</h4>
@@ -64,7 +68,9 @@
                     </div>
                     </div>
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue o checkout</button>
+                    <div class="col-md-12 text-center mb-4">
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue o checkout</button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -1,22 +1,65 @@
 @extends('layouts.padrao')
 @section('titulo', 'Avaliação')
+
+<script>
+        // serve para chamar as fuções que quero que inicie
+        window.onload = function(){
+        media();
+
+        if('<?php print $role; ?>' == 'cliente' && '<?php print $_GET['id'] ?>' != '<?php print auth()->user()->id ?>')
+        {
+            swal({
+                title: "Informativo",
+                text: "Seu nível de perfil não consegue realizar comentários, por favor cadastrar as informações pessoais!",
+                icon: "info"
+            })
+        }
+    };
+</script>
+
+
 <x-app-layout>
     <x-slot name="header">
         <button class="btn btn-dark p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <img src="/icons/list.svg" class="icon-space d-flex">  
           </button>
-        <h2 class="font-semibold text-xxl text-gray-800 leading-tight d-inline p-4">
-            {{ __('Avaliações') }}
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
+            AVALIAÇÕES
         </h2>
     </x-slot>
     <div class="container-fluid m-2">
         <!-- menu projeto -->
         @extends('layouts.menu')
+        <!-- valida se usuário não quer acessar sua propria página de avaliação! -->
+        @if(auth()->user()->role == 'cliente' && $_GET['id'] == auth()->user()->id)
+            <script>
+                window.onload = function(){
+                    swal({
+                        title: "Erro",
+                        text: "Está página é usada apenas para pessoas que possuem um cadastro profissional!",
+                        icon: "error",
+                            
+                        buttons: {
+                        btn1: "ok",
+                        },
+                    })
+                    .then((value) => {
+                        switch (value) {
+                            case "btn1":
+                                //volta para a página anterior
+                                history.go(-1)
+                            break;
+                        }
+                    });
+   
+                }
+            </script>
+        @else
+        <div class="container">
             <div class="row main-body">
                 <div class="row gutters-sm" style="padding:1%;">
                     <div class="col-md-3">
                         <div class="card card-body">
-
                                 <div class="d-flex flex-column align-items-center text-center">
                                     <h3>Prestador: </h3>
                                     <img src="/img/fotos_perfil/{{$perfil[0]->imagem}}" alt="{{$perfil[0]->nome_prestador}}" class="rounded-circle" style="width:144px; height:144px";>
@@ -89,9 +132,9 @@
                                 </div>
                             </div>
                         </div>
-                      
-                        <div class="col-sm-7">
-                            <div class="card" style="overflow: auto; width: 100%; height:375px;">
+                    
+                        <div class="col-sm-9">
+                            <div class="card" style="height:410px;">
                                 <div class="card-body">
                                 @if(!empty($comentario))
                                     @foreach ($comentario as $item)
@@ -108,7 +151,7 @@
                                 @endif
                                 </div>
                             </div>
-                            <div class="card mt-2">
+                            <div class="card mt-4">
                                 <div class="card-body">                               
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">Escreva aqui seu comentário</label>
@@ -144,27 +187,13 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
     
        
 </x-app-layout>
 
 <script>
-    // serve para chamar as fuções que quero que inicie
-    window.onload = function(){
-        media();
-
-        if('<?php print $role; ?>' == 'cliente')
-        {
-            swal({
-                title: "Informativo",
-                text: "Seu nível de perfil não consegue realizar comentários, por favor cadastrar as informações pessoais!",
-                icon: "info"
-            })
-        }
-    };
-
-
     function gravar_comentario(){
         
         var comentario = $("#comentario").val();
