@@ -43,6 +43,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard')->middleware('role:prestador,administrador');
 
+
 Route::get('/dashboard/chat',[ChatController::class,'index'])->middleware(['auth'])->name('chat');
 
 //HOME

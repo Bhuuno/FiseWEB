@@ -7,8 +7,8 @@
 
         <div>    
             @if(isset(auth()->user()->id))
-                <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                    <img src="/icons/list.svg" class="icon-space d-flex">
+                <button class="btn  buttoncor" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                    <img src="/icons/list.svg" class="icon-space ">
                 </button>
             @endif
 
@@ -22,7 +22,7 @@
 
             
             <div class="container-fluid m-2">
-                <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
+                <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 menucor" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
                     <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-white text-decoration-none text-white">
                         <span class="fs-4">Menu</span>
                     </a>
@@ -35,7 +35,7 @@
                     </a>
 
                     <a href="/dashboard?id={{$id}}" class="nav-link link-dark text-white">
-                        <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Dashboard</li>
+                        <li class="d-flex"><img src="/icons/speedometer2.svg" class="icon-space">Dashboard</li>
                         <hr>
                     </a>
 

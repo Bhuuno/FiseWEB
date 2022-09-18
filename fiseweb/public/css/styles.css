@@ -2,6 +2,7 @@ body{
     /* background: -webkit-linear-gradient(-164deg, rgb(22, 135, 237), rgb(20, 55, 90)); */
     /* background: linear-gradient(-164deg, rgb(214, 236, 255), rgb(15, 104, 193)); */
     background-color: aliceblue;
+    
 
 
     /* background-image: url("/img/fundo.jpg");
@@ -34,4 +35,17 @@ nav.menu{
 
 .icon-space{
     margin-right: 6px;
+}
+.menucor{
+    
+    
+background: -webkit-linear-gradient(15deg, rgb(1, 56, 29), rgb(0, 43, 86));
+background: linear-gradient(15deg, rgb(1, 56, 29), rgb(0, 43, 86));
+
+
+}
+.buttoncor{
+    
+    background: rgb(1, 15, 71);
+
 }
