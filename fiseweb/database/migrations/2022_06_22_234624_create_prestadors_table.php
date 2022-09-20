@@ -32,8 +32,42 @@ return new class extends Migration
             $table->string('telefone','15');
             $table->string('endereco');
             $table->integer('numero');
+            $table->integer('status');
             $table->string('cidade');
             $table->string('cep',9);
+            $table->string('image')->nullable();
+
+            // Soft Skill
+            $table->string('primeiroSoftskill')->nullable();
+            $table->integer('porcentagemPrimeiroSoftskill')->nullable();
+            $table->string('segundoSoftskill')->nullable();
+            $table->integer('porcentagemSegundoSoftskill')->nullable();
+            $table->string('terceiroSoftskill')->nullable();
+            $table->integer('porcentagemTerceiroSoftskill')->nullable();
+            $table->string('quartoSoftskill')->nullable();
+            $table->integer('porcentagemQuartoSoftskill')->nullable();
+            $table->string('quintoSoftskill')->nullable();
+            $table->integer('porcentagemQuintoSoftskill')->nullable();
+
+            //Habilidade
+            $table->string('primeiroHabilidade')->nullable();
+            $table->integer('porcentagemPrimeiroHabilidade')->nullable();
+            $table->string('segundoHabilidade')->nullable();
+            $table->integer('porcentagemSegundoHabilidade')->nullable();
+            $table->string('terceiroHabilidade')->nullable();
+            $table->integer('porcentagemTerceiroHabilidade')->nullable();
+            $table->string('quartoHabilidade')->nullable();
+            $table->integer('porcentagemQuartoHabilidade')->nullable();
+            $table->string('quintoHabilidade')->nullable();
+            $table->integer('porcentagemQuintoHabilidade')->nullable();
+
+            // Redes Sociais
+            $table->text('website')->nullable();
+            $table->text('github')->nullable();
+            $table->text('twitter')->nullable();
+            $table->text('instagram')->nullable();
+            $table->text('facebook')->nullable();
+            
             $table->timestamps();
         });
     }
