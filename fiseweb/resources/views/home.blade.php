@@ -8,11 +8,11 @@
         <div>    
             @if(isset(auth()->user()->id))
                 <button class="btn  buttoncor" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                    <img src="/icons/list.svg" class="icon-space ">
+                    <img class="img-button" src="/icons/list.svg" class="icon-space ">
                 </button>
             @endif
 
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3 title-blades">
                 HOME
             </h2>
         </div>
@@ -115,21 +115,21 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="/img/home1.png" class="d-block w-100" alt="...">
+                <img src="/img/home1.png" class="d-block img-carrousel" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                 <h5>First slide label</h5>
                     <p>Some representative placeholder content for the first slide.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img width="100%" height="20%" src="/img/home2.jpg" class="d-block w-100" alt="...">
+                <img  src="/img/home2.jpg" class="d-block img-carrousel" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Second slide label</h5>
                     <p>Some representative placeholder content for the second slide.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img height="100px"src="/img/home3.jpg" class="d-block w-100" alt="...">
+                <img src="/img/home3.jpg" class="img-carrousel d-block" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Third slide label</h5>
                     <p>Some representative placeholder content for the third slide.</p>
@@ -149,7 +149,7 @@
     <div id="search-container" class="col-md-7 container">
         <h2 style="text-align:center">Busque um Prestador</h2>
         <form action="/" method="GET">
-            <input type="text" id="search" name="search" class="form-control" placeholder="Procurar...">
+            <input type="text" id="search" name="search" class="form-control" placeholder="Procurar..."> <img src="">
         </form>
     </div>
     <div class="py-12">
@@ -158,7 +158,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="container p-2">
                         @if($search)
-                            <h2>Buscando por: {{$search}}</h2>
+                            <h2 class="font-semibold ">Buscando por: <i>"{{$search}}"</i></h2><br>
                         @endif
                         @foreach ($prestadores as $prestador)
                         <div class="card mb-1">
@@ -198,55 +198,9 @@
     </div>
     <div class="container">
     <footer class="py-2">
-        <div class="row">
-        <div class="col-2">
-            <h5>Section</h5>
-            <ul class="nav flex-column">
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-            </ul>
-        </div>
-
-        <div class="col-2">
-            <h5>Section</h5>
-            <ul class="nav flex-column">
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-            </ul>
-        </div>
-
-        <div class="col-2">
-            <h5>Section</h5>
-            <ul class="nav flex-column">
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-            </ul>
-        </div>
-
-        <div class="col-4 offset-1">
-            <form>
-            <h5>Subscribe to our newsletter</h5>
-            <p>Monthly digest of whats new and exciting from us.</p>
-            <div class="d-flex w-100 gap-2">
-                <label for="newsletter1" class="visually-hidden">Email address</label>
-                <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                <button class="btn btn-primary" type="button">Subscribe</button>
-            </div>
-            </form>
-        </div>
-        </div>
-
+        
         <div class="d-flex justify-content-between py-4 my-4 border-top">
-        <p>© 2021 Company, Inc. All rights reserved.</p>
+        <p>© 2022 Company, Inc. All rights reserved.</p>
         <ul class="list-unstyled d-flex">
             <li class="ms-3"><a class="link-dark" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
