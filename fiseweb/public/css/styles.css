@@ -49,3 +49,32 @@ background: linear-gradient(15deg, rgb(1, 56, 29), rgb(0, 43, 86));
     background: rgb(1, 15, 71);
 
 }
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    margin: 0px;
+    padding: 0px;
+    grid-template-rows: 2fr 96fr 2fr;
+    grid-template-areas: "h h h"
+                         "a m m"
+                         "f f f"
+}
+
+.grid-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card-main{
+    display: block;
+    margin: 0 auto;
+}
+
+.custom-card {
+    padding: 0 15px;
+    margin: 10px -15px;
+    max-width: 385px;
+    width: 100%;
+    box-sizing: border-box;
+}
