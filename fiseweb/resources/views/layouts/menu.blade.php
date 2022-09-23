@@ -3,7 +3,7 @@
 ?>
 
 <div class="container-fluid m-2">
-    <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
+    <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 menucor" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
     
         <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-white text-decoration-none text-white">
             <span class="fs-4">Menu</span>
