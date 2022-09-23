@@ -29,7 +29,7 @@ class HomeController extends Controller
                 ->orwhere([['especialidade','like', '%'.$search.'%']])
                 ->orwhere([['prestadors.cidade','like', '%'.$search.'%']])
                 ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
-                ->select('prestadors.user_id','pessoas.nome','pessoas.image','prestadors.celular','prestadors.profissao','prestadors.experiencia','prestadors.created_at',
+                ->select('prestadors.user_id','pessoas.nome','prestadors.image','prestadors.celular','prestadors.profissao','prestadors.experiencia','prestadors.created_at',
                         'prestadors.especialidade','prestadors.celular','prestadors.id', 'prestadors.cidade')
                 ->orderBy('nome')
                 ->paginate();
@@ -40,10 +40,10 @@ class HomeController extends Controller
 
             $prestadores = DB::table('prestadors')
             ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
-            ->select('prestadors.user_id','pessoas.nome','pessoas.image','prestadors.celular','prestadors.profissao','prestadors.created_at',
+            ->select('prestadors.user_id','pessoas.nome','prestadors.image','prestadors.celular','prestadors.profissao','prestadors.created_at',
                     'prestadors.especialidade','prestadors.celular','prestadors.experiencia','prestadors.id','prestadors.cidade')
             ->orderBy('nome')
-            ->paginate(2);
+            ->paginate(5);
 
         }   
         return view('home',compact('prestadores','search'));

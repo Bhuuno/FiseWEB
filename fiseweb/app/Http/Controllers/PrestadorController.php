@@ -33,6 +33,9 @@ class PrestadorController extends Controller
 
             $request["status"] = 1;
 
+            $dados = $request
+                ->only($prestadors->getFillable());
+
             //CRIA NOME CRIPTOGRAFIA PARA IMAGEM
             if($request->hasFile('image') && $request->file('image')->isValid()){
                 $requestImage = $request->image;
@@ -41,11 +44,10 @@ class PrestadorController extends Controller
                 $requestImage->move(public_path('img/fotos_perfil'), $imageName);
 
                 // TEM QUE COLOCAR O NOME DA IMAGEM ASSIM NO BANCO
-                $request["image"] =  $imageName;
+                $dados["image"] =  $imageName;
             }
 
-            $dados = $request
-                ->only($prestadors->getFillable());
+            // Grava dados na tabela
             Prestador::create($dados);
 
             // Perquisa o nivel do usuário
@@ -69,6 +71,10 @@ class PrestadorController extends Controller
         $id = auth()->user()->id;
         try{
             
+            $prestador = new Prestador();
+            
+            $dados = $request->only($prestador->getFillable());
+            
             //CRIA NOME CRIPTOGRAFIA PARA IMAGEM
             if($request->hasFile('image') && $request->file('image')->isValid()){
                 $requestImage = $request->image;
@@ -77,17 +83,13 @@ class PrestadorController extends Controller
                 $requestImage->move(public_path('img/fotos_perfil'), $imageName);
 
                 // TEM QUE COLOCAR O NOME DA IMAGEM ASSIM NO BANCO
-                $request["image"] =  $imageName;
-
+                $dados["image"] =  $imageName;
             }
 
-            $request["status"] = 1;
+            //atualiza tabela
+            Prestador::where('user_id',$id)->update($dados);
 
-            $pessoas = new Prestador();
 
-            $dados = $request->only($pessoas->getFillable());
-
-            Prestador::whereId($id)->update($dados);
             return redirect("/perfil?id=$id") -> with('msg',"cadastro alterado");
 
         } catch (\Exception $e){
@@ -103,10 +105,8 @@ class PrestadorController extends Controller
         $prestador=DB::table('prestadors')
         ->where([['prestadors.user_id', $id]])
         ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
-        ->select('pessoas.nome','pessoas.email','pessoas.image','prestadors.celular','prestadors.profissao','prestadors.experiencia','prestadors.created_at',
-                'prestadors.especialidade','prestadors.celular','prestadors.informacao','prestadors.sobre','prestadors.razao_social','prestadors.telefone'
-                ,'prestadors.endereco','prestadors.user_id')
+        ->select('pessoas.*','prestadors.*')
         ->get();
-        return view('prestador.perfil',compact('prestador'));
+        return view('prestador.perfil',compact('prestador','id'));
     }
 }

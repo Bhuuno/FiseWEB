@@ -21,12 +21,11 @@ class AvaliacaoController extends Controller
         //pega o nivel do usuário
         $role = auth()->user()->role;
 
-        
-        $perfil=DB::select("SELECT ps.nome as nome_prestador,
-        pr.profissao as profissao, ps.image as imagem
+        $perfil=DB::select("SELECT pr.*, ps.nome as nome_prestador,
+        pr.profissao as profissao, pr.image as imagem
         FROM prestadors as pr 
         INNER JOIN pessoas as ps on ps.id = pr.id
-        WHERE pr.id = $id");
+        WHERE pr.user_id = $id");
 
         $comentario=DB::select("
         SELECT p.nome as nome_cliente, a.comentario as comentario, ps.nome as nome_prestador,
