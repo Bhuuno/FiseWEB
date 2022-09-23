@@ -4,9 +4,9 @@
 <script src="{{ asset('chats/Chart.js') }}"></script>   
 <x-app-layout>
     <x-slot name="header">
-        <button class="btn btn-dark p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-            <img src="/icons/list.svg" class="icon-space d-flex">  
-        </button>        
+        <button class="btn buttoncor" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <img src="/icons/list.svg" class="img-button">  
+        </button>         
         <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
             DASHBOARD
         </h2>
