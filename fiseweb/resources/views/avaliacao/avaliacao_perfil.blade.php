@@ -134,11 +134,14 @@
                         </div>
                     
                         <div class="col-sm-9">
-                            <div class="card" style="height:410px;">
+                            <div class="card" style="height:410px; overflow:auto; ">
                                 <div class="card-body">
                                 @if(!empty($comentario))
                                     @foreach ($comentario as $item)
-                                        <p>{{$item->nome_cliente}} - {{date('d/m/Y', strtotime($item->created_at));}}</p>
+                                        <div style="display: flex;">
+                                            <img src="/img/fotos_perfil/{{$item->imagem}}" style="border-radius: 50%;" width="4%" height="4%" alt="">
+                                            <p>{{$item->nome_cliente}} - {{date('d/m/Y', strtotime($item->created_at));}}</p>
+                                        </div>  
                                         <div class="col-sm-7 text-secondary">
                                             {{$item->comentario}}
                                             <br>
@@ -204,7 +207,7 @@
                 url: '/gravar/comentario',
                 type: 'get',
                 data: {
-                    id:id,
+                    id_prestador:id,
                     comentario:comentario,
                     nota:nota
                 },
@@ -212,7 +215,7 @@
                     document.location.reload(true);
                 },
                 error: function( request, status, error ) {
-                    console.log(request,status,error);
+                    console.log(error);
                 }
                 
         });

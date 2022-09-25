@@ -18,25 +18,35 @@ class AvaliacaoController extends Controller
      */
     public function index($id)
     {
+
         //pega o nivel do usuário
         $role = auth()->user()->role;
 
         $perfil=DB::select("SELECT pr.*, ps.nome as nome_prestador,
         pr.profissao as profissao, pr.image as imagem
         FROM prestadors as pr 
-        INNER JOIN pessoas as ps on ps.id = pr.id
+        INNER JOIN pessoas as ps on ps.user_id = pr.user_id
         WHERE pr.user_id = $id");
 
-        $comentario=DB::select("
-        SELECT p.nome as nome_cliente, a.comentario as comentario, ps.nome as nome_prestador,
-         pr.profissao as profissao, a.avaliacao as avaliacao, ps.image as imagem, a.created_at,
-         a.avaliacao
-        FROM `avaliacaos` as a 
-        INNER JOIN pessoas as p on p.id = a.pessoa_id
-        INNER JOIN prestadors as pr on pr.id = a.prestador_id
-        INNER JOIN pessoas as ps on ps.id = pr.id
-        WHERE a.prestador_id = $id
-        ORDER by created_at DESC");
+
+        $comentario=DB::select("SELECT a.*, p.nome as nome_cliente, p.image as imagem
+        FROM prestadors as pr
+        INNER JOIN avaliacaos AS a ON a.prestador_id = pr.id
+        INNER JOIN pessoas AS p ON p.id = a.pessoa_id
+        WHERE pr.user_id = $id
+        ORDER by a.created_at desc");    
+
+        //esse esta errado tem que verificar
+        // $comentario=DB::select("
+        // SELECT p.nome as nome_cliente, a.comentario as comentario, ps.nome as nome_prestador,
+        //  pr.profissao as profissao, a.avaliacao as avaliacao, ps.image as imagem, a.created_at,
+        //  a.avaliacao
+        // FROM `avaliacaos` as a 
+        // INNER JOIN pessoas as p on p.id = a.pessoa_id
+        // INNER JOIN prestadors as pr on pr.id = a.prestador_id
+        // INNER JOIN pessoas as ps on ps.id = pr.id
+        // WHERE a.user_id  = 3
+        // ORDER by created_at DESC");
         
         return view('avaliacao.avaliacao_perfil',compact('perfil','comentario','id','role'));
     }
@@ -61,13 +71,16 @@ class AvaliacaoController extends Controller
     {
         //PEGA O ID DO LOGIN DO CLIENTE E BUSCA O ID DO PERFIL
         $user = auth()->user()->id;
-        $id_pessoa = DB::select("SELECT id as id from pessoas WHERE user_id = $user");
+        $id = $_GET['id_prestador'];
 
-        //GRAVA O COMENTARIO NA TABELA DE DADOS "AVALIACAOS"
+        $id_pessoa = DB::select("SELECT id as id from pessoas WHERE user_id = $user");
+        $id_prestador = DB::select("SELECT id as id from prestadors WHERE user_id = $id");
+
+        // GRAVA O COMENTARIO NA TABELA DE DADOS "AVALIACAOS"
         $avaliacao_prestador = new ModelAvaliacao(); 
         $avaliacao_prestador->pessoa_id = $id_pessoa[0]->id;
-        $avaliacao_prestador->prestador_id = $_GET['id'];
-        $avaliacao_prestador->comentario = $_GET['comentario'];
+        $avaliacao_prestador->prestador_id = $id_prestador[0]->id;
+        $avaliacao_prestador->comentario = strval($_GET['comentario']);
         $avaliacao_prestador->avaliacao = $_GET['nota'];
 
         $avaliacao_prestador->save();
@@ -119,13 +132,17 @@ class AvaliacaoController extends Controller
     }
     public function media()
     {
-        $id_prestador = $_GET['id'];
+        //PEGA O ID POR GET
+        $id = $_GET['id'];
 
+        //CALCULA A MEDIA
         $media=DB::select("SELECT 
             sum(avaliacao) as total_nota, 
             COUNT(avaliacao) as qtde_avaliacao 
-        FROM `avaliacaos` 
-        WHERE prestador_id = '$id_prestador'");
+        FROM 
+            `avaliacaos` 
+        WHERE 
+            prestador_id = (SELECT id from prestadors WHERE user_id = '$id')");
 
         return json_encode($media);
     }

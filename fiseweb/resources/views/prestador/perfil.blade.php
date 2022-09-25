@@ -24,8 +24,10 @@
                                     <h4>{{$prestador[0]->nome}}</h4>
                                     <h6>{{strtoupper($prestador[0]->profissao)}}</h6>
                                     <div style="display: flex; justify-content:center;" >   
-                                        <p id="media">0</p>
-                                        <img style="height: fit-content; padding: 2px;"width="25px" src="/img/star1.png">
+                                    <p id="media">0</p>
+                                        <a href="/dashboard/avaliacao/{{$id}}?id=${{$id}}">
+                                            <img style="height: fit-content; padding: 2px;"width="25px" src="/img/star1.png">
+                                        </a>
                                     </div>
                                 </div>
                             </div>
