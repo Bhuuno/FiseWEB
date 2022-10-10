@@ -25,7 +25,7 @@
                                     <h6>{{strtoupper($prestador[0]->profissao)}}</h6>
                                     <div style="display: flex; justify-content:center;" >   
                                     <p id="media">0</p>
-                                        <a href="/dashboard/avaliacao/{{$id}}?id=${{$id}}">
+                                        <a href="/dashboard/avaliacao/{{$id}}?id={{$id}}">
                                             <img style="height: fit-content; padding: 2px;"width="25px" src="/img/star1.png">
                                         </a>
                                     </div>
@@ -126,7 +126,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="row">
+                            <div class="row" style="height: 36px;">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Endereço</h6>
                                 </div>
@@ -281,8 +281,6 @@
                     resposta = JSON.parse(result);
 
                     media = resposta[0].total_nota / resposta[0].qtde_avaliacao;
-
-                    console.log(media);
 
                     //ALETRA O VALOR DA MEDIA
                     if(resposta[0].total_nota != null)
