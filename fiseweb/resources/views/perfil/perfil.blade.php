@@ -162,6 +162,7 @@
                 </div>  
             </div>
         @else
+        <!-- ATUALIZAR PESSOA -->
             <div class="content">
                 <div class="container-fluid rounded bg-white mt-5 mb-5">
                     <div class="row">
@@ -246,6 +247,8 @@
                 </div>  
             </div>
         @endif
+        
+        <?php //var_dump($prestador) ?>
         @if(!isset($prestador))
             <div class="content">
                 <div class="container-fluid rounded bg-white mt-5 mb-5">
@@ -254,12 +257,18 @@
                             <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
                         </div>
                         <div class="col-md-9 border-right">
-                            <form action="{{route('prestador.store')}}" method="post">
+                            <form action="{{route('prestador.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf 
                                 <div class="p-3 py-5">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h4 class="text-right"><kbd>Cadastrar</kbd> - Dados Perfil Prestador</h4>
                                     </div>
+                                    
+                                    <div class="row mt-2">
+                                        <label for="image">Imagem de perfil: </label>
+                                        <input type="file" class="form-control-file" id="image" name="image">
+                                    </div>
+                                    <hr>
                                     <div class="row mt-2">
                                         <div class="col-md-6">
                                             <label for="razao_social" class="labels">Razão Social</label>
@@ -313,8 +322,102 @@
                                             <label for="especialidade" class="labels">Especialidade</label>
                                             <input type="text" class="form-control especialidade" name="especialidade" id="especialidade" placeholder="Construção Civil">
                                         </div>
-                                        
                                     </div>
+                                    <!-- REDES SOCIAIS -->
+                                    <hr>
+                                    <h5><kbd>Redes Sociais</kbd></h5>
+                                    <div class="row mt-3">
+                                        <div class="col-md-4">
+                                            <label for="website" class="labels">Website</label>
+                                            <input type="text" class="form-control website" name="website" id="website">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="github" class="labels">Github</label>
+                                            <input type="text" class="form-control telefone" name="github" id="github">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="twitter" class="labels">Twitter</label>
+                                            <input type="text" class="form-control" name="twitter" id="twitter">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="instagram" class="labels">Instagram</label>
+                                            <input type="text" class="form-control profissao" name="instagram" id="instagram">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="facebook" class="labels">Facebook</label>
+                                            <input type="text" class="form-control especialidade" name="facebook" id="facebook">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h5><kbd>Soft Skill</kbd></h5>
+                                    <div class="mt-3">
+                                        <div class="inline">
+                                            <label class="col-4" for="primeiroSoftskill" class="labels">1°</label>
+                                            <label class="col-4" for="porcentagemPrimeiroSoftskill" class="labels">Porcentagem 1º Soft Skill</label>
+                                            <input class="col-4" type="text" class="form-control website" placeholder="Ex: Criatividade" name="primeiroSoftskill" id="primeiroSoftskill">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="100" name="porcentagemPrimeiroSoftskill" id="porcentagemPrimeiroSoftskill">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="segundoSoftskill" class="labels">2°</label>
+                                            <label class="col-4" for="porcentagemSegundoSoftskill" class="labels">Porcentagem 2º Soft Skill</label>
+                                            <input class="col-4" type="text" class="form-control website" placeholder="Ex: Liderança" name="segundoSoftskill" id="segundoSoftskill">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="100" name="porcentagemSegundoSoftskill" id="porcentagemSegundoSoftskill">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="terceiroSoftskill" class="labels">3°</label>
+                                            <label class="col-4" for="porcentagemTerceiroSoftskill" class="labels">Porcentagem 3º Soft Skill</label>
+                                            <input class="col-4" type="text" class="form-control website" placeholder="Ex: Sociabilidade" name="terceiroSoftskill" id="terceiroSoftskill">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="100" name="porcentagemTerceiroSoftskill" id="porcentagemTerceiroSoftskill">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="quartoSoftskill" class="labels">4°</label>
+                                            <label class="col-4" for="porcentagemQuartoSoftskill" class="labels">Porcentagem 4º Soft Skill</label>
+                                            <input class="col-4" type="text" class="form-control website" placeholder="Ex: Trabalho em equipe" name="quartoSoftskill" id="quarto-softskill">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="100" name="porcentagemQuartoSoftskill" id="porcentagemQuartoSoftskill">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="quintoSoftskill" class="labels">5°</label>
+                                            <label class="col-4" for="porcentagemQuintoSoftskill" class="labels">Porcentagem 5º Soft Skill</label>
+                                            <input class="col-4" type="text" class="form-control website" placeholder="Ex: Comunicação" name="quintoSoftskill" id="quinto-softskill">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="100" name="porcentagemQuintoSoftskill" id="porcentagemQuintoSoftskill">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h5><kbd>Habilidades</kbd></h5>
+                                    <div class="mt-3">
+                                        <div class="inline">
+                                            <label class="col-4" for="primeiroHabilidade" class="labels">1°</label>
+                                            <label class="col-4" for="porcentagemPrimeiroHabilidade" class="labels">Porcentagem 1º Habilidade</label>
+                                            <input class="col-4" type="text" class="form-control website" placeholder="Ex: HTML / CSS" name="primeiroHabilidade" id="primeiroHabilidade">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="100" name="porcentagemPrimeiroHabilidade" id="porcentagemPrimeiroHabilidade">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="segundoHabilidade" class="labels">2°</label>
+                                            <label class="col-4" for="porcentagemSegundoHabilidade" class="labels">Porcentagem 2º Habilidade</label>
+                                            <input class="col-4" type="text" class="form-control website" placeholder="Ex: HTML / CSS" name="segundoHabilidade" id="segundoHabilidade">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="100" name="porcentagemSegundoHabilidade" id="porcentagemSegundoHabilidade">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="terceiroHabilidade" class="labels">3°</label>
+                                            <label class="col-4" for="porcentagemTerceiroHabilidade" class="labels">Porcentagem 3º Habilidade</label>
+                                            <input class="col-4" type="text" class="form-control website" placeholder="Ex: HTML / CSS" name="terceiroHabilidade" id="terceiroHabilidade">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="100" name="porcentagemTerceiroHabilidade" id="porcentagemTerceiroHabilidade">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="quartoHabilidade" class="labels">4°</label>
+                                            <label class="col-4" for="porcentagemQuartoHabilidade" class="labels">Porcentagem 4º Habilidade</label>
+                                            <input class="col-4" type="text" class="form-control website" placeholder="Ex: HTML / CSS" name="quartoHabilidade" id="quartoHabilidade">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="100" name="porcentagemQuartoHabilidade" id="porcentagemQuartoHabilidade">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="quintoHabilidade" class="labels">5°</label>
+                                            <label class="col-4" for="porcentagemQuintoHabilidade" class="labels">Porcentagem 5º Habilidade</label>
+                                            <input class="col-4" type="text" class="form-control website" placeholder="Ex: HTML / CSS" name="quintoHabilidade" id="quintoHabilidade">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="100" name="porcentagemQuintoHabilidade" id="porcentagemQuintoHabilidade">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h5><kbd>Sobre Você</kbd></h5>
                                     <div class="row mt-3">
                                         <div class="col-md-4">
                                             <label for="informacao" class="labels">Informações</label>
@@ -328,7 +431,6 @@
                                             <label for="experiencia" class="labels">Experiência</label>
                                             <textarea rows="2" type="text" class="form-control experiencia" name="experiencia" id="experiencia"></textarea>
                                         </div>
-
                                     </div>
                                     <div class="mt-5 text-center"><button class="btn btn-success profile-button" type="submit">Salvar!</button></div>
                                 </div>
@@ -342,16 +444,21 @@
                 <div class="container-fluid rounded bg-white mt-5 mb-5">
                     <div class="row">
                         <div class="col-md-3 border-right">
-                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{$prestador->razao_social}}</span><span class="text-black-50">{{$prestador->email}}</span><span> </span></div>
+                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="/img/fotos_perfil/{{$prestador->image}}"><span class="font-weight-bold">{{$prestador->razao_social}}</span><span class="text-black-50">{{$prestador->email}}</span><span> </span></div>
                         </div>
                         <div class="col-md-9 border-right">
-                            <form action="{{route('prestador.update','$cadastro->user_id')}}" method="post">
+                            <form action="{{route('prestador.update','$cadastro->user_id')}}" method="post" enctype="multipart/form-data">
                                 @csrf 
                                 @method('PATCH')
                                 <div class="p-3 py-5">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h4 class="text-right"><kbd>Atualizar</kbd> - Dados Perfil Prestador</h4>
                                     </div>
+                                    <div class="row mt-2">
+                                        <label for="image">Imagem de perfil: </label>
+                                        <input type="file" class="form-control-file" id="image" name="image">
+                                    </div>
+                                    <hr>
                                     <div class="row mt-2">
                                         <div class="col-md-6">
                                             <label for="razao_social" class="labels">Razão Social</label>
@@ -407,6 +514,103 @@
                                         </div>
                                         
                                     </div>
+                                    <!-- REDES SOCIAIS -->
+                                    <hr>
+                                    <h5><kbd>Redes Sociais</kbd></h5>
+                                    <div class="row mt-3">
+                                        <div class="col-md-4">
+                                            <label for="website" class="labels">Website</label>
+                                            <input type="text" class="form-control website" name="website" value="{{$prestador->website}}" id="website">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="github" class="labels">Github</label>
+                                            <input type="text" class="form-control telefone" name="github" value="{{$prestador->github}}" id="github">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="twitter" class="labels">Twitter</label>
+                                            <input type="text" class="form-control" name="twitter" value="{{$prestador->twitter}}" id="twitter">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="instagram" class="labels">Instagram</label>
+                                            <input type="text" class="form-control profissao" name="instagram" value="{{$prestador->instagram}}" id="instagram">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="facebook" class="labels">Facebook</label>
+                                            <input type="text" class="form-control especialidade" name="facebook" value="{{$prestador->facebook}}" id="facebook">
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <?php //var_dump($prestador) ?>
+                                    <h5><kbd>Soft Skill</kbd></h5>
+                                    <div class="mt-3">
+                                        <div class="inline">
+                                            <label class="col-4" for="primeiroSoftskill" class="labels">1°</label>
+                                            <label class="col-4" for="porcentagemPrimeiroSoftskill" class="labels">Porcentagem 1º Soft Skill</label>
+                                            <input class="col-4" type="text" value="{{$prestador->primeiroSoftskill}}" class="form-control website" name="primeiroSoftskill" id="primeiroSoftskill">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" value="{{$prestador->porcentagemPrimeiroSoftskill}}" class="form-control website" name="porcentagemPrimeiroSoftskill" id="porcentagemPrimeiroSoftskill">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="segundoSoftskill" class="labels">2°</label>
+                                            <label class="col-4" for="porcentagemSegundoSoftskill" class="labels">Porcentagem 2º Soft Skill</label>
+                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->segundoSoftskill}}" name="segundoSoftskill" id="segundoSoftskill">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" value="{{$prestador->porcentagemSegundoSoftskill}}" class="form-control website" name="porcentagemSegundoSoftskill" id="porcentagemSegundoSoftskill">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="terceiroSoftskill" class="labels">3°</label>
+                                            <label class="col-4" for="porcentagemTerceiroSoftskill" class="labels">Porcentagem 3º Soft Skill</label>
+                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->terceiroSoftskill}}" name="terceiroSoftskill" id="terceiroSoftskill">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemTerceiroSoftskill}}" name="porcentagemTerceiroSoftskill" id="porcentagemTerceiroSoftskill">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="quartoSoftskill" class="labels">4°</label>
+                                            <label class="col-4" for="porcentagemQuartoSoftskill" class="labels">Porcentagem 4º Soft Skill</label>
+                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->quartoSoftskill}}" name="quartoSoftskill" id="quarto-softskill">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemQuartoSoftskill}}" name="porcentagemQuartoSoftskill" id="porcentagemQuartoSoftskill">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="quintoSoftskill" class="labels">5°</label>
+                                            <label class="col-4" for="porcentagemQuintoSoftskill" class="labels">Porcentagem 5º Soft Skill</label>
+                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->quintoSoftskill}}" name="quintoSoftskill" id="quintoSoftskill">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemQuintoSoftskill}}" name="porcentagemQuintoSoftskill" id="porcentagemQuintoSoftskill">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h5><kbd>Habilidades</kbd></h5>
+                                    <div class="mt-3">
+                                        <div class="inline">
+                                            <label class="col-4" for="primeiroHabilidade" class="labels">1°</label>
+                                            <label class="col-4" for="porcentagemPrimeiroHabilidade" class="labels">Porcentagem 1º Habilidade</label>
+                                            <input class="col-4" type="text" value="{{$prestador->primeiroHabilidade}}" class="form-control website" name="primeiroHabilidade" id="primeiroHabilidade">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemPrimeiroHabilidade}}" name="porcentagemPrimeiroHabilidade" id="porcentagemPrimeiroHabilidade">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="segundoHabilidade" class="labels">2°</label>
+                                            <label class="col-4" for="porcentagemSegundoHabilidade" class="labels">Porcentagem 2º Habilidade</label>
+                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->segundoHabilidade}}" name="segundoHabilidade" id="segundoHabilidade">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemSegundoHabilidade}}" name="porcentagemSegundoHabilidade" id="porcentagemSegundoHabilidade">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="terceiroHabilidade" class="labels">3°</label>
+                                            <label class="col-4" for="porcentagemTerceiroHabilidade" class="labels">Porcentagem 3º Habilidade</label>
+                                            <input class="col-4" type="text" class="form-control website"  value="{{$prestador->terceiroHabilidade}}" name="terceiroHabilidade" id="terceiroHabilidade">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemTerceiroHabilidade}}" name="porcentagemTerceiroHabilidade" id="porcentagem-terceiro-habilidade">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="quartoHabilidade" class="labels">4°</label>
+                                            <label class="col-4" for="porcentagemQuartoHabilidade" class="labels">Porcentagem 4º Habilidade</label>
+                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->quartoHabilidade}}" name="quartoHabilidade" id="quartoHabilidade">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website"  value="{{$prestador->porcentagemQuartoHabilidade}}" name="porcentagemQuartoHabilidade" id="porcentagemQuartoHabilidade">
+                                        </div>
+                                        <div class="inline">
+                                            <label class="col-4" for="quintoHabilidade" class="labels">5°</label>
+                                            <label class="col-4" for="porcentagemQuintoHabilidade" class="labels">Porcentagem 5º Habilidade</label>
+                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->quintoHabilidade}}" name="quintoHabilidade" id="quintoHabilidade">
+                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemQuintoHabilidade}}" name="porcentagemQuintoHabilidade" id="porcentagemQuintoHabilidade">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h5><kbd>Sobre Você</kbd></h5>
                                     <div class="row mt-3">
                                         <div class="col-md-4">
                                             <label for="informacao" class="labels">Informações</label>

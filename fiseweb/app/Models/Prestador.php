@@ -30,6 +30,39 @@ class Prestador extends Model
         'numero',
         'cidade',
         'cep',
+        'status',
+        'image',
+
+        // Redes Sociais
+        'website',
+        'github',
+        'instagram',
+        'twitter',
+        'facebook',
+
+        // SOFTSKILL
+        'primeiroSoftskill',
+        'segundoSoftskill',
+        'terceiroSoftskill',
+        'quartoSoftskill',
+        'quintoSoftskill',
+        'porcentagemPrimeiroSoftskill',
+        'porcentagemSegundoSoftskill',
+        'porcentagemTerceiroSoftskill',
+        'porcentagemQuartoSoftskill',
+        'porcentagemQuintoSoftskill',
+
+        // Habilidade
+        'primeiroHabilidade',
+        'segundoHabilidade',
+        'terceiroHabilidade',
+        'quartoHabilidade',
+        'quintoHabilidade',
+        'porcentagemPrimeiroHabilidade',
+        'porcentagemSegundoHabilidade',
+        'porcentagemTerceiroHabilidade',
+        'porcentagemQuartoHabilidade',
+        'porcentagemQuintoHabilidade',
         ];
         public function user(){
             return $this->belongsTo(Users::class);

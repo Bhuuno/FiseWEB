@@ -31,10 +31,24 @@ class PrestadorController extends Controller
             // INSERE O ID DO USUÁRIO NA CHAVE ESTRANGEIRA
             $request["user_id"] = auth()->user()->id;
 
+            $request["status"] = 1;
+
             $dados = $request
                 ->only($prestadors->getFillable());
+
+            //CRIA NOME CRIPTOGRAFIA PARA IMAGEM
+            if($request->hasFile('image') && $request->file('image')->isValid()){
+                $requestImage = $request->image;
+                $extension = $requestImage -> extension();
+                $imageName = md5($requestImage -> getClientOriginalName() . strtotime("now") . "." . $extension);
+                $requestImage->move(public_path('img/fotos_perfil'), $imageName);
+
+                // TEM QUE COLOCAR O NOME DA IMAGEM ASSIM NO BANCO
+                $dados["image"] =  $imageName;
+            }
+
+            // Grava dados na tabela
             Prestador::create($dados);
-            //return redirect()->action([PessoaController::class,'create']);
 
             // Perquisa o nivel do usuário
             $nivel = DB::select("SELECT * FROM users WHERE id = $id");
@@ -43,26 +57,46 @@ class PrestadorController extends Controller
             if($nivel[0]->role == 'pessoal')
                 DB::select("UPDATE users set role = 'prestador' WHERE id = $id");
 
-            return redirect("/perfil?id=$id") -> with('msg','Cadastro Prestador criado com sucesso!');
+            return redirect("/perfil?id=$id") -> with('msg',"cadastro criado");
         }
         catch(\Exception $e){
-            echo"Erro ao inserir! $e";
+
+            // CASO ESTEJA PROCURANDO ERRO USE O EXEMPLO ABAIXO
+            // echo("Erro: $e");
+            return redirect("/perfil?id=$id") -> with('msg',"erro");
         }
     }
     public function update(Request $request)
     {
         $id = auth()->user()->id;
         try{
-            $pessoas = new Prestador();
-            $dados = $request->only($pessoas->getFillable());
-            Prestador::whereId($id)->update($dados);
-            return redirect("/perfil?id=$id") -> with('msg',"Cadastro Prestador Alterado com sucesso!");
-            // return redirect()->action([ProdutoController::class, "index"])
-            //     ->with("resposta", "Registro alterado");
+            
+            $prestador = new Prestador();
+            
+            $dados = $request->only($prestador->getFillable());
+            
+            //CRIA NOME CRIPTOGRAFIA PARA IMAGEM
+            if($request->hasFile('image') && $request->file('image')->isValid()){
+                $requestImage = $request->image;
+                $extension = $requestImage -> extension();
+                $imageName = md5($requestImage -> getClientOriginalName() . strtotime("now") . "." . $extension);
+                $requestImage->move(public_path('img/fotos_perfil'), $imageName);
+
+                // TEM QUE COLOCAR O NOME DA IMAGEM ASSIM NO BANCO
+                $dados["image"] =  $imageName;
+            }
+
+            //atualiza tabela
+            Prestador::where('user_id',$id)->update($dados);
+
+
+            return redirect("/perfil?id=$id") -> with('msg',"cadastro alterado");
+
         } catch (\Exception $e){
-            // return redirect()->action([ProdutoController::class, "index"])
-            //     ->with("resposta", "Erro ao alterar");
-            return redirect("/perfil?id=$id") -> with('msg',"Erro ao alterar cadastro Prestador! $e");
+
+            // CASO ESTEJA PROCURANDO ERRO USE O EXEMPLO ABAIXO
+            // echo("Erro: $e");
+            return redirect("/perfil?id=$id") -> with('msg',"erro");
         }
     }
     // RETORNA AS INFORMAÇÕES NA TELA
@@ -71,10 +105,8 @@ class PrestadorController extends Controller
         $prestador=DB::table('prestadors')
         ->where([['prestadors.user_id', $id]])
         ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
-        ->select('pessoas.nome','pessoas.email','pessoas.image','prestadors.celular','prestadors.profissao','prestadors.experiencia','prestadors.created_at',
-                'prestadors.especialidade','prestadors.celular','prestadors.informacao','prestadors.sobre','prestadors.razao_social','prestadors.telefone'
-                ,'prestadors.endereco','prestadors.user_id')
+        ->select('pessoas.*','prestadors.*')
         ->get();
-        return view('prestador.perfil',compact('prestador'));
+        return view('prestador.perfil',compact('prestador','id'));
     }
 }

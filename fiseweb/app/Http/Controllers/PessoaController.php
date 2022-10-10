@@ -94,7 +94,7 @@ class PessoaController extends Controller
                 $dados["image"] =  $imageName;
             }
 
-            Pessoa::whereId($id)->update($dados);
+            Pessoa::where('user_id',$id)->update($dados);
             return redirect("/perfil?id=$id") -> with('msg',"cadastro alterado");
 
         } catch (\Exception $e){

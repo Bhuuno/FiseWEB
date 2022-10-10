@@ -23,7 +23,12 @@
                                 <div class="mt-3">
                                     <h4>{{$prestador[0]->nome}}</h4>
                                     <h6>{{strtoupper($prestador[0]->profissao)}}</h6>
-                                    <p class="text-secondary mb-1">Avaliações</p>
+                                    <div style="display: flex; justify-content:center;" >   
+                                    <p id="media">0</p>
+                                        <a href="/dashboard/avaliacao/{{$id}}?id={{$id}}">
+                                            <img style="height: fit-content; padding: 2px;"width="25px" src="/img/star1.png">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +44,7 @@
                                 </svg>
                                 Website
                             </h6>
-                            <span class="text-secondary">https://bootdey.com</span>
+                            <span class="text-secondary">{{empty($prestador[0]->website) ? 'https://bootdey.com' : $prestador[0]->website}}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">
@@ -48,7 +53,7 @@
                                 </svg>
                                 Github
                             </h6>
-                            <span class="text-secondary">bootdey</span>
+                            <span class="text-secondary">{{empty($prestador[0]->github) ? 'bootdey' : $prestador[0]->github}}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">
@@ -57,7 +62,7 @@
                                 </svg>
                                 Twitter
                             </h6>
-                            <span class="text-secondary">@bootdey</span>
+                            <span class="text-secondary">{{empty($prestador[0]->twitter) ? '@bootdey' : $prestador[0]->twitter}}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">
@@ -68,7 +73,7 @@
                                 </svg>
                                 Instagram
                             </h6>
-                            <span class="text-secondary">bootdey</span>
+                            <span class="text-secondary">{{empty($prestador[0]->instagram) ? 'bootdey' : $prestador[0]->instagram}}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">
@@ -77,7 +82,7 @@
                                 </svg>
                                 Facebook
                             </h6>
-                            <span class="text-secondary">bootdey</span>
+                            <span class="text-secondary">{{empty($prestador[0]->facebook) ? 'bootdey' : $prestador[0]->facebook}}</span>
                         </li>
                         </ul>
                     </div>
@@ -121,7 +126,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="row">
+                            <div class="row" style="height: 36px;">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Endereço</h6>
                                 </div>
@@ -135,54 +140,74 @@
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                    <small>Web Design</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Website Markup</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>One Page</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Mobile Template</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Backend API</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">SOFT SKILL</i></h6>
+                                    @if(isset($prestador[0]->primeiroSoftskill))
+                                        <small>{{$prestador[0]->primeiroSoftskill}}</small>
+                                        <div class="progress mb-3" style="height: 5px">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{$prestador[0]->porcentagemPrimeiroSoftskill}}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    @endif
+                                    @if(isset($prestador[0]->segundoSoftskill))
+                                        <small>{{$prestador[0]->segundoSoftskill}}</small>
+                                        <div class="progress mb-3" style="height: 5px">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{$prestador[0]->porcentagemSegundoSoftskill}}%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    @endif
+                                    @if(isset($prestador[0]->terceiroSoftskill))
+                                        <small>{{$prestador[0]->terceiroSoftskill}}</small>
+                                        <div class="progress mb-3" style="height: 5px">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{$prestador[0]->porcentagemTerceiroSoftskill}}%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    @endif
+                                    @if(isset($prestador[0]->quartoSoftskill))
+                                        <small>{{$prestador[0]->quartoSoftskill}}</small>
+                                        <div class="progress mb-3" style="height: 5px">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{$prestador[0]->porcentagemQuartoSoftskill}}%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    @endif
+                                    @if(isset($prestador[0]->quintoSoftskill))
+                                        <small>{{$prestador[0]->quintoSoftskill}}</small>
+                                        <div class="progress mb-3" style="height: 5px">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{$prestador[0]->porcentagemQuintoSoftskill}}%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                    <small>Web Design</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Website Markup</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>One Page</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Mobile Template</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Backend API</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">HABILIDADES</i></h6>
+                                    @if(isset($prestador[0]->primeiroHabilidade))
+                                        <small>{{$prestador[0]->primeiroHabilidade}}</small>
+                                        <div class="progress mb-3" style="height: 5px">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{$prestador[0]->porcentagemPrimeiroHabilidade}}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    @endif
+                                    @if(isset($prestador[0]->segundoHabilidade))
+                                        <small>{{$prestador[0]->segundoHabilidade}}</small>
+                                        <div class="progress mb-3" style="height: 5px">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{$prestador[0]->porcentagemSegundoHabilidade}}%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    @endif
+                                    @if(isset($prestador[0]->terceiroHabilidade))
+                                        <small>{{$prestador[0]->terceiroHabilidade}}</small>
+                                        <div class="progress mb-3" style="height: 5px">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{$prestador[0]->porcentagemTerceiroHabilidade}}%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    @endif
+                                    @if(isset($prestador[0]->quartoHabilidade))
+                                        <small>{{$prestador[0]->quartoHabilidade}}</small>
+                                        <div class="progress mb-3" style="height: 5px">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{$prestador[0]->porcentagemQuartoHabilidade}}%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    @endif
+                                    @if(isset($prestador[0]->quintoHabilidade))
+                                        <small>{{$prestador[0]->quintoHabilidade}}</small>
+                                        <div class="progress mb-3" style="height: 5px">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{$prestador[0]->porcentagemQuintoHabilidade}}%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    @endif
                                     <br>
                                 </div>
                             </div>
@@ -242,7 +267,32 @@
                 console.log(request,status,error);
             }
         });
+
+
+        var id = <?php echo $id; ?>
+
+        $.ajax({
+                url: '/media',
+                type: 'get',
+                data: {
+                    id:id
+                },
+                success: function( result ) {  
+                    resposta = JSON.parse(result);
+
+                    media = resposta[0].total_nota / resposta[0].qtde_avaliacao;
+
+                    //ALETRA O VALOR DA MEDIA
+                    if(resposta[0].total_nota != null)
+                        document.getElementById('media').innerHTML = media.toFixed(1)
+                },
+                error: function( request, status, error ) {
+                    console.log(request,status,error);
+                }
+                
+        });
     };
+    
 
 </script>
 

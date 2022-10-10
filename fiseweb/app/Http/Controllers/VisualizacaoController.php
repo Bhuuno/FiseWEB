@@ -109,30 +109,40 @@ class VisualizacaoController extends Controller
         from 
             visualizacaos
         WHERE 
-            prestador_id = '$prestador' AND
+            user_id = '$prestador' AND
             date(created_at) >= '$mensal' 
             LIMIT 30)as mensal,
         (select COUNT(*)
         from 
             visualizacaos
         WHERE 
-            prestador_id = '$prestador')as total_visualizacao,
+            user_id = '$prestador')as total_visualizacao,
         (select COUNT(*)
-        from 
-            avaliacaos
+        FROM 
+            prestadors AS p
+        INNER JOIN 
+            avaliacaos as ava ON ava.prestador_id = p.id
         WHERE 
-            prestador_id = '$prestador')as total_avaliacoes,
+            user_id = '$prestador')as total_avaliacoes,
+
         (SELECT COUNT(*) from galerias WHERE user_id = '$prestador') as qtde_fotos,
-        (select sum(avaliacao)/(SELECT COUNT(*) from avaliacaos WHERE 
-            prestador_id = '$prestador')
-        from 
-            avaliacaos
+
+        (select sum(av.avaliacao)/(SELECT COUNT(*)
+        FROM 
+            prestadors AS p
+        INNER JOIN 
+            avaliacaos as ava ON ava.prestador_id = p.id
         WHERE 
-            prestador_id = '$prestador')as media
+            user_id = '$prestador')
+        FROM 
+	        prestadors AS p 
+        INNER JOIN avaliacaos AS av ON av.prestador_id = p.id
+        WHERE 
+            p.user_id = '$prestador') as media
     from 
         visualizacaos
     WHERE 
-        prestador_id = '$prestador' AND
+        prestador_id = '$prestador' AND 
         date(created_at) >= '$semana';");
 
         return json_encode($consulta);
