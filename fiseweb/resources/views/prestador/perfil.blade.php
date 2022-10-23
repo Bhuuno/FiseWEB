@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="/img/fotos_perfil/{{$prestador[0]->image}}" alt="{{$prestador[0]->nome}}" class="rounded-circle" style="width:144px; height:144px";>
+                                <img src="/img/fotos_perfil/{{isset($prestador[0]->image)?$prestador[0]->image:'sem-foto.png'}}" alt="{{$prestador[0]->nome}}" class="rounded-circle" style="width:144px; height:144px";>
                                 <div class="mt-3">
                                     <h4>{{$prestador[0]->nome}}</h4>
                                     <h6>{{strtoupper($prestador[0]->profissao)}}</h6>
@@ -244,10 +244,31 @@
                         </div>
                     </div>
                 </div>
+                <!-- PERGUNTA AO PRESTADOR -->
+                <div class="col-sm-12 mt-4">
+                    <div class="card h-60">
+                        <div class="card-body">
+                            <h3>Perguntar ao prestador</h3>
+                            <br>
+
+                            <!-- INPUT DE PERGUNTA -->
+                            <div class="input-group">
+                                <input type="text" class="form-control" style="border-radius: 10px;" name="pergunta" id ="pergunta" placeholder="Escreva sua pergunta..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <span style="margin-left:20px;">
+                                        <button onclick="gravar_pergunta()" class="btn btn-primary" type="button">Perguntar</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mt-5">
+                                <h3>Últimas perguntas feitas</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-          
+    </div> 
 </x-app-layout>
 <script type="text/javascript">
     window.onload = function(){
@@ -269,6 +290,7 @@
         });
 
 
+        // CALCULA A MÉDIA DO PRESTADOR
         var id = <?php echo $id; ?>
 
         $.ajax({
@@ -292,6 +314,71 @@
                 
         });
     };
+
+    //GRAVA A PERGUNTA DO PARA O PRESTADOR
+    function gravar_pergunta(){
+
+        var id_pessoa = <?php echo auth()->user()->id; ?>;
+        var pergunta = $("#pergunta").val();
+        var id_prestador = '<?= $prestador[0]->id ?>';
+
+        if(pergunta == 0)
+        {
+            swal({
+                    title: "ERROR",
+                    text: "Escreva uma pergunta!",
+                    icon: "error"
+                })
+        }
+        else if(id_pessoa == id_prestador)
+        {
+            swal({
+                    title: "ERROR",
+                    text: "Você está fazendo uma pergunta para você mesmo!",
+                    icon: "error"
+                })
+        }
+        else
+        {
+            $.ajax({
+                url: '/gravar_pergunta',
+                type: 'get',
+                data: {
+                    id_pessoa:id_pessoa,
+                    pergunta:pergunta,
+                    id_prestador:id_prestador
+                },
+                success: function( result ) {  
+                    retorno = JSON.parse(result);
+
+                    if (retorno == 1)
+                    {
+                        swal({
+                            title: "Sucesso!",
+                            text: "Pergunta realizada",
+                            icon: "success",    
+                            buttons: {
+                            btn1: "ok",
+                            }
+                        })
+                        .then((value) => {
+                            switch (value) {
+                                case "btn1":                                   
+                                    document.location.reload(true);
+                                break;
+                            }
+                        });
+                    }
+
+
+                },
+                error: function( request, status, error ) {
+                    console.log(error);
+                }
+                
+            });
+        }
+    }
     
 
 </script>

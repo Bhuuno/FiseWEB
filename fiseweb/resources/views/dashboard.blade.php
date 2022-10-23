@@ -111,7 +111,8 @@
             success: function( result ) {  
                 var dashboard = JSON.parse(result);
     
-                //se a média vem com valor null, recebe 0
+                //se 
+                a média vem com valor null, recebe 0
                 if( dashboard[0].media == null)
                     dashboard[0].media = 0;
 

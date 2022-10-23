@@ -62,7 +62,7 @@
                         <div class="card card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
                                     <h3>Prestador: </h3>
-                                    <img src="/img/fotos_perfil/{{$perfil[0]->imagem}}" alt="{{$perfil[0]->nome_prestador}}" class="rounded-circle" style="width:144px; height:144px";>
+                                    <img src="/img/fotos_perfil/{{isset($perfil[0]->imagem)?$perfil[0]->imagem:'sem-foto.png'}}" alt="{{$perfil[0]->nome_prestador}}" class="rounded-circle" style="width:144px; height:144px";>
                                     <div class="mt-3">
                                         <h4>{{$perfil[0]->nome_prestador}}</h4>
                                         <h6>{{strtoupper($perfil[0]->profissao)}}</h6>
