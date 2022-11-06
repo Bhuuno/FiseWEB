@@ -165,7 +165,7 @@
                             <a href="/dashboard/prestador/{{$prestador->user_id}}?id={{$prestador->user_id}}" class="text-decoration-none" style="color:black;">
                             <div class="row g-0">
                                 <div class="col-md-3 border border-dark text-center">
-                                    <img style="height:260px; margin:auto" src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
+                                    <img style="height:260px; margin:auto" src="/img/fotos_perfil/{{isset($prestador->image)?$prestador->image:'sem-foto.png'}}" class="img-fluid" alt="...">
                                     <p class="bg-warning">{{strtoupper($prestador->profissao)}}</p>
                                     <p>{{strtoupper($prestador->cidade)}}</p>
                                 </div>

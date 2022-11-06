@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="/img/fotos_perfil/{{$prestador[0]->image}}" alt="{{$prestador[0]->nome}}" class="rounded-circle" style="width:144px; height:144px";>
+                                <img src="/img/fotos_perfil/{{isset($prestador[0]->image)?$prestador[0]->image:'sem-foto.png'}}" alt="{{$prestador[0]->nome}}" class="rounded-circle" style="width:144px; height:144px";>
                                 <div class="mt-3">
                                     <h4>{{$prestador[0]->nome}}</h4>
                                     <h6>{{strtoupper($prestador[0]->profissao)}}</h6>
@@ -244,10 +244,64 @@
                         </div>
                     </div>
                 </div>
+
+                <?php //if(empty($perguntas)){ ?>
+                    <!-- PERGUNTA AO PRESTADOR -->
+                    <div class="col-sm-12 mt-4">
+                        <div class="card h-60">
+                            <div class="card-body">
+                                <?php if($prestador[0]->id != auth()->user()->id) {?>
+                                    <h4>Perguntar ao prestador</h4>
+                                    <br>
+                                    <!-- INPUT DE PERGUNTA -->
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" style="border-radius: 10px;" name="pergunta" id ="pergunta" placeholder="Escreva sua pergunta..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <span style="margin-left:20px;">
+                                                <button onclick="gravar_pergunta()" class="btn btn-primary" type="button">Perguntar</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                <?php }?>
+
+                                <!-- RESPOSTAS -->
+                                <?php if(!empty($perguntas)){
+                                    $respondido = false; ?>
+                                    <div class="mt-3 text-center">
+                                        <h4><kbd>Últimas perguntas feitas</kbd></h4>
+                                    </div>
+                                    <hr>
+                                    <div class="mt-4">
+                                        <?php
+                                        foreach ($perguntas as $item) { ?>
+                                            <h5 class="mt-3">Pergunta: <?php echo($item->pergunta); ?></h5>
+                                            <?php foreach($respostas as $item2){
+                                                if($item->id == $item2->id_pergunta){?>
+                                                    <h5 style="margin-left:40px;">Resposta: <?php echo($item2->resposta); $respondido = true; ?></h5>
+                                            <?php }}?>
+                                            <!-- input de pergunta -->
+                                            <div class="input-group" style="margin-left:20px;" >
+                                                <?php if($prestador[0]->id == auth()->user()->id && $respondido == false) {?>
+                                                    <input type="text" style="border-radius: 10px;  width: 60%; " name="resposta" id ="resposta" placeholder="Escreva sua resposta...">
+                                                    <div class="input-group-append">
+                                                        <span style="margin-left:20px;">
+                                                            <button onclick="gravar_resposta(<?php echo($item->id); ?>)" class="btn btn-primary" type="button">Responder</button>
+                                                        </span>
+                                                    </div>
+                                                    
+                                                <?php } ?>
+                                            </div>
+                                            <hr>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php //} ?>
             </div>
         </div>
-    </div>
-          
+    </div> 
 </x-app-layout>
 <script type="text/javascript">
     window.onload = function(){
@@ -269,6 +323,7 @@
         });
 
 
+        // CALCULA A MÉDIA DO PRESTADOR
         var id = <?php echo $id; ?>
 
         $.ajax({
@@ -292,6 +347,113 @@
                 
         });
     };
+
+    //GRAVA A PERGUNTA DO PARA O PRESTADOR
+    function gravar_pergunta(){
+
+        var id_pessoa = <?php echo auth()->user()->id; ?>;
+        var pergunta = $("#pergunta").val();
+        var id_prestador = '<?= $prestador[0]->id ?>';
+
+        if(pergunta == 0)
+        {
+            swal({
+                    title: "ERROR",
+                    text: "Escreva uma pergunta!",
+                    icon: "error"
+                })
+        }
+        else if(id_pessoa == id_prestador)
+        {
+            swal({
+                    title: "ERROR",
+                    text: "Você está fazendo uma pergunta para você mesmo!",
+                    icon: "error"
+                })
+        }
+        else
+        {
+            $.ajax({
+                url: '/gravar_pergunta',
+                type: 'get',
+                data: {
+                    id_pessoa:id_pessoa,
+                    pergunta:pergunta,
+                    id_prestador:id_prestador
+                },
+                success: function( result ) {  
+                    retorno = JSON.parse(result);
+
+                    if (retorno == 1)
+                    {
+                        swal({
+                            title: "Sucesso!",
+                            text: "Pergunta realizada",
+                            icon: "success",    
+                            buttons: {
+                            btn1: "ok",
+                            }
+                        })
+                        .then((value) => {
+                            switch (value) {
+                                case "btn1":                                   
+                                    document.location.reload(true);
+                                break;
+                            }
+                        });
+                    }
+
+
+                },
+                error: function( request, status, error ) {
+                    console.log(error);
+                }
+                
+            });
+        }
+        
+    }
+
+    //GRAVA A RESPOSTA DO PARA O PRESTADOR
+    function gravar_resposta(id_pergunta){
+
+        var id_pessoa = <?php echo auth()->user()->id; ?>;
+        var resposta = $("#resposta").val();
+        var id_prestador = '<?= $prestador[0]->id ?>';
+
+        $.ajax({
+            url: '/gravar_resposta',
+            type: 'get',
+            data: {
+                id_pessoa:id_pessoa,
+                resposta:resposta,
+                id_prestador:id_prestador,
+                id_pergunta: id_pergunta
+            },
+            success: function( result ) {  
+                swal({
+                            title: "Sucesso!",
+                            text: "Respondido com sucesso",
+                            icon: "success",    
+                            buttons: {
+                            btn1: "ok",
+                            }
+                        })
+                        .then((value) => {
+                            switch (value) {
+                                case "btn1":                                   
+                                    document.location.reload(true);
+                                break;
+                            }
+                        });
+            },
+            error: function( request, status, error ) {
+                console.log(error);
+            }
+            
+        });
+        
+    }
     
 
 </script>

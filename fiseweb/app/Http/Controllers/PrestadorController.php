@@ -102,11 +102,19 @@ class PrestadorController extends Controller
     // RETORNA AS INFORMAÇÕES NA TELA
     public function profile($id)
     {
+        //RETORNA OS DADOS DO PRESTADOR
         $prestador=DB::table('prestadors')
         ->where([['prestadors.user_id', $id]])
         ->join('pessoas', 'pessoas.user_id', '=', 'prestadors.user_id')
         ->select('pessoas.*','prestadors.*')
         ->get();
-        return view('prestador.perfil',compact('prestador','id'));
+
+        //RETORNA APENAS PERGUNTAS   
+        $perguntas = DB::select("SELECT * FROM `perguntas` WHERE id_prestador = $id AND id_pergunta is null AND tipo = 0 ORDER by created_at desc");
+
+        //RETORNA APENAS RESPOSTAS   
+        $respostas = DB::select("SELECT * FROM `perguntas` WHERE id_prestador = $id AND id_pergunta is not null AND tipo = 1 ORDER by created_at");
+
+        return view('prestador.perfil',compact('prestador','id','perguntas','respostas'));
     }
 }

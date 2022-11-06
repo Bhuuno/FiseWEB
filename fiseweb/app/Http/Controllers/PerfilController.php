@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pessoa;
 use App\Models\Prestador;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class PerfilController extends Controller
@@ -19,6 +20,8 @@ class PerfilController extends Controller
         //ELE VERIFICA SE O USUÁRIO JÁ POSSUI CADASTRO PESSOA/PRESTADOR
         $cadastro_pessoa = Pessoa::where('user_id',auth()->user()->id)->first();
         $cadastro_prestador = Prestador::where('user_id',auth()->user()->id)->first();
+
+        
         $perfil = auth()->user()->role;
 
         // // var_dump($casdastro_prestador, $cadastro_pessoa);
