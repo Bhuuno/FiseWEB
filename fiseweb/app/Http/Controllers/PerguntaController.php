@@ -13,18 +13,54 @@ class PerguntaController extends Controller
     //GRAVA A PERGUNTA PARA O PRESTADOR!
     public function gravar_pergunta()
     { 
+        $perguntas = new Perguntas();
         $id_prestador = $_GET['id_prestador'];
         $id_pessoa = $_GET['id_pessoa'];
         $pergunta = $_GET['pergunta'];
+
         try{
             //GRAVA PERGUNTA NA TABELA
-            $perguntas = DB::select("INSERT into `perguntas` (pergunta,pessoa_user_id,id_prestador,resposta,status,tipo) VALUES('$pergunta',$id_pessoa,$id_prestador,'',0,0)");
+            $perguntas->pergunta = $pergunta;
+            $perguntas->pessoa_user_id = $id_pessoa;
+            $perguntas->id_prestador = $id_prestador;
+            $perguntas->resposta = "";
+            $perguntas->status = 0;
+            $perguntas->tipo = 0;
+
+            $perguntas->save();
+            
             return true;
         }
         catch(\Exception $e){
             return false;
         }
+    }
+
+    public function gravar_resposta()
+    { 
+        $perguntas = new Perguntas();
+        $id_prestador = $_GET['id_prestador'];
+        $id_pessoa = $_GET['id_pessoa'];
+        $resposta = $_GET['resposta'];
+        $id_pergunta = $_GET['id_pergunta'];
         
+        try{
+            //GRAVA RESPOSTA NA TABELA
+            $perguntas->pergunta = "";
+            $perguntas->pessoa_user_id = $id_pessoa;
+            $perguntas->id_prestador = $id_prestador;
+            $perguntas->id_pergunta = $id_pergunta;
+            $perguntas->resposta = $resposta;
+            $perguntas->status = 0;
+            $perguntas->tipo = 1;
+
+            $perguntas->save();
+            
+            return true;
+        }
+        catch(\Exception $e){
+            return false;
+        }
     }
     /**
      * Display a listing of the resource.
@@ -33,10 +69,7 @@ class PerguntaController extends Controller
      */
     public function index($id)
     {
-        $perguntas=DB::select("SELECT * FROM `perguntas` WHERE id_prestador = $id");
-
-        
-        return view('perfil.perfil',compact('perguntas'));        
+        //       
     }
 
     /**

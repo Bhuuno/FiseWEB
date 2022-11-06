@@ -16,6 +16,9 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
 
+    <!-- UTILIZADO PARA FUNCIONAR O DATA-MASK -->
+    <script type="text/javascript" src="{{asset('../../js/jquery.mask.js')}}"></script>
+
     <!-- Funcionar Modal -->
     <!-- <script src="{{ asset('../../../jquery/bootstrap.min.js') }}"></script>    -->
 

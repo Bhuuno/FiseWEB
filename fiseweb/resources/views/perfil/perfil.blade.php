@@ -1,5 +1,6 @@
 @extends('layouts.padrao')
-    <link href="{{asset('css/perfil.css')}}" rel="stylesheet">
+<link href="{{asset('css/perfil.css')}}" rel="stylesheet">
+    
 @section('titulo', 'Cadastro')
 
 @section('conteudo')
@@ -119,7 +120,7 @@
                                     <div class="row mt-3">
                                         <div class="col-md-6">
                                             <label class="labels">Celular</label>
-                                            <input type="tel" class="form-control" name="celular" id="celular" placeholder="(00)00000-0000">
+                                            <input type="tel" class="form-control" required data-mask="(99)99999-9999" maxlength="11" name="celular" id="celular" placeholder="(00)00000-0000">
                                         </div>
 
                                         <div class="col-md-6">
@@ -127,19 +128,19 @@
                                             <input type="mail" required class="form-control" name="email" id="email" placeholder="teste@exemplo.com"></div>
                                         <div class="col-md-6">
                                             <label for="rg" class="form-label">RG</label>
-                                            <input type="text" class="form-control" data-mask="000.00.000-0" name="rg" id="rg" placeholder="Ex: 000.000.000-00">
+                                            <input type="text" required class="form-control" data-mask="000.00.000-0" maxlength="9" name="rg" id="rg" placeholder="Ex: 000.000.000-00">
                                         </div>
                             
                                         <div class="col-md-6">
                                             <label for="cpf" name="exemplo" id="exemplo" class="form-label">CPF</label>
-                                            <input type="text" required name="cpf" class="form-control" id="cpf" maxlength='11' onkeyup="verificarCPF()" onkeydown="verificarCPF()" name="cpf" placeholder="Digite apenas os números do CPF">
+                                            <input type="text" required name="cpf" data-mask="999.999.999-26" class="form-control" id="cpf" maxlength='11' onkeyup="verificarCPF()" onkeydown="verificarCPF()" name="cpf" placeholder="Digite apenas os números do CPF">
                                         </div>
                                         
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-4">
                                             <label for="rua" class="labels">Endereço</label>
-                                            <input type="rua" class="form-control" name="endereco" value="" id="rua" placeholder="Ex: R. Rua dos Bobos">
+                                            <input type="rua" required class="form-control" name="endereco" value="" id="rua" placeholder="Ex: R. Rua dos Bobos">
                                         </div>
                                         <div class="col-md-1">
                                             <label for="numero" class="labels">N°</label>
@@ -190,7 +191,7 @@
                                         </div>
                                         <div class="col-md-3"><label for="est_civil" class="labels">Estado Civil</label>
                                             <select required class="form-select" name="estado_civil" aria-label="Default select example">
-                                                <option selected value="{{$pessoa->estado_civil}}"></option>
+                                                <option selected value="{{$pessoa->estado_civil}}">{{$pessoa->estado_civil}}</option>
                                                 <option value="Solteiro">Solteiro</option>
                                                 <option value="Casado">Casado</option>
                                                 <option value="Viúvo">Viúvo</option>
@@ -204,7 +205,7 @@
                                     <div class="row mt-3">
                                         <div class="col-md-6">
                                             <label class="labels">Celular</label>
-                                            <input type="tel" class="form-control" name="celular" value="{{$pessoa->celular}}" id="celular" placeholder="(00)00000-0000">
+                                            <input type="tel" data-mask="(99)99999-9999" class="form-control" name="celular" value="{{$pessoa->celular}}" id="celular" placeholder="(00)00000-0000">
                                         </div>
 
                                         <div class="col-md-6">
@@ -212,19 +213,19 @@
                                             <input type="mail" required class="form-control" value="{{$pessoa->email}}"  name="email" id="email" placeholder="teste@exemplo.com"></div>
                                         <div class="col-md-6">
                                             <label for="rg" class="form-label">RG</label>
-                                            <input type="text" class="form-control" data-mask="000.00.000-0" value="{{$pessoa->rg}}"  name="rg" id="rg" placeholder="Ex: 000.000.000-00">
+                                            <input type="text" class="form-control" data-mask="000.00.000-0" value="{{$pessoa->rg}}"  maxlength='9' name="rg" id="rg" placeholder="Ex: 000.000.000-00">
                                         </div>
                             
                                         <div class="col-md-6">
                                             <label for="cpf" name="exemplo" id="exemplo" class="form-label">CPF</label>
-                                            <input type="text" required name="cpf" class="form-control" id="cpf" value="{{$pessoa->cpf}}"  maxlength='11' onkeyup="verificarCPF()" onkeydown="verificarCPF()" name="cpf" placeholder="Digite apenas os números do CPF">
+                                            <input type="text" required name="cpf" data-mask="999.999.999-99" class="form-control" id="cpf" value="{{$pessoa->cpf}}"  maxlength='11' onkeyup="verificarCPF()" onkeydown="verificarCPF()" name="cpf" placeholder="Digite apenas os números do CPF">
                                         </div>
                                         
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-4">
                                             <label for="rua" class="labels">Endereço</label>
-                                            <input type="rua" class="form-control" name="endereco" value="{{$pessoa->endereco}}"  value="" id="rua" placeholder="Ex: R. Rua dos Bobos">
+                                            <input type="rua" required class="form-control" name="endereco" value="{{$pessoa->endereco}}"  value="" id="rua" placeholder="Ex: R. Rua dos Bobos">
                                         </div>
                                         <div class="col-md-1">
                                             <label for="numero" class="labels">N°</label>
@@ -232,7 +233,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <label for="cep" id="label_cep" class="labels">CEP</label>
-                                            <input type="cep" required class="form-control" id="cep" name="cep" value="{{$pessoa->cep}}"  onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
+                                            <input type="cep" required class="form-control" maxlength="8" id="cep" name="cep" value="{{$pessoa->cep}}"  onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="city" class="labels">Cidade</label>
@@ -248,7 +249,7 @@
             </div>
         @endif
         
-        <?php //var_dump($prestador) ?>
+        <!-- CADASTRO PRESTADOR -->
         @if(!isset($prestador))
             <div class="content">
                 <div class="container-fluid rounded bg-white mt-5 mb-5">
@@ -280,7 +281,7 @@
                                         </div>
                                         <div class="col-md-3"> 
                                             <label for="cnpj" class="labels">CNPJ</label>
-                                            <input type="text" required class="form-control" name="cnpj" id="cnpj" maxlength='14' placeholder="XX.XXX.XXX/0001-XX">
+                                            <input type="text" data-mask="99.999.999/9999-99" maxlength="14" required class="form-control" name="cnpj" id="cnpj" maxlength='14' placeholder="XX.XXX.XXX/0001-XX">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -304,11 +305,11 @@
                                     <div class="row mt-3">
                                         <div class="col-md-4">
                                             <label for="celular" class="labels">Celular</label>
-                                            <input type="tel" class="form-control celular" name="celular" id="celular" placeholder="(00)00000-0000">
+                                            <input type="tel" required  class="form-control celular" data-mask="(99)99999-9999" maxlength="11" name="celular" id="celular" placeholder="(00)00000-0000">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="telefone" class="labels">Telefone</label>
-                                            <input type="tel" class="form-control telefone" name="telefone" id="telefone" placeholder="(00)00000-0000">
+                                            <input type="tel" required data-mask="(99)9999-9999" maxlength="10" class="form-control telefone" name="telefone" id="telefone" placeholder="(00)0000-0000">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="email" class="labels">E-mail</label>
@@ -319,7 +320,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="especialidade" class="labels">Especialidade</label>
-                                            <input type="text" class="form-control especialidade" name="especialidade" id="especialidade" placeholder="Construção Civil">
+                                            <input type="text" required class="form-control especialidade" name="especialidade" id="especialidade" placeholder="Construção Civil">
                                         </div>
                                     </div>
                                     <!-- REDES SOCIAIS -->
@@ -420,15 +421,15 @@
                                     <div class="row mt-3">
                                         <div class="col-md-4">
                                             <label for="informacao" class="labels">Informações</label>
-                                            <textarea rows="2" type="text" class="form-control informacao" name="informacao" id="informacao"></textarea>
+                                            <textarea rows="2" required type="text" class="form-control informacao" name="informacao" id="informacao"></textarea>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="sobre" class="labels">Sobre mim</label>
-                                            <textarea rows="2" type="text" class="form-control sobre" name="sobre" id="sobre"></textarea>
+                                            <textarea rows="2" required type="text" class="form-control sobre" name="sobre" id="sobre"></textarea>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="experiencia" class="labels">Experiência</label>
-                                            <textarea rows="2" type="text" class="form-control experiencia" name="experiencia" id="experiencia"></textarea>
+                                            <textarea rows="2" required type="text" class="form-control experiencia" name="experiencia" id="experiencia"></textarea>
                                         </div>
                                     </div>
                                     <div class="mt-5 text-center"><button class="btn btn-success profile-button" type="submit">Salvar!</button></div>
@@ -469,7 +470,7 @@
                                         </div>
                                         <div class="col-md-3"> 
                                             <label for="cnpj" class="labels">CNPJ</label>
-                                            <input type="text" required class="form-control" name="cnpj" value="{{$prestador->cnpj}}" id="cnpj" maxlength='14' placeholder="XX.XXX.XXX/0001-XX">
+                                            <input type="text"  data-mask="99.999.999/9999-99" maxlength="14" required class="form-control" name="cnpj" value="{{$prestador->cnpj}}" id="cnpj" maxlength='14' placeholder="XX.XXX.XXX/0001-XX">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -493,11 +494,11 @@
                                     <div class="row mt-3">
                                         <div class="col-md-4">
                                             <label for="celular" class="labels">Celular</label>
-                                            <input type="tel" class="form-control celular" name="celular" value="{{$prestador->celular}}" id="celular" placeholder="(00)00000-0000">
+                                            <input type="tel" required data-mask="(99)99999-9999" maxlength="11" class="form-control celular" name="celular" value="{{$prestador->celular}}" id="celular" placeholder="(00)00000-0000">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="telefone" class="labels">Telefone</label>
-                                            <input type="tel" class="form-control telefone" name="telefone" value="{{$prestador->telefone}}" id="telefone" placeholder="(00)00000-0000">
+                                            <input type="tel" required data-mask="(99)9999-9999" maxlength="10" class="form-control telefone" name="telefone" value="{{$prestador->telefone}}" id="telefone" placeholder="(00)0000-0000">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="email" class="labels">E-mail</label>
@@ -509,7 +510,7 @@
                             
                                         <div class="col-md-6">
                                             <label for="especialidade" class="labels">Especialidade</label>
-                                            <input type="text" class="form-control especialidade" value="{{$prestador->especialidade}}" name="especialidade" id="especialidade" placeholder="Construção Civil">
+                                            <input type="text" required class="form-control especialidade" value="{{$prestador->especialidade}}" name="especialidade" id="especialidade" placeholder="Construção Civil">
                                         </div>
                                         
                                     </div>
@@ -613,15 +614,15 @@
                                     <div class="row mt-3">
                                         <div class="col-md-4">
                                             <label for="informacao" class="labels">Informações</label>
-                                            <textarea rows="2" type="text" class="form-control informacao" name="informacao" id="informacao">{{$prestador->informacao}}</textarea>
+                                            <textarea rows="2" required type="text" class="form-control informacao" name="informacao" id="informacao">{{$prestador->informacao}}</textarea>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="sobre" class="labels">Sobre mim</label>
-                                            <textarea rows="2" type="text" class="form-control sobre" name="sobre" id="sobre">{{$prestador->sobre}}</textarea>
+                                            <textarea rows="2" required type="text" class="form-control sobre" name="sobre" id="sobre">{{$prestador->sobre}}</textarea>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="experiencia" class="labels">Experiência</label>
-                                            <textarea rows="2" type="text" class="form-control experiencia" name="experiencia" id="experiencia">{{$prestador->experiencia}}</textarea>
+                                            <textarea rows="2" required type="text" class="form-control experiencia" name="experiencia" id="experiencia">{{$prestador->experiencia}}</textarea>
                                         </div>
 
                                     </div>

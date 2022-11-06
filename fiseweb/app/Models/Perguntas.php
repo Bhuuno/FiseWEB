@@ -17,7 +17,4 @@ class Perguntas extends Model
         'pergunta',
         'resposta'];    
 
-    public function user(){
-        return $this->belongsTo(Users::class);
-    }
 }
