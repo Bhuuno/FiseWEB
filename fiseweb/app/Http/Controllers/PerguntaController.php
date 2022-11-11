@@ -36,6 +36,18 @@ class PerguntaController extends Controller
         }
     }
 
+    // public function notificacao()
+    // {
+    //     try{
+    //         $notificacao = Perguntas::where('id_prestador','=',auth()->user()->id);
+
+    //         return $notificacao;
+    //     }
+    //     catch(\Exception $e){
+    //         return false;
+    //     }
+    // }
+
     public function gravar_resposta()
     { 
         $perguntas = new Perguntas();

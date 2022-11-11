@@ -69,7 +69,7 @@
                     </div>
                     <hr class="mb-4">
                     <div class="col-md-12 text-center mb-4">
-                        <button class="btn btn-success btn-lg btn-block" type="submit">Continue o checkout</button>
+                        <button class="btn btn-success btn-lg btn-block">Continue o checkout</button>
                     </div>
                 </form>
             </div>

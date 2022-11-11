@@ -245,7 +245,16 @@
                     </div>
                 </div>
 
-                <?php //if(empty($perguntas)){ ?>
+                <!-- Verifica se possui perguntas para o prestador -->
+                <?php 
+                    $cont = 0;
+                    foreach($perguntas as $item) { 
+                        if($item->id_prestador == auth()->user()->id)
+                            $cont +=1;
+                    } 
+
+                    if($cont > 0 || $prestador[0]->id != auth()->user()->id && auth()->user()->role == 'pessoal' || auth()->user()->role == 'prestador' || auth()->user()->role == 'administrador'){ ?>
+
                     <!-- PERGUNTA AO PRESTADOR -->
                     <div class="col-sm-12 mt-4">
                         <div class="card h-60">
@@ -274,15 +283,26 @@
                                     <div class="mt-4">
                                         <?php
                                         foreach ($perguntas as $item) { ?>
-                                            <h5 class="mt-3">Pergunta: <?php echo($item->pergunta); ?></h5>
+                                            <div class="input-group">
+                                                <img style="height:35px; border-radius:12px;" src="/img/fotos_perfil/{{isset($item->imagem)?$item->imagem:'sem-foto.png'}}">
+                                                <h5 style="margin-left:4px;" class="mt-3">{{$item->nome}}: <?php echo($item->pergunta); ?></h5>
+                                            </div>
                                             <?php foreach($respostas as $item2){
                                                 if($item->id == $item2->id_pergunta){?>
-                                                    <h5 style="margin-left:40px;">Resposta: <?php echo($item2->resposta); $respondido = true; ?></h5>
+                                                    <!-- IMAGEM E NOME DO PRESTADOR -->
+                                                    <div style="margin-left:40px;" class="input-group">
+                                                        <img style="height:35px; border-radius:12px;" src="/img/fotos_perfil/{{isset($item2->image_prestador)?$item2->image_prestador:'sem-foto.png'}}">
+                                                        <h5 style="margin-left:5px;"> {{ $item2->nome_razaosocial; }} - {{date('d/m/Y', strtotime($item2->created_at));}} : <?php echo($item2->resposta); 
+                                                            // Se já foi respondido não aparece mais o input de resposta
+                                                            $respondido = true; ?>
+                                                        </h5>
+                                                    </div>
+                                                    <!-- FIM IMAGEM E NOME -->
                                             <?php }}?>
                                             <!-- input de pergunta -->
                                             <div class="input-group" style="margin-left:20px;" >
                                                 <?php if($prestador[0]->id == auth()->user()->id && $respondido == false) {?>
-                                                    <input type="text" style="border-radius: 10px;  width: 60%; " name="resposta" id ="resposta" placeholder="Escreva sua resposta...">
+                                                    <input type="text" style="border-radius: 10px;  width: 60%;" name="resposta{{$item->id}}" id ="resposta{{$item->id}}" placeholder="Escreva sua resposta...">
                                                     <div class="input-group-append">
                                                         <span style="margin-left:20px;">
                                                             <button onclick="gravar_resposta(<?php echo($item->id); ?>)" class="btn btn-primary" type="button">Responder</button>
@@ -292,13 +312,14 @@
                                                 <?php } ?>
                                             </div>
                                             <hr>
-                                        <?php } ?>
+                                        <?php $respondido = false;
+                                        } ?>
                                     </div>
                                 <?php } ?>
                             </div>
                         </div>
                     </div>
-                <?php //} ?>
+                <?php } ?>
             </div>
         </div>
     </div> 
@@ -418,7 +439,9 @@
     function gravar_resposta(id_pergunta){
 
         var id_pessoa = <?php echo auth()->user()->id; ?>;
-        var resposta = $("#resposta").val();
+        var resposta = $("#resposta"+id_pergunta).val();
+
+        console.log(resposta);
         var id_prestador = '<?= $prestador[0]->id ?>';
 
         $.ajax({
@@ -451,11 +474,8 @@
                 console.log(error);
             }
             
-        });
-        
+        });   
     }
-    
-
 </script>
 
 
