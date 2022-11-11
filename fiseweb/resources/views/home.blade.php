@@ -1,5 +1,4 @@
 @extends('layouts.padrao')
-
 @section('titulo', 'FiseWEB')
 
 <x-app-layout>
@@ -34,11 +33,19 @@
                             <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Dashboard</li>
                             <hr>
                         </a>
+                        <a href="/dashboard/prestador/{{auth()->user()->id;}}?id={{auth()->user()->id;}}" class="nav-link link-dark text-white">
+                            <li class="d-flex"><img src="/icons/person.svg" class="icon-space">Perfil Profissional</li>
+                            <hr>
+                        </a>
                     @endif
 
+                    <!-- <a href="/dashboard/prestador/{{$id}}?id={{$id}}" class="nav-link link-dark text-white">
+                        <li class="d-flex"><img src="/icons/person.svg" class="icon-space">Perfil</li>
+                        <hr>
+                    </a> -->
 
                     <a href="/dashboard/perfil?id={{$id}}" class="nav-link link-dark text-white">
-                        <li class="d-flex"><img src="/icons/person.svg" class="icon-space">Perfil</li>
+                        <li class="d-flex"><img src="/icons/person.svg" class="icon-space">Conta</li>
                         <hr>
                     </a>
 
@@ -172,7 +179,7 @@
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h5 class="card-title">{{strtoupper($prestador->nome)}}</h5>
-                                        <p class="card-text">Expecialidade: {{$prestador->especialidade}}</p>
+                                        <p class="card-text">Especialidade: {{$prestador->especialidade}}</p>
                                         <p class="card-text">Contato: {{$prestador->celular}}</p>
                                         <p class="card-text"><small class="text-muted">Parceiro desde: {{date('d/m/Y', strtotime($prestador->created_at));}}</small></p>
                                         <p class="card-text">Experiências: {{$prestador->experiencia}}</p>

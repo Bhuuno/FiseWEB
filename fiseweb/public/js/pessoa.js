@@ -2,7 +2,11 @@
 function verificarCPF()
 {
     var input = document.querySelector('#cpf');
-    var cpf = input.value;
+    var string = input.value;
+    var cpf = string.replace(/[^0-9]/g,'');
+
+    console.log(cpf);
+
 
     var validacao = TestaCPF(cpf);
     
