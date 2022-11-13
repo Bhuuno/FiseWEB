@@ -1,81 +1,99 @@
 @extends('layouts.padrao')
 <link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
-@section('titulo', 'Dashboard')
-<script src="{{ asset('chats/Chart.js') }}"></script>   
-<x-app-layout>
-    <x-slot name="header">
-        <button class="btn buttoncor" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-            <img src="/icons/list.svg" class="img-button">  
-        </button>         
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
-            DASHBOARD
-        </h2>
-    </x-slot>
-    <!-- menu projeto -->
-    @extends('layouts.menu')
 
-    <div class="container">
-        <div class="text-center rounded bg-white mt-5 mb-5">
-            <div class="row mt-3" style="height:80px;">
-                <div class="col-2 barra">
-                    Visualização Semanal
-                    <div id="semanal">0</div>
-                </div>
-                <div class="col-2 barra">
-                    Visualização Mensal
-                    <div id="mensal">0</div>
-                </div>
-                <div class="col-2 barra">
-                    TOTAL Visualização
-                    <div id="total">0</div>
-                </div>
-                <div class="col-2 barra">
-                    TOTAL avaliações
-                    <div id="avaliacoes">0</div>
-                </div>
-                <div class="col-2 barra">
-                    TOTALFotos
-                    <div id="qtde_fotos">0</div>
-                </div>
-                <div class="col-2 barra">
-                    Pontuação
-                    <div style="display: flex; justify-content:center;">
-                        <div id="media">0</div>
-                        <img style="height: fit-content; padding: 2px;"width="25px" src="/img/star1.png">
+<script>
+        // serve para chamar as fuções que quero que inicie
+        window.onload = function(){
+
+        if('<?php print auth()->user()->role ?>' == 'prestador' && '<?php print $_GET['id'] ?>' == '<?php print auth()->user()->id ?>')
+        {
+            swal({
+                title: "Informativo",
+                text: "Seu nível de perfil não possui permissão!",
+                icon: "info"
+            })
+        }
+    };
+</script>
+
+@if(auth()->user()->role == 'prestador')
+    @section('titulo', 'Dashboard')
+    <script src="{{ asset('chats/Chart.js') }}"></script>   
+    <x-app-layout>
+        <x-slot name="header">
+            <button class="btn buttoncor" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                <img src="/icons/list.svg" class="img-button">  
+            </button>         
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
+                DASHBOARD
+            </h2>
+        </x-slot>
+        <!-- menu projeto -->
+        @extends('layouts.menu')
+
+        <div class="container">
+            <div class="text-center rounded bg-white mt-5 mb-5">
+                <div class="row mt-3" style="height:80px;">
+                    <div class="col-2 barra">
+                        Visualização Semanal
+                        <div id="semanal">0</div>
+                    </div>
+                    <div class="col-2 barra">
+                        Visualização Mensal
+                        <div id="mensal">0</div>
+                    </div>
+                    <div class="col-2 barra">
+                        TOTAL Visualização
+                        <div id="total">0</div>
+                    </div>
+                    <div class="col-2 barra">
+                        TOTAL avaliações
+                        <div id="avaliacoes">0</div>
+                    </div>
+                    <div class="col-2 barra">
+                        TOTALFotos
+                        <div id="qtde_fotos">0</div>
+                    </div>
+                    <div class="col-2 barra">
+                        Pontuação
+                        <div style="display: flex; justify-content:center;">
+                            <div id="media">0</div>
+                            <img style="height: fit-content; padding: 2px;"width="25px" src="/img/star1.png">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="mt-3 input-grafico">
-            <label class="m-2" for="dias">Dias:</label>
-            <input class="input_grafico_dias" id="dias" name="dias" type="text" value="5">
-            
-            <label class="m-2" for="tipo">Tipo:</label>
-            <select class="select_grafico" required class="form-select" id="tipo" name="tipo" aria-label="Default select example">
-                <option selected value="0">Linha</option>
-                <option value="1">Barra</option>
-            </select>
-            
-            <input class="input_grafico ms-3" id="data" name="data" type="date">
-            <input class="button_grafico ms-4" id="buscar" type="button" value="Gerar" onclick="grafico_visualizacao()">
-        </div>
-        <div style="display: flex;">
-        
-            <!-- GRAFICO DE LINHA E BARRA -->
-            <div id="grafico" style="display:flex; width:64%;">
-            
-                <canvas id="myChart"></canvas>
-                <canvas id="myChart1"></canvas>
+            <div class="mt-3 input-grafico">
+                <label class="m-2" for="dias">Dias:</label>
+                <input class="input_grafico_dias" id="dias" name="dias" type="text" value="5">
+                
+                <label class="m-2" for="tipo">Tipo:</label>
+                <select class="select_grafico" required class="form-select" id="tipo" name="tipo" aria-label="Default select example">
+                    <option selected value="0">Linha</option>
+                    <option value="1">Barra</option>
+                </select>
+                
+                <input class="input_grafico ms-3" id="data" name="data" type="date">
+                <input class="button_grafico ms-4" id="buscar" type="button" value="Gerar" onclick="grafico_visualizacao()">
             </div>
+            <div style="display: flex;">
+            
+                <!-- GRAFICO DE LINHA E BARRA -->
+                <div id="grafico" style="display:flex; width:64%;">
+                
+                    <canvas id="myChart"></canvas>
+                    <canvas id="myChart1"></canvas>
+                </div>
 
-            <!-- GRAFICO DE ROSCA -->
-            <div id="grafico_rosca" style="display:flex; width:60%;">
-                <p>Visualização de Perfil</p>
+                <!-- GRAFICO DE ROSCA -->
+                <div id="grafico_rosca" style="display:flex; width:60%;">
+                    <p>Visualização de Perfil</p>
+                </div>
             </div>
         </div>
-    </div>
-</x-app-layout>
+    </x-app-layout>
+@endif
 <script>
 
     // ALERTA MENSAGEM 
@@ -144,6 +162,8 @@
         var tipo = $("#tipo").val();
         var id_prestador = '<?=$request["user_id"] = auth()->user()->id;?>';
 
+        
+        console.log("2");
         if(dias < 0)
             valor_negativo_atencao();
 

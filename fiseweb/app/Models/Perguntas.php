@@ -15,6 +15,7 @@ class Perguntas extends Model
         'tipo',
         'status',
         'pergunta',
-        'resposta'];    
+        'resposta',
+        'visualizacao'];    
 
 }

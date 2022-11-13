@@ -108,7 +108,7 @@ class VisualizacaoController extends Controller
         from 
             visualizacaos as v
         INNER JOIN 
-         	prestadors AS pr ON pr.user_id = $prestador
+         	prestadors AS pr ON pr.user_id = '$prestador'
         WHERE 
             v.prestador_id = pr.id AND
             date(v.created_at) >= '$mensal' 
@@ -151,49 +151,6 @@ class VisualizacaoController extends Controller
     WHERE 
         v.prestador_id = PR.user_id AND 
         date(v.created_at) >= '$semana';");
-        
-        
-    //     $consulta = DB::select("SELECT
-    //     COUNT(*) as semanal,
-    //     (select COUNT(*)
-    //     from 
-    //         visualizacaos
-    //     WHERE 
-    //         user_id = '$prestador' AND
-    //         date(created_at) >= '$mensal' 
-    //         LIMIT 30)as mensal,
-    //     (select COUNT(*)
-    //     from 
-    //         visualizacaos
-    //     WHERE 
-    //         user_id = '$prestador')as total_visualizacao,
-    //     (select COUNT(*)
-    //     FROM 
-    //         prestadors AS p
-    //     INNER JOIN 
-    //         avaliacaos as ava ON ava.prestador_id = p.id
-    //     WHERE 
-    //         user_id = '$prestador')as total_avaliacoes,
-
-    //     (SELECT COUNT(*) from galerias WHERE user_id = '$prestador') as qtde_fotos,
-
-    //     (select sum(av.avaliacao)/(SELECT COUNT(*)
-    //     FROM 
-    //         prestadors AS p
-    //     INNER JOIN 
-    //         avaliacaos as ava ON ava.prestador_id = p.id
-    //     WHERE 
-    //         user_id = '$prestador')
-    //     FROM 
-	//         prestadors AS p 
-    //     INNER JOIN avaliacaos AS av ON av.prestador_id = p.id
-    //     WHERE 
-    //         p.user_id = '$prestador') as media
-    // from 
-    //     visualizacaos
-    // WHERE 
-    //     user_id = '$prestador' AND 
-    //     date(created_at) >= '$semana';");
 
         return json_encode($consulta);
         

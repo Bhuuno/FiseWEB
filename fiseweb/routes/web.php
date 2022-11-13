@@ -59,7 +59,6 @@ Route::get('/gravar_pergunta',[PerguntaController::class,'gravar_pergunta'])->mi
 Route::get('/gravar_resposta',[PerguntaController::class,'gravar_resposta'])->middleware(['auth']);
 Route::get('/verificar_notificacao',[PerguntaController::class,'notificacao'])->middleware(['auth']);
 
-
 //NOTA SERVIÇO PRESTADOR
 Route::get('/media',[AvaliacaoController::class,'media'])->middleware(['auth']);
 
