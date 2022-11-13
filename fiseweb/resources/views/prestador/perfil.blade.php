@@ -1,4 +1,4 @@
-    @extends('layouts.padrao')
+@extends('layouts.padrao')
     <link href="{{asset('css/perfil_prestador.css')}}" rel="stylesheet">
     @section('titulo', 'Perfil Prestador')
     <x-app-layout>
@@ -252,14 +252,16 @@
                         if($item->id_prestador == auth()->user()->id)
                             $cont +=1;
                     } 
-
-                    if($cont > 0 || $prestador[0]->id != auth()->user()->id && auth()->user()->role == 'pessoal' || auth()->user()->role == 'prestador' || auth()->user()->role == 'administrador'){ ?>
-
+                ?>
+                    @if($cont > 0 && $prestador[0]->id != auth()->user()->id && auth()->user()->role == 'pessoal' || auth()->user()->role == 'prestador')
+                    
                     <!-- PERGUNTA AO PRESTADOR -->
+                    <!-- Validação tem que ficar aqui se não aparece uma barra -->
+                    <?php if($prestador[0]->id != auth()->user()->id) {?>
                     <div class="col-sm-12 mt-4">
                         <div class="card h-60">
                             <div class="card-body">
-                                <?php if($prestador[0]->id != auth()->user()->id) {?>
+                                
                                     <h4>Perguntar ao prestador</h4>
                                     <br>
                                     <!-- INPUT DE PERGUNTA -->
@@ -271,7 +273,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                <?php }?>
+                            <?php }?>
 
                                 <!-- RESPOSTAS -->
                                 <?php if(!empty($perguntas)){
@@ -285,7 +287,7 @@
                                         foreach ($perguntas as $item) { ?>
                                             <div class="input-group">
                                                 <img style="height:35px; border-radius:12px;" src="/img/fotos_perfil/{{isset($item->imagem)?$item->imagem:'sem-foto.png'}}">
-                                                <h5 style="margin-left:4px;" class="mt-3">{{$item->nome}}: <?php echo($item->pergunta); ?></h5>
+                                                <h5 style="margin-left:4px;" class="mt-3">{{$item->nome}} - {{date('d/m/Y', strtotime($item->created_at));}}: <?php echo($item->pergunta); ?></h5>
                                             </div>
                                             <?php foreach($respostas as $item2){
                                                 if($item->id == $item2->id_pergunta){?>
@@ -319,7 +321,7 @@
                             </div>
                         </div>
                     </div>
-                <?php } ?>
+                @endif
             </div>
         </div>
     </div> 

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('status');
             $table->text('pergunta')->nullable();
             $table->text('resposta')->nullable();
+            $table->integer('visualizacao');
         });
     }
 

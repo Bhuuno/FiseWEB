@@ -4,8 +4,8 @@ body{
   
   .fab{
     position: fixed;
-    bottom:10px;
-    right:10px;
+    bottom:85px;
+    right:25px;
   }
   
   .fab button{
