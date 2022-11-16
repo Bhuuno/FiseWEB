@@ -20,6 +20,34 @@
     <div class="container-fluid">
         <!-- menu projeto -->
         @extends('layouts.menu')
+
+    <!-- MENU VER PERFIL -->
+    <div class="mt-2 container">
+        <ul class="nav nav-tabs" id="minhaAba" role="tablist">
+            <a style="text-decoration: none;" href="/dashboard/prestador/{{$id}}?id={{$id}}">
+                <li class="nav-item" role="presentation">
+                    <button style="background-color:white; color:black;" class="nav-link" id="inicial-tab" data-bs-toggle="tab" data-bs-target="#inicial" type="button"
+                        role="tab" aria-controls="inicial" aria-selected="false">Perfil Prestador</button>
+                </li>
+            </a>
+            <!-- Galeria -->
+            <a style="text-decoration: none;" href="/dashboard/avaliacao/{{$id}}?id={{$id}}">
+                <li class="nav-item" role="presentation">
+                    <button style="background-color:white; color:black;" class="nav-link" id="pefil-tab" data-bs-toggle="tab" data-bs-target="#pefil" type="button"
+                        role="tab" aria-controls="pefil" aria-selected="true">Avaliações</button>
+                </li>
+            </a>
+            <!-- Galeria -->
+            <a style="text-decoration: none;" href="/dashboard/galeria/{{$id}}?id={{$id}}">
+                <li class="nav-item" role="presentation">
+                    <button style="background-color:red; color:black;" class="nav-link active" id="contato-tab" data-bs-toggle="tab" data-bs-target="#contato" type="button"
+                        role="tab" aria-controls="contato" aria-selected="false">Galeria</button>
+                </li>
+            </a>
+        </ul>
+    <div>
+
+
         @if(auth()->user()->role == 'cliente' && $_GET['id'] == auth()->user()->id)
             <script>
                 window.onload = function(){
@@ -127,6 +155,29 @@
                                     @endif
                                 @endfor              
                             </div>
+                        @else
+                            <script>
+                                window.onload = function(){
+                                    swal({
+                                        title: "Alerta",
+                                        text: "Prestador não possui imagens!",
+                                        icon: "info",
+                                            
+                                        buttons: {
+                                        btn1: "ok",
+                                        },
+                                    })
+                                    .then((value) => {
+                                        switch (value) {
+                                            case "btn1":
+                                                //volta para a página anterior
+                                                history.go(-1)
+                                            break;
+                                        }
+                                    });
+                
+                                }
+                            </script>
                         @endif
                     </div>
                 </div>

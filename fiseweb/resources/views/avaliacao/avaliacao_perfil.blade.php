@@ -3,7 +3,7 @@
 
 <script>
         // serve para chamar as fuções que quero que inicie
-        window.onload = function(){
+    window.onload = function(){
         media();
 
         if('<?php print $role; ?>' == 'cliente' && '<?php print $_GET['id'] ?>' != '<?php print auth()->user()->id ?>')
@@ -30,6 +30,36 @@
     <div class="container-fluid m-2">
         <!-- menu projeto -->
         @extends('layouts.menu')
+
+    <!-- menu projeto -->
+    @extends('layouts.menu')
+
+        <!-- MENU VER PERFIL -->
+        <div class="mt-3 container">
+            <ul class="nav nav-tabs" id="minhaAba" role="tablist">
+                <a style="text-decoration: none;" href="/dashboard/prestador/{{$id}}?id={{$id}}">
+                    <li class="nav-item" role="presentation">
+                        <button  style="background-color:white; color:black" class="nav-link" id="inicial-tab" data-bs-toggle="tab" data-bs-target="#inicial" type="button"
+                            role="tab" aria-controls="inicial" aria-selected="false">Perfil Prestador</button>
+                    </li>
+                </a>
+                <!-- Galeria -->
+                <a  style="text-decoration: none;" href="/dashboard/avaliacao/{{$id}}?id={{$id}}">
+                    <li class="nav-item" role="presentation">
+                        <button style="background-color:red; color:black" class="nav-link active" id="pefil-tab" data-bs-toggle="tab" data-bs-target="#pefil" type="button"
+                            role="tab" aria-controls="pefil" aria-selected="true">Avaliações</button>
+                    </li>
+                </a>
+                <!-- Galeria -->
+                <a style="text-decoration: none;" href="/dashboard/galeria/{{$id}}?id={{$id}}">
+                    <li class="nav-item" role="presentation">
+                        <button style="background-color:white; color:black" class="nav-link" id="contato-tab" data-bs-toggle="tab" data-bs-target="#contato" type="button"
+                            role="tab" aria-controls="contato" aria-selected="false">Galeria</button>
+                    </li>
+                </a>
+            </ul>
+        <div>
+
         <!-- valida se usuário não quer acessar sua propria página de avaliação! -->
         @if(auth()->user()->role == 'cliente' && $_GET['id'] == auth()->user()->id)
             <script>
