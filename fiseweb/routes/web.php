@@ -12,6 +12,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\AvaliacaoController;
 use App\Http\Controllers\PagamentoController;
+use App\Http\Controllers\PerguntaController;
 use App\Http\Controllers\PrestadorController;
 use App\Http\Controllers\VisualizacaoController;
 
@@ -36,6 +37,7 @@ Route::resources([
     'perfil' => \App\Http\Controllers\PerfilController::class,
     'avaliacao' => \App\Http\Controllers\AvaliacaoController::class,
     'galeria' => \App\Http\Controllers\GaleriaController::class,
+    'pergunta' => \App\Http\Controllers\PerguntaController::class,
 ]);
 
 
@@ -49,8 +51,13 @@ Route::get('/dashboard/chat',[ChatController::class,'index'])->middleware(['auth
 //HOME
 Route::get('/', [HomeController::class,'index']);
 
-//PRESTADOR//
+//PRESTADOR
 Route::get('/dashboard/prestador/{id}',[PrestadorController::class,'profile'])->middleware(['auth']);
+
+//PERGUNTAS PÁGINA PERFIL PRESTADOR
+Route::get('/gravar_pergunta',[PerguntaController::class,'gravar_pergunta'])->middleware(['auth']);
+Route::get('/gravar_resposta',[PerguntaController::class,'gravar_resposta'])->middleware(['auth']);
+Route::get('/verificar_notificacao',[PerguntaController::class,'notificacao'])->middleware(['auth']);
 
 //NOTA SERVIÇO PRESTADOR
 Route::get('/media',[AvaliacaoController::class,'media'])->middleware(['auth']);

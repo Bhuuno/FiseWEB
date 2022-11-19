@@ -3,7 +3,7 @@
 
 <script>
         // serve para chamar as fuções que quero que inicie
-        window.onload = function(){
+    window.onload = function(){
         media();
 
         if('<?php print $role; ?>' == 'cliente' && '<?php print $_GET['id'] ?>' != '<?php print auth()->user()->id ?>')
@@ -30,6 +30,10 @@
     <div class="container-fluid m-2">
         <!-- menu projeto -->
         @extends('layouts.menu')
+
+    <!-- menu projeto -->
+    @extends('layouts.menu')
+
         <!-- valida se usuário não quer acessar sua propria página de avaliação! -->
         @if(auth()->user()->role == 'cliente' && $_GET['id'] == auth()->user()->id)
             <script>
@@ -56,13 +60,39 @@
             </script>
         @else
         <div class="container">
+            <!-- MENU VER PERFIL -->
+            <div class="mt-3 container">
+                <ul class="nav nav-tabs" id="minhaAba" role="tablist">
+                    <a style="text-decoration: none;" href="/dashboard/prestador/{{$id}}?id={{$id}}">
+                        <li class="nav-item" role="presentation">
+                            <button  style="background-color:white; color:black" class="nav-link" id="inicial-tab" data-bs-toggle="tab" data-bs-target="#inicial" type="button"
+                                role="tab" aria-controls="inicial" aria-selected="false">Perfil Prestador</button>
+                        </li>
+                    </a>
+                    <!-- Galeria -->
+                    <a  style="text-decoration: none;" href="/dashboard/avaliacao/{{$id}}?id={{$id}}">
+                        <li class="nav-item" role="presentation">
+                            <button style="background-color:red; color:black" class="nav-link active" id="pefil-tab" data-bs-toggle="tab" data-bs-target="#pefil" type="button"
+                                role="tab" aria-controls="pefil" aria-selected="true">Avaliações</button>
+                        </li>
+                    </a>
+                    <!-- Galeria -->
+                    <a style="text-decoration: none;" href="/dashboard/galeria/{{$id}}?id={{$id}}">
+                        <li class="nav-item" role="presentation">
+                            <button style="background-color:white; color:black" class="nav-link" id="contato-tab" data-bs-toggle="tab" data-bs-target="#contato" type="button"
+                                role="tab" aria-controls="contato" aria-selected="false">Galeria</button>
+                        </li>
+                    </a>
+                </ul>
+            <div>
+                
             <div class="row main-body">
                 <div class="row gutters-sm" style="padding:1%;">
                     <div class="col-md-3">
                         <div class="card card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
                                     <h3>Prestador: </h3>
-                                    <img src="/img/fotos_perfil/{{$perfil[0]->imagem}}" alt="{{$perfil[0]->nome_prestador}}" class="rounded-circle" style="width:144px; height:144px";>
+                                    <img src="/img/fotos_perfil/{{isset($perfil[0]->imagem)?$perfil[0]->imagem:'sem-foto.png'}}" alt="{{$perfil[0]->nome_prestador}}" class="rounded-circle" style="width:144px; height:144px";>
                                     <div class="mt-3">
                                         <h4>{{$perfil[0]->nome_prestador}}</h4>
                                         <h6>{{strtoupper($perfil[0]->profissao)}}</h6>
@@ -139,7 +169,7 @@
                                 @if(!empty($comentario))
                                     @foreach ($comentario as $item)
                                         <div style="display: flex;">
-                                            <img src="/img/fotos_perfil/{{$item->imagem}}" style="border-radius: 50%;" width="4%" height="4%" alt="">
+                                            <img src="/img/fotos_perfil/{{isset($item->imagem)?$item->imagem:'sem-foto.png'}}" style="border-radius: 50%;" width="4%" height="4%" alt="">
                                             <p>{{$item->nome_cliente}} - {{date('d/m/Y', strtotime($item->created_at));}}</p>
                                         </div>  
                                         <div class="col-sm-7 text-secondary">

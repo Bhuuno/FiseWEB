@@ -101,31 +101,36 @@ class VisualizacaoController extends Controller
         //PEGA O ID DO PRESTADOR
         $prestador = auth()->user()->id;
 
-
         //REALIZA A CONSULTA DO PRESTADOR
         $consulta = DB::select("SELECT
         COUNT(*) as semanal,
         (select COUNT(*)
         from 
-            visualizacaos
+            visualizacaos as v
+        INNER JOIN 
+         	prestadors AS pr ON pr.user_id = '$prestador'
         WHERE 
-            user_id = '$prestador' AND
-            date(created_at) >= '$mensal' 
+            v.prestador_id = pr.user_id AND
+            date(v.created_at) >= '$mensal' 
             LIMIT 30)as mensal,
+            
         (select COUNT(*)
         from 
-            visualizacaos
+            visualizacaos as v
+        INNER JOIN 
+         	prestadors AS pr ON pr.user_id = $prestador
         WHERE 
-            user_id = '$prestador')as total_visualizacao,
+            v.prestador_id = pr.user_id)as total_visualizacao,
+            
         (select COUNT(*)
         FROM 
             prestadors AS p
         INNER JOIN 
             avaliacaos as ava ON ava.prestador_id = p.id
         WHERE 
-            user_id = '$prestador')as total_avaliacoes,
+            user_id = $prestador)as total_avaliacoes,
 
-        (SELECT COUNT(*) from galerias WHERE user_id = '$prestador') as qtde_fotos,
+        (SELECT COUNT(*) from galerias WHERE user_id = $prestador) as qtde_fotos,
 
         (select sum(av.avaliacao)/(SELECT COUNT(*)
         FROM 
@@ -133,17 +138,19 @@ class VisualizacaoController extends Controller
         INNER JOIN 
             avaliacaos as ava ON ava.prestador_id = p.id
         WHERE 
-            user_id = '$prestador')
+            user_id = $prestador)
         FROM 
 	        prestadors AS p 
         INNER JOIN avaliacaos AS av ON av.prestador_id = p.id
         WHERE 
-            p.user_id = '$prestador') as media
+            p.user_id = $prestador) as media
     from 
-        visualizacaos
+        visualizacaos AS v
+    INNER JOIN 
+        prestadors AS pr ON pr.user_id = $prestador
     WHERE 
-        prestador_id = '$prestador' AND 
-        date(created_at) >= '$semana';");
+        v.prestador_id = PR.user_id AND 
+        date(v.created_at) >= '$semana';");
 
         return json_encode($consulta);
         
