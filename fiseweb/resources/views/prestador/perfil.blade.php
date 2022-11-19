@@ -13,15 +13,15 @@
     @extends('layouts.menu')
 
     <!-- MENU VER PERFIL -->
-    <div class="mt-2 container">
-        <ul class="nav nav-tabs" id="minhaAba" role="tablist">
+    <div class="container mt-3">
+        <ul class="nav nav-tabs" id="minhaAba" role="tablist" style="margin-left: 39px;">
             <a style="text-decoration: none; color:black;" href="/dashboard/avaliacao/{{$id}}?id={{$id}}">
                 <li class="nav-item" role="presentation">
                     <button style="background-color:red; color:black;" class="nav-link active" id="inicial-tab" data-bs-toggle="tab" data-bs-target="#inicial" type="button"
                         role="tab" aria-controls="inicial" aria-selected="true">Perfil Prestador</button>
                 </li>
             </a>
-            <!-- Galeria -->
+            <!-- Avaliação -->
             <a  style="text-decoration: none; color:black;" href="/dashboard/avaliacao/{{$id}}?id={{$id}}">
                 <li class="nav-item" role="presentation">
                     <button style="background-color:white; color:black;" class="nav-link" id="pefil-tab" data-bs-toggle="tab" data-bs-target="#pefil" type="button"
@@ -148,7 +148,7 @@
                                     <h6 class="mb-0">Celular</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {{$prestador[0]->telefone}}
+                                    {{$prestador[0]->celular}}
                                 </div>
                             </div>
                             <hr>
@@ -279,15 +279,13 @@
                             $cont +=1;
                     } 
                 ?>
-                    @if($cont > 0 && $prestador[0]->id != auth()->user()->id && auth()->user()->role == 'pessoal' || auth()->user()->role == 'prestador')
-                    
+                @if($cont > 0 && $prestador[0]->user_id != auth()->user()->id && auth()->user()->role == 'pessoal' || auth()->user()->role == 'prestador')                   
                     <!-- PERGUNTA AO PRESTADOR -->
                     <!-- Validação tem que ficar aqui se não aparece uma barra -->
-                    <?php if($prestador[0]->id != auth()->user()->id) {?>
-                    <div class="col-sm-12 mt-4">
-                        <div class="card h-60">
-                            <div class="card-body">
-                                
+                    @if($prestador[0]->user_id != auth()->user()->id)
+                        <div class="col-sm-12 mt-4">
+                            <div class="card h-60">
+                                <div class="card-body">
                                     <h4>Perguntar ao prestador</h4>
                                     <br>
                                     <!-- INPUT DE PERGUNTA -->
@@ -299,24 +297,30 @@
                                             </span>
                                         </div>
                                     </div>
-                            <?php }?>
+                    @else
+                        <div class="col-sm-12 mt-4">
+                            <div class="card h-60">
+                                <div class="card-body">
+
+                    @endif
 
                                 <!-- RESPOSTAS -->
-                                <?php if(!empty($perguntas)){
-                                    $respondido = false; ?>
+                                @if(!empty($perguntas))
+                                    <?php $respondido = false; ?>
                                     <div class="mt-3 text-center">
                                         <h4><kbd>Últimas perguntas feitas</kbd></h4>
                                     </div>
                                     <hr>
                                     <div class="mt-4">
-                                        <?php
-                                        foreach ($perguntas as $item) { ?>
+
+
+                                        @foreach ($perguntas as $item)
                                             <div class="input-group">
-                                                <img style="height:35px; border-radius:12px;" src="/img/fotos_perfil/{{isset($item->imagem)?$item->imagem:'sem-foto.png'}}">
+                                                <img style="height:35px; border-radius:12px;" src="/img/fotos_perfil/{{isset($item->image)?$item->image:'sem-foto.png'}}">
                                                 <h5 style="margin-left:4px;" class="mt-3">{{$item->nome}} - {{date('d/m/Y', strtotime($item->created_at));}}: <?php echo($item->pergunta); ?></h5>
                                             </div>
-                                            <?php foreach($respostas as $item2){
-                                                if($item->id == $item2->id_pergunta){?>
+                                            @foreach($respostas as $item2)
+                                                @if($item->id == $item2->id_pergunta)
                                                     <!-- IMAGEM E NOME DO PRESTADOR -->
                                                     <div style="margin-left:40px;" class="input-group">
                                                         <img style="height:35px; border-radius:12px;" src="/img/fotos_perfil/{{isset($item2->image_prestador)?$item2->image_prestador:'sem-foto.png'}}">
@@ -326,31 +330,31 @@
                                                         </h5>
                                                     </div>
                                                     <!-- FIM IMAGEM E NOME -->
-                                            <?php }}?>
+                                                @endif
+                                            @endforeach
                                             <!-- input de pergunta -->
                                             <div class="input-group" style="margin-left:20px;" >
-                                                <?php if($prestador[0]->id == auth()->user()->id && $respondido == false) {?>
+                                                @if($prestador[0]->user_id == auth()->user()->id && $respondido == false)
                                                     <input type="text" style="border-radius: 10px;  width: 60%;" name="resposta{{$item->id}}" id ="resposta{{$item->id}}" placeholder="Escreva sua resposta...">
                                                     <div class="input-group-append">
                                                         <span style="margin-left:20px;">
                                                             <button onclick="gravar_resposta(<?php echo($item->id); ?>)" class="btn btn-primary" type="button">Responder</button>
                                                         </span>
                                                     </div>
-                                                    
-                                                <?php } ?>
+                                                @endif
                                             </div>
                                             <hr>
-                                        <?php $respondido = false;
-                                        } ?>
+                                        <?php $respondido = false; ?>
+                                        @endforeach
                                     </div>
-                                <?php } ?>
+                                @endif
                             </div>
                         </div>
                     </div>
                 @endif
             </div>
         </div>
-    </div> 
+    </div>
 </x-app-layout>
 <script type="text/javascript">
     window.onload = function(){
@@ -402,7 +406,7 @@
 
         var id_pessoa = <?php echo auth()->user()->id; ?>;
         var pergunta = $("#pergunta").val();
-        var id_prestador = '<?= $prestador[0]->id ?>';
+        var id_prestador = '<?= $prestador[0]->user_id ?>';
 
         if(pergunta == 0)
         {
@@ -470,7 +474,7 @@
         var resposta = $("#resposta"+id_pergunta).val();
 
         console.log(resposta);
-        var id_prestador = '<?= $prestador[0]->id ?>';
+        var id_prestador = '<?= $prestador[0]->user_id ?>';
 
         $.ajax({
             url: '/gravar_resposta',

@@ -18,5 +18,4 @@ class Galeria extends Model
     public function user(){
         return $this->belongsTo(Users::class);
     }
-
 }

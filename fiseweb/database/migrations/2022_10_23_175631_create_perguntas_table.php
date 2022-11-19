@@ -17,7 +17,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('pessoa_user_id');
-            $table->integer('id_prestador');
+            // $table->integer('id_prestador');
+            $table->unsignedBigInteger("id_prestador")->unsigned();
+            $table->foreign("id_prestador")
+                ->references("id")
+                ->on("prestadors");
             $table->integer('id_pergunta')->nullable();
             $table->integer('tipo');
             $table->integer('status');

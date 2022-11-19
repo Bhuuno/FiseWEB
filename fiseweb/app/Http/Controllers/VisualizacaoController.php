@@ -110,7 +110,7 @@ class VisualizacaoController extends Controller
         INNER JOIN 
          	prestadors AS pr ON pr.user_id = '$prestador'
         WHERE 
-            v.prestador_id = pr.id AND
+            v.prestador_id = pr.user_id AND
             date(v.created_at) >= '$mensal' 
             LIMIT 30)as mensal,
             
@@ -120,7 +120,7 @@ class VisualizacaoController extends Controller
         INNER JOIN 
          	prestadors AS pr ON pr.user_id = $prestador
         WHERE 
-            v.prestador_id = pr.id)as total_visualizacao,
+            v.prestador_id = pr.user_id)as total_visualizacao,
             
         (select COUNT(*)
         FROM 
