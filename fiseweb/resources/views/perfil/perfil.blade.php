@@ -128,12 +128,12 @@
                                             <input type="mail" required class="form-control" name="email" id="email" placeholder="teste@exemplo.com"></div>
                                         <div class="col-md-6">
                                             <label for="rg" class="form-label">RG</label>
-                                            <input type="text" required class="form-control" data-mask="000.00.000-0" maxlength="9" name="rg" id="rg" placeholder="Ex: 000.000.000-00">
+                                            <input type="text" required class="form-control" data-mask="00.000.000-0" maxlength="12" name="rg" id="rg" placeholder="Ex: 00.000.000-0">
                                         </div>
                             
                                         <div class="col-md-6">
                                             <label for="cpf" name="exemplo" id="exemplo" class="form-label">CPF</label>
-                                            <input type="text" required name="cpf" data-mask="999.999.999-26" class="form-control" id="cpf" maxlength='11' onkeyup="verificarCPF()" onkeydown="verificarCPF()" name="cpf" placeholder="Digite apenas os números do CPF">
+                                            <input type="text" required name="cpf" data-mask="999.999.999-99" class="form-control" id="cpf" maxlength='14' onkeyup="verificarCPF()" onkeydown="verificarCPF()" name="cpf" placeholder="Digite apenas os números do CPF">
                                         </div>
                                         
                                     </div>
@@ -148,7 +148,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <label for="cep" id="label_cep" class="labels">CEP</label>
-                                            <input type="cep" required class="form-control" id="cep" name="cep" onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
+                                            <input type="cep" required class="form-control" id="cep" name="cep" maxlength="8" onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="city" class="labels">Cidade</label>
@@ -299,7 +299,7 @@
                                         </div>
                                         <div class="col-3">
                                             <label for="cep" id="label_cep" class="form-label">CEP</label>
-                                            <input type="cep" required class="form-control cep" id="cep" name="cep" onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
+                                            <input type="cep" required class="form-control cep" id="cep" name="cep" maxlength="8" onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
                                         </div>
                                     </div>
                                     <div class="row mt-3">
@@ -488,7 +488,7 @@
                                         </div>
                                         <div class="col-3">
                                             <label for="cep" id="label_cep" class="form-label">CEP</label>
-                                            <input type="cep" required class="form-control cep" id="cep" value="{{$prestador->cep}}" name="cep" onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
+                                            <input type="cep" required class="form-control cep" id="cep" value="{{$prestador->cep}}" name="cep" maxlength="8" onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
                                         </div>
                                     </div>
                                     <div class="row mt-3">

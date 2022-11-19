@@ -34,32 +34,6 @@
     <!-- menu projeto -->
     @extends('layouts.menu')
 
-        <!-- MENU VER PERFIL -->
-        <div class="mt-3 container">
-            <ul class="nav nav-tabs" id="minhaAba" role="tablist">
-                <a style="text-decoration: none;" href="/dashboard/prestador/{{$id}}?id={{$id}}">
-                    <li class="nav-item" role="presentation">
-                        <button  style="background-color:white; color:black" class="nav-link" id="inicial-tab" data-bs-toggle="tab" data-bs-target="#inicial" type="button"
-                            role="tab" aria-controls="inicial" aria-selected="false">Perfil Prestador</button>
-                    </li>
-                </a>
-                <!-- Galeria -->
-                <a  style="text-decoration: none;" href="/dashboard/avaliacao/{{$id}}?id={{$id}}">
-                    <li class="nav-item" role="presentation">
-                        <button style="background-color:red; color:black" class="nav-link active" id="pefil-tab" data-bs-toggle="tab" data-bs-target="#pefil" type="button"
-                            role="tab" aria-controls="pefil" aria-selected="true">Avaliações</button>
-                    </li>
-                </a>
-                <!-- Galeria -->
-                <a style="text-decoration: none;" href="/dashboard/galeria/{{$id}}?id={{$id}}">
-                    <li class="nav-item" role="presentation">
-                        <button style="background-color:white; color:black" class="nav-link" id="contato-tab" data-bs-toggle="tab" data-bs-target="#contato" type="button"
-                            role="tab" aria-controls="contato" aria-selected="false">Galeria</button>
-                    </li>
-                </a>
-            </ul>
-        <div>
-
         <!-- valida se usuário não quer acessar sua propria página de avaliação! -->
         @if(auth()->user()->role == 'cliente' && $_GET['id'] == auth()->user()->id)
             <script>
@@ -86,6 +60,32 @@
             </script>
         @else
         <div class="container">
+            <!-- MENU VER PERFIL -->
+            <div class="mt-3 container">
+                <ul class="nav nav-tabs" id="minhaAba" role="tablist">
+                    <a style="text-decoration: none;" href="/dashboard/prestador/{{$id}}?id={{$id}}">
+                        <li class="nav-item" role="presentation">
+                            <button  style="background-color:white; color:black" class="nav-link" id="inicial-tab" data-bs-toggle="tab" data-bs-target="#inicial" type="button"
+                                role="tab" aria-controls="inicial" aria-selected="false">Perfil Prestador</button>
+                        </li>
+                    </a>
+                    <!-- Galeria -->
+                    <a  style="text-decoration: none;" href="/dashboard/avaliacao/{{$id}}?id={{$id}}">
+                        <li class="nav-item" role="presentation">
+                            <button style="background-color:red; color:black" class="nav-link active" id="pefil-tab" data-bs-toggle="tab" data-bs-target="#pefil" type="button"
+                                role="tab" aria-controls="pefil" aria-selected="true">Avaliações</button>
+                        </li>
+                    </a>
+                    <!-- Galeria -->
+                    <a style="text-decoration: none;" href="/dashboard/galeria/{{$id}}?id={{$id}}">
+                        <li class="nav-item" role="presentation">
+                            <button style="background-color:white; color:black" class="nav-link" id="contato-tab" data-bs-toggle="tab" data-bs-target="#contato" type="button"
+                                role="tab" aria-controls="contato" aria-selected="false">Galeria</button>
+                        </li>
+                    </a>
+                </ul>
+            <div>
+                
             <div class="row main-body">
                 <div class="row gutters-sm" style="padding:1%;">
                     <div class="col-md-3">

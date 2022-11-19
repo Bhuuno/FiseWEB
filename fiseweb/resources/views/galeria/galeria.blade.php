@@ -22,8 +22,8 @@
         @extends('layouts.menu')
 
     <!-- MENU VER PERFIL -->
-    <div class="mt-2 container">
-        <ul class="nav nav-tabs" id="minhaAba" role="tablist">
+    <div class="mt-3 container">
+        <ul class="nav nav-tabs" id="minhaAba" role="tablist" style="margin-left: 49px;">
             <a style="text-decoration: none;" href="/dashboard/prestador/{{$id}}?id={{$id}}">
                 <li class="nav-item" role="presentation">
                     <button style="background-color:white; color:black;" class="nav-link" id="inicial-tab" data-bs-toggle="tab" data-bs-target="#inicial" type="button"
@@ -156,28 +156,30 @@
                                 @endfor              
                             </div>
                         @else
-                            <script>
-                                window.onload = function(){
-                                    swal({
-                                        title: "Alerta",
-                                        text: "Prestador não possui imagens!",
-                                        icon: "info",
-                                            
-                                        buttons: {
-                                        btn1: "ok",
-                                        },
-                                    })
-                                    .then((value) => {
-                                        switch (value) {
-                                            case "btn1":
-                                                //volta para a página anterior
-                                                history.go(-1)
-                                            break;
-                                        }
-                                    });
-                
-                                }
-                            </script>
+                            @if(auth()->user()->id != $id)
+                                <script>
+                                    window.onload = function(){
+                                        swal({
+                                            title: "Alerta",
+                                            text: "Prestador não possui imagens!",
+                                            icon: "info",
+                                                
+                                            buttons: {
+                                            btn1: "ok",
+                                            },
+                                        })
+                                        .then((value) => {
+                                            switch (value) {
+                                                case "btn1":
+                                                    //volta para a página anterior
+                                                    history.go(-1)
+                                                break;
+                                            }
+                                        });
+                    
+                                    }
+                                </script>
+                            @endif
                         @endif
                     </div>
                 </div>

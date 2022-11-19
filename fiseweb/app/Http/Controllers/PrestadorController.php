@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use auth;
 use App\Models\User;
 use resources\views;
 use App\Models\Prestador;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PessoaController;
 
 class PrestadorController extends Controller
@@ -110,19 +110,21 @@ class PrestadorController extends Controller
         ->get();
 
         //RETORNA APENAS PERGUNTAS   
-        $perguntas = DB::select("SELECT 
-                                    pr.*,
-                                    pe.image as imagem,
-                                    pe.nome as nome
-                                FROM 
-                                    `perguntas` AS pr
-                                INNER JOIN 
-                                    pessoas AS pe ON pr.pessoa_user_id = pe.user_id
-                                WHERE 
-                                    id_prestador = $id 
-                                    AND id_pergunta is null 
-                                    AND tipo = 0 
-                                    ORDER by pr.created_at desc;");
+        $perguntas = DB::select("SELECT
+                                    ps.nome,
+                                    ps.image,
+                                    pe.* 
+                                FROM
+                                    prestadors AS pr
+                                INNER JOIN
+                                    perguntas AS pe ON pe.id_prestador = pr.user_id
+                                INNER JOIN
+                                    pessoas AS ps ON ps.user_id = pe.pessoa_user_id
+                                WHERE
+                                    pr.user_id = $id
+                                    AND pe.id_pergunta is null 
+                                    AND pe.tipo = 0 
+                                    ORDER by pe.created_at desc;");
 
         //RETORNA APENAS RESPOSTAS   
         $respostas = DB::select("SELECT 
@@ -130,9 +132,9 @@ class PrestadorController extends Controller
                                     pr.razao_social as nome_razaosocial,
                                     pr.image as image_prestador
                                 FROM `perguntas` AS p
-                                    INNER JOIN prestadors AS pr ON pr.id = p.id_prestador
+                                    INNER JOIN prestadors AS pr ON pr.user_id = p.id_prestador
                                 WHERE 
-                                    id_prestador = $id 
+                                    pr.user_id = $id 
                                     AND id_pergunta is not null 
                                     AND tipo = 1 ORDER by p.created_at;");
 
