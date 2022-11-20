@@ -23,8 +23,8 @@
         <button class="btn buttoncor" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <img src="/icons/list.svg" class="img-button">  
         </button> 
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
-            AVALIAÇÕES
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline">
+            <b>AVALIAÇÕES</b>
         </h2>
     </x-slot>
     <div class="container-fluid m-2">
@@ -72,8 +72,8 @@
                     <!-- Galeria -->
                     <a  style="text-decoration: none;" href="/dashboard/avaliacao/{{$id}}?id={{$id}}">
                         <li class="nav-item" role="presentation">
-                            <button style="background-color:red; color:black" class="nav-link active" id="pefil-tab" data-bs-toggle="tab" data-bs-target="#pefil" type="button"
-                                role="tab" aria-controls="pefil" aria-selected="true">Avaliações</button>
+                            <button style="background-color:rgb(4, 12, 124); color:rgb(255, 255, 255);" class="nav-link active d-flex" id="pefil-tab" data-bs-toggle="tab" data-bs-target="#pefil" type="button"
+                                role="tab" aria-controls="pefil" aria-selected="true"><img src="/icons/star-half.svg" class="icon-space2">Avaliações</button>
                         </li>
                     </a>
                     <!-- Galeria -->

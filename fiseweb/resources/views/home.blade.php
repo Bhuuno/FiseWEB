@@ -1,4 +1,5 @@
 @extends('layouts.padrao')
+
 @section('titulo', 'FiseWEB')
 
 <x-app-layout>
@@ -11,10 +12,75 @@
                 </button>
             @endif
 
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3 title-blades">
-                HOME
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline  title-blades">
+                <b>HOME</b>
             </h2>
         </div>
+
+        @if(isset(auth()->user()->id))
+            <?php $id = auth()->user()->id; ?>
+            
+            <div class="container-fluid m-2">
+                <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 menucor" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
+                    <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-white text-decoration-none text-white">
+                        <span class="fs-4">Menu</span>
+                    </a>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+
+
+                    @if(auth()->user()->role == 'prestador' ||  auth()->user()->role == 'administrador')
+                        <a href="/dashboard?id={{$id}}" class="nav-link link-dark text-white">
+                            <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Dashboard</li>
+                            <hr>
+                        </a>
+                    @endif
+
+
+                    <a href="/dashboard/perfil?id={{$id}}" class="nav-link link-dark text-white">
+                        <li class="d-flex"><img src="/icons/person.svg" class="icon-space">Perfil</li>
+                        <hr>
+                    </a>
+
+                    <!-- <a href="#" class="nav-link link-dark text-white">
+                        <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
+                        <hr>
+                    </a> -->
+
+                    <!-- <a href="#" class="nav-link link-dark text-white">
+                        <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
+                        <hr>
+                    </a> -->
+
+                    @if(auth()->user()->role != 'cliente')
+                        <a href="/dashboard/avaliacao/{{$id}}?id={{$id}}" class="nav-link link-dark text-white">
+                            <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
+                            <hr>
+                        </a>
+                    @endif
+                    @if(auth()->user()->role != 'cliente')
+                    <a href="/dashboard/galeria/{{$id}}?id={{$id}}" class="nav-link link-dark text-white">
+                        <li class="d-flex"><img src="/icons/images.svg" class="icon-space">Galeria</li>
+                        <hr>
+                    </a>
+                    @endif
+                    @if(auth()->user()->role != 'cliente')
+                        <a href="/dashboard/pagamento/index?id={{$id}}" class="nav-link link-dark text-white">
+                            <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Seja Pro!</li>
+                            <hr>
+                        </a>
+                    @endif
+
+                    <!-- <a href="#" class="nav-link link-dark text-white">
+                        <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>
+                        <hr>
+                    </a> -->
+
+                    </ul>
+                    <hr>
+                </div>
+            </div>
+        @endif
 
         <!-- Aparece botão quando faz login e o nivel do usuário é cliente -->
         @if(!empty(auth()->user()->role) && auth()->user()->role == 'cliente')
@@ -105,14 +171,14 @@
                             <a href="/dashboard/prestador/{{$prestador->user_id}}?id={{$prestador->user_id}}" class="text-decoration-none" style="color:black;">
                             <div class="row g-0">
                                 <div class="col-md-3 border border-dark text-center">
-                                    <img style="height:260px; margin:auto" src="/img/fotos_perfil/{{isset($prestador->image)?$prestador->image:'sem-foto.png'}}" class="img-fluid" alt="...">
+                                    <img style="height:260px; margin:auto" src="/img/fotos_perfil/{{$prestador->image}}" class="img-fluid" alt="...">
                                     <p class="bg-warning">{{strtoupper($prestador->profissao)}}</p>
                                     <p>{{strtoupper($prestador->cidade)}}</p>
                                 </div>
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h5 class="card-title">{{strtoupper($prestador->nome)}}</h5>
-                                        <p class="card-text">Especialidade: {{$prestador->especialidade}}</p>
+                                        <p class="card-text">Expecialidade: {{$prestador->especialidade}}</p>
                                         <p class="card-text">Contato: {{$prestador->celular}}</p>
                                         <p class="card-text"><small class="text-muted">Parceiro desde: {{date('d/m/Y', strtotime($prestador->created_at));}}</small></p>
                                         <p class="card-text">Experiências: {{$prestador->experiencia}}</p>
