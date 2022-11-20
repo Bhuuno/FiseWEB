@@ -13,7 +13,7 @@
             @endif
 
             <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3 title-blades">
-                HOME
+                <b>HOME</b>
             </h2>
         </div>
 

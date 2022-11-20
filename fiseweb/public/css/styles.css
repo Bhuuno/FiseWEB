@@ -94,3 +94,11 @@ background: linear-gradient(15deg, rgb(1, 56, 29), rgb(0, 43, 86));
 .title-blades{
     margin-top: 30px;
 }
+.prestador-button{
+    background-color:rgb(4, 12, 124); 
+    color:black;
+}
+.icon-space2{
+    margin-right: 6px;
+    margin-top: 3px;
+}

@@ -5,8 +5,10 @@
     <x-slot name="header">
         <button class="btn buttoncor" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <img src="/icons/list.svg" class="img-button">  
-        </button>         
-          <h2 class="d-inline p-4">PERFIL PRESTADOR</h2>
+        </button> 
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
+            <b>PERFIL PRESTADOR</b>
+        </h2>
     </x-slot>
     
     <!-- menu projeto -->
@@ -17,8 +19,8 @@
         <ul class="nav nav-tabs" id="minhaAba" role="tablist" style="margin-left: 39px;">
             <a style="text-decoration: none; color:black;" href="/dashboard/avaliacao/{{$id}}?id={{$id}}">
                 <li class="nav-item" role="presentation">
-                    <button style="background-color:red; color:black;" class="nav-link active" id="inicial-tab" data-bs-toggle="tab" data-bs-target="#inicial" type="button"
-                        role="tab" aria-controls="inicial" aria-selected="true">Perfil Prestador</button>
+                    <button style="background-color:rgb(4, 12, 124); color:rgb(255, 255, 255);" class="nav-link active d-flex" id="inicial-tab" data-bs-toggle="tab" data-bs-target="#inicial" type="button"
+                        role="tab" aria-controls="inicial" aria-selected="true"><img src="/icons/person.svg" class="icon-space">Perfil Prestador</button>
                 </li>
             </a>
             <!-- Avaliação -->

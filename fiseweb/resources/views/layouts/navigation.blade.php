@@ -4,8 +4,8 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <a href="\" style="max-width: 10%; heigth: auto;">
-                    <img src="/img/fise-logo.png">
+                <a href="\" >
+                    <img src="/img/Logo-semfundo.png" style="max-width: 23%; margin-left: -2%;">
                 </a>
                 
                 <!-- Navigation Links -->

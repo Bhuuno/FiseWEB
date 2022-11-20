@@ -11,9 +11,9 @@
     <x-slot name="header">
         <button class="btn buttoncor" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <img src="/icons/list.svg" class="img-button">  
-        </button>        
+        </button> 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
-            GALERIA
+            <b>GALERIA</b>
         </h2>
     </x-slot>
 
@@ -40,8 +40,8 @@
             <!-- Galeria -->
             <a style="text-decoration: none;" href="/dashboard/galeria/{{$id}}?id={{$id}}">
                 <li class="nav-item" role="presentation">
-                    <button style="background-color:red; color:black;" class="nav-link active" id="contato-tab" data-bs-toggle="tab" data-bs-target="#contato" type="button"
-                        role="tab" aria-controls="contato" aria-selected="false">Galeria</button>
+                    <button style="background-color:rgb(4, 12, 124); color:rgb(255, 255, 255);" class="nav-link active d-flex" id="contato-tab" data-bs-toggle="tab" data-bs-target="#contato" type="button"
+                        role="tab" aria-controls="contato" aria-selected="false"><img src="/icons/images.svg" class="icon-space2">Galeria</button>
                 </li>
             </a>
         </ul>
