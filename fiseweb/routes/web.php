@@ -58,6 +58,7 @@ Route::get('/dashboard/prestador/{id}',[PrestadorController::class,'profile'])->
 Route::get('/gravar_pergunta',[PerguntaController::class,'gravar_pergunta'])->middleware(['auth']);
 Route::get('/gravar_resposta',[PerguntaController::class,'gravar_resposta'])->middleware(['auth']);
 Route::get('/verificar_notificacao',[PerguntaController::class,'notificacao'])->middleware(['auth']);
+Route::get('/nomes_notificacao',[PerguntaController::class,'nomes_notificacao'])->middleware(['auth']);
 
 //NOTA SERVIÇO PRESTADOR
 Route::get('/media',[AvaliacaoController::class,'media'])->middleware(['auth']);

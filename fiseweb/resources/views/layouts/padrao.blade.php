@@ -56,9 +56,10 @@
       <ul>
         <li style="padding: 10px;">
           <kbd>Perguntas: <span id="pergunta">0</span></kbd>
+          <p id="nomes_perguntas"></p>
         </li>
         <li style="padding: 10px;">
-          <kbd>Respostas: <span id="resposta">0</span></kbd>
+          <kbd>Respostas: <span id="resposta">0</span> <p id="nomes_respostas"></p></kbd>
         </li>
         <!-- <li>
           <label for="opcao3">Opção 3</label>
@@ -80,8 +81,9 @@
       url: '/verificar_notificacao',
       type: 'get',
       data: {},
-      success: function( result ) {  
+      success: function(result ) {  
         var notificacao = JSON.parse(result);
+        // console.log(notificacao);
 
         var total = parseInt(notificacao[0].perguntas) + parseInt(notificacao[0].respondido);
 
@@ -90,7 +92,27 @@
         
         document.getElementById('pergunta').innerHTML = notificacao[0].perguntas;
         document.getElementById('resposta').innerHTML = notificacao[0].respondido;
+        $.ajax({
+          url: '/nomes_notificacao',
+          type: 'get',
+          data: {},
+          success: function(result ) {  
+            nomes = JSON.parse(result);
+            $respostas = "";
+            
+            nomes.forEach(item => $respostas += '<a href="/dashboard/prestador/1?id=1" class="text-decoration-none" style="color:yellow;"><div style="width:130px;">'+item.nome+'</div></a>')
+
+            // console.log(respostas);
+
+            // document.getElementById('nomes_perguntas').innerHTML = respostas;
+            $("#nomes_respostas").html($respostas);
         
+
+          },
+          error: function( request, status, error ) {
+            console.log(error);
+          }
+        });
       },
       error: function( request, status, error ) {
         console.log(error);
