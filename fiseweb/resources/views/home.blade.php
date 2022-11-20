@@ -12,7 +12,7 @@
                 </button>
             @endif
 
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3 title-blades">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline  title-blades">
                 <b>HOME</b>
             </h2>
         </div>

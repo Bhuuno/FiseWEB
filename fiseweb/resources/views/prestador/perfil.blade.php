@@ -6,7 +6,7 @@
         <button class="btn buttoncor" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <img src="/icons/list.svg" class="img-button">  
         </button> 
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline p-3">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight d-inline">
             <b>PERFIL PRESTADOR</b>
         </h2>
     </x-slot>
