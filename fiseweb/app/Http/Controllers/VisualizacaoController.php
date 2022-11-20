@@ -101,56 +101,58 @@ class VisualizacaoController extends Controller
         //PEGA O ID DO PRESTADOR
         $prestador = auth()->user()->id;
 
+        var_dump($prestador);exit();
+
         //REALIZA A CONSULTA DO PRESTADOR
         $consulta = DB::select("SELECT
         COUNT(*) as semanal,
-        (select COUNT(*)
-        from 
-            visualizacaos as v
-        INNER JOIN 
-         	prestadors AS pr ON pr.user_id = '$prestador'
-        WHERE 
-            v.prestador_id = pr.user_id AND
-            date(v.created_at) >= '$mensal' 
-            LIMIT 30)as mensal,
-            
-        (select COUNT(*)
-        from 
-            visualizacaos as v
-        INNER JOIN 
-         	prestadors AS pr ON pr.user_id = $prestador
-        WHERE 
-            v.prestador_id = pr.user_id)as total_visualizacao,
-            
-        (select COUNT(*)
-        FROM 
-            prestadors AS p
-        INNER JOIN 
-            avaliacaos as ava ON ava.prestador_id = p.id
-        WHERE 
-            user_id = $prestador)as total_avaliacoes,
+            (select COUNT(*)
+            from 
+                visualizacaos as v
+            INNER JOIN 
+                prestadors AS pr ON pr.user_id = '$prestador'
+            WHERE 
+                v.prestador_id = pr.user_id AND
+                date(v.created_at) >= '$mensal' 
+                LIMIT 30)as mensal,
+                
+            (select COUNT(*)
+            from 
+                visualizacaos as v
+            INNER JOIN 
+                prestadors AS pr ON pr.user_id = $prestador
+            WHERE 
+                v.prestador_id = pr.user_id)as total_visualizacao,
+                
+            (select COUNT(*)
+            FROM 
+                prestadors AS p
+            INNER JOIN 
+                avaliacaos as ava ON ava.prestador_id = p.id
+            WHERE 
+                user_id = $prestador)as total_avaliacoes,
 
-        (SELECT COUNT(*) from galerias WHERE user_id = $prestador) as qtde_fotos,
+            (SELECT COUNT(*) from galerias WHERE user_id = $prestador) as qtde_fotos,
 
-        (select sum(av.avaliacao)/(SELECT COUNT(*)
-        FROM 
-            prestadors AS p
+            (select sum(av.avaliacao)/(SELECT COUNT(*)
+            FROM 
+                prestadors AS p
+            INNER JOIN 
+                avaliacaos as ava ON ava.prestador_id = p.id
+            WHERE 
+                user_id = $prestador)
+            FROM 
+                prestadors AS p 
+            INNER JOIN avaliacaos AS av ON av.prestador_id = p.id
+            WHERE 
+                p.user_id = $prestador) as media
+        from 
+            visualizacaos AS v
         INNER JOIN 
-            avaliacaos as ava ON ava.prestador_id = p.id
+            prestadors AS pr ON pr.user_id = $prestador
         WHERE 
-            user_id = $prestador)
-        FROM 
-	        prestadors AS p 
-        INNER JOIN avaliacaos AS av ON av.prestador_id = p.id
-        WHERE 
-            p.user_id = $prestador) as media
-    from 
-        visualizacaos AS v
-    INNER JOIN 
-        prestadors AS pr ON pr.user_id = $prestador
-    WHERE 
-        v.prestador_id = PR.user_id AND 
-        date(v.created_at) >= '$semana';");
+            v.prestador_id = PR.user_id AND 
+            date(v.created_at) >= '$semana';");
 
         return json_encode($consulta);
         
@@ -158,7 +160,7 @@ class VisualizacaoController extends Controller
     public function grafico()
     {
         //RECEBE DO DASHBOAD
-        $prestador = $_GET['prestador'];
+        $prestador = auth()->user()->id;
         $dias = $_GET['dias'];
         $data = $_GET['data'];
 
@@ -170,20 +172,22 @@ class VisualizacaoController extends Controller
         }
 
         $grafico = DB::select("SELECT 
-            COUNT(prestador_id) AS quantidade,
-            date_format(created_at, '%d/%m/%Y') AS data,
-            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = '$prestador' AND avaliacao = '1') AS NOTA0,
-            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = '$prestador' AND avaliacao = '1') AS NOTA1,
-            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = '$prestador' AND avaliacao = '2') AS NOTA2,
-            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = '$prestador' AND avaliacao = '3') AS NOTA3,
-            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = '$prestador' AND avaliacao = '4') AS NOTA4,
-            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = '$prestador' AND avaliacao = '5') AS NOTA5
+            COUNT(v.prestador_id) AS quantidade,
+            date_format(v.created_at, '%d/%m/%Y') AS data,
+            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = pr.id AND avaliacao = '0') AS NOTA0,
+            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = pr.id AND avaliacao = '1') AS NOTA1,
+            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = pr.id AND avaliacao = '2') AS NOTA2,
+            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = pr.id AND avaliacao = '3') AS NOTA3,
+            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = pr.id AND avaliacao = '4') AS NOTA4,
+            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = pr.id AND avaliacao = '5') AS NOTA5
         FROM 
-            visualizacaos 
+            visualizacaos as v
+        INNER JOIN 
+        	prestadors AS pr ON pr.user_id = '$prestador' 
         WHERE 
-            prestador_id = '$prestador' AND
-            date(created_at) >= '$data' 
-            GROUP BY DATA
+            v.prestador_id = pr.id AND
+            date(v.created_at) >= '$data' 
+            GROUP BY DATA, pr.id
             LIMIT $dias");
 
        return json_encode($grafico);

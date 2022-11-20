@@ -77,8 +77,10 @@
     <div class="tab container">
     <input type="radio" name="tabs" id="tab1" checked>
     <label for="tab1">Perfil Pessoal</label>
-    <input type="radio" name="tabs" id="tab2">
-    <label for="tab2">Perfil Profissional</label>
+    @if(auth()->user()->role != 'cliente')
+        <input type="radio" name="tabs" id="tab2">
+        <label for="tab2">Perfil Profissional</label>
+    @endif
     <div class="tabs">
         @if(!isset($pessoa))
             <div class="content">
@@ -250,7 +252,7 @@
         @endif
         
         <!-- CADASTRO PRESTADOR -->
-        @if(!isset($prestador))
+        @if(!isset($prestador) && auth()->user()->role != 'cliente')
             <div class="content">
                 <div class="container-fluid rounded bg-white mt-5 mb-5">
                     <div class="row">
@@ -440,6 +442,7 @@
                 </div>  
             </div>
         @else
+            @if(auth()->user()->role != 'cliente')
             <div class="content">
                 <div class="container-fluid rounded bg-white mt-5 mb-5">
                     <div class="row">
@@ -633,6 +636,7 @@
                     </div>
                 </div>  
             </div>
+            @endif
         @endif
     </div>
 </x-app-layout>
