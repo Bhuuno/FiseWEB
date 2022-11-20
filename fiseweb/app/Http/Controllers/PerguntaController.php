@@ -39,15 +39,63 @@ class PerguntaController extends Controller
 
     public function notificacao()
     {
+        $dados = [];
         $id_prestador = auth()->user()->id;
         try{
             $notificacao = db::select("SELECT 
-            (SELECT count(*) FROM perguntas as p 
-                        WHERE p.pessoa_user_id = $id_prestador and status = 1 and p.tipo = 0 and visualizacao = 0) as respondido,
-            (SELECT count(*) FROM perguntas as p
-                        WHERE p.id_prestador = $id_prestador and status = 0 and visualizacao = 0) as perguntas;");
+                                            (SELECT count(*) FROM perguntas as p 
+                                                        WHERE p.pessoa_user_id = $id_prestador and status = 1 and p.tipo = 0 and visualizacao = 0) as respondido,
+                                            (SELECT count(*) FROM perguntas as p
+                                                        WHERE p.id_prestador = $id_prestador and status = 0 and visualizacao = 0) as perguntas;");
+
+            //RETORNA APENAS RESPOSTAS   
+            $perguntas = DB::select("SELECT DISTINCT
+                                                pe.nome
+                                            FROM
+                                                perguntas AS p
+                                            INNER JOIN
+                                                prestadors AS pr ON pr.user_id = p.id_prestador
+                                            INNER JOIN
+                                                pessoas AS pe ON pe.user_id = p.pessoa_user_id
+                                            WHERE
+                                                p.id_prestador = $id_prestador
+                                                AND p.status = 1
+                                                AND p.tipo = 0;");
+    
+            
+            
+
+            // var_dump($dados);exit();
 
             return json_encode($notificacao);
+        }
+        catch(\Exception $e){
+            return false;
+        }
+    }
+
+    public function nomes_notificacao()
+    {
+        $dados = [];
+        $id_prestador = auth()->user()->id;
+        try{
+           
+            //RETORNA APENAS NOMES
+            $nomes = DB::select("SELECT DISTINCT
+                                                pe.nome
+                                            FROM
+                                                perguntas AS p
+                                            INNER JOIN
+                                                prestadors AS pr ON pr.user_id = p.id_prestador
+                                            INNER JOIN
+                                                pessoas AS pe ON pe.user_id = p.pessoa_user_id
+                                            WHERE
+                                                p.id_prestador = $id_prestador
+                                                AND p.status = 1
+                                                AND p.tipo = 0;");
+
+
+            return json_encode($nomes);
         }
         catch(\Exception $e){
             return false;
