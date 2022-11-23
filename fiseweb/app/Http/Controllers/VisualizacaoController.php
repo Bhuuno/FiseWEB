@@ -101,8 +101,6 @@ class VisualizacaoController extends Controller
         //PEGA O ID DO PRESTADOR
         $prestador = auth()->user()->id;
 
-        var_dump($prestador);exit();
-
         //REALIZA A CONSULTA DO PRESTADOR
         $consulta = DB::select("SELECT
         COUNT(*) as semanal,
@@ -174,7 +172,7 @@ class VisualizacaoController extends Controller
         $grafico = DB::select("SELECT 
             COUNT(v.prestador_id) AS quantidade,
             date_format(v.created_at, '%d/%m/%Y') AS data,
-            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = pr.id AND avaliacao = '0') AS NOTA0,
+            (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = pr.id AND avaliacao = '1') AS NOTA0,
             (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = pr.id AND avaliacao = '1') AS NOTA1,
             (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = pr.id AND avaliacao = '2') AS NOTA2,
             (SELECT COUNT(*) FROM avaliacaos WHERE prestador_id = pr.id AND avaliacao = '3') AS NOTA3,
@@ -185,7 +183,7 @@ class VisualizacaoController extends Controller
         INNER JOIN 
         	prestadors AS pr ON pr.user_id = '$prestador' 
         WHERE 
-            v.prestador_id = pr.id AND
+            v.prestador_id = pr.user_id AND
             date(v.created_at) >= '$data' 
             GROUP BY DATA, pr.id
             LIMIT $dias");

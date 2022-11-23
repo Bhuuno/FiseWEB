@@ -48,23 +48,6 @@ class PerguntaController extends Controller
                                             (SELECT count(*) FROM perguntas as p
                                                         WHERE p.id_prestador = $id_prestador and status = 0 and visualizacao = 0) as perguntas;");
 
-            //RETORNA APENAS RESPOSTAS   
-            $perguntas = DB::select("SELECT DISTINCT
-                                                pe.nome
-                                            FROM
-                                                perguntas AS p
-                                            INNER JOIN
-                                                prestadors AS pr ON pr.user_id = p.id_prestador
-                                            INNER JOIN
-                                                pessoas AS pe ON pe.user_id = p.pessoa_user_id
-                                            WHERE
-                                                p.id_prestador = $id_prestador
-                                                AND p.status = 1
-                                                AND p.tipo = 0;");
-    
-            
-            
-
             // var_dump($dados);exit();
 
             return json_encode($notificacao);
