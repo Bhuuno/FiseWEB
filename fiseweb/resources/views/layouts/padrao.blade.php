@@ -55,11 +55,10 @@
       </button>
       <ul>
         <li style="padding: 10px;">
-          <kbd>Perguntas: <span id="pergunta">0</span></kbd>
-          <p id="nomes_perguntas"></p>
+          <kbd>Perguntas: <span id="pergunta">0</span><p id="nomes_perguntas"></p></kbd>
         </li>
         <li style="padding: 10px;">
-          <kbd>Respostas: <span id="resposta">0</span> <p id="nomes_respostas"></p></kbd>
+          <kbd>Respostas: <span id="resposta">0</span><p id="nomes_respostas"></p></kbd>
         </li>
         <!-- <li>
           <label for="opcao3">Opção 3</label>
@@ -105,7 +104,7 @@
             // console.log(respostas);
 
             // document.getElementById('nomes_perguntas').innerHTML = respostas;
-            $("#nomes_respostas").html($respostas);
+            $("#nomes_perguntas").html($respostas);
         
 
           },
