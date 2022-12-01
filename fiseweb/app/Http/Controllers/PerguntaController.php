@@ -57,7 +57,7 @@ class PerguntaController extends Controller
         }
     }
 
-    public function nomes_notificacao()
+    public function nomes_notificacao_perguntas()
     {
         $dados = [];
         $id_prestador = auth()->user()->id;
@@ -74,8 +74,35 @@ class PerguntaController extends Controller
                                                 pessoas AS pe ON pe.user_id = p.pessoa_user_id
                                             WHERE
                                                 p.id_prestador = $id_prestador
-                                                AND p.status = 1
+                                                AND p.status = 0
                                                 AND p.tipo = 0;");
+
+
+            return json_encode($nomes);
+        }
+        catch(\Exception $e){
+            return false;
+        }
+    }
+
+    
+    public function nomes_notificacao_respostas()
+    {
+        $dados = [];
+        $id_prestador = auth()->user()->id;
+        try{
+           
+            //RETORNA APENAS NOMES
+            $nomes = DB::select("SELECT DISTINCT
+                                            ps.user_id,
+                                            ps.nome
+                                        FROM 
+                                            perguntas as p
+                                        INNER JOIN
+                                            pessoas AS ps ON ps.user_id = p.id_prestador 
+                                        WHERE
+                                            p.pessoa_user_id = $id_prestador
+                                            AND p.status = 1;");
 
 
             return json_encode($nomes);

@@ -77,7 +77,7 @@
   // VERIFICA SE POSSUI NOTIFICAÇÕES
   // Não pode colocar dentro do windows onload, isso pode dar B.O
   $.ajax({
-      url: '/verificar_notificacao',
+      url: '/verificar_notificacao_perguntas',
       type: 'get',
       data: {},
       success: function(result ) {  
@@ -92,19 +92,40 @@
         document.getElementById('pergunta').innerHTML = notificacao[0].perguntas;
         document.getElementById('resposta').innerHTML = notificacao[0].respondido;
         $.ajax({
-          url: '/nomes_notificacao',
+          url: '/nomes_notificacao_perguntas',
           type: 'get',
           data: {},
           success: function(result ) {  
             nomes = JSON.parse(result);
-            $respostas = "";
+            $perguntas = "";
             
-            nomes.forEach(item => $respostas += '<a href="/dashboard/prestador/1?id=1" class="text-decoration-none" style="color:yellow;"><div style="width:130px;">'+item.nome+'</div></a>')
+            nomes.forEach(item => $perguntas += '<div style="width:230px;"><a href="/dashboard/prestador/3?id=3" class="text-decoration-none" style="color:yellow;"><div>'+item.nome+'</div></a></div>')
 
             // console.log(respostas);
 
             // document.getElementById('nomes_perguntas').innerHTML = respostas;
-            $("#nomes_perguntas").html($respostas);
+            $("#nomes_perguntas").html($perguntas);
+        
+
+          },
+          error: function( request, status, error ) {
+            console.log(error);
+          }
+        });
+        $.ajax({
+          url: '/nomes_notificacao_respostas',
+          type: 'get',
+          data: {},
+          success: function(result) {  
+            nomes = JSON.parse(result);
+            $respostas = "";
+            
+            nomes.forEach(item => $respostas += '<a href="/dashboard/prestador/'+item.user_id+'?id='+item.user_id+'" class="text-decoration-none" style="color:yellow;"><div style="width:230px;">'+item.nome+'</div></a>')
+
+            // console.log(respostas);
+
+            // document.getElementById('nomes_perguntas').innerHTML = respostas;
+            $("#nomes_respostas").html($respostas);
         
 
           },

@@ -169,8 +169,8 @@
                                 @if(!empty($comentario))
                                     @foreach ($comentario as $item)
                                         <div style="display: flex;">
-                                            <img src="/img/fotos_perfil/{{isset($item->imagem)?$item->imagem:'sem-foto.png'}}" style="border-radius: 50%;" width="4%" height="4%" alt="">
-                                            <p>{{$item->nome_cliente}} - {{date('d/m/Y', strtotime($item->created_at));}}</p>
+                                            <img src="/img/fotos_perfil/{{isset($item->imagem)?$item->imagem:'sem-foto.png'}}" style="border-radius: 100%; width:26px; height:26px;" alt="">
+                                            <p style="margin-left:3px;">{{$item->nome_cliente}} - {{date('d/m/Y', strtotime($item->created_at));}}</p>
                                         </div>  
                                         <div class="col-sm-7 text-secondary">
                                             {{$item->comentario}}
