@@ -16,7 +16,7 @@ body{
     background-color: #cb60b3;
     border: none;
     box-shadow: 0 1px 5px rgba(0,0,0,.4);
-    font-size: 24px;
+    font-size: 20px;
     color: white;
       
     -webkit-transition: .2s ease-out;
@@ -33,15 +33,16 @@ body{
     width: 60px;
     height: 60px;
     border-radius: 30px;
-    background-color: #5b19b7;
+    background-color: #a05efc;
     right: 0;
     bottom: 0;
     z-index: 20;
   }
   
   .fab button.main:before{
-    content: '⏚';
+    content: '🔔';
   }
+  /* 🕭 */
   
   .fab ul{
     position:absolute;
@@ -62,7 +63,7 @@ body{
     display: flex;
     justify-content: flex-start;
     position: relative;
-    margin-bottom: -10%;
+    /* margin-bottom: -10%; */
     opacity: 0;
     
     -webkit-transition: .3s ease-out;

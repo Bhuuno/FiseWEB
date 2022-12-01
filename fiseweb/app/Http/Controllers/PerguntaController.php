@@ -25,7 +25,8 @@ class PerguntaController extends Controller
             $perguntas->id_prestador = $id_prestador;
             $perguntas->resposta = "";
             $perguntas->status = 0;
-            $perguntas->visualizacao = 0;
+            $perguntas->visualizacao_pergunta = 0;
+            $perguntas->visualizacao_resposta = 0;
             $perguntas->tipo = 0;
 
             $perguntas->save();
@@ -43,10 +44,10 @@ class PerguntaController extends Controller
         $id_prestador = auth()->user()->id;
         try{
             $notificacao = db::select("SELECT 
-                                            (SELECT count(*) FROM perguntas as p 
-                                                        WHERE p.pessoa_user_id = $id_prestador and status = 1 and p.tipo = 0 and visualizacao = 0) as respondido,
-                                            (SELECT count(*) FROM perguntas as p
-                                                        WHERE p.id_prestador = $id_prestador and status = 0 and visualizacao = 0) as perguntas;");
+                                        (SELECT count(*) FROM perguntas as p 
+                                                    WHERE p.pessoa_user_id = $id_prestador and status = 1 and p.tipo = 0 and visualizacao_resposta <= 0) as respondido,
+                                        (SELECT count(*) FROM perguntas as p
+                                                    WHERE p.id_prestador = $id_prestador and status = 0 and tipo = 0) as perguntas;");
 
             // var_dump($dados);exit();
 
@@ -65,7 +66,8 @@ class PerguntaController extends Controller
            
             //RETORNA APENAS NOMES
             $nomes = DB::select("SELECT DISTINCT
-                                                pe.nome
+                                                pe.nome,
+                                                pe.user_id
                                             FROM
                                                 perguntas AS p
                                             INNER JOIN
@@ -85,7 +87,7 @@ class PerguntaController extends Controller
         }
     }
 
-    
+
     public function nomes_notificacao_respostas()
     {
         $dados = [];
@@ -102,7 +104,8 @@ class PerguntaController extends Controller
                                             pessoas AS ps ON ps.user_id = p.id_prestador 
                                         WHERE
                                             p.pessoa_user_id = $id_prestador
-                                            AND p.status = 1;");
+                                            AND p.status = 1 
+                                            ;");
 
 
             return json_encode($nomes);
@@ -110,6 +113,21 @@ class PerguntaController extends Controller
         catch(\Exception $e){
             return false;
         }
+    }
+
+
+    public function visualizacao_resposta()
+    {
+        $id_prestador = $_GET['id_prestador'];
+        $id_pessoa = auth()->user()->id;
+
+        try{
+            $atualizar = DB::select("UPDATE perguntas SET visualizacao_resposta = visualizacao_resposta + 1 WHERE id_prestador =$id_prestador AND pessoa_user_id = $id_pessoa AND status = 1 AND id_pergunta is null;");
+        }
+        catch(\Exception $e){
+            return false;
+        }
+
     }
 
     public function gravar_resposta()
@@ -128,7 +146,8 @@ class PerguntaController extends Controller
             $perguntas->id_pergunta = $id_pergunta;
             $perguntas->resposta = $resposta;
             $perguntas->status = 0;
-            $perguntas->visualizacao = 0;
+            $perguntas->visualizacao_pergunta = 0;
+            $perguntas->visualizacao_resposta = 0;
             $perguntas->tipo = 1;
 
             $perguntas->save();

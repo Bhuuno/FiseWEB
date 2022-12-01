@@ -51,7 +51,7 @@
     </div> -->
     <div class="fab">
       <button class="main">
-        <kbd name="qtd_notificacoes" id="qtd_notificacoes" style="border-radius:27px; font-size:16px;">0</kbd>
+        <kbd name="qtd_notificacoes" id="qtd_notificacoes" style="border-radius:27px; font-size:18px;">0</kbd>
       </button>
       <ul>
         <li style="padding: 10px;">
@@ -91,6 +91,8 @@
         
         document.getElementById('pergunta').innerHTML = notificacao[0].perguntas;
         document.getElementById('resposta').innerHTML = notificacao[0].respondido;
+
+        // nomes perguntas
         $.ajax({
           url: '/nomes_notificacao_perguntas',
           type: 'get',
@@ -99,7 +101,7 @@
             nomes = JSON.parse(result);
             $perguntas = "";
             
-            nomes.forEach(item => $perguntas += '<div style="width:230px;"><a href="/dashboard/prestador/3?id=3" class="text-decoration-none" style="color:yellow;"><div>'+item.nome+'</div></a></div>')
+            nomes.forEach(item => $perguntas += '<a style:"width:50px; backgorund:color:red;" href="/dashboard/prestador/'+item.user_id+'?id='+item.user_id+'" class="text-decoration-none" style="color:yellow;"><div style="width:230px; display:block;"><div>'+item.nome+'</div></div></a>')
 
             // console.log(respostas);
 
@@ -112,6 +114,8 @@
             console.log(error);
           }
         });
+
+        // nomes respostas
         $.ajax({
           url: '/nomes_notificacao_respostas',
           type: 'get',

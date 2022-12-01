@@ -382,24 +382,38 @@
         var id = <?php echo $id; ?>
 
         $.ajax({
-                url: '/media',
-                type: 'get',
-                data: {
-                    id:id
-                },
-                success: function( result ) {  
-                    resposta = JSON.parse(result);
+            url: '/media',
+            type: 'get',
+            data: {
+                id:id
+            },
+            success: function( result ) {  
+                resposta = JSON.parse(result);
 
-                    media = resposta[0].total_nota / resposta[0].qtde_avaliacao;
+                media = resposta[0].total_nota / resposta[0].qtde_avaliacao;
 
-                    //ALETRA O VALOR DA MEDIA
-                    if(resposta[0].total_nota != null)
-                        document.getElementById('media').innerHTML = media.toFixed(1)
-                },
-                error: function( request, status, error ) {
-                    console.log(request,status,error);
-                }
-                
+                //ALETRA O VALOR DA MEDIA
+                if(resposta[0].total_nota != null)
+                    document.getElementById('media').innerHTML = media.toFixed(1)
+            },
+            error: function( request, status, error ) {
+                console.log(request,status,error);
+            }
+        });
+        //VERIFICA SE PRESTADOR VIU A RESPOSTA DO PRESTADOR
+        $.ajax({
+            url: '/visualizacao_resposta',
+            type: 'get',
+            data: {
+                id_prestador:id
+            },
+            success: function( result ) {  
+                resposta = JSON.parse(result);
+                alert('deu certo');
+            },
+            error: function( request, status, error ) {
+                console.log(request,status,error);
+            }
         });
     };
 
@@ -452,7 +466,7 @@
                         .then((value) => {
                             switch (value) {
                                 case "btn1":                                   
-                                    document.location.reload(true);
+                                    // document.location.reload(true);
                                 break;
                             }
                         });
@@ -497,7 +511,7 @@
                         .then((value) => {
                             switch (value) {
                                 case "btn1":                                   
-                                    document.location.reload(true);
+                                    // document.location.reload(true);
                                 break;
                             }
                         });
