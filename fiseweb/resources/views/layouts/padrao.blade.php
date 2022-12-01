@@ -83,64 +83,66 @@
       success: function(result ) {  
         var notificacao = JSON.parse(result);
         // console.log(notificacao);
+        if(notificacao != "")
+        {
+          var total = parseInt(notificacao[0].perguntas) + parseInt(notificacao[0].respondido);
 
-        var total = parseInt(notificacao[0].perguntas) + parseInt(notificacao[0].respondido);
+          //pega o valor das notificações
+          document.getElementById('qtd_notificacoes').innerHTML = total;
+          
+          document.getElementById('pergunta').innerHTML = notificacao[0].perguntas;
+          document.getElementById('resposta').innerHTML = notificacao[0].respondido;
 
-        //pega o valor das notificações
-        document.getElementById('qtd_notificacoes').innerHTML = total;
-        
-        document.getElementById('pergunta').innerHTML = notificacao[0].perguntas;
-        document.getElementById('resposta').innerHTML = notificacao[0].respondido;
+          // nomes perguntas
+          $.ajax({
+            url: '/nomes_notificacao_perguntas',
+            type: 'get',
+            data: {},
+            success: function(result ) {  
+              nomes = JSON.parse(result);
+              $perguntas = "";
+              
+              nomes.forEach(item => $perguntas += '<a style:"width:50px; backgorund:color:red;" href="/dashboard/prestador/'+item.user_id+'?id='+item.user_id+'" class="text-decoration-none" style="color:yellow;"><div style="width:230px; display:block;"><div>'+item.nome+'</div></div></a>')
 
-        // nomes perguntas
-        $.ajax({
-          url: '/nomes_notificacao_perguntas',
-          type: 'get',
-          data: {},
-          success: function(result ) {  
-            nomes = JSON.parse(result);
-            $perguntas = "";
-            
-            nomes.forEach(item => $perguntas += '<a style:"width:50px; backgorund:color:red;" href="/dashboard/prestador/'+item.user_id+'?id='+item.user_id+'" class="text-decoration-none" style="color:yellow;"><div style="width:230px; display:block;"><div>'+item.nome+'</div></div></a>')
+              // console.log(respostas);
 
-            // console.log(respostas);
+              // document.getElementById('nomes_perguntas').innerHTML = respostas;
+              $("#nomes_perguntas").html($perguntas);
+          
 
-            // document.getElementById('nomes_perguntas').innerHTML = respostas;
-            $("#nomes_perguntas").html($perguntas);
-        
+            },
+            error: function( request, status, error ) {
+              console.log(error);
+            }
+          });
 
-          },
-          error: function( request, status, error ) {
-            console.log(error);
-          }
-        });
+          // nomes respostas
+          $.ajax({
+            url: '/nomes_notificacao_respostas',
+            type: 'get',
+            data: {},
+            success: function(result) {  
+              nomes = JSON.parse(result);
+              $respostas = "";
+              
+              nomes.forEach(item => $respostas += '<a href="/dashboard/prestador/'+item.user_id+'?id='+item.user_id+'" class="text-decoration-none" style="color:yellow;"><div style="width:230px;">'+item.nome+'</div></a>')
 
-        // nomes respostas
-        $.ajax({
-          url: '/nomes_notificacao_respostas',
-          type: 'get',
-          data: {},
-          success: function(result) {  
-            nomes = JSON.parse(result);
-            $respostas = "";
-            
-            nomes.forEach(item => $respostas += '<a href="/dashboard/prestador/'+item.user_id+'?id='+item.user_id+'" class="text-decoration-none" style="color:yellow;"><div style="width:230px;">'+item.nome+'</div></a>')
+              // console.log(respostas);
 
-            // console.log(respostas);
+              // document.getElementById('nomes_perguntas').innerHTML = respostas;
+              $("#nomes_respostas").html($respostas);
+          
 
-            // document.getElementById('nomes_perguntas').innerHTML = respostas;
-            $("#nomes_respostas").html($respostas);
-        
-
-          },
-          error: function( request, status, error ) {
-            console.log(error);
-          }
-        });
+            },
+            error: function( request, status, error ) {
+              console.log(error);
+            }
+          });
+        }
       },
       error: function( request, status, error ) {
         console.log(error);
-      }
+    }
   });
 </script>
 
