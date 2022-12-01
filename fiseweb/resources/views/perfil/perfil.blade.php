@@ -87,7 +87,7 @@
                 <div class="container-fluid rounded bg-white mt-5 mb-5">
                     <div class="row">
                         <div class="col-md-3 border-right">
-                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" style="width:150px; height:150px;" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
                         </div>
                         <div class="col-md-9 border-right"> 
                             <div class="p-3 py-5">
@@ -170,7 +170,7 @@
                 <div class="container-fluid rounded bg-white mt-5 mb-5">
                     <div class="row">
                         <div class="col-md-3 border-right">
-                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="/img/fotos_perfil/{{isset($pessoa->image)?$pessoa->image:'sem-foto.png'}}"><span class="font-weight-bold">{{$pessoa->nome}}</span><span class="text-black-50">{{$pessoa->email}}</span><span> </span></div>
+                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" style="width:150px; height:150px;" src="/img/fotos_perfil/{{isset($pessoa->image)?$pessoa->image:'sem-foto.png'}}"><span class="font-weight-bold">{{$pessoa->nome}}</span><span class="text-black-50">{{$pessoa->email}}</span><span> </span></div>
                         </div>
                         <div class="col-md-9 border-right"> 
                             <div class="p-3 py-5">
@@ -257,7 +257,7 @@
                 <div class="container-fluid rounded bg-white mt-5 mb-5">
                     <div class="row">
                         <div class="col-md-3 border-right">
-                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" style="width:150px; height:150px;" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
                         </div>
                         <div class="col-md-9 border-right">
                             <form action="{{route('prestador.store')}}" method="post" enctype="multipart/form-data">
@@ -447,7 +447,7 @@
                 <div class="container-fluid rounded bg-white mt-5 mb-5">
                     <div class="row">
                         <div class="col-md-3 border-right">
-                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="/img/fotos_perfil/{{isset($prestador->image)?$prestador->image:'sem-foto.png'}}"><span class="font-weight-bold">{{$prestador->razao_social}}</span><span class="text-black-50">{{$prestador->email}}</span><span> </span></div>
+                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" style="width:150px; height:150px;" src="/img/fotos_perfil/{{isset($prestador->image)?$prestador->image:'sem-foto.png'}}"><span class="font-weight-bold">{{$prestador->razao_social}}</span><span class="text-black-50">{{$prestador->email}}</span><span> </span></div>
                         </div>
                         <div class="col-md-9 border-right">
                             <form action="{{route('prestador.update','$cadastro->user_id')}}" method="post" enctype="multipart/form-data">

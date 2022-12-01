@@ -317,16 +317,16 @@
 
 
                                         @foreach ($perguntas as $item)
-                                            <div class="input-group">
-                                                <img style="height:35px; border-radius:12px;" src="/img/fotos_perfil/{{isset($item->image)?$item->image:'sem-foto.png'}}">
+                                            <div class="input-group" style="display:flex; align-items:center;">
+                                                <img style="height:35px; width:35px; border-radius:100%;" src="/img/fotos_perfil/{{isset($item->image)?$item->image:'sem-foto.png'}}">
                                                 <h5 style="margin-left:4px;" class="mt-3">{{$item->nome}} - {{date('d/m/Y', strtotime($item->created_at));}}: <?php echo($item->pergunta); ?></h5>
                                             </div>
                                             @foreach($respostas as $item2)
                                                 @if($item->id == $item2->id_pergunta)
                                                     <!-- IMAGEM E NOME DO PRESTADOR -->
-                                                    <div style="margin-left:40px;" class="input-group">
-                                                        <img style="height:35px; border-radius:12px;" src="/img/fotos_perfil/{{isset($item2->image_prestador)?$item2->image_prestador:'sem-foto.png'}}">
-                                                        <h5 style="margin-left:5px;"> {{ $item2->nome_razaosocial; }} - {{date('d/m/Y', strtotime($item2->created_at));}} : <?php echo($item2->resposta); 
+                                                    <div style="margin-left:40px; display:flex; align-items:center;" class="input-group">
+                                                        <img style="height:35px; width:35px; border-radius:100%;" src="/img/fotos_perfil/{{isset($item2->image_prestador)?$item2->image_prestador:'sem-foto.png'}}">
+                                                        <h5 style="margin-left:4px;"> {{ $item2->nome_razaosocial; }} - {{date('d/m/Y', strtotime($item2->created_at));}} : <?php echo($item2->resposta); 
                                                             // Se já foi respondido não aparece mais o input de resposta
                                                             $respondido = true; ?>
                                                         </h5>
