@@ -60,6 +60,8 @@ Route::get('/gravar_resposta',[PerguntaController::class,'gravar_resposta'])->mi
 Route::get('/verificar_notificacao_perguntas',[PerguntaController::class,'notificacao'])->middleware(['auth']);
 Route::get('/nomes_notificacao_perguntas',[PerguntaController::class,'nomes_notificacao_perguntas'])->middleware(['auth']);
 Route::get('/nomes_notificacao_respostas',[PerguntaController::class,'nomes_notificacao_respostas'])->middleware(['auth']);
+Route::get('/visualizacao_resposta',[PerguntaController::class,'visualizacao_resposta'])->middleware(['auth']);
+
 
 //NOTA SERVIÇO PRESTADOR
 Route::get('/media',[AvaliacaoController::class,'media'])->middleware(['auth']);

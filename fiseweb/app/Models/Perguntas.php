@@ -16,7 +16,8 @@ class Perguntas extends Model
         'status',
         'pergunta',
         'resposta',
-        'visualizacao'
+        'visualizacao_pergunta',
+        'visualizacao_resposta'
     ];
     public function user(){
         return $this->belongsTo(Perguntas::class);
