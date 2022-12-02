@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <a href="\" >
-                    <img src="/img/Logo-semfundo.png" style="max-width: 23%; margin-left: -2%;">
+                    <img src="/img/Logo-semfundo.png" style="width:229px; height:82px; margin-left: -2%; margin-top: -4%">
                 </a>
                 
                 <!-- Navigation Links -->
