@@ -143,10 +143,11 @@
             console.log(error);
           }
         });
+
       },
       error: function( request, status, error ) {
         console.log(error);
-      }
+    }
   });
 </script>
 
