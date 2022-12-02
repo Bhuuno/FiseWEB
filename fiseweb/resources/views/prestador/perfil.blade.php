@@ -408,8 +408,7 @@
                 id_prestador:id
             },
             success: function( result ) {  
-                resposta = JSON.parse(result);
-                alert('deu certo');
+                // resposta = JSON.parse(result);
             },
             error: function( request, status, error ) {
                 console.log(request,status,error);
@@ -466,7 +465,7 @@
                         .then((value) => {
                             switch (value) {
                                 case "btn1":                                   
-                                    // document.location.reload(true);
+                                    document.location.reload(true);
                                 break;
                             }
                         });
@@ -511,7 +510,7 @@
                         .then((value) => {
                             switch (value) {
                                 case "btn1":                                   
-                                    // document.location.reload(true);
+                                    document.location.reload(true);
                                 break;
                             }
                         });

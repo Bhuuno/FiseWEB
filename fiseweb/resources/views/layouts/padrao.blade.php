@@ -55,10 +55,10 @@
       </button>
       <ul>
         <li style="padding: 10px;">
-          <kbd>Perguntas: <span id="pergunta">0</span><p id="nomes_perguntas"></p></kbd>
+          <kbd>Perguntas: <span id="perg"><span id="pergunta_var">0</span></span><p id="nomes_perguntas"></p></kbd>
         </li>
         <li style="padding: 10px;">
-          <kbd>Respostas: <span id="resposta">0</span><p id="nomes_respostas"></p></kbd>
+          <kbd>Respostas: <span id="resp"><span id="resposta_var">0</span></span><p id="nomes_respostas"></p></kbd>
         </li>
         <!-- <li>
           <label for="opcao3">Opção 3</label>
@@ -73,7 +73,7 @@
 </html>
 
 
-<script>
+<script >
   // VERIFICA SE POSSUI NOTIFICAÇÕES
   // Não pode colocar dentro do windows onload, isso pode dar B.O
   $.ajax({
@@ -82,15 +82,31 @@
       data: {},
       success: function(result ) {  
         var notificacao = JSON.parse(result);
-        // console.log(notificacao);
 
         var total = parseInt(notificacao[0].perguntas) + parseInt(notificacao[0].respondido);
 
         //pega o valor das notificações
         document.getElementById('qtd_notificacoes').innerHTML = total;
+
+        $("#pergunta_var").remove();
+        document.getElementById('perg').innerHTML='<span id="pergunta">0</span>';
+        document.getElementById('perg').innerHTML = notificacao[0].perguntas;
         
-        document.getElementById('pergunta').innerHTML = notificacao[0].perguntas;
-        document.getElementById('resposta').innerHTML = notificacao[0].respondido;
+        $("#resposta_var").remove();
+        document.getElementById('resp').innerHTML='<span id="resposta">0</span>';
+        document.getElementById('resp').innerHTML = notificacao[0].respondido;
+
+
+
+        // $perguntas = notificacao[0].perguntas;
+        // $("#pergunta").html($perguntas); 
+
+        
+        // $resposta = notificacao[0].respondido;
+        // $("#resposta").html($resposta); 
+
+          
+
 
         // nomes perguntas
         $.ajax({
@@ -102,12 +118,7 @@
             $perguntas = "";
             
             nomes.forEach(item => $perguntas += '<a style:"width:50px; backgorund:color:red;" href="/dashboard/prestador/'+item.user_id+'?id='+item.user_id+'" class="text-decoration-none" style="color:yellow;"><div style="width:230px; display:block;"><div>'+item.nome+'</div></div></a>')
-
-            // console.log(respostas);
-
-            // document.getElementById('nomes_perguntas').innerHTML = respostas;
-            $("#nomes_perguntas").html($perguntas);
-        
+            $("#nomes_perguntas").html($perguntas); 
 
           },
           error: function( request, status, error ) {
@@ -126,12 +137,7 @@
             
             nomes.forEach(item => $respostas += '<a href="/dashboard/prestador/'+item.user_id+'?id='+item.user_id+'" class="text-decoration-none" style="color:yellow;"><div style="width:230px;">'+item.nome+'</div></a>')
 
-            // console.log(respostas);
-
-            // document.getElementById('nomes_perguntas').innerHTML = respostas;
             $("#nomes_respostas").html($respostas);
-        
-
           },
           error: function( request, status, error ) {
             console.log(error);
