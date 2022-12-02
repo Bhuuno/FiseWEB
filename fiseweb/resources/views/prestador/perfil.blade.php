@@ -310,6 +310,7 @@
                                 @if(!empty($perguntas))
                                     <?php $respondido = false; ?>
                                     <div class="mt-3 text-center">
+                                        <a name="perguntas"></a>
                                         <h4><kbd>Últimas perguntas feitas</kbd></h4>
                                     </div>
                                     <hr>
