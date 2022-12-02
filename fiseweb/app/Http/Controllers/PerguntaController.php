@@ -40,7 +40,6 @@ class PerguntaController extends Controller
 
     public function notificacao()
     {
-        $dados = [];
         $id_prestador = auth()->user()->id;
         try{
             $notificacao = db::select("SELECT 
@@ -58,9 +57,10 @@ class PerguntaController extends Controller
         }
     }
 
+
+    // NOME DE QUEM FEZ AS PERGUNTAS
     public function nomes_notificacao_perguntas()
     {
-        $dados = [];
         $id_prestador = auth()->user()->id;
         try{
            
@@ -88,9 +88,9 @@ class PerguntaController extends Controller
     }
 
 
+    // NOME DE QUEM RESPONDEU
     public function nomes_notificacao_respostas()
     {
-        $dados = [];
         $id_prestador = auth()->user()->id;
         try{
            
@@ -105,7 +105,7 @@ class PerguntaController extends Controller
                                         WHERE
                                             p.pessoa_user_id = $id_prestador
                                             AND p.status = 1 
-                                            ;");
+                                            AND p.visualizacao_resposta <= 0;");
 
 
             return json_encode($nomes);
