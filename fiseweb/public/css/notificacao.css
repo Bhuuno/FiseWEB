@@ -45,14 +45,14 @@ body{
   /* 🕭 */
   
   .fab ul{
-    position:absolute;
+    /* position:absolute;*/
     bottom: 0;
     right: 0;
     padding:0;
-    padding-right:5px;
+    padding-right:45px;
     margin:0;
     list-style:none;
-    z-index:10;
+    z-index:10; 
     
     -webkit-transition: .2s ease-out;
     -moz-transition: .2s ease-out;
