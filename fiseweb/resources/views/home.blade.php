@@ -170,15 +170,15 @@
                             <h2 class="font-semibold ">Buscando por: <i>"{{$search}}"</i></h2><br>
                         @endif
                         @foreach ($prestadores as $prestador)
-                        <div class="card mb-1">
+                        <div class="card mb-2" style="border-radius: 15px;">
                             <a href="/dashboard/prestador/{{$prestador->user_id}}?id={{$prestador->user_id}}" class="text-decoration-none" style="color:black;">
                             <div class="row g-0">
-                                <div class="col-md-3 border border-dark text-center">
-                                    <img style="height:260px; margin:auto" src="/img/fotos_perfil/{{isset($prestador->image)?$prestador->image:'sem-foto.png'}}" class="img-fluid" alt="...">
+                                <div class="col-md-3 border border-dark text-center" style=" border-radius: 15px;">
+                                    <img style="height:260px; margin:auto; border-radius: 15px 15px 0px 0px;" src="/img/fotos_perfil/{{isset($prestador->image)?$prestador->image:'sem-foto.png'}}" class="img-fluid" alt="...">
                                     <p class="bg-warning">{{strtoupper($prestador->profissao)}}</p>
                                     <p>{{strtoupper($prestador->cidade)}}</p>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-7 ms-3">
                                     <div class="card-body">
                                         <h5 class="card-title">{{strtoupper($prestador->nome)}}</h5>
                                         <p class="card-text">Expecialidade: {{$prestador->especialidade}}</p>
