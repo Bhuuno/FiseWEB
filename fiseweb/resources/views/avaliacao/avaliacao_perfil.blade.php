@@ -31,11 +31,8 @@
         <!-- menu projeto -->
         @extends('layouts.menu')
 
-    <!-- menu projeto -->
-    @extends('layouts.menu')
-
         <!-- valida se usuário não quer acessar sua propria página de avaliação! -->
-        @if(auth()->user()->role == 'cliente' && $_GET['id'] == auth()->user()->id)
+        @if(auth()->user()->role == 'cliente' && $id == auth()->user()->id)
             <script>
                 window.onload = function(){
                     swal({
@@ -212,7 +209,7 @@
                                         <p id="rating_nota">0</p>
                                     </div>
                                     <br>
-                                    <button type="button" onclick="gravar_comentario()" class="btn btn-dark">Enviar</button>
+                                    <button type="button" <?php if($id == auth()->user()->id) echo "disabled" ?> onclick="gravar_comentario()" class="btn btn-dark">Enviar</button>
                                 </div>
                             </div>
                         </div>
@@ -243,6 +240,7 @@
                 },
                 success: function( result ) {  
                     document.location.reload(true);
+                    console.log(result);
                 },
                 error: function( request, status, error ) {
                     console.log(error);

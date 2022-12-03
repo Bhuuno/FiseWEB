@@ -76,14 +76,38 @@ class AvaliacaoController extends Controller
         $id_pessoa = DB::select("SELECT id as id from pessoas WHERE user_id = $user");
         $id_prestador = DB::select("SELECT id as id from prestadors WHERE user_id = $id");
 
-        // GRAVA O COMENTARIO NA TABELA DE DADOS "AVALIACAOS"
-        $avaliacao_prestador = new ModelAvaliacao(); 
-        $avaliacao_prestador->pessoa_id = $id_pessoa[0]->id;
-        $avaliacao_prestador->prestador_id = $id_prestador[0]->id;
-        $avaliacao_prestador->comentario = strval($_GET['comentario']);
-        $avaliacao_prestador->avaliacao = $_GET['nota'];
+        $id_p = intval($id_pessoa[0]->id);
+        $id_pr = intval($id_prestador[0]->id);
 
-        $avaliacao_prestador->save();
+        
+        // var_dump(intval($id_pessoa[0]->id),$id_prestador);exit();
+
+        //VERIFICA SE JÁ POSSUI AVALIAÇÃO
+        $avaliacao = DB::select("SELECT 
+                                    count(*) as avaliacao 
+                                FROM 
+                                    `avaliacaos` 
+                                WHERE 
+                                    pessoa_id = $id_p
+                                    and prestador_id = $id_pr");
+
+        if(intval($avaliacao[0]->avaliacao) > 0)
+        {
+            $nota = intval($_GET['nota']);
+            $comentario = strval($_GET['comentario']);
+            DB::select("UPDATE avaliacaos SET comentario = '$comentario', avaliacao = $nota  WHERE prestador_id = $id_pr and pessoa_id = $id_p;");
+        }
+        else
+        {
+            // GRAVA O COMENTARIO NA TABELA DE DADOS "AVALIACAOS"
+            $avaliacao_prestador = new ModelAvaliacao(); 
+            $avaliacao_prestador->pessoa_id = $id_pessoa[0]->id;
+            $avaliacao_prestador->prestador_id = $id_prestador[0]->id;
+            $avaliacao_prestador->comentario = strval($_GET['comentario']);
+            $avaliacao_prestador->avaliacao = $_GET['nota'];
+
+            $avaliacao_prestador->save();
+        }
     }
 
     /**

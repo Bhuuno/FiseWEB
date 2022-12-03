@@ -29,47 +29,50 @@
                     <ul class="nav nav-pills flex-column mb-auto">
 
 
-                    @if(auth()->user()->role == 'prestador' ||  auth()->user()->role == 'administrador')
-                        <a href="/dashboard?id={{$id}}" class="nav-link link-dark text-white">
-                            <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Dashboard</li>
-                            <hr>
-                        </a>
-                    @endif
+                    @if(auth()->user()->role == 'administrador' || auth()->user()->role == 'prestador')
+                <a href="/dashboard?id={{$id}}" class="nav-link link-dark text-white">
+                    <li class="d-flex"><img src="/icons/house-door.svg" class="icon-space">Dashboard</li>
+                    <hr>
+                </a>
+            
+                <a href="/dashboard/prestador/{{auth()->user()->id;}}?id={{auth()->user()->id;}}" class="nav-link link-dark text-white">
+                    <li class="d-flex"><img src="/icons/person.svg" class="icon-space">Perfil Profissional</li>
+                    <hr>
+                </a>
+            @endif
+            <a href="/dashboard/perfil?id={{$id}}" class="nav-link link-dark text-white">
+                <li class="d-flex"><img src="/icons/person.svg" class="icon-space">Conta</li>
+                <hr>
+            </a>
+
+            <!-- <a href="#" class="nav-link link-dark text-white">
+                <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
+                <hr>
+            </a> -->
+
+            <!-- <a href="#" class="nav-link link-dark text-white">
+                <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
+                <hr>
+            </a> -->
+            
+            @if(auth()->user()->role != 'cliente' || auth()->user()->role == 'prestador')
+                <a href="/dashboard/avaliacao/{{$id}}?id={{$id}}" class="nav-link link-dark text-white">
+                    <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
+                    <hr>
+                </a>
+
+                <a href="/dashboard/galeria/{{$id}}?id={{$id}}" class="nav-link link-dark text-white">
+                    <li class="d-flex"><img src="/icons/images.svg" class="icon-space">Galeria</li>
+                    <hr>
+                </a>
+            @endif
 
 
-                    <a href="/dashboard/perfil?id={{$id}}" class="nav-link link-dark text-white">
-                        <li class="d-flex"><img src="/icons/person.svg" class="icon-space">Perfil</li>
-                        <hr>
-                    </a>
+            <a href="/dashboard/pagamento/index?id={{$id}}" class="nav-link link-dark text-white">
+                <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Seja Pro!</li>
+                <hr>
+            </a>
 
-                    <!-- <a href="#" class="nav-link link-dark text-white">
-                        <li class="d-flex"><img src="/icons/briefcase.svg" class="icon-space">Serviços</li>
-                        <hr>
-                    </a> -->
-
-                    <!-- <a href="#" class="nav-link link-dark text-white">
-                        <li class="d-flex"><img src="/icons/journal-bookmark.svg" class="icon-space">Agenda</li>
-                        <hr>
-                    </a> -->
-
-                    @if(auth()->user()->role != 'cliente')
-                        <a href="/dashboard/avaliacao/{{$id}}?id={{$id}}" class="nav-link link-dark text-white">
-                            <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
-                            <hr>
-                        </a>
-                    @endif
-                    @if(auth()->user()->role != 'cliente')
-                    <a href="/dashboard/galeria/{{$id}}?id={{$id}}" class="nav-link link-dark text-white">
-                        <li class="d-flex"><img src="/icons/images.svg" class="icon-space">Galeria</li>
-                        <hr>
-                    </a>
-                    @endif
-                    @if(auth()->user()->role != 'cliente')
-                        <a href="/dashboard/pagamento/index?id={{$id}}" class="nav-link link-dark text-white">
-                            <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Seja Pro!</li>
-                            <hr>
-                        </a>
-                    @endif
 
                     <!-- <a href="#" class="nav-link link-dark text-white">
                         <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>

@@ -99,7 +99,8 @@ function limpa_formulário_cep() {
 function meu_callback(conteudo) {
     if (!("erro" in conteudo)) {
         //Atualiza os campos com os valores.
-        document.getElementById('rua').value=(conteudo.logradouro);
+        if(conteudo.logradouro.length > 0)
+            document.getElementById('rua').value=(conteudo.logradouro);
         // document.getElementById('bairro').value=(conteudo.bairro);
         document.getElementById('cidade').value=(conteudo.localidade);
         // document.getElementById('uf').value=(conteudo.uf);
@@ -108,7 +109,7 @@ function meu_callback(conteudo) {
     else {
         //CEP não Encontrado.
         limpa_formulário_cep();
-        alert("CEP não encontrado.");
+        // alert("CEP não encontrado.");
     }
 }
 function pesquisacep(valor) {
@@ -126,6 +127,7 @@ function pesquisacep(valor) {
         if(validacep.test(cep)) {
 
             //Preenche os campos com "..." enquanto consulta webservice.
+            if((document.getElementById('rua').value).length = 0 )
             document.getElementById('rua').value="...";
             // document.getElementById('bairro').value="...";
             document.getElementById('cidade').value="...";
@@ -144,12 +146,12 @@ function pesquisacep(valor) {
         } //end if.
         else {
             //cep é inválido.
-            limpa_formulário_cep();
+            // limpa_formulário_cep();
             //alert("Formato de CEP inválido.");
         }
     } //end if.
     else {
         //cep sem valor, limpa formulário.
-        limpa_formulário_cep();
+        // limpa_formulário_cep();
     }
 }

@@ -253,6 +253,7 @@
         
         <!-- CADASTRO PRESTADOR -->
         @if(!isset($prestador) && auth()->user()->role != 'cliente')
+            <script type="text/javascript" src="{{asset('../../js/profissional.js')}}"></script>
             <div class="content">
                 <div class="container-fluid rounded bg-white mt-5 mb-5">
                     <div class="row">
@@ -301,7 +302,7 @@
                                         </div>
                                         <div class="col-3">
                                             <label for="cep" id="label_cep" class="form-label">CEP</label>
-                                            <input type="cep" required class="form-control cep" id="cep" name="cep" maxlength="8" onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
+                                            <input type="cep" required class="form-control cep" id="cep" name="cep" maxlength="8" onkeyup="verificarCEP_profissional()" onkeydown="verificarCEP_profissional()" placeholder="Ex: 19000-000">
                                         </div>
                                     </div>
                                     <div class="row mt-3">
