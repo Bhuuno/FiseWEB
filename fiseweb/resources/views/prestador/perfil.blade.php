@@ -281,10 +281,65 @@
                             $cont +=1;
                     } 
                 ?>
-                @if($cont > 0 && $prestador[0]->user_id != auth()->user()->id && auth()->user()->role == 'pessoal' || auth()->user()->role == 'prestador')                   
+                @if($cont > 0 && $prestador[0]->user_id == auth()->user()->id)                   
                     <!-- PERGUNTA AO PRESTADOR -->
                     <!-- Validação tem que ficar aqui se não aparece uma barra -->
-                    @if($prestador[0]->user_id != auth()->user()->id)
+                    <div class="col-sm-12 mt-4">
+                        <div class="card h-60">
+                            <div class="card-body">
+
+                            <!-- RESPOSTAS -->
+                            @if(!empty($perguntas))
+                                <?php $respondido = false; ?>
+                                <div class="mt-3 text-center">
+                                    <a name="perguntas"></a>
+                                    <h4><kbd>Últimas perguntas feitas</kbd></h4>
+                                </div>
+                                <hr>
+                                <div class="mt-4">
+
+
+                                    @foreach ($perguntas as $item)
+                                        <div class="input-group" style="display:flex; align-items:center;">
+                                            <img style="height:35px; width:35px; border-radius:100%;" src="/img/fotos_perfil/{{isset($item->image)?$item->image:'sem-foto.png'}}">
+                                            <h5 style="margin-left:4px;" class="mt-3">{{$item->nome}} - {{date('d/m/Y', strtotime($item->created_at));}}: <?php echo($item->pergunta); ?></h5>
+                                        </div>
+                                        @foreach($respostas as $item2)
+                                            @if($item->id == $item2->id_pergunta)
+                                                <!-- IMAGEM E NOME DO PRESTADOR -->
+                                                <div style="margin-left:40px; display:flex; align-items:center;" class="input-group">
+                                                    <img style="height:35px; width:35px; border-radius:100%;" src="/img/fotos_perfil/{{isset($item2->image_prestador)?$item2->image_prestador:'sem-foto.png'}}">
+                                                    <h5 style="margin-left:4px;"> {{ $item2->nome_razaosocial; }} - {{date('d/m/Y', strtotime($item2->created_at));}} : <?php echo($item2->resposta); 
+                                                        // Se já foi respondido não aparece mais o input de resposta
+                                                        $respondido = true; ?>
+                                                    </h5>
+                                                </div>
+                                                <!-- FIM IMAGEM E NOME -->
+                                            @endif
+                                        @endforeach
+                                        <!-- input de pergunta -->
+                                        <div class="input-group" style="margin-left:20px;" >
+                                            @if($prestador[0]->user_id == auth()->user()->id && $respondido == false)
+                                                <input type="text" style="border-radius: 10px;  width: 60%;" name="resposta{{$item->id}}" id ="resposta{{$item->id}}" placeholder="Escreva sua resposta...">
+                                                <div class="input-group-append">
+                                                    <span style="margin-left:20px;">
+                                                        <button onclick="gravar_resposta(<?php echo($item->id); ?>)" class="btn btn-primary" type="button">Responder</button>
+                                                    </span>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <hr>
+                                    <?php $respondido = false; ?>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <!-- APARECE PARA PESSOAS QUE NÃO TEM CONTA PESSOAL -->
+                @else
+                    @if($prestador[0]->user_id != auth()->user()->id and auth()->user()->role != 'cliente')
                         <div class="col-sm-12 mt-4">
                             <div class="card h-60">
                                 <div class="card-body">
@@ -302,56 +357,56 @@
                     @else
                         <div class="col-sm-12 mt-4">
                             <div class="card h-60">
-                                <div class="card-body">
-
                     @endif
 
-                                <!-- RESPOSTAS -->
-                                @if(!empty($perguntas))
-                                    <?php $respondido = false; ?>
-                                    <div class="mt-3 text-center">
-                                        <a name="perguntas"></a>
-                                        <h4><kbd>Últimas perguntas feitas</kbd></h4>
-                                    </div>
-                                    <hr>
-                                    <div class="mt-4">
+                            <!-- RESPOSTAS -->
+                            @if(!empty($perguntas))
+                            
+                            <div class="card-body">
+                                <?php $respondido = false; ?>
+                                <div class="mt-3 text-center">
+                                    <a name="perguntas"></a>
+                                    <h4><kbd>Últimas perguntas feitas</kbd></h4>
+                                </div>
+                                <hr>
+                                <div class="mt-4">
 
 
-                                        @foreach ($perguntas as $item)
-                                            <div class="input-group" style="display:flex; align-items:center;">
-                                                <img style="height:35px; width:35px; border-radius:100%;" src="/img/fotos_perfil/{{isset($item->image)?$item->image:'sem-foto.png'}}">
-                                                <h5 style="margin-left:4px;" class="mt-3">{{$item->nome}} - {{date('d/m/Y', strtotime($item->created_at));}}: <?php echo($item->pergunta); ?></h5>
-                                            </div>
-                                            @foreach($respostas as $item2)
-                                                @if($item->id == $item2->id_pergunta)
-                                                    <!-- IMAGEM E NOME DO PRESTADOR -->
-                                                    <div style="margin-left:40px; display:flex; align-items:center;" class="input-group">
-                                                        <img style="height:35px; width:35px; border-radius:100%;" src="/img/fotos_perfil/{{isset($item2->image_prestador)?$item2->image_prestador:'sem-foto.png'}}">
-                                                        <h5 style="margin-left:4px;"> {{ $item2->nome_razaosocial; }} - {{date('d/m/Y', strtotime($item2->created_at));}} : <?php echo($item2->resposta); 
-                                                            // Se já foi respondido não aparece mais o input de resposta
-                                                            $respondido = true; ?>
-                                                        </h5>
-                                                    </div>
-                                                    <!-- FIM IMAGEM E NOME -->
-                                                @endif
-                                            @endforeach
-                                            <!-- input de pergunta -->
-                                            <div class="input-group" style="margin-left:20px;" >
-                                                @if($prestador[0]->user_id == auth()->user()->id && $respondido == false)
-                                                    <input type="text" style="border-radius: 10px;  width: 60%;" name="resposta{{$item->id}}" id ="resposta{{$item->id}}" placeholder="Escreva sua resposta...">
-                                                    <div class="input-group-append">
-                                                        <span style="margin-left:20px;">
-                                                            <button onclick="gravar_resposta(<?php echo($item->id); ?>)" class="btn btn-primary" type="button">Responder</button>
-                                                        </span>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                            <hr>
-                                        <?php $respondido = false; ?>
+                                    @foreach ($perguntas as $item)
+                                        <div class="input-group" style="display:flex; align-items:center;">
+                                            <img style="height:35px; width:35px; border-radius:100%;" src="/img/fotos_perfil/{{isset($item->image)?$item->image:'sem-foto.png'}}">
+                                            <h5 style="margin-left:4px;" class="mt-3">{{$item->nome}} - {{date('d/m/Y', strtotime($item->created_at));}}: <?php echo($item->pergunta); ?></h5>
+                                        </div>
+                                        @foreach($respostas as $item2)
+                                            @if($item->id == $item2->id_pergunta)
+                                                <!-- IMAGEM E NOME DO PRESTADOR -->
+                                                <div style="margin-left:40px; display:flex; align-items:center;" class="input-group">
+                                                    <img style="height:35px; width:35px; border-radius:100%;" src="/img/fotos_perfil/{{isset($item2->image_prestador)?$item2->image_prestador:'sem-foto.png'}}">
+                                                    <h5 style="margin-left:4px;"> {{ $item2->nome_razaosocial; }} - {{date('d/m/Y', strtotime($item2->created_at));}} : <?php echo($item2->resposta); 
+                                                        // Se já foi respondido não aparece mais o input de resposta
+                                                        $respondido = true; ?>
+                                                    </h5>
+                                                </div>
+                                                <!-- FIM IMAGEM E NOME -->
+                                            @endif
                                         @endforeach
-                                    </div>
-                                @endif
-                            </div>
+                                        <!-- input de pergunta -->
+                                        <div class="input-group" style="margin-left:20px;" >
+                                            @if($prestador[0]->user_id == auth()->user()->id && $respondido == false)
+                                                <input type="text" style="border-radius: 10px;  width: 60%;" name="resposta{{$item->id}}" id ="resposta{{$item->id}}" placeholder="Escreva sua resposta...">
+                                                <div class="input-group-append">
+                                                    <span style="margin-left:20px;">
+                                                        <button onclick="gravar_resposta(<?php echo($item->id); ?>)" class="btn btn-primary" type="button">Responder</button>
+                                                    </span>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <hr>
+                                        <?php $respondido = false; ?>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
                         </div>
                     </div>
                 @endif

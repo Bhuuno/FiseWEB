@@ -41,7 +41,7 @@
                 <hr>
             </a> -->
             
-            @if(auth()->user()->role == 'pessoal' || auth()->user()->role == 'prestador')
+            @if(auth()->user()->role != 'cliente')
                 <a href="/dashboard/avaliacao/{{$id}}?id={{$id}}" class="nav-link link-dark text-white">
                     <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
                     <hr>
@@ -53,12 +53,12 @@
                 </a>
             @endif
 
-            @if(auth()->user()->role != 'cliente')
+            <!-- @if(auth()->user()->role != 'cliente') -->
                 <a href="/dashboard/pagamento/index?id={{$id}}" class="nav-link link-dark text-white">
                     <li class="d-flex"><img src="/icons/wrench-adjustable.svg" class="icon-space">Seja Pro!</li>
                     <hr>
                 </a>
-            @endif
+            <!-- @endif -->
 
             <!-- <a href="#" class="nav-link link-dark text-white">
                 <li class="d-flex"><img src="/icons/gear-fill.svg" class="icon-space">Configurações</li>
