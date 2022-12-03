@@ -81,7 +81,6 @@
             
                 <!-- GRAFICO DE LINHA E BARRA -->
                 <div id="grafico" style="display:flex; width:64%;">
-                
                     <canvas id="myChart"></canvas>
                     <canvas id="myChart1"></canvas>
                 </div>

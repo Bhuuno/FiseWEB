@@ -88,6 +88,12 @@
 <script >
   // VERIFICA SE POSSUI NOTIFICAÇÕES
   // Não pode colocar dentro do windows onload, isso pode dar B.O
+  function trocar_cor()
+  {
+    
+  }
+
+
   $.ajax({
       url: '/verificar_notificacao_perguntas',
       type: 'get',
