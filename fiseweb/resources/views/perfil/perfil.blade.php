@@ -155,6 +155,10 @@
                                             <label for="cep" id="label_cep" class="labels">CEP</label>
                                             <input type="cep" required class="form-control" id="cep" name="cep" maxlength="8" onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
                                         </div>
+                                        <div class="col-md-3">
+                                            <label for="city" class="labels">Cidade</label>
+                                            <input type="city" required class="form-control" id="cidade" name="cidade" placeholder="Ex: Presidente Prudente-SP">
+                                        </div>
                                         <div class="col-md-4">
                                             <label for="rua" class="labels">Endereço</label>
                                             <input type="rua" required class="form-control" name="endereco" value="" id="rua" placeholder="Ex: R. Rua dos Bobos">
@@ -162,10 +166,6 @@
                                         <div class="col-md-2">
                                             <label for="numero" class="labels">N°</label>
                                             <input type="text" required name="numero" class="form-control" id="numero" placeholder="0">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="city" class="labels">Cidade</label>
-                                            <input type="city" required class="form-control" id="cidade" name="cidade" placeholder="Ex: Presidente Prudente-SP">
                                         </div>
                                     </div>
                                     <div class="mt-5 text-center"><button class="btn btn-success profile-button" type="submit">Salvar!</button></div>
@@ -245,6 +245,10 @@
                                             <label for="cep" id="label_cep" class="labels">CEP</label>
                                             <input type="cep" required class="form-control" maxlength="8" id="cep" name="cep" value="{{$pessoa->cep}}"  onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
                                         </div>
+                                        <div class="col-md-3">
+                                            <label for="city" class="labels">Cidade</label>
+                                            <input type="city" required class="form-control" id="cidade" value="{{$pessoa->cidade}}"  name="cidade" placeholder="Ex: Presidente Prudente-SP">
+                                        </div>
                                         <div class="col-md-4">
                                             <label for="rua" class="labels">Endereço</label>
                                             <input type="rua" required class="form-control" name="endereco" value="{{$pessoa->endereco}}"  value="" id="rua" placeholder="Ex: R. Rua dos Bobos">
@@ -252,10 +256,6 @@
                                         <div class="col-md-2">
                                             <label for="numero" class="labels">N°</label>
                                             <input type="text" required name="numero" value="{{$pessoa->numero}}" class="form-control" id="numero" placeholder="0">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="city" class="labels">Cidade</label>
-                                            <input type="city" required class="form-control" id="cidade" value="{{$pessoa->cidade}}"  name="cidade" placeholder="Ex: Presidente Prudente-SP">
                                         </div>
                                     </div>
 
@@ -536,7 +536,11 @@
                 <div class="container-fluid rounded bg-white mt-5 mb-5">
                     <div class="row">
                         <div class="col-md-3 border-right">
-                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" style="width:150px; height:150px;" src="/img/fotos_perfil/{{isset($prestador->image)?$prestador->image:'sem-foto.png'}}"><span class="font-weight-bold">{{$prestador->razao_social}}</span><span class="text-black-50">{{$prestador->email}}</span><span> </span></div>
+                            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                                <img class="rounded-circle mt-5" style="width:150px; height:150px;" src="/img/fotos_perfil/{{isset($prestador->image)?$prestador->image:'sem-foto.png'}}">
+                                <span class="font-weight-bold">{{$prestador->razao_social}}</span>
+                                <span class="text-black-50">{{$prestador->email}}</span>
+                            </div>
                         </div>
                         <div class="col-md-9 border-right">
                             <form action="{{route('prestador.update','$cadastro->user_id')}}" method="post" enctype="multipart/form-data">
@@ -550,13 +554,15 @@
                                         <label for="image">Imagem de perfil: </label>
                                         <input type="file" class="form-control-file" id="image" name="image">
                                     </div>
+
                                     <hr>
+
                                     <div class="row mt-2">
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <label for="razao_social" class="labels">Razão Social</label>
                                             <input type="text" required value="{{$prestador->razao_social}}" name="razao_social" class="form-control razao_social" id="razao_social" placeholder="Exemplo LTDA">
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <label for="data_constituicao" class="labels">Data de Constituição</label>
                                             <input type="date" required name="data_constituicao"  value="{{$prestador->data_constituicao}}" class="form-control data_constituicao" id="data_constituicao">
                                         </div>
@@ -565,24 +571,26 @@
                                             <input type="text"  data-mask="99.999.999/9999-99" maxlength="14" required class="form-control" name="cnpj" value="{{$prestador->cnpj}}" id="cnpj" maxlength='14' placeholder="XX.XXX.XXX/0001-XX">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-5">
-                                            <label for="rua" class="form-label">Endereço</label>
-                                            <input type="text" required class="form-control endereco" value="{{$prestador->endereco}}" name="endereco" id="rua" placeholder="Ex: R. João Constatino Silva">
-                                        </div>
-                                        <div class="col-1">
-                                            <label for="numero" class="form-label">N°</label>
-                                            <input type="text" required name="numero" class="form-control numero" value="{{$prestador->numero}}" id="numero">
-                                        </div>
-                                        <div class="col-3">
-                                            <label for="cidade" class="form-label">Cidade</label>
-                                            <input type="city" required class="form-control cidade" value="{{$prestador->cidade}}" id="cidade" name="cidade" placeholder="Ex: Presidente Prudente-SP">
-                                        </div>
-                                        <div class="col-3">
+
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
                                             <label for="cep" id="label_cep" class="form-label">CEP</label>
                                             <input type="cep" required class="form-control cep" id="cep" value="{{$prestador->cep}}" name="cep" maxlength="8" onkeyup="verificarCEP()" onkeydown="verificarCEP()" placeholder="Ex: 19000-000">
                                         </div>
+                                        <div class="col-md-3">
+                                            <label for="cidade" class="form-label">Cidade</label>
+                                            <input type="city" required class="form-control cidade" value="{{$prestador->cidade}}" id="cidade" name="cidade" placeholder="Ex: Presidente Prudente-SP">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="rua" class="form-label">Endereço</label>
+                                            <input type="text" required class="form-control endereco" value="{{$prestador->endereco}}" name="endereco" id="rua" placeholder="Ex: R. João Constatino Silva">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="numero" class="form-label">N°</label>
+                                            <input type="text" required name="numero" class="form-control numero" value="{{$prestador->numero}}" id="numero">
+                                        </div>
                                     </div>
+
                                     <div class="row mt-3">
                                         <div class="col-md-4">
                                             <label for="celular" class="labels">Celular</label>
@@ -594,18 +602,21 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="email" class="labels">E-mail</label>
-                                            <input type="mail" required class="form-control" value="{{$prestador->email}}" name="email" id="email" placeholder="teste@exemplo.com"></div>
+                                            <input type="mail" required class="form-control" value="{{$prestador->email}}" name="email" id="email" placeholder="teste@exemplo.com">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
                                         <div class="col-md-6">
                                             <label for="profissao" class="labels">Profissão</label>
                                             <input type="text" required class="form-control profissao" value="{{$prestador->profissao}}" name="profissao" id="profissao" placeholder="Pedreiro">
                                         </div>
-
                                         <div class="col-md-6">
                                             <label for="especialidade" class="labels">Especialidade</label>
                                             <input type="text" required class="form-control especialidade" value="{{$prestador->especialidade}}" name="especialidade" id="especialidade" placeholder="Construção Civil">
                                         </div>
-
                                     </div>
+
                                     <!-- REDES SOCIAIS -->
                                     <hr>
 
@@ -618,13 +629,16 @@
                                             <input type="text" class="form-control website" name="website" value="{{$prestador->website}}" id="website">
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="github" class="labels">Github</label>
+                                            <label for="github" class="labels">GitHub</label>
                                             <input type="text" class="form-control telefone" name="github" value="{{$prestador->github}}" id="github">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="twitter" class="labels">Twitter</label>
                                             <input type="text" class="form-control" name="twitter" value="{{$prestador->twitter}}" id="twitter">
                                         </div>
+                                    </div>
+
+                                    <div class="row mt-3">
                                         <div class="col-md-6">
                                             <label for="instagram" class="labels">Instagram</label>
                                             <input type="text" class="form-control profissao" name="instagram" value="{{$prestador->instagram}}" id="instagram">
@@ -641,37 +655,61 @@
                                     <h5>
                                         <kbd>Soft Skill</kbd>
                                     </h5>
-                                    <div class="mt-3">
-                                        <div class="inline">
-                                            <label class="col-4" for="primeiroSoftskill" class="labels">1°</label>
-                                            <label class="col-4" for="porcentagemPrimeiroSoftskill" class="labels">Porcentagem 1º Soft Skill</label>
-                                            <input class="col-4" type="text" value="{{$prestador->primeiroSoftskill}}" class="form-control website" name="primeiroSoftskill" id="primeiroSoftskill">
-                                            <input class="col-4 ml-4" type="number" max="100" min="0" value="{{$prestador->porcentagemPrimeiroSoftskill}}" class="form-control website" name="porcentagemPrimeiroSoftskill" id="porcentagemPrimeiroSoftskill">
+                                    <div class="row mt-3">
+                                        <div class="col-sm-8 col-lg-6">
+                                            <label for="primeiroSoftskill" class="labels">1° Soft Skill</label>
+                                            <input type="text" value="{{$prestador->primeiroSoftskill}}" class="form-control website" name="primeiroSoftskill" id="primeiroSoftskill">
                                         </div>
-                                        <div class="inline">
-                                            <label class="col-4" for="segundoSoftskill" class="labels">2°</label>
-                                            <label class="col-4" for="porcentagemSegundoSoftskill" class="labels">Porcentagem 2º Soft Skill</label>
-                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->segundoSoftskill}}" name="segundoSoftskill" id="segundoSoftskill">
-                                            <input class="col-4 ml-4" type="number" max="100" min="0" value="{{$prestador->porcentagemSegundoSoftskill}}" class="form-control website" name="porcentagemSegundoSoftskill" id="porcentagemSegundoSoftskill">
+                                        <div class="col-sm-4 col-lg-6">
+                                            <label for="porcentagemPrimeiroSoftskill" class="labels">Porcentagem</label>
+                                            <input type="number" max="100" min="0" value="{{$prestador->porcentagemPrimeiroSoftskill}}" class="form-control website" name="porcentagemPrimeiroSoftskill" id="porcentagemPrimeiroSoftskill">
                                         </div>
-                                        <div class="inline">
-                                            <label class="col-4" for="terceiroSoftskill" class="labels">3°</label>
-                                            <label class="col-4" for="porcentagemTerceiroSoftskill" class="labels">Porcentagem 3º Soft Skill</label>
-                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->terceiroSoftskill}}" name="terceiroSoftskill" id="terceiroSoftskill">
-                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemTerceiroSoftskill}}" name="porcentagemTerceiroSoftskill" id="porcentagemTerceiroSoftskill">
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-sm-8 col-lg-6">
+                                            <label for="segundoSoftskill" class="labels">2° Soft Skill</label>
+                                            <input type="text" class="form-control website" value="{{$prestador->segundoSoftskill}}" name="segundoSoftskill" id="segundoSoftskill">
                                         </div>
-                                        <div class="inline">
-                                            <label class="col-4" for="quartoSoftskill" class="labels">4°</label>
-                                            <label class="col-4" for="porcentagemQuartoSoftskill" class="labels">Porcentagem 4º Soft Skill</label>
-                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->quartoSoftskill}}" name="quartoSoftskill" id="quarto-softskill">
-                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemQuartoSoftskill}}" name="porcentagemQuartoSoftskill" id="porcentagemQuartoSoftskill">
+                                        <div class="col-sm-4 col-lg-6">
+                                            <label for="porcentagemSegundoSoftskill" class="labels">Porcentagem</label>
+                                            <input type="number" max="100" min="0" value="{{$prestador->porcentagemSegundoSoftskill}}" class="form-control website" name="porcentagemSegundoSoftskill" id="porcentagemSegundoSoftskill">
                                         </div>
-                                        <div class="inline">
-                                            <label class="col-4" for="quintoSoftskill" class="labels">5°</label>
-                                            <label class="col-4" for="porcentagemQuintoSoftskill" class="labels">Porcentagem 5º Soft Skill</label>
-                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->quintoSoftskill}}" name="quintoSoftskill" id="quintoSoftskill">
-                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemQuintoSoftskill}}" name="porcentagemQuintoSoftskill" id="porcentagemQuintoSoftskill">
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-sm-8 col-lg-6">
+                                            <label for="terceiroSoftskill" class="labels">3° Soft Skill</label>
+                                            <input type="text" class="form-control website" value="{{$prestador->terceiroSoftskill}}" name="terceiroSoftskill" id="terceiroSoftskill">
                                         </div>
+                                        <div class="col-sm-4 col-lg-6">
+                                            <label for="porcentagemTerceiroSoftskill" class="labels">Porcentagem</label>
+                                            <input type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemTerceiroSoftskill}}" name="porcentagemTerceiroSoftskill" id="porcentagemTerceiroSoftskill">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-sm-8 col-lg-6">
+                                            <label for="quartoSoftskill" class="labels">4° Soft Skill</label>
+                                            <input type="text" class="form-control website" value="{{$prestador->quartoSoftskill}}" name="quartoSoftskill" id="quarto-softskill">
+                                        </div>
+                                        <div class="col-sm-4 col-lg-6">
+                                            <label for="porcentagemQuartoSoftskill" class="labels">Porcentagem</label>
+                                            <input type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemQuartoSoftskill}}" name="porcentagemQuartoSoftskill" id="porcentagemQuartoSoftskill">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-sm-8 col-lg-6">
+                                            <label for="quintoSoftskill" class="labels">5° Soft Skill</label>
+                                            <input type="text" class="form-control website" value="{{$prestador->quintoSoftskill}}" name="quintoSoftskill" id="quintoSoftskill">
+                                        </div>
+                                        <div class="col-sm-4 col-lg-6">
+                                            <label for="porcentagemQuintoSoftskill" class="labels">Porcentagem</label>
+                                            <input type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemQuintoSoftskill}}" name="porcentagemQuintoSoftskill" id="porcentagemQuintoSoftskill">
+                                        </div>
+                                    </div>
+
                                     </div>
 
                                     <hr>
@@ -679,36 +717,58 @@
                                     <h5>
                                         <kbd>Habilidades</kbd>
                                     </h5>
-                                    <div class="mt-3">
-                                        <div class="inline">
-                                            <label class="col-4" for="primeiroHabilidade" class="labels">1°</label>
-                                            <label class="col-4" for="porcentagemPrimeiroHabilidade" class="labels">Porcentagem 1º Habilidade</label>
-                                            <input class="col-4" type="text" value="{{$prestador->primeiroHabilidade}}" class="form-control website" name="primeiroHabilidade" id="primeiroHabilidade">
-                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemPrimeiroHabilidade}}" name="porcentagemPrimeiroHabilidade" id="porcentagemPrimeiroHabilidade">
+                                    <div class="row mt-3">
+                                        <div class="col-sm-8 col-lg-6">
+                                            <label for="primeiroHabilidade" class="labels">1° Habilidade</label>
+                                            <input type="text" value="{{$prestador->primeiroHabilidade}}" class="form-control website" name="primeiroHabilidade" id="primeiroHabilidade">
                                         </div>
-                                        <div class="inline">
-                                            <label class="col-4" for="segundoHabilidade" class="labels">2°</label>
-                                            <label class="col-4" for="porcentagemSegundoHabilidade" class="labels">Porcentagem 2º Habilidade</label>
-                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->segundoHabilidade}}" name="segundoHabilidade" id="segundoHabilidade">
-                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemSegundoHabilidade}}" name="porcentagemSegundoHabilidade" id="porcentagemSegundoHabilidade">
+                                        <div class="col-sm-4 col-lg-6">
+                                            <label for="porcentagemPrimeiroHabilidade" class="labels">Porcentagem</label>
+                                            <input type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemPrimeiroHabilidade}}" name="porcentagemPrimeiroHabilidade" id="porcentagemPrimeiroHabilidade">
                                         </div>
-                                        <div class="inline">
-                                            <label class="col-4" for="terceiroHabilidade" class="labels">3°</label>
-                                            <label class="col-4" for="porcentagemTerceiroHabilidade" class="labels">Porcentagem 3º Habilidade</label>
-                                            <input class="col-4" type="text" class="form-control website"  value="{{$prestador->terceiroHabilidade}}" name="terceiroHabilidade" id="terceiroHabilidade">
-                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemTerceiroHabilidade}}" name="porcentagemTerceiroHabilidade" id="porcentagem-terceiro-habilidade">
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-sm-8 col-lg-6">
+                                            <label for="segundoHabilidade" class="labels">2° Habilidade</label>
+                                            <input type="text" class="form-control website" value="{{$prestador->segundoHabilidade}}" name="segundoHabilidade" id="segundoHabilidade">
                                         </div>
-                                        <div class="inline">
-                                            <label class="col-4" for="quartoHabilidade" class="labels">4°</label>
-                                            <label class="col-4" for="porcentagemQuartoHabilidade" class="labels">Porcentagem 4º Habilidade</label>
-                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->quartoHabilidade}}" name="quartoHabilidade" id="quartoHabilidade">
-                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website"  value="{{$prestador->porcentagemQuartoHabilidade}}" name="porcentagemQuartoHabilidade" id="porcentagemQuartoHabilidade">
+                                        <div class="col-sm-4 col-lg-6">
+                                            <label for="porcentagemSegundoHabilidade" class="labels">Porcentagem</label>
+                                            <input type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemSegundoHabilidade}}" name="porcentagemSegundoHabilidade" id="porcentagemSegundoHabilidade">
                                         </div>
-                                        <div class="inline">
-                                            <label class="col-4" for="quintoHabilidade" class="labels">5°</label>
-                                            <label class="col-4" for="porcentagemQuintoHabilidade" class="labels">Porcentagem 5º Habilidade</label>
-                                            <input class="col-4" type="text" class="form-control website" value="{{$prestador->quintoHabilidade}}" name="quintoHabilidade" id="quintoHabilidade">
-                                            <input class="col-4 ml-4" type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemQuintoHabilidade}}" name="porcentagemQuintoHabilidade" id="porcentagemQuintoHabilidade">
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-sm-8 col-lg-6">
+                                            <label for="terceiroHabilidade" class="labels">3° Habilidade</label>
+                                            <input type="text" class="form-control website"  value="{{$prestador->terceiroHabilidade}}" name="terceiroHabilidade" id="terceiroHabilidade">
+                                        </div>
+                                        <div class="col-sm-4 col-lg-6">
+                                            <label for="porcentagemTerceiroHabilidade" class="labels">Porcentagem</label>
+                                            <input type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemTerceiroHabilidade}}" name="porcentagemTerceiroHabilidade" id="porcentagem-terceiro-habilidade">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-sm-8 col-lg-6">
+                                            <label for="quartoHabilidade" class="labels">4° Habilidade</label>
+                                            <input type="text" class="form-control website" value="{{$prestador->quartoHabilidade}}" name="quartoHabilidade" id="quartoHabilidade">
+                                        </div>
+                                        <div class="col-sm-4 col-lg-6">
+                                            <label for="porcentagemQuartoHabilidade" class="labels">Porcentagem</label>
+                                            <input type="number" max="100" min="0" class="form-control website"  value="{{$prestador->porcentagemQuartoHabilidade}}" name="porcentagemQuartoHabilidade" id="porcentagemQuartoHabilidade">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-sm-8 col-lg-6">
+                                            <label for="quintoHabilidade" class="labels">5° Habilidade</label>
+                                            <input type="text" class="form-control website" value="{{$prestador->quintoHabilidade}}" name="quintoHabilidade" id="quintoHabilidade">
+                                        </div>
+                                        <div class="col-sm-4 col-lg-6">
+                                            <label for="porcentagemQuintoHabilidade" class="labels">Porcentagem</label>
+                                            <input type="number" max="100" min="0" class="form-control website" value="{{$prestador->porcentagemQuintoHabilidade}}" name="porcentagemQuintoHabilidade" id="porcentagemQuintoHabilidade">
                                         </div>
                                     </div>
 
