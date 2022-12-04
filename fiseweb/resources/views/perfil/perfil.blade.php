@@ -88,7 +88,7 @@
                     <div class="row">
                         <div class="col-md-3 border-right">
                             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                <img class="rounded-circle mt-5" style="width:150px; height:150px;" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                                <img class="rounded-circle mt-5" style="width:150px; height:150px;" src="/img/user.png">
                                 <span class="font-weight-bold">Edogaru</span>
                                 <span class="text-black-50">edogaru@mail.com.my</span>
                             </div>
@@ -186,7 +186,7 @@
                         <div class="col-md-9 border-right">
                             <div class="p-3 py-5">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4 class="text-right"><kbd>Atualizar</kbd> - Dados Perfil Pessoa</h4>
+                                    <h4 class="text-right"><kbd>Atualizar</kbd> - Dados Perfil Pessoal</h4>
                                 </div>
                                 <form action="{{route('pessoa.update','$pessoa->user_id')}}" method="post" enctype="multipart/form-data">
                                     @csrf
@@ -279,14 +279,14 @@
                 <div class="container-fluid rounded bg-white mt-5 mb-5">
                     <div class="row">
                         <div class="col-md-3 border-right">
-                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" style="width:150px; height:150px;" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" style="width:150px; height:150px;" src="/img/user.png"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
                         </div>
                         <div class="col-md-9 border-right">
                             <form action="{{route('prestador.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="p-3 py-5">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h4 class="text-right"><kbd>Cadastrar</kbd> - Dados Perfil Prestador</h4>
+                                        <h4 class="text-right"><kbd>Cadastrar</kbd> - Dados Perfil Profissional</h4>
                                     </div>
 
                                     <div class="row mt-2">
@@ -548,7 +548,7 @@
                                 @method('PATCH')
                                 <div class="p-3 py-5">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h4 class="text-right"><kbd>Atualizar</kbd> - Dados Perfil Prestador</h4>
+                                        <h4 class="text-right"><kbd>Atualizar</kbd> - Dados Perfil Profissional</h4>
                                     </div>
                                     <div class="row mt-2">
                                         <label for="image">Imagem de perfil: </label>
