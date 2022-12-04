@@ -72,7 +72,7 @@
                                 </svg>
                                 Website
                             </h6>
-                            <span class="text-secondary">{{empty($prestador[0]->website) ? 'https://bootdey.com' : $prestador[0]->website}}</span>
+                            <span class="text-secondary">{{empty($prestador[0]->website) ? '---' : $prestador[0]->website}}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">
@@ -81,7 +81,7 @@
                                 </svg>
                                 Github
                             </h6>
-                            <span class="text-secondary">{{empty($prestador[0]->github) ? 'bootdey' : $prestador[0]->github}}</span>
+                            <span class="text-secondary">{{empty($prestador[0]->github) ? '---' : $prestador[0]->github}}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">
@@ -90,7 +90,7 @@
                                 </svg>
                                 Twitter
                             </h6>
-                            <span class="text-secondary">{{empty($prestador[0]->twitter) ? '@bootdey' : $prestador[0]->twitter}}</span>
+                            <span class="text-secondary">{{empty($prestador[0]->twitter) ? '---' : $prestador[0]->twitter}}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">
@@ -101,7 +101,7 @@
                                 </svg>
                                 Instagram
                             </h6>
-                            <span class="text-secondary">{{empty($prestador[0]->instagram) ? 'bootdey' : $prestador[0]->instagram}}</span>
+                            <span class="text-secondary">{{empty($prestador[0]->instagram) ? '---' : $prestador[0]->instagram}}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">
@@ -110,7 +110,7 @@
                                 </svg>
                                 Facebook
                             </h6>
-                            <span class="text-secondary">{{empty($prestador[0]->facebook) ? 'bootdey' : $prestador[0]->facebook}}</span>
+                            <span class="text-secondary">{{empty($prestador[0]->facebook) ? '---' : $prestador[0]->facebook}}</span>
                         </li>
                         </ul>
                     </div>
