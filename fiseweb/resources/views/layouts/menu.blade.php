@@ -41,7 +41,7 @@
                 <hr>
             </a> -->
             
-            @if(auth()->user()->role != 'cliente')
+            @if(auth()->user()->role != 'cliente' and auth()->user()->role != 'pessoal')
                 <a href="/dashboard/avaliacao/{{$id}}?id={{$id}}" class="nav-link link-dark text-white">
                     <li class="d-flex"><img src="/icons/star-half.svg" class="icon-space">Avaliações</li>
                     <hr>

@@ -78,7 +78,7 @@
     @endif
     @yield('conteudo')
   </body>
-</html>
+</html> 
 
 
 
@@ -86,14 +86,38 @@
 
 
 <script >
+  //VERIFICA SE TEM TRITANOPIA OU NÃO
+  $.ajax({
+      url: '/tritanopia_verificacao',
+      type: 'get',
+      data: {},
+      success: function(result ) {  
+        var style = JSON.parse(result);
+        
+        if(style[0].id != "")
+        {
+          if(style[0].checked == 1)
+          {
+            // Ativa o checked tritanopia
+            $('#flexSwitchCheckChecked').prop('checked', true);
+            
+            //Pega os elementos que deseja trocar a cor
+            let el = document.getElementById('qtd_notificacoes');
+            el.style.cssText = 'background-color: yellow;';
+          }
+          else
+            $('#flexSwitchCheckChecked').prop('checked', false);
+          
+        }
+
+      },
+      error: function( request, status, error ) {
+        console.log(error);
+      }
+    });
+
   // VERIFICA SE POSSUI NOTIFICAÇÕES
   // Não pode colocar dentro do windows onload, isso pode dar B.O
-  function trocar_cor()
-  {
-    
-  }
-
-
   $.ajax({
       url: '/verificar_notificacao_perguntas',
       type: 'get',
@@ -173,6 +197,31 @@
         console.log(error);
     }
   });
+
+  function trocar_cor()
+  {
+
+    //ATIVA OU DESATIVA A OPÇÃO DE TRITANOPIA
+    $.ajax({
+      url: '/tritanopia',
+      type: 'get',
+      data: {},
+      success: function(result ) {  
+      },
+      error: function( request, status, error ) {
+        console.log(error);
+      }
+    });
+    
+    // let el = document.getElementById('qtd_notificacoes');
+    // // alterando uma propriedade
+    // el.style.backgroundColor = 'red';
+    // varias propriedades
+    // el.style.cssText =
+    //     'color: blue;' +
+        // 'background-color: yellow;';1
+    //     'border: 1px solid magenta';
+  }
 </script>
 
 <!-- API DE CHAT -->

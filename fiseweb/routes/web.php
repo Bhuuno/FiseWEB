@@ -14,6 +14,7 @@ use App\Http\Controllers\AvaliacaoController;
 use App\Http\Controllers\PagamentoController;
 use App\Http\Controllers\PerguntaController;
 use App\Http\Controllers\PrestadorController;
+use App\Http\Controllers\TritanopiaController;
 use App\Http\Controllers\VisualizacaoController;
 
 $user = new User(); 
@@ -89,3 +90,7 @@ Route::get('/galeria/foto/exibir',[GaleriaController::class,'exibir'])->middlewa
 
 //PAGAMENTO
 Route::get('/dashboard/pagamento/index',[PagamentoController::class,'index'])->middleware(['auth'])->middleware('role:pessoal,prestador,administrador');
+
+//TRITANOPIA
+Route::get('/tritanopia',[TritanopiaController::class,'create'])->middleware(['auth']);
+Route::get('/tritanopia_verificacao',[TritanopiaController::class,'show'])->middleware(['auth']);
