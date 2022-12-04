@@ -115,7 +115,7 @@
                                             </svg>
                                             Website
                                         </h6>
-                                        <span class="text-secondary">{{empty($perfil[0]->website) ? 'https://bootdey.com' : $perfil[0]->website}}</span>
+                                        <span class="text-secondary">{{empty($perfil[0]->website) ? '---' : $perfil[0]->website}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0">
@@ -124,7 +124,7 @@
                                             </svg>
                                             Github
                                         </h6>
-                                        <span class="text-secondary">{{empty($perfil[0]->github) ? 'bootdey' : $perfil[0]->github}}</span>
+                                        <span class="text-secondary">{{empty($perfil[0]->github) ? '---' : $perfil[0]->github}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0">
@@ -133,7 +133,7 @@
                                             </svg>
                                             Twitter
                                         </h6>
-                                        <span class="text-secondary">{{empty($perfil[0]->twitter) ? '@bootdey' : $perfil[0]->twitter}}</span>
+                                        <span class="text-secondary">{{empty($perfil[0]->twitter) ? '---' : $perfil[0]->twitter}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0">
@@ -144,7 +144,7 @@
                                             </svg>
                                             Instagram
                                         </h6>
-                                        <span class="text-secondary">{{empty($perfil[0]->instagram) ? 'bootdey' : $perfil[0]->instagram}}</span>
+                                        <span class="text-secondary">{{empty($perfil[0]->instagram) ? '---' : $perfil[0]->instagram}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0">
@@ -153,7 +153,7 @@
                                             </svg>
                                             Facebook
                                         </h6>
-                                        <span class="text-secondary">{{empty($perfil[0]->facebook) ? 'bootdey' : $perfil[0]->facebook}}</span>
+                                        <span class="text-secondary">{{empty($perfil[0]->facebook) ? '---' : $perfil[0]->facebook}}</span>
                                     </li>
                                     </ul>
                                 </div>

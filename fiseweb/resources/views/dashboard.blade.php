@@ -43,15 +43,15 @@
                         <div id="mensal">0</div>
                     </div>
                     <div class="col-2 barra">
-                        TOTAL Visualização
+                        Total de Visualização
                         <div id="total">0</div>
                     </div>
                     <div class="col-2 barra">
-                        TOTAL avaliações
+                        Total de Avaliações
                         <div id="avaliacoes">0</div>
                     </div>
                     <div class="col-2 barra">
-                        TOTALFotos
+                        Total de Fotos 
                         <div id="qtde_fotos">0</div>
                     </div>
                     <div class="col-2 barra">
