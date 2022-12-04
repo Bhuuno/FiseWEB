@@ -2,7 +2,7 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <img src="/img/Logo-semfundo.png" alt="FiseWeb" style="width:400px; height:130px; margin-left: -2%; margin-top: -4%">
             </a>
         </x-slot>
 
