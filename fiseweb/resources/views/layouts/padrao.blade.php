@@ -80,11 +80,6 @@
   </body>
 </html> 
 
-
-
-
-
-
 <script >
   //VERIFICA SE TEM TRITANOPIA OU NÃO
   $.ajax({
@@ -266,7 +261,6 @@
     });
   }
 </script>
-
 
 <!-- API DE CHAT -->
 <!--Start of Tawk.to Script-->

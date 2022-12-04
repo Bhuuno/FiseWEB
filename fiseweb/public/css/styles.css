@@ -36,14 +36,10 @@ nav.menu{
 .icon-space{
     margin-right: 6px;
 }
-/* .menucor{
-    
-    
-background: -webkit-linear-gradient(15deg, rgb(1, 56, 29), rgb(0, 43, 86));
-background: linear-gradient(15deg, rgb(1, 56, 29), rgb(0, 43, 86));
-
-
-} */
+.menucor{
+    background: -webkit-linear-gradient(15deg, rgb(1, 56, 29), rgb(0, 43, 86));
+    background: linear-gradient(15deg, rgb(1, 56, 29), rgb(0, 43, 86));
+}
 .buttoncor{
     
     background: white;
