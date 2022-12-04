@@ -33,17 +33,23 @@ class TritanopiaController extends Controller
         if($ativo[0]->ativo == 0)
         {
             DB::select("INSERT INTO tritanopias (user_id,checked) VALUES($id,true);");
+            echo "true";
         }
         else{
             $checked = DB::select("SELECT * FROM `tritanopias` WHERE user_id = $id");
 
             // caso esteja desativado ele ativa tritanopia
             if($checked[0]->checked ==0)
+            {
                 DB::select("UPDATE tritanopias SET checked=true WHERE user_id = $id;");
+                echo "true";
+            }
             //faz aocontrario
             else
+            {
                 DB::select("UPDATE tritanopias SET checked=false WHERE user_id = $id;");
-
+                echo "false";
+            }
         }
 
 
