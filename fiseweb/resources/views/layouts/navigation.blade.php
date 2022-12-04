@@ -24,7 +24,7 @@
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
 
                     <!-- BOTÃO DESATIVAR TRITANOPIA -->
-                    <div class="form-check form-switch" onclick="trocar_cor();" style="margin-right: 40px;">
+                    <div class="form-check form-switch" onclick="trocar_cor()" style="margin-right: 40px;">
                         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
                         <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 12px;">Tritanopia</label>
                     </div>
