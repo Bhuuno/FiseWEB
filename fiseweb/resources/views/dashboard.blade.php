@@ -64,31 +64,40 @@
                 </div>
             </div>
 
-            <div class="mt-3 input-grafico">
+            <div class="mt-3 input-grafico col-sm-9">
                 <label class="m-2" for="dias">Dias:</label>
-                <input class="input_grafico_dias" id="dias" name="dias" type="text" value="5">
+                <input class="input_grafico_dias  col-sm-1" id="dias" name="dias" type="text" value="5">
                 
                 <label class="m-2" for="tipo">Tipo:</label>
-                <select class="select_grafico" required class="form-select" id="tipo" name="tipo" aria-label="Default select example">
+                <select class="select_grafico col-sm-1" required class="form-select" id="tipo" name="tipo" aria-label="Default select example">
                     <option selected value="0">Linha</option>
                     <option value="1">Barra</option>
                 </select>
                 
-                <input class="input_grafico ms-3" id="data" name="data" type="date">
-                <input class="button_grafico ms-4" id="buscar" type="button" value="Gerar" onclick="grafico_visualizacao()">
+                <input class="input_grafico ms-3 col-sm-2" id="data" name="data" type="date">
+                <input class="button_grafico ms-4 col-sm-2" id="buscar" type="button" value="Gerar" onclick="grafico_visualizacao()">
             </div>
-            <div style="display: flex;">
-            
-                <!-- GRAFICO DE LINHA E BARRA -->
-                <div id="grafico" style="display:flex; width:64%;">
-                    <canvas id="myChart"></canvas>
-                    <canvas id="myChart1"></canvas>
-                </div>
+            <div class="row">
 
-                <!-- GRAFICO DE ROSCA -->
-                <div id="grafico_rosca" style="display:flex; width:60%;">
-                    <p>Visualização de Perfil</p>
-                </div>
+            
+            <div class="row">
+                <h2 class="text-center mt-5">Quantidade de visualizações</h2>
+            </div>
+            <br>
+            <!-- GRAFICO DE LINHA E BARRA -->
+            <div id="grafico" class="row">
+                <canvas id="myChart"></canvas>
+                <canvas id="myChart1"></canvas>
+            </div>
+                
+            <div class="row">
+                <h2 class="text-center mt-5">Avaliações</h2>
+            </div>
+            <br>
+
+            <!-- GRAFICO DE ROSCA -->
+            <div id="grafico_rosca" class="row">
+            </div>
             </div>
         </div>
     </x-app-layout>

@@ -106,7 +106,6 @@
             let el_ativo = document.getElementById('offcanvasExample');
             el_ativo.style.cssText = 'background: -webkit-linear-gradient(-1deg, rgb(190, 120, 6), rgb(0, 45, 186));'
                                 +'background: linear-gradient(-1deg, rgb(190, 120, 6), rgb(0, 45, 186));'
-                                +'width:100px;'
                                 +'width: 280px;';
           }
           else
@@ -116,7 +115,6 @@
             let el = document.getElementById('offcanvasExample');
             el.style.cssText = 'background: -webkit-linear-gradient(15deg, rgb(1, 56, 29), rgb(0, 43, 86));'
                               +'background: linear-gradient(15deg, rgb(1, 56, 29), rgb(0, 43, 86));'
-                              +'width:100px;'
                               +'width: 280px;';
           }
         }
@@ -232,7 +230,6 @@
           let el_trono_ativo_true = document.getElementById('offcanvasExample');
           el_trono_ativo_true.style.cssText = 'background: -webkit-linear-gradient(-1deg, rgb(190, 120, 6), rgb(0, 45, 186));'
                               +'background: linear-gradient(-1deg, rgb(190, 120, 6), rgb(0, 45, 186));'
-                              +'width:100px;'
                               +'width: 280px;';
         }
         // QUANDO DESATIVA TRONOTOPIA
@@ -250,7 +247,6 @@
           let el_trono_ativo_false = document.getElementById('offcanvasExample');
           el_trono_ativo_false.style.cssText = 'background: -webkit-linear-gradient(15deg, rgb(1, 56, 29), rgb(0, 43, 86));'
                             +'background: linear-gradient(15deg, rgb(1, 56, 29), rgb(0, 43, 86));'
-                            +'width:100px;'
                             +'width: 280px;';
         }
           
