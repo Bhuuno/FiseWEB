@@ -1,0 +1,22 @@
+@media screen and (max-width: 992px) 
+{
+  .text-secondary{
+    font-size: 14px;
+  }
+  .cima{
+    height: 279px;
+  }
+  .cima_cel{
+    height: 279px;
+  }
+}
+
+@media screen and (max-width: 574px)
+{
+  .cima_cel{
+    height: 350px;
+  }
+  .cima{
+    height: 305px;
+  }
+}

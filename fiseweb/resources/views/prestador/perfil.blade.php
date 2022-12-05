@@ -43,9 +43,9 @@
     <div class="container">
         <div class="">
             <div class="row gutters-md p-4">
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body cima">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <img src="/img/fotos_perfil/{{isset($prestador[0]->image)?$prestador[0]->image:'sem-foto.png'}}" alt="{{$prestador[0]->nome}}" class="rounded-circle" style="width:144px; height:144px";>
                                 <div class="mt-3">
@@ -117,48 +117,48 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card mb-3">
-                        <div class="card-body">
+                        <div class="card-body cima_cel">
                             <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Razão Social</h6>
+                                <div class="col-sm-2">
+                                    <img src="/icons/building.svg" class="img-button">
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-10 text-secondary">
                                     {{$prestador[0]->razao_social}}
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Email</h6>
+                                <div class="col-sm-2">
+                                    <img src="/icons/envelope-fill.svg" class="img-button">  
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-10 text-secondary">
                                     {{$prestador[0]->email}}
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Telefone</h6>
+                                <div class="col-sm-2">
+                                    <img src="/icons/telephone-fill.svg" class="img-button">  
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-10 text-secondary">
                                     {{$prestador[0]->telefone}}
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Celular</h6>
+                                <div class="col-sm-2">
+                                    <img src="/icons/tablet-fill.svg" class="img-button">  
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-10 text-secondary">
                                     {{$prestador[0]->celular}}
                                 </div>
                             </div>
                             <hr>
                             <div class="row" style="height: 36px;">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Endereço</h6>
+                                <div class="col-sm-2">    
+                                    <img src="/icons/geo-alt-fill.svg" class="img-button">  
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-10 text-secondary">
                                     {{$prestador[0]->endereco}}
                                 </div>
                             </div>

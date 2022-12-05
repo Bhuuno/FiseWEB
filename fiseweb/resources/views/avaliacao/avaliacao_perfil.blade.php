@@ -1,6 +1,8 @@
 @extends('layouts.padrao')
 @section('titulo', 'Avaliação')
 
+<link href="{{asset('css/avaliacao.css')}}" rel="stylesheet">
+
 <script>
         // serve para chamar as fuções que quero que inicie
     window.onload = function(){
@@ -85,8 +87,8 @@
                 
             <div class="row main-body">
                 <div class="row gutters-sm" style="padding:1%;">
-                    <div class="col-md-3">
-                        <div class="card card-body">
+                    <div class="col-lg-3">
+                        <div class="card card-body mb-4">
                                 <div class="d-flex flex-column align-items-center text-center">
                                     <h3>Prestador: </h3>
                                     <img src="/img/fotos_perfil/{{isset($perfil[0]->imagem)?$perfil[0]->imagem:'sem-foto.png'}}" alt="{{$perfil[0]->nome_prestador}}" class="rounded-circle" style="width:144px; height:144px";>
@@ -160,8 +162,8 @@
                             </div>
                         </div>
                     
-                        <div class="col-sm-9">
-                            <div class="card" style="height:410px; overflow:auto; ">
+                        <div class="col-lg-9" style="display: grid; align-content: space-between; margin-bottom: 25px">
+                            <div class="card" style="height:380px; overflow:auto; ">
                                 <div class="card-body">
                                 @if(!empty($comentario))
                                     @foreach ($comentario as $item)
@@ -181,8 +183,8 @@
                                 @endif
                                 </div>
                             </div>
-                            <div class="card mt-4">
-                                <div class="card-body">                               
+                            <div class="card mt-4 col-lg-12 div_card">
+                                <div class="card-body div_corpo">                               
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">Escreva aqui seu comentário</label>
                                         <textarea id="comentario" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
