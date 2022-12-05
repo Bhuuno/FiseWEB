@@ -81,23 +81,22 @@
 
             
             <div class="row">
-                <h2 class="text-center mt-5">Quantidade de visualizações</h2>
+                <h2 class="mt-5 text-center">Quantidade de visualizações</h2>
             </div>
             <br>
             <!-- GRAFICO DE LINHA E BARRA -->
-            <div id="grafico" class="row">
+            <div id="grafico" class="col-lg-8" style="margin: auto;">
                 <canvas id="myChart"></canvas>
                 <canvas id="myChart1"></canvas>
             </div>
                 
             <div class="row">
-                <h2 class="text-center mt-5">Avaliações</h2>
+                <h2 class="text-center mt-5 avaliacao" id="avaliacao" name="avaliacao">Avaliações</h2>
             </div>
             <br>
 
             <!-- GRAFICO DE ROSCA -->
-            <div id="grafico_rosca" class="row">
-            </div>
+            <div id="grafico_rosca" class=" col-lg-8" style="margin: auto;">
             </div>
         </div>
     </x-app-layout>
@@ -170,8 +169,6 @@
         var tipo = $("#tipo").val();
         var id_prestador = '<?=$request["user_id"] = auth()->user()->id;?>';
 
-        
-        console.log("2");
         if(dias < 0)
             valor_negativo_atencao();
 
@@ -194,6 +191,7 @@
                     var avaliacao_rosca = [];
                     var valores=[];
                     var i;
+                    var cont_nota = 0;
 
                     //MONTA UM ARRAY PRO GRAFICO DE ROSCA COM A QUANTIDADE DE AVALIAÇÕES
                     for(i=0; i< grafico.length; i++)
@@ -205,33 +203,43 @@
                     {
                         avaliacao_rosca.push(grafico[0].NOTA0);
                         label_rosca.push('Nota 0')
+                        cont_nota+=1;
                     }
                     if(grafico[0].NOTA1)
                     {
                         avaliacao_rosca.push(grafico[0].NOTA1);
                         label_rosca.push('Nota 1')
+                        cont_nota+=1;
                     }
                     if(grafico[0].NOTA2)
                     {
                         avaliacao_rosca.push(grafico[0].NOTA2);
                         label_rosca.push('Nota 2')
+                        cont_nota+=1;
                     }
                     if(grafico[0].NOTA3)
                     {
                         avaliacao_rosca.push(grafico[0].NOTA3);
                         label_rosca.push('Nota 3')
+                        cont_nota+=1;
                     }
                     if(grafico[0].NOTA4)
                     {
                         avaliacao_rosca.push(grafico[0].NOTA4);
                         label_rosca.push('Nota 4')
+                        cont_nota+=1;
                     }
                     if(grafico[0].NOTA5)
                     {
                         avaliacao_rosca.push(grafico[0].NOTA5);
                         label_rosca.push('Nota 5')
+                        cont_nota+=1;
                     }
-
+                    if(cont_nota== 0)
+                    {
+                        var elemento = document.querySelector("#avaliacao");
+                        elemento.parentNode.removeChild(elemento);
+                    }
 
                     //GRAFICO DE LINHA 
                     if(tipo == 0)
