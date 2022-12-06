@@ -89,14 +89,13 @@
                 <canvas id="myChart"></canvas>
                 <canvas id="myChart1"></canvas>
             </div>
-                
-            <div class="row">
-                <h2 class="text-center mt-5 avaliacao" id="avaliacao" name="avaliacao">Avaliações</h2>
+            <div class="row mt-5">
+                <h2 class="avaliacao text-center" name="avaliacao" id="avaliacao" hidden>Avaliações</h2>
             </div>
             <br>
 
             <!-- GRAFICO DE ROSCA -->
-            <div id="grafico_rosca" class=" col-lg-8" style="margin: auto;">
+            <div id="grafico_rosca" class="col-lg-8 mt-2" style="margin: auto;">
             </div>
         </div>
     </x-app-layout>
@@ -236,10 +235,10 @@
                         cont_nota+=1;
                     }
                     if(cont_nota== 0)
-                    {
-                        var elemento = document.querySelector("#avaliacao");
-                        elemento.parentNode.removeChild(elemento);
-                    }
+                        $('#avaliacao').prop('hidden',true);
+                    else
+                        $('#avaliacao').prop('hidden',false);
+                    
 
                     //GRAFICO DE LINHA 
                     if(tipo == 0)
@@ -262,15 +261,24 @@
                         const config = {
                             type: 'line',
                             data: data,
-                            options: {}
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
                         };
 
                         const myChart = new Chart(
                             document.getElementById('myChart'),
                             config
                         );
+                    }
                     // GRAFICO ESTILO BARRA
-                    }if(tipo == 1){
+                    if(tipo == 1){
                         $("#myChart").remove();
                         document.getElementById('grafico').innerHTML='<canvas id="myChart"></canvas>';
                         const ctx = document.getElementById('myChart').getContext('2d');
@@ -301,11 +309,12 @@
                                 }]
                             },
                             options: {
-                                indexAxis: 'y',
                                 scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
                                 }
                             }
                         });
