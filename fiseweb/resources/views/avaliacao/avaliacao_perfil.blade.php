@@ -255,27 +255,26 @@
         var id = <?php echo $id; ?>
 
         $.ajax({
-                url: '/media',
-                type: 'get',
-                data: {
-                    id:id
-                },
-                success: function( result ) {  
-                    resposta = JSON.parse(result);
+            url: '/media',
+            type: 'get',
+            data: {
+                id:id
+            },
+            success: function( result ) {  
+                resposta = JSON.parse(result);
 
-                    media = resposta[0].total_nota / resposta[0].qtde_avaliacao;
+                media = resposta[0].total_nota / resposta[0].qtde_avaliacao;
 
-                    //ALETRA O VALOR DA MEDIA
-                    if(resposta[0].total_nota != null)
-                        document.getElementById('media').innerHTML = media.toFixed(1)
+                //ALETRA O VALOR DA MEDIA
+                if(resposta[0].total_nota != null)
+                    document.getElementById('media').innerHTML = media.toFixed(1)
 
-                    //MOSTRA A QANTIDADE DE VISUALIZAÇÕES
-                    document.getElementById('quantidade').innerHTML = resposta[0].qtde_avaliacao
-                },
-                error: function( request, status, error ) {
-                    console.log(request,status,error);
-                }
-                
+                //MOSTRA A QANTIDADE DE VISUALIZAÇÕES
+                document.getElementById('quantidade').innerHTML = resposta[0].qtde_avaliacao
+            },
+            error: function( request, status, error ) {
+                console.log(request,status,error);
+            }
         });
     }
 

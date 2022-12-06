@@ -161,7 +161,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="rua" class="labels">Endereço</label>
-                                            <input type="rua" required class="form-control" name="endereco" value="" id="rua" placeholder="Ex: R. Rua dos Bobos">
+                                            <input type="rua" required class="form-control" name="endereco" value="" id="rua" placeholder="Ex: R. Teresina, 75 - Vila Paulo Roberto">
                                         </div>
                                         <div class="col-md-2">
                                             <label for="numero" class="labels">N°</label>
@@ -251,7 +251,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="rua" class="labels">Endereço</label>
-                                            <input type="rua" required class="form-control" name="endereco" value="{{$pessoa->endereco}}"  value="" id="rua" placeholder="Ex: R. Rua dos Bobos">
+                                            <input type="rua" required class="form-control" name="endereco" value="{{$pessoa->endereco}}"  value="" id="rua" placeholder="Ex: R. Teresina, 75 - Vila Paulo Roberto">
                                         </div>
                                         <div class="col-md-2">
                                             <label for="numero" class="labels">N°</label>
