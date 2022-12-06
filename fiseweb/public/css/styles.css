@@ -100,3 +100,7 @@ nav.menu{
     margin-right: 6px;
     margin-top: 3px;
 }
+.button-padrao{
+    background: #1010aa;
+    color: aliceblue;
+}
