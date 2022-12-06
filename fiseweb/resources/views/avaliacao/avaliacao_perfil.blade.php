@@ -211,7 +211,7 @@
                                         <p id="rating_nota">0</p>
                                     </div>
                                     <br>
-                                    <button type="button" <?php if($id == auth()->user()->id) echo "disabled" ?> onclick="gravar_comentario()" class="btn btn-dark">Enviar</button>
+                                    <button type="button" <?php if($id == auth()->user()->id) echo "disabled" ?> onclick="gravar_comentario()" class="btn btn-success">Enviar</button>
                                 </div>
                             </div>
                         </div>
