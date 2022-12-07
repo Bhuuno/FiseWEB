@@ -33,7 +33,7 @@ body{
     width: 60px;
     height: 60px;
     border-radius: 30px;
-    background-color: #a05efc;
+    background-color: #07cc1e;
     right: 0;
     bottom: 0;
     z-index: 20;
@@ -93,7 +93,7 @@ body{
   .fab button.main:active,
   .fab button.main:focus{
     outline: none;
-    background-color: #7716ff;
+    background-color: #07cc1e;
     box-shadow: 0 3px 8px rgba(0,0,0,.5);
    }
    
