@@ -50,7 +50,7 @@
 
             <div class="flex items-center  mt-4" style="text-align: center; margin-left: 37%;">
                 
-                <x-button class="ml-3">
+                <x-button class="ml-3" style="background: #1010aa">
                     {{ __('Logar') }}
                 </x-button>
             </div>
@@ -58,7 +58,7 @@
             <div class="text-center mt-4">
                 <h1 class="fw-bold">Ainda não está cadastrado?</h1>
                 @if (Route::has('register'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 " href="{{ route('register') }}">
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 " style="color: blue" href="{{ route('register') }}">
                         {{ __('Registrar-se') }}
                     </a>
                 @endif

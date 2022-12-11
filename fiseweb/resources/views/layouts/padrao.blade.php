@@ -98,7 +98,7 @@
             
             //Pega os elementos que deseja trocar a cor
             let el = document.getElementById('main');
-            el.style.cssText = 'background-color: #0e0ecc;'
+            el.style.cssText = 'background-color: #d35906;'
                               +'border-radius:27px; font-size:18px;'
                               +'border-radius: 30px;';
             
@@ -222,7 +222,7 @@
 
           //Pega os elementos que deseja trocar a cor
           let el_noti_true = document.getElementById('main');
-          el_noti_true.style.cssText = 'background-color: #0e0ecc;'
+          el_noti_true.style.cssText = 'background-color: #d35906;'
                             +'border-radius:27px; font-size:18px;'
                             +'border-radius: 30px;';
             
@@ -239,7 +239,7 @@
 
           //Pega os elementos que deseja trocar a cor
           let el_noti_false = document.getElementById('main');
-          el_noti_false.style.cssText = 'background-color: #a05efc;'
+          el_noti_false.style.cssText = 'background-color: #07cc1e;'
                             +'border-radius:27px; font-size:18px;'
                             +'border-radius: 30px;';
 

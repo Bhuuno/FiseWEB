@@ -18,7 +18,8 @@ input.input_grafico{
 input.button_grafico{
     border-radius: 5px;
     padding: 0 25px;
-    background-color: red;
+    background-color: #1010aa;
+    color: aliceblue;
 }
 select.select_grafico{
     border-radius: 5px;
