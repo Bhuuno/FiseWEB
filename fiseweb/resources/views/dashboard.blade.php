@@ -138,6 +138,7 @@
                 //se a média vem com valor null, recebe 0
                 if( dashboard[0].media == null)
                     dashboard[0].media = 0;
+                    
 
                 //EXIBIR O VALOR NO DASHBOARD SEMANAL 
                 document.getElementById('semanal').innerHTML = dashboard[0].semanal
