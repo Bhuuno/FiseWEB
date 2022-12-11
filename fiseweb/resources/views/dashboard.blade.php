@@ -135,6 +135,7 @@
             button: "Fechar!",
         });
     };
+    
     // ALERTA MENSAGEM
     function acima_30_dias_atencao(){
         swal({
